@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "economy2",
+  "version": "${version}",
+  "name": "Economy2",
+  "description": "Second version of my economy mod",
+  "authors": [
+    "ThatEpicBanana"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/economy2/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "mods.banana.economy2.Economy2"
+    ]
+  },
+  "mixins": [
+    "economy2.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.8",
+    "fabric": "*",
+    "minecraft": "1.16.4"
+  }
+}
