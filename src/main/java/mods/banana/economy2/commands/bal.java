@@ -19,7 +19,7 @@ public class bal {
     public static LiteralCommandNode<ServerCommandSource> build() {
         return CommandManager
                 .literal("bal")
-                .executes(context -> bal.run(context.getSource().getPlayer()))
+                .executes(context -> run(context.getSource().getPlayer()))
                 .build();
     }
 }

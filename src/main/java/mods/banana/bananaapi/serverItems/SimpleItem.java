@@ -5,6 +5,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -53,12 +54,10 @@ public class SimpleItem extends ServerItem {
     }
 
     @Override
-    public boolean onItemEntitySpawn(ItemStack itemStack) {
-        return true;
-    }
+    public boolean onItemEntitySpawn(ItemStack itemStack) { return true; }
 
     @Override
-    public boolean onUse(ItemStack itemStack) {
+    public boolean onUse(ItemStack itemStack, ServerPlayerEntity player, int slot) {
         return true;
     }
 }

@@ -1,5 +1,6 @@
 package mods.banana.economy2.mixins;
 
+import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.interfaces.PlayerInterface;
@@ -9,6 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
+import org.lwjgl.system.CallbackI;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ServerPlayerEntity.class)
 public abstract class PlayerMixin extends EntityMixin implements PlayerInterface {
     private long bal;
+    private String playerName;
 
     @Override
     public long getBal() { return bal; }
@@ -29,24 +32,35 @@ public abstract class PlayerMixin extends EntityMixin implements PlayerInterface
 
     @Override
     public String getBalString() {
-        return String.valueOf(bal).replaceAll("(\\d+)", Economy2.currencyRegex);
+        return Economy2.addCurrencySign(bal);
     }
 
     @Override
     public void save() {
+        JsonObject player = new JsonObject();
+        player.addProperty("playerName", getEntityName());
+        player.addProperty("bal", bal);
+
         Economy2.BalanceJson.remove(getUuidAsString());
-        Economy2.BalanceJson.addProperty(getUuidAsString(), bal);
+//        Economy2.BalanceJson.addProperty(getUuidAsString(), bal);
+        Economy2.BalanceJson.add(getUuidAsString(), player);
+
         System.out.println("Saving player " + getEntityName());
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onConnect(MinecraftServer server, ServerWorld world, GameProfile profile, ServerPlayerInteractionManager interactionManager, CallbackInfo ci) {
         if(!Economy2.BalanceJson.has(getUuidAsString())) {
-            Economy2.BalanceJson.addProperty(getUuidAsString(), Economy2.startingBalance);
+            bal = Economy2.startingBalance;
+            playerName = profile.getName();
+            save();
             System.out.println("Added player " + profile.getName() + " to balance file");
-        }
+        } else {
+            JsonObject player = Economy2.BalanceJson.get(getUuidAsString()).getAsJsonObject();
 
-        bal = Economy2.BalanceJson.get(getUuidAsString()).getAsLong();
+            bal = player.get("bal").getAsLong();
+            playerName = player.get("playerName").getAsString();
+        }
     }
 
     @Inject(method = "onDisconnect", at = @At("HEAD"))
