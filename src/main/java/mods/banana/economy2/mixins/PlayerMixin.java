@@ -3,8 +3,10 @@ package mods.banana.economy2.mixins;
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.commands.trade.TradeInstance;
 import mods.banana.economy2.interfaces.PlayerInterface;
 import mods.banana.economy2.interfaces.ServerInterface;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -16,10 +18,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
+
 @Mixin(ServerPlayerEntity.class)
 public abstract class PlayerMixin extends EntityMixin implements PlayerInterface {
     private long bal;
     private String playerName;
+
+    private TradeInstance currentTrade;
+    private ArrayList<ItemStack> tradingItems = new ArrayList<>();
+    private boolean accepted;
 
     @Override
     public long getBal() { return bal; }
@@ -33,6 +41,26 @@ public abstract class PlayerMixin extends EntityMixin implements PlayerInterface
     @Override
     public String getBalString() {
         return Economy2.addCurrencySign(bal);
+    }
+
+    @Override
+    public TradeInstance getTrade() { return currentTrade; }
+    @Override
+    public void setTrade(TradeInstance tradeInstance) {
+        currentTrade = tradeInstance;
+    }
+    @Override
+    public ArrayList<ItemStack> getTradeItems() { return tradingItems; }
+
+    @Override
+    public boolean getAccepted() { return accepted; }
+    @Override
+    public void setAccepted(boolean accepted) { this.accepted = accepted; }
+
+    @Override
+    public void resetTrade() {
+        currentTrade = null;
+        tradingItems = new ArrayList<>();
     }
 
     @Override

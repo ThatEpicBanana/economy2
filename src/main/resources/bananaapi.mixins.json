@@ -4,7 +4,7 @@
   "package": "mods.banana.bananaapi.serverItems.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-
+    "ServerWorldMixin"
   ],
   "client": [
   ],

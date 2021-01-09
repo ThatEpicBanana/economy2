@@ -21,5 +21,6 @@ public class BananaApi implements ModInitializer {
             }
             return TypedActionResult.pass(ItemStack.EMPTY);
         });
+
     }
 }

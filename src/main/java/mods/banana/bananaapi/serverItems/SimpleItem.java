@@ -10,6 +10,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class SimpleItem extends ServerItem {
+    public boolean preventDrop = false;
+
     public SimpleItem(ItemConvertible parent, Identifier identifier) {
         this.parent = parent;
         this.identifier = identifier;
@@ -40,6 +42,11 @@ public class SimpleItem extends ServerItem {
         return this;
     }
 
+    public SimpleItem setDropPrevention(boolean preventDrop) {
+        this.preventDrop = preventDrop;
+        return this;
+    }
+
     @Override
     public ItemStack getItemStack(int count) {
         CompoundTag moduleTag = new CompoundTag();
@@ -54,7 +61,7 @@ public class SimpleItem extends ServerItem {
     }
 
     @Override
-    public boolean onItemEntitySpawn(ItemStack itemStack) { return true; }
+    public boolean onItemEntitySpawn(ItemStack itemStack) { return preventDrop; }
 
     @Override
     public boolean onUse(ItemStack itemStack, ServerPlayerEntity player, int slot) {

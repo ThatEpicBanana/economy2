@@ -4,9 +4,12 @@
   "package": "mods.banana.economy2.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ChestEntityMixin",
+    "ChestMixin",
     "EntityMixin",
     "MinecraftServerMixin",
     "PlayerMixin",
+    "ScreenHandlerMixin",
     "server.DedicatedServerMixin"
   ],
   "client": [

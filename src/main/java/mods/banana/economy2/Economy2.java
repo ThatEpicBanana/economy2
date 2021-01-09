@@ -9,11 +9,15 @@ import mods.banana.economy2.commands.bal;
 import mods.banana.economy2.commands.baltop;
 import mods.banana.economy2.commands.banknote;
 import mods.banana.economy2.commands.exchange;
+import mods.banana.economy2.commands.trade.Root;
+import mods.banana.economy2.commands.trade.TradeHandler;
 import mods.banana.economy2.items.EconomyItems;
 import mods.banana.economy2.mixins.MinecraftServerMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
@@ -35,6 +39,7 @@ public class Economy2 implements ModInitializer {
     public static String currencyName = "yen";
 
     public static MinecraftServer server = null;
+    public static TradeHandler tradeHandler = new TradeHandler();
 
     @Override
     public void onInitialize() {
@@ -77,17 +82,12 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(exchange.build());
             dispatcher.getRoot().addChild(baltop.build());
             dispatcher.getRoot().addChild(banknote.build());
+            dispatcher.getRoot().addChild(Root.build());
         });
 
+        tradeHandler.onLoad();
         // setup items
-
         EconomyItems.onInit();
-
-        UseItemCallback.EVENT.register((player, world, hand) -> {
-
-
-            return TypedActionResult.pass(ItemStack.EMPTY);
-        });
     }
 
     public static String addCurrencySign(long amount) {
