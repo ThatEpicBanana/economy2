@@ -4,6 +4,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.interfaces.PlayerInterface;
+import mods.banana.economy2.interfaces.TradePlayerInterface;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 public class Cancel {
     public static int run(ServerPlayerEntity target) throws CommandSyntaxException {
-        TradeInstance trade = ((PlayerInterface)target).getTrade();
+        TradeInstance trade = ((TradePlayerInterface)target).getTrade();
         if(trade != null) {
             trade.complete(false);
             trade.getTarget().sendSystemMessage(new LiteralText("Trade cancelled...").formatted(Formatting.RED), UUID.randomUUID());

@@ -3,6 +3,7 @@ package mods.banana.economy2.commands.trade;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.interfaces.PlayerInterface;
+import mods.banana.economy2.interfaces.TradePlayerInterface;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -16,14 +17,14 @@ import java.util.UUID;
 public class Confirm {
     public static int run(ServerPlayerEntity source) {
         // get source interface and trade
-        PlayerInterface sourceInterface = (PlayerInterface) source;
+        TradePlayerInterface sourceInterface = (TradePlayerInterface) source;
         TradeInstance trade = sourceInterface.getTrade();
 
         if(trade != null && trade.timer >= TradeInstance.confirmTime) {
             // get target and target interface
             ServerPlayerEntity target;
             if(trade.getSource().equals(source)) target = trade.getTarget(); else target = trade.getSource();
-            PlayerInterface targetInterface = (PlayerInterface) target;
+            TradePlayerInterface targetInterface = (TradePlayerInterface) target;
 
             // mark source as accepted
             sourceInterface.setAccepted(true);

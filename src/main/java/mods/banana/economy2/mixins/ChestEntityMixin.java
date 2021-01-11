@@ -1,18 +1,23 @@
 package mods.banana.economy2.mixins;
 
 import mods.banana.economy2.interfaces.ChestInterface;
+import mods.banana.economy2.interfaces.SignInterface;
 import mods.banana.economy2.items.EconomyItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
+import org.lwjgl.system.CallbackI;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,15 +28,33 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.UUID;
 
 @Mixin(ChestBlockEntity.class)
-public class ChestEntityMixin extends BlockEntity implements ChestInterface {
+public abstract class ChestEntityMixin extends LootableContainerBlockEntity implements ChestInterface {
+    @Shadow public abstract int size();
 //    @Shadow private DefaultedList<ItemStack> inventory;
+
+    //    @Shadow private DefaultedList<ItemStack> inventory;
     private boolean chestShop = false;
+    private BlockPos sign;
     private UUID parent;
+
+    public void create(ServerPlayerEntity player, BlockPos sign) {
+        this.parent = player.getUuid();
+        this.sign = sign;
+        chestShop = true;
+    }
+
+    public void destroy(boolean destroyOther) {
+        this.chestShop = false;
+        this.parent = null;
+        if(destroyOther) ((SignInterface)world.getBlockEntity(sign)).destroy(false);
+        this.sign = null;
+    }
 
     public ChestEntityMixin(BlockEntityType<?> type) { super(type); }
 
     public boolean isChestShop() { return chestShop; }
     public UUID getParent() { return parent; }
+    public SignInterface getSign() { return (SignInterface) world.getBlockEntity(sign); }
 
     public void setLimit(int index) {
         Inventory inventory = (Inventory) this;
@@ -48,7 +71,7 @@ public class ChestEntityMixin extends BlockEntity implements ChestInterface {
         inventory.setStack(index, EconomyItems.LIMIT.getItemStack());
 
         //add all of the limited item
-        for(int i = inventory.size(); i > index; i--) {
+        for(int i = inventory.size() - 1; i > index; i--) {
             if(inventory.getStack(i) != ItemStack.EMPTY && !EconomyItems.LIMITED.sameIdentifierAs(inventory.getStack(i))) insertItemStack(inventory.getStack(i));
             inventory.setStack(i, EconomyItems.LIMITED.getItemStack());
         }
@@ -57,19 +80,20 @@ public class ChestEntityMixin extends BlockEntity implements ChestInterface {
     }
 
     public Integer getLimit() {
-        Inventory inventory = (Inventory) this;
-        for(int i = 0; i < inventory.size(); i++)
-            if(EconomyItems.LIMIT.sameIdentifierAs(inventory.getStack(i))) return i;
-            return null;
+//        Inventory inventory = (Inventory) this;
+        for(int i = 0; i < size(); i++) {
+            if(EconomyItems.LIMIT.sameIdentifierAs(getStack(i))) return i;
+        }
+        setLimit(size() - 1);
+        return getLimit();
     }
 
     public void insertItemStack(ItemStack input) {
-        Inventory inventory = (Inventory) this;
         Item item = input.getItem();
 
         // for each slot
-        for(int i = 0; i < inventory.size() && input.getCount() > 0; i++) {
-            ItemStack stack = inventory.getStack(i);
+        for(int i = 0; i < size() && input.getCount() > 0; i++) {
+            ItemStack stack = getStack(i);
             if(
                     stack.isEmpty() || // if slot is empty
                             (stack.getItem() == item && stack.getCount() < stack.getMaxCount()) // or the slot is the same item and has space
@@ -77,15 +101,45 @@ public class ChestEntityMixin extends BlockEntity implements ChestInterface {
                 // get count
                 int count = Math.min(input.getCount() + stack.getCount(), input.getMaxCount()) - stack.getCount();
                 // add count to item stack
-                ItemStack newStack = input.copy();
-                newStack.setCount(count + stack.getCount());
-                inventory.setStack(i, newStack);
+                ItemStack newStack = new ItemStack(item, count + stack.getCount());
+                setStack(i, newStack);
                 // remove count from input
                 input.setCount(input.getCount() - count);
             }
         }
 
         if(input.getCount() > 0) this.world.spawnEntity(new ItemEntity(world, this.pos.getX(), this.pos.getY(), this.pos.getZ(), input));
+    }
+
+    public void removeItemStack(ItemStack inputStack) {
+        Item item = inputStack.getItem();
+        for(int i = 0; i < size() && inputStack.getCount() > 0; i++) {
+            ItemStack currentStack = getStack(i);
+            if(currentStack.getItem().equals(item)) {
+                int amount = Math.min(currentStack.getCount(), inputStack.getCount());
+                currentStack.setCount(currentStack.getCount() - amount);
+                inputStack.setCount(inputStack.getCount() - amount);
+            }
+        }
+    }
+
+    public int countItem(Item item) {
+        int amount = 0;
+        for(int i = 0; i < getLimit(); i++) {
+            ItemStack currentStack = getStack(i);
+            if(currentStack.getItem().equals(item)) amount += currentStack.getCount();
+        }
+        return amount;
+    }
+
+    public int countSpace(Item item) {
+        int amount = 0;
+        for(int i = 0; i < getLimit(); i++) {
+            ItemStack stack = getStack(i);
+            if(stack.isEmpty()) amount += item.getMaxCount(); // if slot is empty, add max count
+            else if(stack.getItem().equals(item)) amount += item.getMaxCount() - stack.getCount(); // if items are the same, add items left in stack
+        }
+        return amount;
     }
 
     @Inject(method = "onClose", at = {@At("HEAD")})
@@ -106,7 +160,15 @@ public class ChestEntityMixin extends BlockEntity implements ChestInterface {
     private void save(CompoundTag tag, CallbackInfoReturnable<CompoundTag> cir) {
         if(chestShop) {
             CompoundTag chestShopTag = new CompoundTag();
+
+            CompoundTag signTag = new CompoundTag();
+            signTag.putInt("x", sign.getX());
+            signTag.putInt("y", sign.getY());
+            signTag.putInt("z", sign.getZ());
+            chestShopTag.put("sign", signTag);
+
             chestShopTag.putUuid("parent", parent);
+
             tag.put("chestshop", chestShopTag);
         }
     }
@@ -115,8 +177,12 @@ public class ChestEntityMixin extends BlockEntity implements ChestInterface {
     private void load(BlockState state, CompoundTag tag, CallbackInfo ci) {
         if(tag.contains("chestshop")) {
             chestShop = true;
+
             CompoundTag chestShopTag = tag.getCompound("chestshop");
             parent = chestShopTag.getUuid("parent");
+
+            CompoundTag signTag = chestShopTag.getCompound("sign");
+            sign = new BlockPos(signTag.getInt("x"), signTag.getInt("y"), signTag.getInt("z"));
         }
     }
 }

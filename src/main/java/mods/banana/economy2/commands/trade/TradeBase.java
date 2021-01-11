@@ -2,7 +2,6 @@ package mods.banana.economy2.commands.trade;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.interfaces.PlayerInterface;
-import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -10,9 +9,9 @@ import net.minecraft.text.LiteralText;
 
 import java.util.UUID;
 
-public class Root {
+public class TradeBase {
     public static int run(ServerPlayerEntity target) {
-        target.sendSystemMessage(new LiteralText(((PlayerInterface) target).getBalString()), UUID.randomUUID());
+        target.sendSystemMessage(new LiteralText(((PlayerInterface) target).getBalAsString()), UUID.randomUUID());
         return 1;
     }
 

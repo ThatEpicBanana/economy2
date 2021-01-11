@@ -1,6 +1,7 @@
 package mods.banana.economy2.commands.trade;
 
 import mods.banana.economy2.interfaces.PlayerInterface;
+import mods.banana.economy2.interfaces.TradePlayerInterface;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.*;
@@ -56,8 +57,8 @@ public class TradeInstance {
     public void complete() { complete(true); }
 
     public void complete(boolean exchangeItems) {
-        PlayerInterface sourceInterface = (PlayerInterface) source;
-        PlayerInterface targetInterface = (PlayerInterface) target;
+        TradePlayerInterface sourceInterface = (TradePlayerInterface) source;
+        TradePlayerInterface targetInterface = (TradePlayerInterface) target;
 
         if(exchangeItems) {
             for(ItemStack itemStack : sourceInterface.getTradeItems()) {
@@ -113,8 +114,8 @@ public class TradeInstance {
 
         if(resetTimer) {
             timer = 0;
-            ((PlayerInterface)source).setAccepted(false);
-            ((PlayerInterface)target).setAccepted(false);
+            ((TradePlayerInterface)source).setAccepted(false);
+            ((TradePlayerInterface)target).setAccepted(false);
         }
     }
 
@@ -126,7 +127,7 @@ public class TradeInstance {
         target.sendSystemMessage(name, UUID.randomUUID());
 
         // get player's trading items
-        ArrayList<ItemStack> sourceItems = ((PlayerInterface) player).getTradeItems();
+        ArrayList<ItemStack> sourceItems = ((TradePlayerInterface) player).getTradeItems();
         for(int i = 0; i < sourceItems.size(); i++) {
             // send items to both
             sendItemMessage(source, sourceItems.get(i), i, side == Side.SOURCE);

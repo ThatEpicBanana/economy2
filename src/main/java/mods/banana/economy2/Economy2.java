@@ -1,31 +1,18 @@
 package mods.banana.economy2;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mojang.brigadier.tree.LiteralCommandNode;
-import mods.banana.bananaapi.serverItems.SimpleItem;
+import mods.banana.economy2.commands.admin.AdminBase;
 import mods.banana.economy2.commands.bal;
 import mods.banana.economy2.commands.baltop;
 import mods.banana.economy2.commands.banknote;
 import mods.banana.economy2.commands.exchange;
-import mods.banana.economy2.commands.trade.Root;
+import mods.banana.economy2.commands.trade.TradeBase;
 import mods.banana.economy2.commands.trade.TradeHandler;
 import mods.banana.economy2.items.EconomyItems;
-import mods.banana.economy2.mixins.MinecraftServerMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.fabricmc.fabric.api.event.world.WorldTickCallback;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
 
 import java.io.*;
 
@@ -82,7 +69,8 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(exchange.build());
             dispatcher.getRoot().addChild(baltop.build());
             dispatcher.getRoot().addChild(banknote.build());
-            dispatcher.getRoot().addChild(Root.build());
+            dispatcher.getRoot().addChild(TradeBase.build());
+            dispatcher.getRoot().addChild(AdminBase.build());
         });
 
         tradeHandler.onLoad();

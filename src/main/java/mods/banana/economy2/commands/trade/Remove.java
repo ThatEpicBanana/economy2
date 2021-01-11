@@ -7,6 +7,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.interfaces.PlayerInterface;
+import mods.banana.economy2.interfaces.TradePlayerInterface;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -16,7 +17,7 @@ import java.util.UUID;
 
 public class Remove {
     public static int run(ServerPlayerEntity target, int index) throws CommandSyntaxException {
-        PlayerInterface playerInterface = ((PlayerInterface)target);
+        TradePlayerInterface playerInterface = ((TradePlayerInterface)target);
         TradeInstance trade = playerInterface.getTrade();
         if(trade != null) {
             if(index <= playerInterface.getTradeItems().size()) {

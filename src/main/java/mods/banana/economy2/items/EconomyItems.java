@@ -14,5 +14,6 @@ public class EconomyItems {
     public static void onInit() {
         ServerItem.items.add(BANKNOTE);
         ServerItem.items.add(LIMIT);
+        ServerItem.items.add(LIMITED);
     }
 }

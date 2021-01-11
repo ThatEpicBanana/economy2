@@ -6,10 +6,12 @@
   "mixins": [
     "ChestEntityMixin",
     "ChestMixin",
-    "EntityMixin",
+    "PlayerInteractionHandlerMixin",
     "MinecraftServerMixin",
     "PlayerMixin",
+    "PlayHandlerMixin",
     "ScreenHandlerMixin",
+    "SignEntityMixin",
     "server.DedicatedServerMixin"
   ],
   "client": [

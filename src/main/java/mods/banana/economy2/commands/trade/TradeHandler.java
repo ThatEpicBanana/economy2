@@ -1,6 +1,7 @@
 package mods.banana.economy2.commands.trade;
 
 import mods.banana.economy2.interfaces.PlayerInterface;
+import mods.banana.economy2.interfaces.TradePlayerInterface;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ public class TradeHandler {
             if(world.isClient) return TypedActionResult.pass(ItemStack.EMPTY);
 
             // get player interface
-            PlayerInterface playerInterface = (PlayerInterface) player;
+            TradePlayerInterface playerInterface = (TradePlayerInterface) player;
             // if player is in trade
             if(playerInterface.getTrade() != null) {
                 // add stack to player's trade list

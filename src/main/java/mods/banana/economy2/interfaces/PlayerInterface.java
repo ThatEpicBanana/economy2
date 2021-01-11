@@ -1,6 +1,7 @@
 package mods.banana.economy2.interfaces;
 
 import mods.banana.economy2.commands.trade.TradeInstance;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -10,19 +11,8 @@ public interface PlayerInterface {
     void setBal(long value);
     void addBal(long amount);
 
-    String getBalString();
-
-    TradeInstance getTrade();
-    void setTrade(TradeInstance tradeInstance);
-
-    ArrayList<ItemStack> getTradeItems();
-    void resetTrade();
-
-    void setAccepted(boolean value);
-    boolean getAccepted();
-
-    void onConnect();
-    void onDisconnect();
+    String getBalAsString();
 
     void save();
+    void reset(String player);
 }
