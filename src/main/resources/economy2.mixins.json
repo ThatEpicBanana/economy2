@@ -4,18 +4,14 @@
   "package": "mods.banana.economy2.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ChestEntityMixin",
-    "ChestMixin",
-    "PlayerInteractionHandlerMixin",
+    "block.ChestEntityMixin",
+    "block.ChestMixin",
+    "network.PlayerInteractionHandlerMixin",
     "MinecraftServerMixin",
-    "PlayerMixin",
-    "PlayHandlerMixin",
+    "entity.PlayerMixin",
+    "network.PlayHandlerMixin",
     "ScreenHandlerMixin",
-    "SignEntityMixin",
-    "server.DedicatedServerMixin"
-  ],
-  "client": [
-    "client.IntegratedServerMixin"
+    "block.SignEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,17 +1,15 @@
 package mods.banana.economy2.mixins;
 
-import mods.banana.economy2.interfaces.ChestInterface;
-import mods.banana.economy2.items.EconomyItems;
+import mods.banana.economy2.chestshop.ChestInterface;
+import mods.banana.economy2.EconomyItems;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

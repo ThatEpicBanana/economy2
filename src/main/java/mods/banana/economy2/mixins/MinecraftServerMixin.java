@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,11 +21,13 @@ import java.util.Map;
 public class MinecraftServerMixin {
     @Shadow @Final private Map<RegistryKey<World>, ServerWorld> worlds;
 
+    @Shadow @Final private static Logger LOGGER;
+
     @Inject(method = { "save" }, at = { @At("HEAD") })
     private void save(boolean suppressLogs, boolean bl2, boolean bl3, CallbackInfoReturnable<Boolean> callbackInfo) {
         if(Economy2.server == null) Economy2.server = worlds.get(ServerWorld.OVERWORLD).getServer();
 
-        System.out.println("Saving balances...");
+        LOGGER.info("Saving balances...");
         try {
             //open file
             FileWriter file = new FileWriter(Economy2.balFileName);
@@ -39,6 +42,6 @@ public class MinecraftServerMixin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Balance file saved");
+        LOGGER.info("Balance file saved");
     }
 }

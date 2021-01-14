@@ -21,6 +21,17 @@ dependencies {
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
+    include 'com.github.OroArmor:oro-config:-SNAPSHOT'
+    modImplementation 'com.github.OroArmor:oro-config:-SNAPSHOT'
+
+    implementation files('libs/bananaapi-1.0.0-dev.jar')
+}
+
+repositories {
+    jcenter()
+    maven {
+        url = "https://jitpack.io"
+    }
 }
 
 processResources {

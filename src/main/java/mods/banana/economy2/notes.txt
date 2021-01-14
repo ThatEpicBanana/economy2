@@ -1,0 +1,5 @@
+jetbrains://idea/navigate/reference?project=economy2&path=~\.gradle\caches\fabric-loom\1.16.4-mapped-net.fabricmc.yarn-1.16.4+build.7-v2\minecraft-1.16.4-mapped-net.fabricmc.yarn-1.16.4+build.7-v2-sources.jar!\net\minecraft\network\packet\s2c\play\BlockUpdateS2CPacket.java
+net/minecraft/network/packet/s2c/play/BlockUpdateS2CPacket.java
+openhandledscreen
+screen handler has to be saved somewhere ofc
+refresh screen handler?

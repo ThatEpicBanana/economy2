@@ -13,17 +13,21 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "mods.banana.economy2.Economy2",
-      "mods.banana.bananaapi.BananaApi"
+      "mods.banana.economy2.Economy2"
     ]
   },
   "mixins": [
-    "economy2.mixins.json",
-    "bananaapi.mixins.json"
+    "economy2.mixins.json"
+  ],
+  "jars": [
+    {
+      "file": "nested/Oro-Config.jar"
+    }
   ],
   "depends": {
     "fabricloader": ">=0.10.8",
     "fabric": "*",
-    "minecraft": "1.16.4"
+    "minecraft": "1.16.4",
+    "bananaapi": "*"
   }
 }
