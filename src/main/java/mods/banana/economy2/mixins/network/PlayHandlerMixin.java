@@ -58,14 +58,14 @@ public class PlayHandlerMixin {
 
         return (lines.get(0).equals(player.getEntityName()) || (lines.get(0).equals("Admin") && player.hasPermissionLevel(3))) &&
                 lines.get(1).matches("\\d+") &&
-                (lines.get(2).matches("^B (\\d+) : (\\d+) S$") || lines.get(2).matches("^[BS] (\\d+)$")) &&
+                (lines.get(2).toLowerCase().matches("^b (\\d+) : (\\d+) s$") || lines.get(2).toLowerCase().matches("^[bs] (\\d+)$")) &&
                 Registry.ITEM.getOrEmpty(new Identifier(lines.get(3).toLowerCase())).isPresent();
     }
 
     private boolean validateSignBase(List<String> lines, ServerPlayerEntity player) {
         return (lines.get(0).equals(player.getEntityName()) || (lines.get(0).equals("Admin") && player.hasPermissionLevel(3)) || lines.get(0).equals("")) &&
                 lines.get(1).matches("\\d+") &&
-                (lines.get(2).matches("^B (\\d+) : (\\d+) S$") || lines.get(2).matches("^[BS] (\\d+)$")) &&
+                (lines.get(2).toLowerCase().matches("^b (\\d+) : (\\d+) s$") || lines.get(2).toLowerCase().matches("^[bs] (\\d+)$")) &&
                 (Registry.ITEM.getOrEmpty(new Identifier(lines.get(3).toLowerCase())).isPresent() || lines.get(3).equals(""));
     }
 

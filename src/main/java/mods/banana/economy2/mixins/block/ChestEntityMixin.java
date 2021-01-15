@@ -111,7 +111,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
             }
         }
 
-        if(input.getCount() > 0) this.world.spawnEntity(new ItemEntity(world, this.pos.getX(), this.pos.getY(), this.pos.getZ(), input));
+        if(input.getCount() > 0) world.spawnEntity(new ItemEntity(world, this.pos.getX(), this.pos.getY(), this.pos.getZ(), input));
     }
 
     public void removeItemStack(ItemStack inputStack) {

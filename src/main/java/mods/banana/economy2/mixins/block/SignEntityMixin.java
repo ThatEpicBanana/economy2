@@ -31,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Locale;
 import java.util.UUID;
 
 @Mixin(SignBlockEntity.class)
@@ -68,20 +69,20 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
 
     public long getBuy() {
         if(chestShop) {
-            if(text[2].getString().matches("^B (\\d+) : (\\d+) S$")) { // if it has both buy and sell
-                return Long.parseLong(text[2].getString().replaceAll("^B (\\d+) : (\\d+) S$", "$1"));
-            } else if (text[2].getString().matches("B (\\d+)$")) { // if it is buy only
-                return Long.parseLong(text[2].getString().replaceAll("B (\\d+)$", "$1"));
+            if(text[2].getString().toLowerCase().matches("^b (\\d+) : (\\d+) s$")) { // if it has both buy and sell
+                return Long.parseLong(text[2].getString().toLowerCase().replaceAll("^b (\\d+) : (\\d+) s$", "$1"));
+            } else if (text[2].getString().toLowerCase().matches("^b (\\d+)$")) { // if it is buy only
+                return Long.parseLong(text[2].getString().toLowerCase().replaceAll("^b (\\d+)$", "$1"));
             } else return -1; // if it is sell only or not a valid sign
         } else return -1; // not a chest shop sign
     }
 
     public long getSell() {
         if(chestShop) {
-            if(text[2].getString().matches("^B (\\d+) : (\\d+) S$")) { // if it has both buy and sell
-                return Long.parseLong(text[2].getString().replaceAll("^B (\\d+) : (\\d+) S$", "$2"));
-            } else if (text[2].getString().matches("S (\\d+)$")) { // if it is sell only
-                return Long.parseLong(text[2].getString().replaceAll("S (\\d+)$", "$1"));
+            if(text[2].getString().toLowerCase().matches("^b (\\d+) : (\\d+) s$")) { // if it has both buy and sell
+                return Long.parseLong(text[2].getString().toLowerCase().replaceAll("^b (\\d+) : (\\d+) s$", "$2"));
+            } else if (text[2].getString().toLowerCase().matches("^s (\\d+)$")) { // if it is sell only
+                return Long.parseLong(text[2].getString().toLowerCase().replaceAll("^s (\\d+)$", "$1"));
             } else return -1; // if it is buy only or not a valid sign
         } else return -1; // not a chest shop sign
     }
