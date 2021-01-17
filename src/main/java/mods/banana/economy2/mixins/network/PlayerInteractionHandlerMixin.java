@@ -1,7 +1,7 @@
 package mods.banana.economy2.mixins.network;
 
-import mods.banana.economy2.chestshop.ChestShopPart;
-import mods.banana.economy2.chestshop.SignInterface;
+import mods.banana.economy2.chestshop.interfaces.ChestShopPart;
+import mods.banana.economy2.chestshop.interfaces.SignInterface;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;

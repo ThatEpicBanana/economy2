@@ -1,4 +1,4 @@
-package mods.banana.economy2.chestshop;
+package mods.banana.economy2.chestshop.interfaces;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +13,10 @@ public interface ChestInterface extends ChestShopPart {
 
     void insertItemStack(ItemStack inputStack);
     void removeItemStack(ItemStack inputStack);
+    @Deprecated
     int countItem(Item item);
+    int countItemStack(ItemStack input);
+    @Deprecated
     int countSpace(Item item);
+    int countSpaceForStack(ItemStack input);
 }

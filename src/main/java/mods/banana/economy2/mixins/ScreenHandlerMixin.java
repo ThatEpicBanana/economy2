@@ -1,6 +1,6 @@
 package mods.banana.economy2.mixins;
 
-import mods.banana.economy2.chestshop.ChestInterface;
+import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.EconomyItems;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,6 +30,7 @@ public abstract class ScreenHandlerMixin {
 
     @Inject(method = "onSlotClick", at = {@At("HEAD")})
     private void checkLimitedItem(int i, int j, SlotActionType actionType, PlayerEntity playerEntity, CallbackInfoReturnable<ItemStack> cir) {
+        if(i < 0) return;
         if(EconomyItems.LIMIT.sameIdentifierAs(playerEntity.inventory.getCursorStack())) {
             if(EconomyItems.LIMITED.sameIdentifierAs(getSlot(i).getStack())) setStackInSlot(i, ItemStack.EMPTY);
         }

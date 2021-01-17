@@ -2,13 +2,16 @@ package mods.banana.economy2;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.oroarmor.config.Config;
+import com.oroarmor.config.ConfigItem;
 import com.oroarmor.config.command.ConfigCommand;
 import mods.banana.economy2.balance.commands.bal;
 import mods.banana.economy2.balance.commands.baltop;
 import mods.banana.economy2.balance.commands.exchange;
 import mods.banana.economy2.banknote.commands.banknote;
 import mods.banana.economy2.admin.commands.AdminBase;
+import mods.banana.economy2.chestshop.ItemModules;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -19,30 +22,60 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Economy2 implements ModInitializer {
     public static JsonObject BalanceJson;
     public static String balFileName = "economy/balJson.json";
+    private static boolean initializing;
 
     public static final Config CONFIG = new EconomyConfig();
     public static final Logger LOGGER = LogManager.getLogger();
+
+    public static String previousSaveDirectory;
 
     public static MinecraftServer server = null;
     public static TradeHandler tradeHandler = new TradeHandler();
 
     @Override
     public void onInitialize() {
+        initializing = true;
+
+        // load config
         CONFIG.readConfigFromFile();
         CONFIG.saveConfigToFile();
 
+        previousSaveDirectory = CONFIG.getValue("file.saveDirectory", String.class);
+
+        loadBalJson();
+
+        registerCommands();
+
+        ServerLifecycleEvents.SERVER_STARTED.register(server1 -> server = server1);
+
+        tradeHandler.onLoad();
+        // setup items
+        EconomyItems.onInit();
+
+        try {
+            ItemModules.onInit();
+        } catch (IOException | CommandSyntaxException e) {
+            e.printStackTrace();
+        }
+
+        initializing = false;
+    }
+
+    public static void loadBalJson() {
         // setup balance file
-        File balFile = new File(balFileName);
+        Path path = Paths.get(CONFIG.getValue("file.saveDirectory", String.class));
         try {
             //create directory
-            File directory = new File("economy");
-            if(directory.mkdir()) {
-                LOGGER.info("economy directory created");
-            }
+            Files.createDirectories(path);
+
+            File balFile = new File(path.toString() + "/balJson.json");
 
             // add file
             if (balFile.createNewFile()) {
@@ -62,7 +95,9 @@ public class Economy2 implements ModInitializer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void registerCommands() {
         // setup commands
 
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
@@ -76,17 +111,38 @@ public class Economy2 implements ModInitializer {
         });
 
         CommandRegistrationCallback.EVENT.register(new ConfigCommand(CONFIG));
-
-        ServerLifecycleEvents.SERVER_STARTED.register(server1 -> {
-            server = server1;
-        });
-
-        tradeHandler.onLoad();
-        // setup items
-        EconomyItems.onInit();
     }
 
     public static String addCurrencySign(long amount) {
         return (amount + "").replaceAll("(\\d+)", CONFIG.getValue("currency.regex", String.class));
+    }
+
+    public static void onSaveFileChange(ConfigItem<String> item) {
+        if(initializing) return;
+
+        if(item.getValue().contains(".")) {
+            // set value recalls this function, running the lower code
+            item.setValue(item.getValue().replace('.', '/'));
+        } else {
+            System.out.println(item.getValue());
+
+            try {
+                LOGGER.info("Moving balance Json...");
+
+                Path newPath = Paths.get(item.getValue());
+                Path oldPath = Paths.get(previousSaveDirectory);
+
+                Files.createDirectories(newPath);
+                Files.createDirectories(oldPath);
+
+                Files.copy(Paths.get(oldPath.toString(), "/balJson.json"), Paths.get(newPath.toString(), "/balJson.json"));
+
+                Files.delete(Paths.get(oldPath.toString(), "/balJson.json"));
+
+                previousSaveDirectory = newPath.toString();
+
+                LOGGER.info("Moved balance Json");
+            } catch (IOException e) { e.printStackTrace(); }
+        }
     }
 }

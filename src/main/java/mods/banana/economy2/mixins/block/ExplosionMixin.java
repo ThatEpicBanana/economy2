@@ -1,16 +1,10 @@
 package mods.banana.economy2.mixins.block;
 
-import mods.banana.economy2.chestshop.ChestInterface;
-import mods.banana.economy2.chestshop.ChestShopPart;
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.BlockState;
+import mods.banana.economy2.chestshop.interfaces.ChestShopPart;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;

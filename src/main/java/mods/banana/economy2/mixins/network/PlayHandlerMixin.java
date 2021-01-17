@@ -1,9 +1,12 @@
 package mods.banana.economy2.mixins.network;
 
-import mods.banana.economy2.chestshop.ChestInterface;
-import mods.banana.economy2.chestshop.SignInterface;
+import mods.banana.economy2.chestshop.ItemModules;
+import mods.banana.economy2.chestshop.interfaces.ChestInterface;
+import mods.banana.economy2.chestshop.interfaces.SignInterface;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -21,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import java.util.Locale;
 
 @Mixin(ServerPlayNetworkHandler.class)
 public class PlayHandlerMixin {
@@ -51,7 +55,12 @@ public class PlayHandlerMixin {
         if(lines.get(3).equals("")) {
             for(int i = 0; i < 27; i++)
                 if(!chest.getStack(i).isEmpty()) {
-                    lines.set(3, Registry.ITEM.getId(chest.getStack(i).getItem()).getPath());
+                    Identifier nbtStack = ItemModules.fromStack(chest.getStack(i));
+                    if(nbtStack != null) {
+                        lines.set(3, nbtStack.toString()); // if it's an nbt stack, set the identifier to that stack
+                    } else {
+                        lines.set(3, Registry.ITEM.getId(chest.getStack(i).getItem()).getPath()); // if it's not, set it to the item
+                    }
                     break;
                 }
         }
@@ -59,14 +68,21 @@ public class PlayHandlerMixin {
         return (lines.get(0).equals(player.getEntityName()) || (lines.get(0).equals("Admin") && player.hasPermissionLevel(3))) &&
                 lines.get(1).matches("\\d+") &&
                 (lines.get(2).toLowerCase().matches("^b (\\d+) : (\\d+) s$") || lines.get(2).toLowerCase().matches("^[bs] (\\d+)$")) &&
-                Registry.ITEM.getOrEmpty(new Identifier(lines.get(3).toLowerCase())).isPresent();
+                validItem(lines.get(3).toLowerCase(Locale.ROOT));
     }
 
     private boolean validateSignBase(List<String> lines, ServerPlayerEntity player) {
         return (lines.get(0).equals(player.getEntityName()) || (lines.get(0).equals("Admin") && player.hasPermissionLevel(3)) || lines.get(0).equals("")) &&
                 lines.get(1).matches("\\d+") &&
                 (lines.get(2).toLowerCase().matches("^b (\\d+) : (\\d+) s$") || lines.get(2).toLowerCase().matches("^[bs] (\\d+)$")) &&
-                (Registry.ITEM.getOrEmpty(new Identifier(lines.get(3).toLowerCase())).isPresent() || lines.get(3).equals(""));
+                (validItem(lines.get(3).toLowerCase(Locale.ROOT)) || lines.get(3).equals(""));
+    }
+
+    public boolean validItem(String string) {
+        return(
+                ItemModules.fromIdentifier(new Identifier(string)) != null ||
+                        Registry.ITEM.getOrEmpty(new Identifier(string)).isPresent()
+                );
     }
 
     private @Nullable BlockPos checkSign(World world, BlockPos blockPos) {

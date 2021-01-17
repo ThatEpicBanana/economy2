@@ -6,6 +6,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.system.CallbackI;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,21 +28,29 @@ public class MinecraftServerMixin {
     private void save(boolean suppressLogs, boolean bl2, boolean bl3, CallbackInfoReturnable<Boolean> callbackInfo) {
         if(Economy2.server == null) Economy2.server = worlds.get(ServerWorld.OVERWORLD).getServer();
 
-        LOGGER.info("Saving balances...");
-        try {
-            //open file
-            FileWriter file = new FileWriter(Economy2.balFileName);
+        // check that it is actually supposed to save by iterating through worlds
+        boolean saving = false;
+        for(ServerWorld world : worlds.values())
+            if (!world.savingDisabled) { saving = true; break; }
 
-            //write json to file
-            file.write(Economy2.BalanceJson.toString());
+        // if it's actually saving
+        if(saving) {
+            LOGGER.info("Saving balances...");
+            try {
+                //open file
+                FileWriter file = new FileWriter(Economy2.CONFIG.getValue("file.saveDirectory", String.class) + "/balJson.json");
 
-            //close file
-            file.flush();
-            file.close();
+                //write json to file
+                file.write(Economy2.BalanceJson.toString());
 
-        } catch (IOException e) {
-            e.printStackTrace();
+                //close file
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            LOGGER.info("Balance file saved");
         }
-        LOGGER.info("Balance file saved");
     }
 }

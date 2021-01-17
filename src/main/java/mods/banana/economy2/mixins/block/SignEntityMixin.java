@@ -2,10 +2,11 @@ package mods.banana.economy2.mixins.block;
 
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.OfflinePlayer;
-import mods.banana.economy2.chestshop.ChestInterface;
-import mods.banana.economy2.chestshop.ChestShopPlayerInterface;
+import mods.banana.economy2.chestshop.ItemModules;
+import mods.banana.economy2.chestshop.interfaces.ChestInterface;
+import mods.banana.economy2.chestshop.interfaces.ChestShopPlayerInterface;
 import mods.banana.economy2.balance.PlayerInterface;
-import mods.banana.economy2.chestshop.SignInterface;
+import mods.banana.economy2.chestshop.interfaces.SignInterface;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -23,6 +24,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import org.lwjgl.system.CallbackI;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +33,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Locale;
 import java.util.UUID;
 
 @Mixin(SignBlockEntity.class)
@@ -93,6 +94,20 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         } else return null;
     }
 
+    public ItemStack getItemStack() {return getItemStack(1);}
+
+    public ItemStack getItemStack(int amount) {
+        if(chestShop) {
+            ItemStack nbtItem = ItemModules.fromIdentifier(new Identifier(text[3].getString()));
+            if(nbtItem != null) {
+                nbtItem.setCount(amount);
+                return nbtItem;
+            } else {
+                return new ItemStack(Registry.ITEM.get(new Identifier(text[3].getString())), amount);
+            }
+        } else return null;
+    }
+
     public int getAmount() {
         if(chestShop) {
             return Integer.parseInt(text[1].getString());
@@ -111,16 +126,23 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     public void onBuy(PlayerEntity player) {
         if(chestShop) {
             long buy = getBuy();
+            int amount = getAmount();
             ChestShopPlayerInterface buyer = (ChestShopPlayerInterface) player;
             if(!isAdmin()) {
                 PlayerInterface owner = OfflinePlayer.getPlayer(parent);
+                ChestInterface chest = getChest();
                 if(buy > -1) {
                     if(buyer.getBal() >= buy) {
-                        if(getChest().countItem(getItem()) >= getAmount()) {
-                            getChest().removeItemStack(new ItemStack(getItem(), getAmount()));
-                            buyer.giveStack(new ItemStack(getItem(), getAmount()));
-                            owner.addBal(buy);
+                        if(chest.countItemStack(getItemStack()) >= amount) {
+                            // remove items from chest
+                            chest.removeItemStack(getItemStack(amount));
+                            // add to buyer
+                            buyer.giveStack(getItemStack(amount));
+
+                            // remove balance from buyer
                             buyer.addBal(-buy);
+                            // add to owner
+                            owner.addBal(buy);
                             player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1, 1.5F);
                         } else player.sendSystemMessage(new LiteralText("This shop does not have enough items for this trade.").formatted(Formatting.RED), UUID.randomUUID());
                     } else player.sendSystemMessage(new LiteralText("You do not have enough " + Economy2.CONFIG.getValue("currency.name", String.class) + " for this trade.").formatted(Formatting.RED), UUID.randomUUID());
@@ -128,7 +150,9 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
             } else {
                 if(buy > -1) {
                     if(buyer.getBal() >= buy) {
-                        buyer.giveStack(new ItemStack(getItem(), getAmount()));
+                        // give items to buyer
+                        buyer.giveStack(getItemStack(amount));
+                        // remove balance from buyer
                         buyer.addBal(-buy);
                         player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1, 1.5F);
                     } else player.sendSystemMessage(new LiteralText("You do not have enough " + Economy2.CONFIG.getValue("currency.name", String.class) + " for this trade.").formatted(Formatting.RED), UUID.randomUUID());
@@ -141,18 +165,21 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         if(chestShop) {
             long sell = getSell();
             int amount = getAmount();
-            Item item = getItem();
             ChestShopPlayerInterface seller = (ChestShopPlayerInterface) player;
             if(!isAdmin()) {
                 ChestInterface chest = getChest();
                 PlayerInterface owner = OfflinePlayer.getPlayer(parent);
                 if(sell > -1) {
-                    if(seller.countItem(item) >= amount) {
-                        if(getChest().countSpace(item) >= amount) {
+                    if(seller.countItemStack(getItemStack()) >= amount) {
+                        if(getChest().countSpaceForStack(getItemStack()) >= amount) {
                             if(owner.getBal() >= sell) {
-                                seller.removeItemStack(new ItemStack(item, amount));
-                                chest.insertItemStack(new ItemStack(item, amount));
+                                // remove stack from seller
+                                seller.removeItemStack(getItemStack(amount));
+                                // insert into chest
+                                chest.insertItemStack(getItemStack(amount));
+                                // give seller the sell amount
                                 seller.addBal(sell);
+                                // remove the sell amount from the owner
                                 owner.addBal(-sell);
                                 player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1, 1);
                             } else player.sendSystemMessage(new LiteralText("The shop owner does not have enough " + Economy2.CONFIG.getValue("currency.name", String.class) + " for this trade.").formatted(Formatting.RED), UUID.randomUUID());
@@ -161,8 +188,10 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
                 } else player.sendSystemMessage(new LiteralText("This shop is buy only.").formatted(Formatting.RED), UUID.randomUUID());
             } else {
                 if(sell > -1) {
-                    if(seller.countItem(item) >= amount) {
-                        seller.removeItemStack(new ItemStack(item, amount));
+                    if(seller.countItemStack(getItemStack()) >= amount) {
+                        // remove items from seller
+                        seller.removeItemStack(getItemStack(amount));
+                        // add balance to seller
                         seller.addBal(sell);
                         player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1, 1);
                     } else player.sendSystemMessage(new LiteralText("You do not have enough items for this trade.").formatted(Formatting.RED), UUID.randomUUID());
