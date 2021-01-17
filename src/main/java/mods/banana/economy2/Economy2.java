@@ -2,7 +2,6 @@ package mods.banana.economy2;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.oroarmor.config.Config;
 import com.oroarmor.config.ConfigItem;
 import com.oroarmor.config.command.ConfigCommand;
@@ -12,6 +11,7 @@ import mods.banana.economy2.balance.commands.exchange;
 import mods.banana.economy2.banknote.commands.banknote;
 import mods.banana.economy2.admin.commands.AdminBase;
 import mods.banana.economy2.chestshop.ItemModules;
+import mods.banana.economy2.chestshop.commands.AboutItem;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -37,7 +37,7 @@ public class Economy2 implements ModInitializer {
     public static String previousSaveDirectory;
 
     public static MinecraftServer server = null;
-    public static TradeHandler tradeHandler = new TradeHandler();
+//    public static TradeHandler tradeHandler = new TradeHandler();
 
     @Override
     public void onInitialize() {
@@ -47,23 +47,16 @@ public class Economy2 implements ModInitializer {
         CONFIG.readConfigFromFile();
         CONFIG.saveConfigToFile();
 
+        // save previous directory for reference when moving it
         previousSaveDirectory = CONFIG.getValue("file.saveDirectory", String.class);
-
-        loadBalJson();
-
-        registerCommands();
 
         ServerLifecycleEvents.SERVER_STARTED.register(server1 -> server = server1);
 
-        tradeHandler.onLoad();
-        // setup items
+        loadBalJson();
+        registerCommands();
+        TradeHandler.onInit();
         EconomyItems.onInit();
-
-        try {
-            ItemModules.onInit();
-        } catch (IOException | CommandSyntaxException e) {
-            e.printStackTrace();
-        }
+        ItemModules.onInit();
 
         initializing = false;
     }
@@ -99,17 +92,17 @@ public class Economy2 implements ModInitializer {
 
     public static void registerCommands() {
         // setup commands
-
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            dispatcher.getRoot().addChild(bal.build());
-            dispatcher.getRoot().addChild(exchange.build());
-            dispatcher.getRoot().addChild(baltop.build());
-            dispatcher.getRoot().addChild(banknote.build());
-            dispatcher.getRoot().addChild(TradeBase.build());
-            dispatcher.getRoot().addChild(AdminBase.build());
-//            dispatcher.getRoot().addChild(OpenGui.build());
+            dispatcher.getRoot().addChild(bal.build()); //bal <player>(optional)
+            dispatcher.getRoot().addChild(exchange.build()); //exchange <player> <amount>
+            dispatcher.getRoot().addChild(baltop.build()); //baltop
+            dispatcher.getRoot().addChild(banknote.build()); //banknote <amount>
+            dispatcher.getRoot().addChild(TradeBase.build()); //trade <player>
+            dispatcher.getRoot().addChild(AdminBase.build()); //admin [clean|removeALl|balance|player]
+            dispatcher.getRoot().addChild(AboutItem.build()); //aboutitem
         });
 
+        // setup config command
         CommandRegistrationCallback.EVENT.register(new ConfigCommand(CONFIG));
     }
 

@@ -2,6 +2,7 @@ package mods.banana.economy2.trade.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.trade.TradeHandler;
 import mods.banana.economy2.trade.TradePlayerInterface;
 import mods.banana.economy2.trade.TradeInstance;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -11,13 +12,13 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 public class Accept {
     public static int run(ServerPlayerEntity source, ServerPlayerEntity target) {
-        for(TradeInstance tradeInstance : Economy2.tradeHandler.requests) {
+        for(TradeInstance tradeInstance : TradeHandler.requests) {
             if(tradeInstance.getSource().equals(target) && tradeInstance.getTarget().equals(source)) {
                 ((TradePlayerInterface)source).setTrade(tradeInstance);
                 ((TradePlayerInterface)target).setTrade(tradeInstance);
                 tradeInstance.sendUpdateMessage(true);
-                Economy2.tradeHandler.trades.add(tradeInstance);
-                Economy2.tradeHandler.requests.remove(tradeInstance);
+                TradeHandler.trades.add(tradeInstance);
+                TradeHandler.requests.remove(tradeInstance);
                 return 1;
             }
         }

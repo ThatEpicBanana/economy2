@@ -12,6 +12,7 @@ import net.minecraft.util.registry.Registry;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +21,12 @@ import java.util.Map;
 public class ItemModule {
     private final String name;
     private final Map<Identifier, ItemStack> values;
+    private final NbtItem[] items;
 
     public ItemModule(String name, Map<Identifier, ItemStack> values) {
         this.name = name;
         this.values = values;
+        this.items = new NbtItem[10];
     }
 
     /**
@@ -58,6 +61,7 @@ public class ItemModule {
 
         this.name = name;
         this.values = values;
+        this.items = new NbtItem[10];
     }
 
     public String getName() { return name; }

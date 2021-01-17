@@ -11,10 +11,10 @@ import net.minecraft.util.TypedActionResult;
 import java.util.ArrayList;
 
 public class TradeHandler {
-    public ArrayList<TradeInstance> requests = new ArrayList<>();
-    public ArrayList<TradeInstance> trades = new ArrayList<>();
+    public static ArrayList<TradeInstance> requests = new ArrayList<>();
+    public static ArrayList<TradeInstance> trades = new ArrayList<>();
 
-    public void onLoad() {
+    public static void onInit() {
         UseItemCallback.EVENT.register((player, world, hand) -> {
             // return if this is a client call or the player is not in a trade
             if(world.isClient) return TypedActionResult.pass(ItemStack.EMPTY);

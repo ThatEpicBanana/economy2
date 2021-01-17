@@ -22,7 +22,7 @@ public class ItemModules {
     public static ArrayList<ItemModule> registeredModules = new ArrayList<>();
     public static ArrayList<ItemModule> activeModules = new ArrayList<>();
 
-    public static void onInit() throws IOException, CommandSyntaxException {
+    public static void onInit() {
         ItemModule heads = new ItemModule("heads", "heads.json");
         registeredModules.add(heads);
         if(Economy2.CONFIG.getValue("chestShop.nbtItemModule.heads", Boolean.class)) activeModules.add(heads);

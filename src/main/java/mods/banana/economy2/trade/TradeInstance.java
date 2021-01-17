@@ -13,7 +13,6 @@ import java.util.UUID;
 public class TradeInstance {
     private final ServerPlayerEntity source;
     private final ServerPlayerEntity target;
-    private final TradeHandler handler;
 
     enum Side {
         SOURCE,
@@ -26,10 +25,9 @@ public class TradeInstance {
 
 //    public void markAcceptable() { canAccept = true; }
 
-    public TradeInstance(ServerPlayerEntity source, ServerPlayerEntity target, TradeHandler handler) {
+    public TradeInstance(ServerPlayerEntity source, ServerPlayerEntity target) {
         this.source = source;
         this.target = target;
-        this.handler = handler;
     }
 
     public ServerPlayerEntity getSource() { return source; }
@@ -84,7 +82,7 @@ public class TradeInstance {
         sourceInterface.resetTrade();
         targetInterface.resetTrade();
 
-        handler.trades.remove(this);
+        TradeHandler.trades.remove(this);
     }
 
     public void sendUpdateMessage(boolean resetTimer) {
