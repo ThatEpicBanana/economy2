@@ -1,7 +1,7 @@
 package mods.banana.economy2.chestshop.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import mods.banana.economy2.chestshop.ItemModules;
+import mods.banana.economy2.chestshop.modules.ItemModuleHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -20,7 +20,7 @@ public class AboutItem {
             String item;
 
             // get nbt item from modules
-            Identifier nbtItem = ItemModules.fromStack(selectedItem);
+            Identifier nbtItem = ItemModuleHandler.getIdentifierOfStack(selectedItem);
 
             // if it is a default minecraft item, set the identifier to it's one
             if(nbtItem == null) item = Registry.ITEM.getId(selectedItem.getItem()).toString();

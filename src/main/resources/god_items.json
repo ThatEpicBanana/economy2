@@ -1,0 +1,581 @@
+[
+    {
+        "item": "wooden_shovel",
+        "identifier": "god:silk-w-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "wooden_shovel",
+        "identifier": "god:fortune-w-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "wooden_pickaxe",
+        "identifier": "god:silk-w-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "wooden_pickaxe",
+        "identifier": "god:fortune-w-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "wooden_hoe",
+        "identifier": "god:silk-w-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "wooden_hoe",
+        "identifier": "god:fortune-w-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "wooden_axe",
+        "identifier": "god:silk-w-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "wooden_axe",
+        "identifier": "god:fortune-w-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "wooden_sword",
+        "identifier": "god:w-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}]} "
+    },
+    {
+        "item": "wooden_sword",
+        "identifier": "god:knockback-w-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 2s, id: \"minecraft:knockback\"}]} "
+    },
+    {
+        "item": "stone_shovel",
+        "identifier": "god:silk-s-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "stone_shovel",
+        "identifier": "god:fortune-s-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "stone_pickaxe",
+        "identifier": "god:silk-s-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "stone_pickaxe",
+        "identifier": "god:fortune-s-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "stone_hoe",
+        "identifier": "god:silk-s-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "stone_hoe",
+        "identifier": "god:fortune-s-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "stone_axe",
+        "identifier": "god:silk-s-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "stone_axe",
+        "identifier": "god:fortune-s-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "stone_sword",
+        "identifier": "god:s-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}]} "
+    },
+    {
+        "item": "stone_sword",
+        "identifier": "god:knockback-s-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 2s, id: \"minecraft:knockback\"}]} "
+    },
+    {
+        "item": "iron_shovel",
+        "identifier": "god:silk-i-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "iron_shovel",
+        "identifier": "god:fortune-i-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "iron_pickaxe",
+        "identifier": "god:silk-i-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "iron_pickaxe",
+        "identifier": "god:fortune-i-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "iron_hoe",
+        "identifier": "god:silk-i-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "iron_hoe",
+        "identifier": "god:fortune-i-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "iron_axe",
+        "identifier": "god:silk-i-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "iron_axe",
+        "identifier": "god:fortune-i-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "iron_sword",
+        "identifier": "god:i-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}]} "
+    },
+    {
+        "item": "iron_sword",
+        "identifier": "god:knockback-i-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 2s, id: \"minecraft:knockback\"}]} "
+    },
+    {
+        "item": "diamond_shovel",
+        "identifier": "god:silk-d-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "diamond_shovel",
+        "identifier": "god:fortune-d-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "diamond_pickaxe",
+        "identifier": "god:silk-d-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "diamond_pickaxe",
+        "identifier": "god:fortune-d-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "diamond_hoe",
+        "identifier": "god:silk-d-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "diamond_hoe",
+        "identifier": "god:fortune-d-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "diamond_axe",
+        "identifier": "god:silk-d-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "diamond_axe",
+        "identifier": "god:fortune-d-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "diamond_sword",
+        "identifier": "god:d-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}]} "
+    },
+    {
+        "item": "diamond_sword",
+        "identifier": "god:knockback-d-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 2s, id: \"minecraft:knockback\"}]} "
+    },
+    {
+        "item": "gold_shovel",
+        "identifier": "god:silk-g-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "gold_shovel",
+        "identifier": "god:fortune-g-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "gold_pickaxe",
+        "identifier": "god:silk-g-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "gold_pickaxe",
+        "identifier": "god:fortune-g-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "gold_hoe",
+        "identifier": "god:silk-g-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "gold_hoe",
+        "identifier": "god:fortune-g-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "gold_axe",
+        "identifier": "god:silk-g-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "gold_axe",
+        "identifier": "god:fortune-g-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "gold_sword",
+        "identifier": "god:g-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}]} "
+    },
+    {
+        "item": "gold_sword",
+        "identifier": "god:knockback-g-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 2s, id: \"minecraft:knockback\"}]} "
+    },
+    {
+        "item": "netherite_shovel",
+        "identifier": "god:silk-n-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "netherite_shovel",
+        "identifier": "god:fortune-n-shovel",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "netherite_pickaxe",
+        "identifier": "god:silk-n-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "netherite_pickaxe",
+        "identifier": "god:fortune-n-pickaxe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "netherite_hoe",
+        "identifier": "god:silk-n-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}]}"
+    },
+    {
+        "item": "netherite_hoe",
+        "identifier": "god:fortune-n-hoe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}]}"
+    },
+    {
+        "item": "netherite_axe",
+        "identifier": "god:silk-n-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 1s, id: \"minecraft:silk_touch\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "netherite_axe",
+        "identifier": "god:fortune-n-axe",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 5s, id: \"minecraft:efficiency\"}, {lvl: 3s, id: \"minecraft:fortune\"}, {lvl: 5s, id: \"minecraft:sharpness\"}]}"
+    },
+    {
+        "item": "netherite_sword",
+        "identifier": "god:n-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}]} "
+    },
+    {
+        "item": "netherite_sword",
+        "identifier": "god:knockback-n-sword",
+        "tag": "{Enchantments: [{lvl: 5s, id: \"minecraft:sharpness\"}, {lvl: 2s, id: \"minecraft:fire_aspect\"}, {lvl: 3s, id: \"minecraft:looting\"}, {lvl: 3s, id: \"minecraft:sweeping\"}, {lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 2s, id: \"minecraft:knockback\"}]} "
+    },
+    {
+        "item": "leather_helmet",
+        "identifier": "god:le-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}"
+    },
+    {
+        "item": "leather_helmet",
+        "identifier": "god:thorns-le-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}",
+        "parent": "god:le-helmet"
+    },
+    {
+        "item": "leather_chestplate",
+        "identifier": "god:le-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "leather_chestplate",
+        "identifier": "god:thorns-le-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:le-chestplate"
+    },
+    {
+        "item": "leather_leggings",
+        "identifier": "god:le-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "leather_leggings",
+        "identifier": "god:thorns-le-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:le-leggings"
+    },
+    {
+        "item": "leather_boots",
+        "identifier": "god:le-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}"
+    },
+    {
+        "item": "leather_boots",
+        "identifier": "god:thorns-le-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}",
+        "parent": "god:le-boots"
+    },
+    {
+        "item": "chain_helmet",
+        "identifier": "god:c-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}"
+    },
+    {
+        "item": "chain_helmet",
+        "identifier": "god:thorns-c-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}",
+        "parent": "god:c-helmet"
+    },
+    {
+        "item": "chain_chestplate",
+        "identifier": "god:c-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "chain_chestplate",
+        "identifier": "god:thorns-c-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:c-chestplate"
+    },
+    {
+        "item": "chain_leggings",
+        "identifier": "god:c-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "chain_leggings",
+        "identifier": "god:thorns-c-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:c-leggings"
+    },
+    {
+        "item": "chain_boots",
+        "identifier": "god:c-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}"
+    },
+    {
+        "item": "chain_boots",
+        "identifier": "god:thorns-c-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}",
+        "parent": "god:c-boots"
+    },
+    {
+        "item": "iron_helmet",
+        "identifier": "god:i-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}"
+    },
+    {
+        "item": "iron_helmet",
+        "identifier": "god:thorns-i-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}",
+        "parent": "god:i-helmet"
+    },
+    {
+        "item": "iron_chestplate",
+        "identifier": "god:i-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "iron_chestplate",
+        "identifier": "god:thorns-i-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:i-chestplate"
+    },
+    {
+        "item": "iron_leggings",
+        "identifier": "god:i-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "iron_leggings",
+        "identifier": "god:thorns-i-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:i-leggings"
+    },
+    {
+        "item": "iron_boots",
+        "identifier": "god:i-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}"
+    },
+    {
+        "item": "iron_boots",
+        "identifier": "god:thorns-i-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}",
+        "parent": "god:i-boots"
+    },
+    {
+        "item": "diamond_helmet",
+        "identifier": "god:d-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}"
+    },
+    {
+        "item": "diamond_helmet",
+        "identifier": "god:thorns-d-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}",
+        "parent": "god:d-helmet"
+    },
+    {
+        "item": "diamond_chestplate",
+        "identifier": "god:d-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "diamond_chestplate",
+        "identifier": "god:thorns-d-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:d-chestplate"
+    },
+    {
+        "item": "diamond_leggings",
+        "identifier": "god:d-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "diamond_leggings",
+        "identifier": "god:thorns-d-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:d-leggings"
+    },
+    {
+        "item": "diamond_boots",
+        "identifier": "god:d-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}"
+    },
+    {
+        "item": "diamond_boots",
+        "identifier": "god:thorns-d-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}",
+        "parent": "god:d-boots"
+    },
+    {
+        "item": "gold_helmet",
+        "identifier": "god:g-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}"
+    },
+    {
+        "item": "gold_helmet",
+        "identifier": "god:thorns-g-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}",
+        "parent": "god:g-helmet"
+    },
+    {
+        "item": "gold_chestplate",
+        "identifier": "god:g-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "gold_chestplate",
+        "identifier": "god:thorns-g-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:g-chestplate"
+    },
+    {
+        "item": "gold_leggings",
+        "identifier": "god:g-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "gold_leggings",
+        "identifier": "god:thorns-g-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:g-leggings"
+    },
+    {
+        "item": "gold_boots",
+        "identifier": "god:g-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}"
+    },
+    {
+        "item": "gold_boots",
+        "identifier": "god:thorns-g-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}",
+        "parent": "god:g-boots"
+    },
+    {
+        "item": "netherite_helmet",
+        "identifier": "god:ne-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}"
+    },
+    {
+        "item": "netherite_helmet",
+        "identifier": "god:thorns-ne-helmet",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:respiration\"}, {lvl: 1s, id: \"minecraft:aqua_affinity\"}]}",
+        "parent": "god:ne-helmet"
+    },
+    {
+        "item": "netherite_chestplate",
+        "identifier": "god:ne-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "netherite_chestplate",
+        "identifier": "god:thorns-ne-chestplate",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:ne-chestplate"
+    },
+    {
+        "item": "netherite_leggings",
+        "identifier": "god:ne-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}]}"
+    },
+    {
+        "item": "netherite_leggings",
+        "identifier": "god:thorns-ne-leggings",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}]}",
+        "parent": "god:ne-leggings"
+    },
+    {
+        "item": "netherite_boots",
+        "identifier": "god:ne-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}"
+    },
+    {
+        "item": "netherite_boots",
+        "identifier": "god:thorns-ne-boots",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 4s, id: \"minecraft:protection\"}, {lvl: 3s, id: \"minecraft:thorns\"}, {lvl: 3s, id: \"minecraft:depth_strider\"}, {lvl: 3s, id: \"minecraft:soul_speed\"}, {lvl: 4s, id: \"minecraft:feather-falling\"}]}",
+        "parent": "god:ne-boots"
+    },
+    {
+        "item": "bow",
+        "identifier": "god:infinity_bow",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:flame\"}, {lvl: 2s, id: \"minecraft:punch\"}, {lvl: 5s, id: \"minecraft:power\"}, {lvl: 1s, id: \"minecraft:infinity\"}]}"
+    },
+    {
+        "item": "bow",
+        "identifier": "god:mending_bow",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:flame\"}, {lvl: 2s, id: \"minecraft:punch\"}, {lvl: 5s, id: \"minecraft:power\"}, {lvl: 1s, id: \"minecraft:mending\"}]}"
+    },
+    {
+        "item": "fishing_rod",
+        "identifier": "god:rod",
+        "tag": "{Enchantments: [{lvl: 3s, id: \"minecraft:unbreaking\"}, {lvl: 1s, id: \"minecraft:mending\"}, {lvl: 3s, id: \"minecraft:lure\"}, {lvl: 3s, id: \"minecraft:luck_of_the_sea\"}]}"
+    }
+]

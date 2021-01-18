@@ -10,8 +10,9 @@ import mods.banana.economy2.balance.commands.baltop;
 import mods.banana.economy2.balance.commands.exchange;
 import mods.banana.economy2.banknote.commands.banknote;
 import mods.banana.economy2.admin.commands.AdminBase;
-import mods.banana.economy2.chestshop.ItemModules;
 import mods.banana.economy2.chestshop.commands.AboutItem;
+import mods.banana.economy2.chestshop.modules.ItemModules;
+import mods.banana.economy2.chestshop.modules.module_creators.CreateEnchants;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -28,7 +29,6 @@ import java.nio.file.Paths;
 
 public class Economy2 implements ModInitializer {
     public static JsonObject BalanceJson;
-    public static String balFileName = "economy/balJson.json";
     private static boolean initializing;
 
     public static final Config CONFIG = new EconomyConfig();
@@ -56,7 +56,12 @@ public class Economy2 implements ModInitializer {
         registerCommands();
         TradeHandler.onInit();
         EconomyItems.onInit();
-        ItemModules.onInit();
+//        CreateEnchants.onInit();
+        try {
+            ItemModules.onInit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         initializing = false;
     }

@@ -1,12 +1,10 @@
 package mods.banana.economy2.mixins.network;
 
-import mods.banana.economy2.chestshop.ItemModules;
+import mods.banana.economy2.chestshop.modules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -55,7 +53,7 @@ public class PlayHandlerMixin {
         if(lines.get(3).equals("")) {
             for(int i = 0; i < 27; i++)
                 if(!chest.getStack(i).isEmpty()) {
-                    Identifier nbtStack = ItemModules.fromStack(chest.getStack(i));
+                    Identifier nbtStack = ItemModuleHandler.getIdentifierOfStack(chest.getStack(i));
                     if(nbtStack != null) {
                         lines.set(3, nbtStack.toString()); // if it's an nbt stack, set the identifier to that stack
                     } else {
@@ -80,7 +78,7 @@ public class PlayHandlerMixin {
 
     public boolean validItem(String string) {
         return(
-                ItemModules.fromIdentifier(new Identifier(string)) != null ||
+                ItemModuleHandler.getActiveItem(new Identifier(string)) != null ||
                         Registry.ITEM.getOrEmpty(new Identifier(string)).isPresent()
                 );
     }

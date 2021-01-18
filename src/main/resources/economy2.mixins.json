@@ -4,12 +4,12 @@
   "package": "mods.banana.economy2.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "HopperEntityMixin",
     "MinecraftServerMixin",
     "ScreenHandlerMixin",
     "block.ChestEntityMixin",
     "block.ChestMixin",
     "block.ExplosionMixin",
+    "block.HopperEntityMixin",
     "block.SignEntityMixin",
     "entity.PlayerMixin",
     "network.PlayerInteractionHandlerMixin",

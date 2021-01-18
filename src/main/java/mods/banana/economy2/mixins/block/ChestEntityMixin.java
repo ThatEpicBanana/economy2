@@ -1,5 +1,7 @@
 package mods.banana.economy2.mixins.block;
 
+import mods.banana.economy2.ItemStackUtil;
+import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
 import mods.banana.economy2.EconomyItems;
@@ -9,7 +11,6 @@ import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -24,6 +25,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Mixin(ChestBlockEntity.class)
@@ -74,7 +77,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
 
         //add all of the limited item
         for(int i = inventory.size() - 1; i > index; i--) {
-            if(getStack(i) != ItemStack.EMPTY && !EconomyItems.LIMITED.sameIdentifierAs(getStack(i))) insertItemStack(getStack(i));
+            if(getStack(i) != ItemStack.EMPTY && !EconomyItems.LIMITED.sameIdentifierAs(getStack(i))) insertStack(getStack(i));
             setStack(i, EconomyItems.LIMITED.getItemStack());
         }
 
@@ -90,7 +93,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         return getLimit();
     }
 
-    public void insertItemStack(ItemStack input) {
+    public void insertStack(ItemStack input) {
         int amountLeft = input.getCount();
         // for each slot
         for(int i = 0; i < size() && amountLeft > 0; i++) {
@@ -98,21 +101,17 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
             if(stack.isEmpty()) { // if the slot is empty:
                 // the count to add is either the current input count or the maximum
                 int count = Math.min(amountLeft, input.getMaxCount());
-                // create new stack
-                ItemStack newItem = input.copy();
-                // set it's count to the new count
-                newItem.setCount(count);
                 // set slot to the new stack
-                setStack(i, newItem);
+                setStack(i, ItemStackUtil.setCount(input.copy(), count));
                 // remove count from input
                 amountLeft -= count;
-            } else if (ScreenHandler.canStacksCombine(stack, input)) { // if the two items can combine
-                // get the amount to add; either the stacks put together or the max stack count
+            } else if (ScreenHandler.canStacksCombine(stack, input) && stack.getCount() < stack.getMaxCount()) { // if the two items can combine
+                // get the amount to set to; either the stacks put together or the max stack count
                 int count = Math.min(stack.getCount() + amountLeft, input.getMaxCount());
+                // remove count from input
+                amountLeft -= (count - stack.getCount());
                 // set count of stack to new count
                 stack.setCount(count);
-                // remove count from input
-                amountLeft -= count;
             }
         }
 
@@ -124,6 +123,10 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
             // spawn the entity
             world.spawnEntity(new ItemEntity(world, this.pos.getX(), this.pos.getY(), this.pos.getZ(), newItem));
         }
+    }
+
+    public void insertStacks(List<ItemStack> stacks) {
+        for(ItemStack stack : stacks) insertStack(stack);
     }
 
     public void removeItemStack(ItemStack inputStack) {
@@ -143,6 +146,27 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         }
     }
 
+    public List<ItemStack> removeItem(ChestShopItem item, int count) {
+        ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
+        for(int i = 0; i < size() && count > 0; i++) {
+            ItemStack currentStack = getStack(i);
+            // if the items are the same
+            if(item.matches(currentStack)) {
+                // the amount to remove is either the entirety of the slot or the rest of the input amount
+                int amount = Math.min(currentStack.getCount(), count);
+
+                // add item removed to list
+                itemsRemoved.add(ItemStackUtil.setCount(currentStack.copy(), amount));
+                // remove the amount from the current stack
+                currentStack.setCount(currentStack.getCount() - amount);
+
+                // update the count
+                count -= amount;
+            }
+        }
+        return itemsRemoved;
+    }
+
     @Deprecated
     public int countItem(Item item) {
         int amount = 0;
@@ -158,6 +182,15 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         for(int i = 0; i < getLimit(); i++) {
             ItemStack currentStack = getStack(i);
             if(!currentStack.isEmpty() && ScreenHandler.canStacksCombine(currentStack, input)) amount += currentStack.getCount();
+        }
+        return amount;
+    }
+
+    public int countItem(ChestShopItem input) {
+        int amount = 0;
+        for(int i = 0; i < getLimit(); i++) {
+            ItemStack currentStack = getStack(i);
+            if(!currentStack.isEmpty() && input.matches(currentStack)) amount += currentStack.getCount();
         }
         return amount;
     }
@@ -182,6 +215,16 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         }
         return amount;
     }
+
+//    public int countSpaceForItem(ChestShopItem input) {
+//        int amount = 0;
+//        for(int i = 0; i < getLimit(); i++) {
+//            ItemStack stack = getStack(i);
+//            if(stack.isEmpty()) amount += input.getItem().getMaxCount(); // if slot is empty, add max count
+//            else if(input.matches(stack)) amount += input.getItem().getMaxCount() - stack.getCount(); // if items are the same, add items left in stack
+//        }
+//        return amount;
+//    }
 
     @Inject(method = "onClose", at = {@At("HEAD")})
     private void close(PlayerEntity player, CallbackInfo ci) {

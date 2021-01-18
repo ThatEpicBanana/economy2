@@ -39,12 +39,10 @@ public class Balance {
         player.then(add);
         player.then(reset);
 
-        LiteralCommandNode<ServerCommandSource> base = CommandManager
+        return CommandManager
                 .literal("balance")
                 .then(player)
                 .build();
-
-        return base;
     }
 
     public static int set(String player, long value) {

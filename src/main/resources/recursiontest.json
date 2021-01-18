@@ -1,0 +1,37 @@
+[
+  {
+    "item": "dirt",
+    "identifier": "t:a",
+    "tag": "{a: 1b}"
+  },
+  {
+    "item": "dirt",
+    "identifier": "t:b",
+    "tag": "{a: 1b, b: 1b}",
+    "parent": "t:a"
+  },
+  {
+    "item": "dirt",
+    "identifier": "t:c",
+    "tag": "{a: 1b, b: 1b, c: 1b}",
+    "parent": "t:b"
+  },
+  {
+    "item": "dirt",
+    "identifier": "t:d",
+    "tag": "{a: 1b, b: 1b, c: 1b, d: 1b}",
+    "parent": "t:c"
+  },
+  {
+    "item": "dirt",
+    "identifier": "t:ab",
+    "tag": "{a: 1b, ab: 1b}",
+    "parent": "t:a"
+  },
+  {
+    "item": "dirt",
+    "identifier": "t:abc",
+    "tag": "{a: 1b, ab: 1b, abc: 1b}",
+    "parent": "t:ab"
+  }
+]

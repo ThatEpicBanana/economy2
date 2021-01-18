@@ -3,6 +3,8 @@ package mods.banana.economy2.mixins.entity;
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.ItemStackUtil;
+import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.trade.TradeInstance;
 import mods.banana.economy2.chestshop.interfaces.ChestShopPlayerInterface;
 import mods.banana.economy2.trade.TradePlayerInterface;
@@ -25,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInterface, ChestShopPlayerInterface {
@@ -83,6 +86,15 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         return amount;
     }
 
+    public int countItem(ChestShopItem item) {
+        int amount = 0;
+        for(int i = 0; i < inventory.main.size(); i++) {
+            ItemStack currentStack = inventory.main.get(i);
+            if(item.matches(currentStack)) amount += currentStack.getCount();
+        }
+        return amount;
+    }
+
     public void removeItemStack(ItemStack inputStack) {
         for(int i = 0; i < inventory.size() && inputStack.getCount() > 0; i++) {
             ItemStack currentStack = inventory.getStack(i);
@@ -100,6 +112,27 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         }
     }
 
+    public List<ItemStack> removeItem(ChestShopItem item, int count) {
+        ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
+        for(int i = 0; i < inventory.main.size() && count > 0; i++) {
+            ItemStack currentStack = inventory.main.get(i);
+            // if the items are the same
+            if(item.matches(currentStack)) {
+                // the amount to remove is either the entirety of the slot or the rest of the input amount
+                int amount = Math.min(currentStack.getCount(), count);
+
+                // add item removed to list
+                itemsRemoved.add(ItemStackUtil.setCount(currentStack.copy(), amount));
+                // remove the amount from the current stack
+                currentStack.setCount(currentStack.getCount() - amount);
+
+                // update the count
+                count -= amount;
+            }
+        }
+        return itemsRemoved;
+    }
+
     public void giveStack(ItemStack inputStack) {
         if(!inventory.insertStack(inputStack)) {
             ItemEntity itemEntity = dropItem(inputStack, false);
@@ -108,6 +141,10 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
                 itemEntity.setOwner(getUuid());
             }
         }
+    }
+
+    public void giveStacks(List<ItemStack> inputStacks) {
+        for(ItemStack stack : inputStacks) giveStack(stack);
     }
 
     // reset player
