@@ -1,7 +1,7 @@
 package mods.banana.economy2.chestshop.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import mods.banana.economy2.chestshop.modules.ItemModuleHandler;
+import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;

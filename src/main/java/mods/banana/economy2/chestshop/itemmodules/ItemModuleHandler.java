@@ -1,4 +1,4 @@
-package mods.banana.economy2.chestshop.modules;
+package mods.banana.economy2.chestshop.itemmodules;
 
 import com.oroarmor.config.ConfigItem;
 import net.minecraft.item.ItemStack;

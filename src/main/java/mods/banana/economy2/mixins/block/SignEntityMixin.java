@@ -3,7 +3,7 @@ package mods.banana.economy2.mixins.block;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.OfflinePlayer;
 import mods.banana.economy2.chestshop.ChestShopItem;
-import mods.banana.economy2.chestshop.modules.ItemModuleHandler;
+import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.ChestShopPlayerInterface;
 import mods.banana.economy2.balance.PlayerInterface;

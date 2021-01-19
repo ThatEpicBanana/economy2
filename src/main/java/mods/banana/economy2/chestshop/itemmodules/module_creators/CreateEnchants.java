@@ -1,17 +1,14 @@
-package mods.banana.economy2.chestshop.modules.module_creators;
+package mods.banana.economy2.chestshop.itemmodules.module_creators;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import mods.banana.economy2.chestshop.modules.JsonNbtItem;
-import net.fabricmc.loader.api.FabricLoader;
+import mods.banana.economy2.chestshop.itemmodules.JsonNbtItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.registry.Registry;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class CreateEnchants {
@@ -19,15 +16,11 @@ public class CreateEnchants {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-//            System.out.println(CreateEnchants.class.getResource("/").getPath() + "enchantment_books.json");
-//            Path source = Paths.get(CreateEnchants.class.getResource("/").getPath());
-//            Path file = Paths.get(source.toAbsolutePath().toString() + "/enchantment_books.json");
-//            FileWriter writer = new FileWriter(file.toFile());
-//            FileWriter writer = new FileWriter(Paths.get(FabricLoader.getInstance().getConfigDir().toString(), "enchantment_books.json").toFile());
-
-            JsonArray array = new JsonArray();
-
+            // roman numerals
             String[] roman = {"i", "ii", "iii", "iv", "v"};
+
+            // initialize array
+            JsonArray array = new JsonArray();
 
             for(Enchantment ench : Registry.ENCHANTMENT) {
                 for(int i = 1; i <= ench.getMaxLevel(); i++) {

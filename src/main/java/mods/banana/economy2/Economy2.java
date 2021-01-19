@@ -11,8 +11,7 @@ import mods.banana.economy2.balance.commands.exchange;
 import mods.banana.economy2.banknote.commands.banknote;
 import mods.banana.economy2.admin.commands.AdminBase;
 import mods.banana.economy2.chestshop.commands.AboutItem;
-import mods.banana.economy2.chestshop.modules.ItemModules;
-import mods.banana.economy2.chestshop.modules.module_creators.CreateEnchants;
+import mods.banana.economy2.chestshop.itemmodules.ItemModules;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -56,12 +55,8 @@ public class Economy2 implements ModInitializer {
         registerCommands();
         TradeHandler.onInit();
         EconomyItems.onInit();
-//        CreateEnchants.onInit();
-        try {
-            ItemModules.onInit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        CreatePotions.onInit();
+        ItemModules.onInit();
 
         initializing = false;
     }

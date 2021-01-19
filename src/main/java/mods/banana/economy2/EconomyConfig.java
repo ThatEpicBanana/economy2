@@ -3,7 +3,7 @@ package mods.banana.economy2;
 import com.oroarmor.config.Config;
 import com.oroarmor.config.ConfigItem;
 import com.oroarmor.config.ConfigItemGroup;
-import mods.banana.economy2.chestshop.modules.ItemModuleHandler;
+import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
@@ -50,8 +50,9 @@ public class EconomyConfig extends Config {
             public static final ConfigItem<Boolean> heads = new ConfigItem<>("heads", false, "Adds support for custom heads from VanillaTweaks in chest shops", ItemModuleHandler::onChange);
             public static final ConfigItem<Boolean> god_items = new ConfigItem<>("god_items", true, "Adds support for max enchanted items in chest shops", ItemModuleHandler::onChange);
             public static final ConfigItem<Boolean> enchantment_books = new ConfigItem<>("enchantment_books", true, "Adds support for enchantment books in chest shops", ItemModuleHandler::onChange);
+            public static final ConfigItem<Boolean> potions = new ConfigItem<>("potions", true, "Adds support for potions in chest shops", ItemModuleHandler::onChange);
 
-            public ItemModuleSettings() { super(List.of(heads, god_items, enchantment_books), "ItemModule"); }
+            public ItemModuleSettings() { super(List.of(heads, god_items, enchantment_books, potions), "ItemModule"); }
         }
     }
 

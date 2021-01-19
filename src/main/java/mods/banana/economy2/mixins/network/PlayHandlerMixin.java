@@ -1,6 +1,6 @@
 package mods.banana.economy2.mixins.network;
 
-import mods.banana.economy2.chestshop.modules.ItemModuleHandler;
+import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
 import net.minecraft.block.*;
