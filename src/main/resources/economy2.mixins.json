@@ -10,8 +10,10 @@
     "block.ChestMixin",
     "block.ExplosionMixin",
     "block.HopperEntityMixin",
+    "block.HopperMixin",
     "block.SignEntityMixin",
     "entity.PlayerMixin",
+    "item.BlockItemMixin",
     "network.PlayerInteractionHandlerMixin",
     "network.PlayHandlerMixin"
   ],

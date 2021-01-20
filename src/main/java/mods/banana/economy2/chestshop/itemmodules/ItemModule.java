@@ -24,6 +24,7 @@ public class ItemModule {
      * An item is defined by a base item, identifier, optional parent, and tag - all of them strings.
      * @param name module name
      * @param file file name originating from the resources folder
+     * @param classLoader classloader for your class, used to get to resource folder
      */
     public ItemModule(String name, String file, ClassLoader classLoader) {
         this(name, new InputStreamReader(classLoader.getResourceAsStream(file)));

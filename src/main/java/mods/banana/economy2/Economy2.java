@@ -36,7 +36,6 @@ public class Economy2 implements ModInitializer {
     public static String previousSaveDirectory;
 
     public static MinecraftServer server = null;
-//    public static TradeHandler tradeHandler = new TradeHandler();
 
     @Override
     public void onInitialize() {

@@ -24,7 +24,7 @@ dependencies {
     include 'com.github.OroArmor:oro-config:-SNAPSHOT'
     modImplementation 'com.github.OroArmor:oro-config:-SNAPSHOT'
 
-    implementation files('C:/Users/thate/Documents/mods/bananaapi/build/libs/bananaapi-1.0.0-dev.jar')
+    implementation files('C:/Users/thate/Documents/mods/bananaapi/build/libs/bananaapi-1.0.1-dev.jar')
 }
 
 repositories {

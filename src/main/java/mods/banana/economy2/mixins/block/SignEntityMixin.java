@@ -1,19 +1,24 @@
 package mods.banana.economy2.mixins.block;
 
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.balance.OfflinePlayer;
 import mods.banana.economy2.chestshop.ChestShopItem;
+import mods.banana.economy2.chestshop.interfaces.HopperInterface;
 import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.ChestShopPlayerInterface;
 import mods.banana.economy2.balance.PlayerInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
+import mods.banana.economy2.chestshop.itemmodules.NbtItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -97,12 +102,12 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
 
     public ItemStack getItemStack(int amount) {
         if(chestShop) {
-            ItemStack nbtItem = ItemModuleHandler.getActiveItem(new Identifier(text[3].getString())).toItemStack();
-            if(nbtItem != null) {
-                nbtItem.setCount(amount);
-                return nbtItem;
-            } else {
-                return new ItemStack(Registry.ITEM.get(new Identifier(text[3].getString())), amount);
+            NbtItem nbtItem = ItemModuleHandler.getActiveItem(new Identifier(text[3].getString()));
+            if(nbtItem == null) return new ItemStack(Registry.ITEM.get(new Identifier(text[3].getString())), amount);
+            else {
+                ItemStack stack = nbtItem.toItemStack();
+                stack.setCount(amount);
+                return stack;
             }
         } else return null;
     }
@@ -118,9 +123,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     }
 
     @Inject(method = "onActivate", at = {@At("HEAD")})
-    public void onBuy(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
-        onBuy(player);
-    }
+    public void onBuy(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) { onBuy(player); }
 
     public void onBuy(PlayerEntity player) {
         if(chestShop) {
@@ -198,6 +201,33 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
                         player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1, 1);
                     } else player.sendSystemMessage(new LiteralText("You do not have enough items for this trade.").formatted(Formatting.RED), UUID.randomUUID());
                 } else player.sendSystemMessage(new LiteralText("This shop is buy only.").formatted(Formatting.RED), UUID.randomUUID());
+            }
+        }
+    }
+
+    public void onSell(HopperInterface hopper, PlayerInterface player) {
+        long sell = getSell();
+        int amount = getAmount();
+        ChestShopItem item = getItem();
+        if(chestShop && sell >= -1 && hopper.countItem(item) >= amount) {
+            if(!isAdmin()) {
+                ChestInterface chest = getChest();
+                PlayerInterface owner = OfflinePlayer.getPlayer(parent);
+                if(chest.countSpaceForStack(getItemStack()) >= amount && owner.getBal() >= sell) {
+                    // remove items from seller and insert them into chest
+                    chest.insertStacks(hopper.removeItem(item, amount));
+
+                    // give seller the sell amount
+                    player.addBal(sell);
+                    // remove the sell amount from the owner
+                    owner.addBal(-sell);
+                }
+            } else {
+                // remove items from seller
+                hopper.removeItem(item, amount);
+
+                // add balance to seller
+                player.addBal(sell);
             }
         }
     }
