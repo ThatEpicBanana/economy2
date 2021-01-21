@@ -1,7 +1,7 @@
 package mods.banana.economy2.chestshop;
 
-import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
-import mods.banana.economy2.chestshop.itemmodules.NbtItem;
+import mods.banana.economy2.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.NbtItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;

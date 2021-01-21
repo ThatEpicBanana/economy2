@@ -1,7 +1,7 @@
 package mods.banana.economy2.chestshop.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -12,8 +12,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 

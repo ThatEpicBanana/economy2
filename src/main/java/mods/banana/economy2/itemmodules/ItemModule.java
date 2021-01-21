@@ -1,4 +1,4 @@
-package mods.banana.economy2.chestshop.itemmodules;
+package mods.banana.economy2.itemmodules;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

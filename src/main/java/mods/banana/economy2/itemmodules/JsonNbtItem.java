@@ -1,4 +1,4 @@
-package mods.banana.economy2.chestshop.itemmodules;
+package mods.banana.economy2.itemmodules;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.nbt.StringNbtReader;

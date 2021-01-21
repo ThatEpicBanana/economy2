@@ -1,15 +1,24 @@
-package mods.banana.economy2.chestshop.itemmodules;
+package mods.banana.economy2.itemmodules;
 
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
+import com.mojang.brigadier.suggestion.Suggestions;
+import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.oroarmor.config.ConfigItem;
+import net.minecraft.command.CommandSource;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public class ItemModuleHandler {
     public static ArrayList<ItemModule> registeredModules = new ArrayList<>();
@@ -145,6 +154,27 @@ public class ItemModuleHandler {
 
                 return;
             }
+        }
+    }
+
+    /**
+     * creates suggestions of all item registry identifiers + all nbt item identifiers
+     */
+    public static class ItemModuleSuggestionProvider implements SuggestionProvider<ServerCommandSource> {
+        @Override
+        public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) {
+            // add regular minecraft items
+            ArrayList<Identifier> identifiers = new ArrayList<>(Registry.ITEM.getIds());
+
+            // add all nbt items
+            for(ItemModule module : activeModules) {
+                for(NbtItem item : module.getValues().values()) {
+                    identifiers.add(item.getIdentifier());
+                }
+            }
+
+            // suggest the identifiers
+            return CommandSource.suggestIdentifiers(identifiers, builder);
         }
     }
 }

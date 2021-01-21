@@ -3,7 +3,7 @@ package mods.banana.economy2;
 import com.oroarmor.config.Config;
 import com.oroarmor.config.ConfigItem;
 import com.oroarmor.config.ConfigItemGroup;
-import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;

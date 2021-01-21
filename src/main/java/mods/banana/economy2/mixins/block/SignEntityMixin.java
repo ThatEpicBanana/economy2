@@ -1,24 +1,21 @@
 package mods.banana.economy2.mixins.block;
 
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.balance.OfflinePlayer;
 import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.chestshop.interfaces.HopperInterface;
-import mods.banana.economy2.chestshop.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.ChestShopPlayerInterface;
 import mods.banana.economy2.balance.PlayerInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
-import mods.banana.economy2.chestshop.itemmodules.NbtItem;
+import mods.banana.economy2.itemmodules.NbtItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;

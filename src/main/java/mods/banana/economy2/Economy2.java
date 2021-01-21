@@ -10,8 +10,9 @@ import mods.banana.economy2.balance.commands.baltop;
 import mods.banana.economy2.balance.commands.exchange;
 import mods.banana.economy2.banknote.commands.banknote;
 import mods.banana.economy2.admin.commands.AdminBase;
+import mods.banana.economy2.bounties.commands.BountyBase;
 import mods.banana.economy2.chestshop.commands.AboutItem;
-import mods.banana.economy2.chestshop.itemmodules.ItemModules;
+import mods.banana.economy2.itemmodules.ItemModules;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -99,6 +100,7 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(TradeBase.build()); //trade <player>
             dispatcher.getRoot().addChild(AdminBase.build()); //admin [clean|removeALl|balance|player]
             dispatcher.getRoot().addChild(AboutItem.build()); //aboutitem
+            dispatcher.getRoot().addChild(BountyBase.build()); //bounty [request|list]
         });
 
         // setup config command

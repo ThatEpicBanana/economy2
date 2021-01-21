@@ -1,9 +1,8 @@
-package mods.banana.economy2.chestshop.itemmodules;
+package mods.banana.economy2.itemmodules;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import mods.banana.economy2.Economy2;
 
 import java.io.FileReader;

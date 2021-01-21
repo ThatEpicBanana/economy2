@@ -1,4 +1,4 @@
-package mods.banana.economy2.chestshop.itemmodules;
+package mods.banana.economy2.itemmodules;
 
 import mods.banana.economy2.chestshop.ChestShopItem;
 import net.minecraft.item.Item;

@@ -3,7 +3,7 @@ package mods.banana.economy2.chestshop.itemmodules.module_creators;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import mods.banana.economy2.chestshop.itemmodules.JsonNbtItem;
+import mods.banana.economy2.itemmodules.JsonNbtItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.registry.Registry;
 
