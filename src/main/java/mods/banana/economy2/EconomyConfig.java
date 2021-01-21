@@ -41,9 +41,10 @@ public class EconomyConfig extends Config {
     public static class ChestShopSettings extends ConfigItemGroup {
         public static final ConfigItem<Boolean> enabledItem = new ConfigItem<>("enabled", true, "Setting to enable/disable chest shops in their entirety");
         public static final ConfigItem<Boolean> adminShopsEnabledItem = new ConfigItem<>("adminshops", true, "Setting to enable/disable admin shops");
+        public static final ConfigItem<Boolean> autoSellHoppersItem = new ConfigItem<>("autosellHoppers", true, "Setting to enable/disable auto-sell hoppers");
 
         public ChestShopSettings() {
-            super(List.of(enabledItem, adminShopsEnabledItem, new ItemModuleSettings()), "chestShop");
+            super(List.of(enabledItem, adminShopsEnabledItem, autoSellHoppersItem, new ItemModuleSettings()), "chestShop");
         }
 
         public static class ItemModuleSettings extends ConfigItemGroup {

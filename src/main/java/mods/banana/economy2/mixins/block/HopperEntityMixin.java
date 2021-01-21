@@ -1,6 +1,7 @@
 package mods.banana.economy2.mixins.block;
 
 import mods.banana.bananaapi.BlockPosHelper;
+import mods.banana.economy2.Economy2;
 import mods.banana.economy2.ItemStackUtil;
 import mods.banana.economy2.balance.OfflinePlayer;
 import mods.banana.economy2.chestshop.ChestShopItem;
@@ -37,7 +38,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
     protected HopperEntityMixin(BlockEntityType<?> blockEntityType) { super(blockEntityType); }
 
     public void setAutoSell(boolean autoSell) { this.autoSell = autoSell; }
-    public boolean isAutoSell() { return autoSell; }
+    public boolean isAutoSell() { return autoSell && Economy2.CONFIG.getValue("chestShop.autosellHoppers", Boolean.class); }
 
     public void setChestShop(BlockPos chestShop) { this.chestShop = chestShop; }
     public BlockPos getChestShopPos() { return chestShop; }
@@ -107,7 +108,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
     @Inject(method = "toTag", at = @At("TAIL"))
     private void onSave(CompoundTag tag, CallbackInfoReturnable<CompoundTag> cir) {
         // {autoSell:{shop:{x:0,y:0,z:0}, parent:[I; 0,0,0,0]}}
-        if(autoSell) {
+        if(isAutoSell()) {
             CompoundTag autoSellTag = new CompoundTag();
             autoSellTag.put("shop", BlockPosHelper.toTag(chestShop));
             autoSellTag.putUuid("parent", parent);
