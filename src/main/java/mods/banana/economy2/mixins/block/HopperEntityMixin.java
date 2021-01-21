@@ -1,8 +1,8 @@
 package mods.banana.economy2.mixins.block;
 
 import mods.banana.bananaapi.BlockPosHelper;
+import mods.banana.bananaapi.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.ItemStackUtil;
 import mods.banana.economy2.balance.OfflinePlayer;
 import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
@@ -66,7 +66,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
                 int amount = Math.min(currentStack.getCount(), count);
 
                 // add item removed to list
-                itemsRemoved.add(ItemStackUtil.setCount(currentStack.copy(), amount));
+                itemsRemoved.add(ItemStackHelper.setCount(currentStack.copy(), amount));
                 // remove the amount from the current stack
                 currentStack.setCount(currentStack.getCount() - amount);
 

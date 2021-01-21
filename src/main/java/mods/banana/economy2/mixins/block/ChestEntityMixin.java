@@ -1,7 +1,7 @@
 package mods.banana.economy2.mixins.block;
 
+import mods.banana.bananaapi.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.ItemStackUtil;
 import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
@@ -103,7 +103,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
                 // the count to add is either the current input count or the maximum
                 int count = Math.min(amountLeft, input.getMaxCount());
                 // set slot to the new stack
-                setStack(i, ItemStackUtil.setCount(input.copy(), count));
+                setStack(i, ItemStackHelper.setCount(input.copy(), count));
                 // remove count from input
                 amountLeft -= count;
             } else if (ScreenHandler.canStacksCombine(stack, input) && stack.getCount() < stack.getMaxCount()) { // if the two items can combine
@@ -157,7 +157,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
                 int amount = Math.min(currentStack.getCount(), count);
 
                 // add item removed to list
-                itemsRemoved.add(ItemStackUtil.setCount(currentStack.copy(), amount));
+                itemsRemoved.add(ItemStackHelper.setCount(currentStack.copy(), amount));
                 // remove the amount from the current stack
                 currentStack.setCount(currentStack.getCount() - amount);
 

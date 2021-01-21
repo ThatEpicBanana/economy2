@@ -2,8 +2,8 @@ package mods.banana.economy2.mixins.entity;
 
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
+import mods.banana.bananaapi.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.ItemStackUtil;
 import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.trade.TradeInstance;
 import mods.banana.economy2.chestshop.interfaces.ChestShopPlayerInterface;
@@ -122,7 +122,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
                 int amount = Math.min(currentStack.getCount(), count);
 
                 // add item removed to list
-                itemsRemoved.add(ItemStackUtil.setCount(currentStack.copy(), amount));
+                itemsRemoved.add(ItemStackHelper.setCount(currentStack.copy(), amount));
                 // remove the amount from the current stack
                 currentStack.setCount(currentStack.getCount() - amount);
 
