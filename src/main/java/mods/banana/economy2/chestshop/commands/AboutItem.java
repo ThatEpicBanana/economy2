@@ -7,28 +7,37 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
 
 public class AboutItem {
     public static int run(ServerPlayerEntity source) {
         ItemStack selectedItem = source.inventory.getStack(source.inventory.selectedSlot);
         if(!selectedItem.equals(ItemStack.EMPTY)) {
-            // initialize item identifier name
-            String item;
+            // get matches
+            List<Identifier> matches = ItemModuleHandler.getSoftMatches(selectedItem);
+            // add regular minecraft item and set it to front
+            matches.add(0, Registry.ITEM.getId(selectedItem.getItem()));
 
-            // get nbt item from modules
-            Identifier nbtItem = ItemModuleHandler.getIdentifierOfStack(selectedItem);
+            // send header
+            source.sendSystemMessage(new LiteralText(" - Identifiers - ").formatted(Formatting.GREEN), UUID.randomUUID());
+            // send items
+            for(Identifier item : matches) {
+                // minecraft:
+                MutableText text = new LiteralText(item.toString().replaceAll("[a-zA-Z-_]+$", "")).formatted(Formatting.GRAY);
+                // dirt
+                text.append(new LiteralText(item.toString().replaceAll("^\\w+:", "")).formatted(Formatting.WHITE));
+                // minecraft:dirt
+                source.sendSystemMessage(text, UUID.randomUUID());
+            }
 
-            // if it is a default minecraft item, set the identifier to it's one
-            if(nbtItem == null) item = Registry.ITEM.getId(selectedItem.getItem()).toString();
-            // if the item is a set item, set the identifier to it's custom identifier.
-            else item = nbtItem.toString();
-
-            // send message to source
-            source.sendSystemMessage(new LiteralText(item), UUID.randomUUID());
 
             return 1; // command succeeded
         } else return 0; // command failed

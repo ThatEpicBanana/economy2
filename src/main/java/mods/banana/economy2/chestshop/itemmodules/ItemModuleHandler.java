@@ -5,8 +5,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class ItemModuleHandler {
     public static ArrayList<ItemModule> registeredModules = new ArrayList<>();
@@ -50,22 +53,47 @@ public class ItemModuleHandler {
     }
 
 
-    public static Identifier getIdentifierOfUnsureStack(ItemStack itemStack) {
-        Identifier nbtItem = getIdentifierOfStack(itemStack);
+    public static Identifier getMatchOfUnsureStack(ItemStack itemStack) {
+        Identifier nbtItem = getMatch(itemStack);
         if(nbtItem != null) return nbtItem;
         else return Registry.ITEM.getId(itemStack.getItem());
     }
 
-    public static Identifier getIdentifierOfStack(ItemStack itemStack) {
+    public static Identifier getMatch(ItemStack itemStack) {
+        List<Identifier> matches = getMatches(itemStack);
+        return matches.size() == 0 ? null : matches.get(0);
+    }
+
+    public static List<Identifier> getMatches(ItemStack stack) {
+        ArrayList<Identifier> matches = new ArrayList<>();
+
+        // for each nbt item
         for(ItemModule module : activeModules) {
             for(NbtItem current : module.getValues().values()) {
-                if(current.softMatches(itemStack)) {
-                    return getBestFit(getParent(current), itemStack, 0).getLeft();
-//                    return current.getIdentifier();
+                // if it matches, add it to list
+                if(current.matches(stack)) {
+                    matches.add(current.getIdentifier());
                 }
             }
         }
-        return null;
+
+        return matches;
+    }
+
+    public static List<Identifier> getSoftMatches(ItemStack stack) {
+        ArrayList<Identifier> matches = new ArrayList<>();
+
+        // for each nbt item
+        for(ItemModule module : activeModules) {
+            for(NbtItem current : module.getValues().values()) {
+                // if it soft matches, add it to list
+                if(current.softMatches(stack)) {
+                    matches.add(current.getIdentifier());
+                }
+            }
+        }
+
+        return matches;
     }
 
 
@@ -81,25 +109,26 @@ public class ItemModuleHandler {
     // finds the child with the best fit to the item stack
     private static Pair<Identifier, Integer> getBestFit(NbtItem item, ItemStack stack, int specificity) {
         // visualizer
-//        System.out.println(StringUtils.repeat("    ", specificity) + item.getIdentifier());
+        System.out.println(StringUtils.repeat("    ", specificity) + item.getIdentifier());
+
         // increment specificity
         specificity += 1;
-        // if item has children
-        if(item.hasChildren()) {
-            // initialize best fit of children
-            Pair<Identifier, Integer> bestpair = new Pair<>(new Identifier(""), 0);
-            // for each child
-            for(NbtItem child : item.getChildren()) {
-                if(child.softMatches(stack)) {
-                    // get it's fit
-                    Pair<Identifier, Integer> childFit = getBestFit(child, stack, specificity);
-                    // if it's more than the current best fit, update it
-                    if(childFit.getRight() > bestpair.getRight()) bestpair = childFit;
-                }
+
+        // initialize best fit of children
+        Pair<Identifier, Integer> bestpair = new Pair<>(item.getIdentifier(), specificity);
+
+        // get best fit of children (if it has any)
+        for(NbtItem child : item.getChildren()) {
+            if(child.softMatches(stack)) {
+                // get it's fit
+                Pair<Identifier, Integer> childFit = getBestFit(child, stack, specificity);
+                // if it's more than the current best fit, update it
+                if(childFit.getRight() > bestpair.getRight()) bestpair = childFit;
             }
-            // return the best fit
-            return bestpair;
-        } else return new Pair<>(item.getIdentifier(), specificity);
+        }
+
+        // return the best fit
+        return bestpair;
     }
 
     public static void onChange(ConfigItem<Boolean> item) {

@@ -53,7 +53,7 @@ public class PlayHandlerMixin {
         if(lines.get(3).equals("")) {
             for(int i = 0; i < 27; i++)
                 if(!chest.getStack(i).isEmpty()) {
-                    Identifier nbtStack = ItemModuleHandler.getIdentifierOfStack(chest.getStack(i));
+                    Identifier nbtStack = ItemModuleHandler.getMatch(chest.getStack(i));
                     if(nbtStack != null) {
                         lines.set(3, nbtStack.toString()); // if it's an nbt stack, set the identifier to that stack
                     } else {
