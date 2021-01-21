@@ -48,7 +48,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
 
     public SignEntityMixin(BlockEntityType<?> type) { super(type); }
 
-    public boolean isChestShop() { return chestShop; }
+    public boolean isChestShop() { return chestShop && Economy2.CONFIG.getValue("chestShop.enabled", Boolean.class); }
 
     public UUID getParent() { return parent; }
 
@@ -73,7 +73,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     }
 
     public long getBuy() {
-        if(chestShop) {
+        if(isChestShop()) {
             if(text[2].getString().toLowerCase().matches("^b (\\d+) : (\\d+) s$")) { // if it has both buy and sell
                 return Long.parseLong(text[2].getString().toLowerCase().replaceAll("^b (\\d+) : (\\d+) s$", "$1"));
             } else if (text[2].getString().toLowerCase().matches("^b (\\d+)$")) { // if it is buy only
@@ -83,7 +83,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     }
 
     public long getSell() {
-        if(chestShop) {
+        if(isChestShop()) {
             if(text[2].getString().toLowerCase().matches("^b (\\d+) : (\\d+) s$")) { // if it has both buy and sell
                 return Long.parseLong(text[2].getString().toLowerCase().replaceAll("^b (\\d+) : (\\d+) s$", "$2"));
             } else if (text[2].getString().toLowerCase().matches("^s (\\d+)$")) { // if it is sell only
@@ -93,7 +93,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     }
 
     public ChestShopItem getItem() {
-        if(chestShop) {
+        if(isChestShop()) {
             return ChestShopItem.fromIdentifier(new Identifier(text[3].getString()));
         } else return null;
     }
@@ -101,7 +101,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     public ItemStack getItemStack() {return getItemStack(1);}
 
     public ItemStack getItemStack(int amount) {
-        if(chestShop) {
+        if(isChestShop()) {
             NbtItem nbtItem = ItemModuleHandler.getActiveItem(new Identifier(text[3].getString()));
             if(nbtItem == null) return new ItemStack(Registry.ITEM.get(new Identifier(text[3].getString())), amount);
             else {
@@ -113,7 +113,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     }
 
     public int getAmount() {
-        if(chestShop) {
+        if(isChestShop()) {
             return Integer.parseInt(text[1].getString());
         } else return -1;
     }
@@ -126,7 +126,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     public void onBuy(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) { onBuy(player); }
 
     public void onBuy(PlayerEntity player) {
-        if(chestShop) {
+        if(isChestShop()) {
             long buy = getBuy();
             int amount = getAmount();
             ChestShopItem item = getItem();
@@ -164,7 +164,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     }
 
     public void onSell(PlayerEntity player) {
-        if(chestShop) {
+        if(isChestShop()) {
             long sell = getSell();
             int amount = getAmount();
             ChestShopItem item = getItem();
@@ -209,7 +209,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         long sell = getSell();
         int amount = getAmount();
         ChestShopItem item = getItem();
-        if(chestShop && sell >= -1 && hopper.countItem(item) >= amount) {
+        if(isChestShop() && sell >= -1 && hopper.countItem(item) >= amount) {
             if(!isAdmin()) {
                 ChestInterface chest = getChest();
                 PlayerInterface owner = OfflinePlayer.getPlayer(parent);
@@ -234,7 +234,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
 
     @Inject(method = "toTag", at = {@At("HEAD")})
     private void save(CompoundTag tag, CallbackInfoReturnable<CompoundTag> cir) {
-        if(chestShop) {
+        if(isChestShop()) {
             CompoundTag chestShopTag = new CompoundTag();
 
             chestShopTag.putUuid("parent", parent);

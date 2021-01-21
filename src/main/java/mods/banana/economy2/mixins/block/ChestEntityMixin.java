@@ -1,5 +1,6 @@
 package mods.banana.economy2.mixins.block;
 
+import mods.banana.economy2.Economy2;
 import mods.banana.economy2.ItemStackUtil;
 import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
@@ -59,7 +60,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
 
     public ChestEntityMixin(BlockEntityType<?> type) { super(type); }
 
-    public boolean isChestShop() { return chestShop; }
+    public boolean isChestShop() { return chestShop && Economy2.CONFIG.getValue("chestShop.enabled", Boolean.class); }
     public UUID getParent() { return parent; }
     public SignInterface getSign() { return (SignInterface) world.getBlockEntity(sign); }
 
@@ -235,14 +236,14 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         }
 
         // if the inventory doesn't have a limiter, reset it
-        if(chestShop && getLimit() == null) setLimit(size() - 1);
+        if(isChestShop() && getLimit() == null) setLimit(size() - 1);
     }
 
     // bro you could just save data to the block itself
     // i am *massive* brain
     @Inject(method = "toTag", at = {@At("HEAD")})
     private void save(CompoundTag tag, CallbackInfoReturnable<CompoundTag> cir) {
-        if(chestShop) {
+        if(isChestShop()) {
             CompoundTag chestShopTag = new CompoundTag();
 
             CompoundTag signTag = new CompoundTag();
