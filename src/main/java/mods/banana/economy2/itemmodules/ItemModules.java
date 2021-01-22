@@ -24,10 +24,10 @@ public class ItemModules {
 
     private static void registerConfig(ItemModule module) {
         ItemModuleHandler.register(module);
-        if(Economy2.CONFIG.getValue("chestShop.ItemModule." + module.getName(), Boolean.class)) ItemModuleHandler.activeModules.add(module);
+        if(Economy2.CONFIG.getValue("ItemModule." + module.getName(), Boolean.class)) ItemModuleHandler.activeModules.add(module);
     }
 
-    private static void getItemModulesFromFile() {
+    public static void getItemModulesFromFile() {
         try {
             // get item module file
             String saveDirectory = Economy2.CONFIG.getValue("file.saveDirectory", String.class);

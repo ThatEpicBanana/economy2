@@ -12,6 +12,7 @@ import mods.banana.economy2.banknote.commands.banknote;
 import mods.banana.economy2.admin.commands.AdminBase;
 import mods.banana.economy2.bounties.commands.BountyBase;
 import mods.banana.economy2.chestshop.commands.AboutItem;
+import mods.banana.economy2.chestshop.commands.HelpCommand;
 import mods.banana.economy2.itemmodules.ItemModules;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
@@ -55,7 +56,6 @@ public class Economy2 implements ModInitializer {
         registerCommands();
         TradeHandler.onInit();
         EconomyItems.onInit();
-//        CreatePotions.onInit();
         ItemModules.onInit();
 
         initializing = false;
@@ -101,10 +101,11 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(AdminBase.build()); //admin [clean|removeALl|balance|player]
             dispatcher.getRoot().addChild(AboutItem.build()); //aboutitem
             dispatcher.getRoot().addChild(BountyBase.build()); //bounty [request|list]
+            dispatcher.getRoot().addChild(HelpCommand.build()); //chestshop help
         });
 
         // setup config command
-        CommandRegistrationCallback.EVENT.register(new ConfigCommand(CONFIG));
+        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> new ConfigCommand(CONFIG).register(dispatcher, dedicated)));
     }
 
     public static String addCurrencySign(long amount) {
