@@ -3,6 +3,8 @@ package mods.banana.economy2.itemmodules;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import mods.banana.economy2.itemmodules.items.JsonNbtItem;
+import mods.banana.economy2.itemmodules.items.NbtItem;
 import net.minecraft.util.Identifier;
 
 import java.io.*;

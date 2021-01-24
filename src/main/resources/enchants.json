@@ -1,0 +1,552 @@
+[
+  {
+    "type": "modifier",
+    "identifier": "ench:protection-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:protection-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:protection-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:protection-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fire_protection-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:fire_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fire_protection-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:fire_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fire_protection-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:fire_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fire_protection-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:fire_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:feather_falling-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:feather_falling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:feather_falling-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:feather_falling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:feather_falling-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:feather_falling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:feather_falling-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:feather_falling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:blast_protection-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:blast_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:blast_protection-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:blast_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:blast_protection-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:blast_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:blast_protection-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:blast_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:projectile_protection-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:projectile_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:projectile_protection-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:projectile_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:projectile_protection-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:projectile_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:projectile_protection-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:projectile_protection\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:respiration-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:respiration\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:respiration-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:respiration\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:respiration-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:respiration\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:aqua_affinity",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:aqua_affinity\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:thorns-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:thorns\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:thorns-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:thorns\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:thorns-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:thorns\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:depth_strider-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:depth_strider\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:depth_strider-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:depth_strider\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:depth_strider-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:depth_strider\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:frost_walker-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:frost_walker\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:frost_walker-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:frost_walker\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:binding_curse",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:binding_curse\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:soul_speed-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:soul_speed\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:soul_speed-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:soul_speed\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:soul_speed-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:soul_speed\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sharpness-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:sharpness\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sharpness-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:sharpness\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sharpness-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:sharpness\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sharpness-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:sharpness\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sharpness-v",
+    "tag": "{Enchantments:[{lvl:5s, id: \"minecraft:sharpness\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:smite-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:smite\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:smite-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:smite\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:smite-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:smite\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:smite-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:smite\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:smite-v",
+    "tag": "{Enchantments:[{lvl:5s, id: \"minecraft:smite\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:bane_of_arthropods-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:bane_of_arthropods\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:bane_of_arthropods-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:bane_of_arthropods\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:bane_of_arthropods-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:bane_of_arthropods\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:bane_of_arthropods-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:bane_of_arthropods\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:bane_of_arthropods-v",
+    "tag": "{Enchantments:[{lvl:5s, id: \"minecraft:bane_of_arthropods\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:knockback-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:knockback\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:knockback-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:knockback\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fire_aspect-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:fire_aspect\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fire_aspect-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:fire_aspect\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:looting-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:looting\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:looting-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:looting\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:looting-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:looting\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sweeping-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:sweeping\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sweeping-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:sweeping\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:sweeping-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:sweeping\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:efficiency-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:efficiency\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:efficiency-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:efficiency\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:efficiency-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:efficiency\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:efficiency-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:efficiency\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:efficiency-v",
+    "tag": "{Enchantments:[{lvl:5s, id: \"minecraft:efficiency\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:silk_touch",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:silk_touch\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:unbreaking-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:unbreaking\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:unbreaking-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:unbreaking\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:unbreaking-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:unbreaking\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fortune-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:fortune\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fortune-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:fortune\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:fortune-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:fortune\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:power-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:power\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:power-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:power\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:power-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:power\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:power-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:power\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:power-v",
+    "tag": "{Enchantments:[{lvl:5s, id: \"minecraft:power\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:punch-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:punch\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:punch-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:punch\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:flame",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:flame\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:infinity",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:infinity\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:luck_of_the_sea-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:luck_of_the_sea\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:luck_of_the_sea-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:luck_of_the_sea\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:luck_of_the_sea-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:luck_of_the_sea\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:lure-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:lure\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:lure-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:lure\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:lure-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:lure\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:loyalty-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:loyalty\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:loyalty-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:loyalty\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:loyalty-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:loyalty\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:impaling-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:impaling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:impaling-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:impaling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:impaling-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:impaling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:impaling-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:impaling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:impaling-v",
+    "tag": "{Enchantments:[{lvl:5s, id: \"minecraft:impaling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:riptide-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:riptide\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:riptide-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:riptide\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:riptide-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:riptide\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:channeling",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:channeling\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:multishot",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:multishot\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:quick_charge-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:quick_charge\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:quick_charge-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:quick_charge\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:quick_charge-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:quick_charge\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:piercing-i",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:piercing\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:piercing-ii",
+    "tag": "{Enchantments:[{lvl:2s, id: \"minecraft:piercing\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:piercing-iii",
+    "tag": "{Enchantments:[{lvl:3s, id: \"minecraft:piercing\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:piercing-iv",
+    "tag": "{Enchantments:[{lvl:4s, id: \"minecraft:piercing\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:mending",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:mending\"}]}"
+  },
+  {
+    "type": "modifier",
+    "identifier": "ench:vanishing_curse",
+    "tag": "{Enchantments:[{lvl:1s, id: \"minecraft:vanishing_curse\"}]}"
+  }
+]

@@ -14,6 +14,8 @@ import mods.banana.economy2.bounties.commands.BountyBase;
 import mods.banana.economy2.chestshop.commands.AboutItem;
 import mods.banana.economy2.chestshop.commands.HelpCommand;
 import mods.banana.economy2.itemmodules.ItemModules;
+//import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
+//import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -55,7 +57,8 @@ public class Economy2 implements ModInitializer {
         loadBalJson();
         registerCommands();
         TradeHandler.onInit();
-        EconomyItems.onInit();
+//        CreateEnchants.onInit();
+//        CreateEnchantBooks.onInit();
         ItemModules.onInit();
 
         initializing = false;

@@ -1,46 +1,64 @@
-package mods.banana.economy2.itemmodules;
+package mods.banana.economy2.itemmodules.items;
 
-import mods.banana.economy2.chestshop.ChestShopItem;
+import mods.banana.economy2.itemmodules.ItemModule;
+import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NbtItem extends ChestShopItem {
+public class NbtItem extends BaseNbtItem {
+    private final ItemType type;
     private final Identifier identifier;
     private final CompoundTag tag;
     private final Identifier parent;
     private List<NbtItem> children = new ArrayList<>();
 
-    public NbtItem(Item item, Identifier identifier, Identifier parent, CompoundTag tag, List<NbtItem> children) {
-        this(item, identifier, parent, tag);
-        this.children = children;
+    public enum ItemType {
+        ITEM,
+        MODIFIER
     }
 
-    public NbtItem(Item item, Identifier identifier, Identifier parent, CompoundTag tag) {
+    // full constructor with parent
+    public NbtItem(ItemType type, Identifier identifier, CompoundTag tag, Item item, Identifier parent) {
         super(item);
+        this.type = type;
         this.identifier = identifier;
         this.tag = tag;
         this.parent = parent;
     }
 
-    public NbtItem(Item item, Identifier identifier, CompoundTag tag) {
-        super(item);
-        this.identifier = identifier;
-        this.tag = tag;
-        this.parent = null;
+    // full constructor with children
+    public NbtItem(ItemType type, Identifier identifier, CompoundTag tag, @Nullable Item item, Identifier parent, List<NbtItem> children) {
+        this(type, identifier, tag, item, parent);
+        this.children = children;
     }
 
+    // modifier constructor
+    public NbtItem(Identifier identifier, CompoundTag tag) {
+        this(ItemType.MODIFIER, identifier, tag, null, null);
+    }
+
+    // item constructor
+    public NbtItem(Identifier identifier, CompoundTag tag, Item item) {
+        this(ItemType.ITEM, identifier, tag, item, null);
+    }
+
+    // constructor from stack
     public NbtItem(ItemStack parentStack) {
         super(parentStack.getItem());
         this.identifier = Registry.ITEM.getId(getItem());
         this.tag = parentStack.getTag();
         this.parent = null;
+        this.type = ItemType.ITEM;
     }
 
     public static NbtItem fromStack(ItemStack stack) {
@@ -55,7 +73,7 @@ public class NbtItem extends ChestShopItem {
     @Override
     public ItemStack toItemStack() {
         // put item into stack
-        ItemStack newStack = new ItemStack(getItem());
+        ItemStack newStack = new ItemStack(type == ItemType.ITEM ? getItem() : Items.DIRT);
         // set stack's tag using the brigadier string reader
         newStack.setTag(tag);
 
@@ -74,16 +92,16 @@ public class NbtItem extends ChestShopItem {
     }
 
     public boolean softMatches(ItemStack stack) {
-        return stack.getItem().equals(getItem()) && // check item
+        return (type == ItemType.ITEM || stack.getItem().equals(getItem())) && // check item if it's an item
                 NbtHelper.matches(getTag(), stack.getTag(), true); // check tag
     }
 
     public String toString() {
-        return identifier.toString() + (parent != null ? " - parent:" + parent.toString() : "");
+        return identifier.toString() + (parent != null ? " - parent: " + parent.toString() : "");
     }
 
     public NbtItem copy() {
-        return new NbtItem(item, identifier, parent, tag, children);
+        return new NbtItem(type, identifier, tag, item, parent, children);
     }
 
     public Identifier getIdentifier() { return identifier; }
@@ -95,4 +113,6 @@ public class NbtItem extends ChestShopItem {
     public void addChild(NbtItem item) { children.add(item); }
     public List<NbtItem> getChildren() { return children; }
     public boolean hasChildren() { return !children.isEmpty(); }
+
+    public ItemType getType() { return type; }
 }

@@ -1,29 +1,28 @@
-package mods.banana.economy2.chestshop;
+package mods.banana.economy2.itemmodules.items;
 
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
-import mods.banana.economy2.itemmodules.NbtItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class ChestShopItem {
+public class BaseNbtItem {
     protected final Item item;
 
-    public ChestShopItem(Item item) {
+    public BaseNbtItem(Item item) {
         this.item = item;
     }
 
-    public static ChestShopItem fromStack(ItemStack itemStack) {
+    public static BaseNbtItem fromStack(ItemStack itemStack) {
         NbtItem nbtItem = NbtItem.fromStack(itemStack);
         if(nbtItem != null) return nbtItem;
-        else return new ChestShopItem(itemStack.getItem());
+        else return new BaseNbtItem(itemStack.getItem());
     }
 
-    public static ChestShopItem fromIdentifier(Identifier identifier) {
+    public static BaseNbtItem fromIdentifier(Identifier identifier) {
         NbtItem nbtItem = ItemModuleHandler.getActiveItem(identifier);
         if(nbtItem != null) return nbtItem;
-        else return new ChestShopItem(Registry.ITEM.get(identifier));
+        else return new BaseNbtItem(Registry.ITEM.get(identifier));
     }
 
     public boolean matches(ItemStack itemStack) {

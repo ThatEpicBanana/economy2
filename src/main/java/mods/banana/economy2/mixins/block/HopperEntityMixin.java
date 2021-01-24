@@ -1,10 +1,10 @@
 package mods.banana.economy2.mixins.block;
 
-import mods.banana.bananaapi.BlockPosHelper;
-import mods.banana.bananaapi.ItemStackHelper;
+import mods.banana.bananaapi.helpers.BlockPosHelper;
+import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.OfflinePlayer;
-import mods.banana.economy2.chestshop.ChestShopItem;
+import mods.banana.economy2.itemmodules.items.BaseNbtItem;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.HopperInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
@@ -47,7 +47,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
     public UUID getParent() { return parent; }
     public void setParent(UUID parent) { this.parent = parent; }
 
-    public int countItem(ChestShopItem input) {
+    public int countItem(BaseNbtItem input) {
         int amount = 0;
         for(int i = 0; i < size(); i++) {
             ItemStack currentStack = getStack(i);
@@ -56,7 +56,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
         return amount;
     }
 
-    public List<ItemStack> removeItem(ChestShopItem item, int count) {
+    public List<ItemStack> removeItem(BaseNbtItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < size() && count > 0; i++) {
             ItemStack currentStack = getStack(i);

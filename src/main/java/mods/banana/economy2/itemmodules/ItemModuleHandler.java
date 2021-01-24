@@ -5,8 +5,9 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.oroarmor.config.ConfigItem;
+import mods.banana.economy2.itemmodules.items.BaseNbtItem;
+import mods.banana.economy2.itemmodules.items.NbtItem;
 import net.minecraft.command.CommandSource;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Identifier;
@@ -15,9 +16,7 @@ import net.minecraft.util.registry.Registry;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class ItemModuleHandler {
@@ -59,6 +58,12 @@ public class ItemModuleHandler {
             }
         }
         return null;
+    }
+
+    public static BaseNbtItem getItem(Identifier identifier) {
+        NbtItem item = getActiveItem(identifier);
+        if(item == null) return new BaseNbtItem(Registry.ITEM.get(identifier));
+        else return item;
     }
 
 
@@ -161,6 +166,30 @@ public class ItemModuleHandler {
      * creates suggestions of all item registry identifiers + all nbt item identifiers
      */
     public static class ItemModuleSuggestionProvider implements SuggestionProvider<ServerCommandSource> {
+        private final boolean negators;
+        private final TypeShown typeShown;
+
+        public enum TypeShown {
+            ITEM,
+            MODIFIER,
+            BOTH
+        }
+
+        public ItemModuleSuggestionProvider() { this(false, TypeShown.ITEM); }
+
+        public ItemModuleSuggestionProvider(boolean negators, TypeShown typeShown) {
+            this.negators = negators;
+            this.typeShown = typeShown;
+        }
+
+        private boolean typeMatches(NbtItem item) {
+            if(typeShown == TypeShown.BOTH) return true;
+
+            NbtItem.ItemType type = item.getType();
+
+            return (type == NbtItem.ItemType.ITEM && typeShown == TypeShown.ITEM) || (type == NbtItem.ItemType.MODIFIER && typeShown == TypeShown.MODIFIER);
+        }
+
         @Override
         public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) {
             // add regular minecraft items
@@ -169,7 +198,19 @@ public class ItemModuleHandler {
             // add all nbt items
             for(ItemModule module : activeModules) {
                 for(NbtItem item : module.getValues().values()) {
-                    identifiers.add(item.getIdentifier());
+                    if(typeMatches(item)) identifiers.add(item.getIdentifier());
+                }
+            }
+
+            // add all negations
+            if(negators) {
+                for(ItemModule module : activeModules) {
+                    for(NbtItem item : module.getValues().values()) {
+                        if(typeMatches(item)) {
+                            Identifier identifier = item.getIdentifier();
+                            identifiers.add(new Identifier("-" + identifier.getNamespace(), identifier.getPath()));
+                        }
+                    }
                 }
             }
 

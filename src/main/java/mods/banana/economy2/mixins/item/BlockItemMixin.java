@@ -1,7 +1,7 @@
 package mods.banana.economy2.mixins.item;
 
-import mods.banana.bananaapi.BlockPosHelper;
-import mods.banana.bananaapi.TextHelper;
+import mods.banana.bananaapi.helpers.BlockPosHelper;
+import mods.banana.bananaapi.helpers.TextHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;

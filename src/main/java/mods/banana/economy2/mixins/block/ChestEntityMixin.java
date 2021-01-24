@@ -1,8 +1,8 @@
 package mods.banana.economy2.mixins.block;
 
-import mods.banana.bananaapi.ItemStackHelper;
+import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.chestshop.ChestShopItem;
+import mods.banana.economy2.itemmodules.items.BaseNbtItem;
 import mods.banana.economy2.chestshop.interfaces.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.SignInterface;
 import mods.banana.economy2.EconomyItems;
@@ -58,7 +58,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         }
     }
 
-    public ChestEntityMixin(BlockEntityType<?> type) { super(type); }
+    public ChestEntityMixin(BlockEntityType<?> itemType) { super(itemType); }
 
     public boolean isChestShop() { return chestShop && Economy2.CONFIG.getValue("chestShop.enabled", Boolean.class); }
     public UUID getParent() { return parent; }
@@ -147,7 +147,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         }
     }
 
-    public List<ItemStack> removeItem(ChestShopItem item, int count) {
+    public List<ItemStack> removeItem(BaseNbtItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < size() && count > 0; i++) {
             ItemStack currentStack = getStack(i);
@@ -187,7 +187,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         return amount;
     }
 
-    public int countItem(ChestShopItem input) {
+    public int countItem(BaseNbtItem input) {
         int amount = 0;
         for(int i = 0; i < getLimit(); i++) {
             ItemStack currentStack = getStack(i);

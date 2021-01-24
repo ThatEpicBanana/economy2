@@ -41,12 +41,13 @@ public class EconomyConfig extends Config {
     }
 
     public static class ItemModuleSettings extends ConfigItemGroup {
-        public static final ConfigItem<Boolean> heads = new ConfigItem<>("heads", false, "Adds support for custom heads from VanillaTweaks in chest shops", ItemModuleHandler::onChange);
-        public static final ConfigItem<Boolean> god_items = new ConfigItem<>("god_items", true, "Adds support for max enchanted items in chest shops", ItemModuleHandler::onChange);
-        public static final ConfigItem<Boolean> enchantment_books = new ConfigItem<>("enchantment_books", true, "Adds support for enchantment books in chest shops", ItemModuleHandler::onChange);
-        public static final ConfigItem<Boolean> potions = new ConfigItem<>("potions", true, "Adds support for potions in chest shops", ItemModuleHandler::onChange);
+        public static final ConfigItem<Boolean> heads = new ConfigItem<>("heads", false, "Adds support for custom heads from VanillaTweaks in bounties and chest shops", ItemModuleHandler::onChange);
+        public static final ConfigItem<Boolean> god_items = new ConfigItem<>("god_items", true, "Adds support for max enchanted items in bounties and chest shops", ItemModuleHandler::onChange);
+        public static final ConfigItem<Boolean> enchantment_books = new ConfigItem<>("enchantment_books", true, "Adds support for enchantment books in bounties and chest shops", ItemModuleHandler::onChange);
+        public static final ConfigItem<Boolean> potions = new ConfigItem<>("potions", true, "Adds support for potions in bounties and chest shops", ItemModuleHandler::onChange);
+        public static final ConfigItem<Boolean> enchants = new ConfigItem<>("enchants", true, "Adds support for enchants in bounties", ItemModuleHandler::onChange);
 
-        public ItemModuleSettings() { super(List.of(heads, god_items, enchantment_books, potions), "ItemModule"); }
+        public ItemModuleSettings() { super(List.of(heads, god_items, enchantment_books, potions, enchants), "ItemModule"); }
     }
 
     public static class ChestShopSettings extends ConfigItemGroup {

@@ -18,6 +18,7 @@ public class ItemModules {
         registerConfig(new ItemModule("god_items", "god_items.json", loader));
         registerConfig(new ItemModule("enchantment_books", "enchantment_books.json", loader));
         registerConfig(new ItemModule("potions", "potions.json", loader));
+        registerConfig(new ItemModule("enchants", "enchants.json", loader));
 
         getItemModulesFromFile();
     }
