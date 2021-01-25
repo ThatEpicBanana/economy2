@@ -57,6 +57,12 @@ public class ItemModule {
 
         this.name = name;
         this.values = values;
+
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String toString() {

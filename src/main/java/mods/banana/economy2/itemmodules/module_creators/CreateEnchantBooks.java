@@ -24,13 +24,13 @@ public class CreateEnchantBooks {
 
             for(Enchantment ench : Registry.ENCHANTMENT) {
                 for(int i = 1; i <= ench.getMaxLevel(); i++) {
-                    array.add(new Gson().toJsonTree(new JsonNbtItem(
-                            "item",
-                            "minecraft:enchanted_book",
-                            "book:" + Registry.ENCHANTMENT.getId(ench).getPath() + (ench.getMaxLevel() != 1 ? "-" + roman[i-1] : ""),
-                            "{StoredEnchantments:[{lvl:" + i + "s, id: \"minecraft:" + Registry.ENCHANTMENT.getId(ench).getPath() + "\"}]}",
-                            null
-                    )));
+//                    array.add(new Gson().toJsonTree(new JsonNbtItem(
+//                            "item",
+//                            "minecraft:enchanted_book",
+//                            "book:" + Registry.ENCHANTMENT.getId(ench).getPath() + (ench.getMaxLevel() != 1 ? "-" + roman[i-1] : ""),
+//                            "{StoredEnchantments:[{lvl:" + i + "s, id: \"minecraft:" + Registry.ENCHANTMENT.getId(ench).getPath() + "\"}]}",
+//                            null
+//                    )));
                 }
             }
 

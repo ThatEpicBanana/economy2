@@ -41,6 +41,11 @@ public class ItemModuleHandler {
         return null;
     }
 
+    public static boolean contains(String name) {
+        for(ItemModule module : registeredModules) if(module.getName().equals(name)) return true;
+        return false;
+    }
+
 
     public static NbtItem getActiveItem(Identifier identifier) {
         for(ItemModule module : activeModules) {
@@ -67,25 +72,26 @@ public class ItemModuleHandler {
     }
 
 
-    public static Identifier getMatchOfUnsureStack(ItemStack itemStack) {
-        Identifier nbtItem = getMatch(itemStack);
+    public static Identifier getMatchOfUnsureStack(ItemStack itemStack, NbtItem.Type type) {
+        Identifier nbtItem = getMatch(itemStack, type);
         if(nbtItem != null) return nbtItem;
         else return Registry.ITEM.getId(itemStack.getItem());
     }
 
-    public static Identifier getMatch(ItemStack itemStack) {
-        List<Identifier> matches = getMatches(itemStack);
+
+    public static Identifier getMatch(ItemStack itemStack, NbtItem.Type type) {
+        List<Identifier> matches = getMatches(itemStack, type);
         return matches.size() == 0 ? null : matches.get(0);
     }
 
-    public static List<Identifier> getMatches(ItemStack stack) {
+    public static List<Identifier> getMatches(ItemStack stack, NbtItem.Type type) {
         ArrayList<Identifier> matches = new ArrayList<>();
 
         // for each nbt item
         for(ItemModule module : activeModules) {
             for(NbtItem current : module.getValues().values()) {
                 // if it matches, add it to list
-                if(current.matches(stack)) {
+                if(current.matches(stack, type)) {
                     matches.add(current.getIdentifier());
                 }
             }
@@ -94,14 +100,14 @@ public class ItemModuleHandler {
         return matches;
     }
 
-    public static List<Identifier> getSoftMatches(ItemStack stack) {
+    public static List<Identifier> getSoftMatches(ItemStack stack, NbtItem.Type type) {
         ArrayList<Identifier> matches = new ArrayList<>();
 
         // for each nbt item
         for(ItemModule module : activeModules) {
             for(NbtItem current : module.getValues().values()) {
                 // if it soft matches, add it to list
-                if(current.softMatches(stack)) {
+                if(current.softMatches(stack, type)) {
                     matches.add(current.getIdentifier());
                 }
             }
@@ -120,30 +126,30 @@ public class ItemModuleHandler {
         return current;
     }
 
-    // finds the child with the best fit to the item stack
-    private static Pair<Identifier, Integer> getBestFit(NbtItem item, ItemStack stack, int specificity) {
-        // visualizer
-        System.out.println(StringUtils.repeat("    ", specificity) + item.getIdentifier());
-
-        // increment specificity
-        specificity += 1;
-
-        // initialize best fit of children
-        Pair<Identifier, Integer> bestpair = new Pair<>(item.getIdentifier(), specificity);
-
-        // get best fit of children (if it has any)
-        for(NbtItem child : item.getChildren()) {
-            if(child.softMatches(stack)) {
-                // get it's fit
-                Pair<Identifier, Integer> childFit = getBestFit(child, stack, specificity);
-                // if it's more than the current best fit, update it
-                if(childFit.getRight() > bestpair.getRight()) bestpair = childFit;
-            }
-        }
-
-        // return the best fit
-        return bestpair;
-    }
+//    // finds the child with the best fit to the item stack
+//    private static Pair<Identifier, Integer> getBestFit(NbtItem item, ItemStack stack, int specificity) {
+//        // visualizer
+//        System.out.println(StringUtils.repeat("    ", specificity) + item.getIdentifier());
+//
+//        // increment specificity
+//        specificity += 1;
+//
+//        // initialize best fit of children
+//        Pair<Identifier, Integer> bestpair = new Pair<>(item.getIdentifier(), specificity);
+//
+//        // get best fit of children (if it has any)
+//        for(NbtItem child : item.getChildren()) {
+//            if(child.softMatches(stack)) {
+//                // get it's fit
+//                Pair<Identifier, Integer> childFit = getBestFit(child, stack, specificity);
+//                // if it's more than the current best fit, update it
+//                if(childFit.getRight() > bestpair.getRight()) bestpair = childFit;
+//            }
+//        }
+//
+//        // return the best fit
+//        return bestpair;
+//    }
 
     public static void onChange(ConfigItem<Boolean> item) {
 //        System.out.println(item);
@@ -185,9 +191,10 @@ public class ItemModuleHandler {
         private boolean typeMatches(NbtItem item) {
             if(typeShown == TypeShown.BOTH) return true;
 
-            NbtItem.ItemType type = item.getType();
+            // true if item, false if modifier
+            boolean type = item.getItem() != null;
 
-            return (type == NbtItem.ItemType.ITEM && typeShown == TypeShown.ITEM) || (type == NbtItem.ItemType.MODIFIER && typeShown == TypeShown.MODIFIER);
+            return (type && typeShown == TypeShown.ITEM) || (!type && typeShown == TypeShown.MODIFIER);
         }
 
         @Override

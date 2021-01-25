@@ -18,39 +18,39 @@ public class CreatePotions {
         JsonArray array = new JsonArray();
 
         for(Potion potion : Registry.POTION) {
-            array.add(gson.toJsonTree(new JsonNbtItem(
-                    "minecraft:potion",
-                    "pot:" + getName(potion),
-                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
-                    null
-            )));
+//            array.add(gson.toJsonTree(new JsonNbtItem(
+//                    "minecraft:potion",
+//                    "pot:" + getName(potion),
+//                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
+//                    null
+//            )));
         }
 
         for(Potion potion : Registry.POTION) {
-            array.add(gson.toJsonTree(new JsonNbtItem(
-                    "minecraft:splash_potion",
-                    "splash:" + getName(potion),
-                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
-                    null
-            )));
+//            array.add(gson.toJsonTree(new JsonNbtItem(
+//                    "minecraft:splash_potion",
+//                    "splash:" + getName(potion),
+//                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
+//                    null
+//            )));
         }
 
         for(Potion potion : Registry.POTION) {
-            array.add(gson.toJsonTree(new JsonNbtItem(
-                    "minecraft:lingering_potion",
-                    "linger:" + getName(potion),
-                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
-                    null
-            )));
+//            array.add(gson.toJsonTree(new JsonNbtItem(
+//                    "minecraft:lingering_potion",
+//                    "linger:" + getName(potion),
+//                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
+//                    null
+//            )));
         }
 
         for(Potion potion : Registry.POTION) {
-            array.add(gson.toJsonTree(new JsonNbtItem(
-                    "minecraft:tipped_arrow",
-                    "arrow:" + getName(potion),
-                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
-                    null
-            )));
+//            array.add(gson.toJsonTree(new JsonNbtItem(
+//                    "minecraft:tipped_arrow",
+//                    "arrow:" + getName(potion),
+//                    "{Potion:\"" + Registry.POTION.getId(potion).toString() + "\"}",
+//                    null
+//            )));
         }
 
         try {

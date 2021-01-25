@@ -13,6 +13,8 @@ import mods.banana.economy2.admin.commands.AdminBase;
 import mods.banana.economy2.bounties.commands.BountyBase;
 import mods.banana.economy2.chestshop.commands.AboutItem;
 import mods.banana.economy2.chestshop.commands.HelpCommand;
+import mods.banana.economy2.itemmodules.ItemModule;
+import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.ItemModules;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
@@ -21,7 +23,12 @@ import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -52,7 +59,7 @@ public class Economy2 implements ModInitializer {
         // save previous directory for reference when moving it
         previousSaveDirectory = CONFIG.getValue("file.saveDirectory", String.class);
 
-        ServerLifecycleEvents.SERVER_STARTED.register(server1 -> server = server1);
+        ServerLifecycleEvents.SERVER_STARTING.register(server1 -> server = server1);
 
         loadBalJson();
         registerCommands();
@@ -60,6 +67,28 @@ public class Economy2 implements ModInitializer {
 //        CreateEnchants.onInit();
 //        CreateEnchantBooks.onInit();
         ItemModules.onInit();
+
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+            @Override
+            public Identifier getFabricId() {
+                return new Identifier("economy", "resources");
+            }
+
+            @Override
+            public void apply(ResourceManager manager) {
+                System.out.println("loading resources");
+                for(Identifier id : manager.findResources("item_modules", path -> path.endsWith(".json"))) {
+                    try(InputStream stream = manager.getResource(id).getInputStream()) {
+                        if(!ItemModuleHandler.contains(id.toString())) {
+                            ItemModuleHandler.register(new ItemModule(id.toString(), new InputStreamReader(stream)));
+                            ItemModuleHandler.activate(id.toString());
+                        }
+                    } catch(Exception e) {
+                        LOGGER.error("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! Error occurred while loading funni resource json " + id.toString(), e);
+                    }
+                }
+            }
+        });
 
         initializing = false;
     }

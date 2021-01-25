@@ -1,13 +1,20 @@
 package mods.banana.economy2.itemmodules.items;
 
+import mods.banana.economy2.Economy2;
 import mods.banana.economy2.itemmodules.ItemModule;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.interfaces.ConditionInterface;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.context.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,49 +23,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NbtItem extends BaseNbtItem {
-    private final ItemType type;
     private final Identifier identifier;
-    private final CompoundTag tag;
+    private final Identifier predicate;
     private final Identifier parent;
     private List<NbtItem> children = new ArrayList<>();
 
-    public enum ItemType {
+    public enum Type {
         ITEM,
-        MODIFIER
+        MODIFIER,
+        BOTH // (used for matching)
     }
 
     // full constructor with parent
-    public NbtItem(ItemType type, Identifier identifier, CompoundTag tag, Item item, Identifier parent) {
+    public NbtItem(Item item, Identifier identifier, Identifier predicate, Identifier parent) {
         super(item);
-        this.type = type;
         this.identifier = identifier;
-        this.tag = tag;
+        this.predicate = predicate;
         this.parent = parent;
     }
 
     // full constructor with children
-    public NbtItem(ItemType type, Identifier identifier, CompoundTag tag, @Nullable Item item, Identifier parent, List<NbtItem> children) {
-        this(type, identifier, tag, item, parent);
+    public NbtItem(Item item, Identifier identifier, Identifier predicate, Identifier parent, List<NbtItem> children) {
+        this(item, identifier, predicate, parent);
         this.children = children;
     }
 
-    // modifier constructor
-    public NbtItem(Identifier identifier, CompoundTag tag) {
-        this(ItemType.MODIFIER, identifier, tag, null, null);
-    }
-
-    // item constructor
-    public NbtItem(Identifier identifier, CompoundTag tag, Item item) {
-        this(ItemType.ITEM, identifier, tag, item, null);
-    }
-
-    // constructor from stack
-    public NbtItem(ItemStack parentStack) {
-        super(parentStack.getItem());
-        this.identifier = Registry.ITEM.getId(getItem());
-        this.tag = parentStack.getTag();
-        this.parent = null;
-        this.type = ItemType.ITEM;
+    public NbtItem(Identifier identifier, Identifier predicate, Identifier parent) {
+        // get item from predicate
+        super(((ConditionInterface) Economy2.server.getPredicateManager().get(predicate)).getStack().getLeft());
+        this.identifier = identifier;
+        this.predicate = predicate;
+        this.parent = parent;
     }
 
     public static NbtItem fromStack(ItemStack stack) {
@@ -73,27 +68,43 @@ public class NbtItem extends BaseNbtItem {
     @Override
     public ItemStack toItemStack() {
         // put item into stack
-        ItemStack newStack = new ItemStack(type == ItemType.ITEM ? getItem() : Items.DIRT);
-        // set stack's tag using the brigadier string reader
-        newStack.setTag(tag);
+        ItemStack newStack = new ItemStack(item != null ? item : Items.DIRT);
+        // set stack's tag
+        newStack.setTag(getTag());
 
         return newStack;
     }
 
+    public CompoundTag getTag() {
+        return getPredicateInfo().getStack().getRight();
+    }
+
     @Override
-    public boolean matches(ItemStack stack) {
-        if(softMatches(stack)) {
+    public boolean matches(ItemStack stack, Type type) {
+        if(softMatches(stack, type)) {
             // make sure children don't match
-            for(NbtItem child : children) if(child.softMatches(stack)) return false;
+            for(NbtItem child : children) if(child.softMatches(stack, type)) return false;
             // if none do return yes
             return true;
         }
         return false;
     }
 
-    public boolean softMatches(ItemStack stack) {
-        return (type == ItemType.ITEM || stack.getItem().equals(getItem())) && // check item if it's an item
-                NbtHelper.matches(getTag(), stack.getTag(), true); // check tag
+    public boolean softMatches(ItemStack stack, Type type) {
+        return typeMatches(type) && // check if type matches
+                getPredicate() // check if predicate matches
+                .test(new LootContext.Builder(Economy2.server.getWorld(ServerWorld.OVERWORLD)) // have to pass in world to get server
+                        .parameter(LootContextParameters.TOOL, stack) // use tool as it's the most simple
+                        .build( // pass in builder
+                                new LootContextType.Builder()
+                                        .require(LootContextParameters.TOOL) // has to specify if parameters are used
+                                        .build()
+                        )
+                );
+    }
+
+    public boolean typeMatches(Type type) {
+        return type == Type.BOTH || type == getType();
     }
 
     public String toString() {
@@ -101,11 +112,14 @@ public class NbtItem extends BaseNbtItem {
     }
 
     public NbtItem copy() {
-        return new NbtItem(type, identifier, tag, item, parent, children);
+        return new NbtItem(item, identifier, predicate, parent, children);
     }
 
+    // so many gets
     public Identifier getIdentifier() { return identifier; }
-    public CompoundTag getTag() { return tag; }
+    public Identifier getPredicateId() { return predicate; }
+    public LootCondition getPredicate() { return Economy2.server.getPredicateManager().get(getPredicateId()); }
+    public ConditionInterface getPredicateInfo() { return (ConditionInterface) getPredicate(); }
 
     public boolean hasParent() { return parent != null; }
     public Identifier getParent() { return parent; }
@@ -114,5 +128,5 @@ public class NbtItem extends BaseNbtItem {
     public List<NbtItem> getChildren() { return children; }
     public boolean hasChildren() { return !children.isEmpty(); }
 
-    public ItemType getType() { return type; }
+    public Type getType() { return getItem() == null ? Type.MODIFIER : Type.ITEM; }
 }

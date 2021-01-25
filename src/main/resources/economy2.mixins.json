@@ -15,7 +15,13 @@
     "entity.PlayerMixin",
     "item.BlockItemMixin",
     "network.PlayerInteractionHandlerMixin",
-    "network.PlayHandlerMixin"
+    "network.PlayHandlerMixin",
+    "predicate.AlternativeConditionMixin",
+    "predicate.ConditionMixin",
+    "predicate.EnchantmentPredicateMixin",
+    "predicate.ItemPredicateMixin",
+    "predicate.MatchToolConditionMixin",
+    "predicate.NbtPredicateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

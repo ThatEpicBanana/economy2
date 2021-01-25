@@ -13,14 +13,14 @@ import java.nio.file.Path;
 
 public class ItemModules {
     public static void onInit() {
-        ClassLoader loader = ItemModules.class.getClassLoader();
-        registerConfig(new ItemModule("heads", "heads.json", loader));
-        registerConfig(new ItemModule("god_items", "god_items.json", loader));
-        registerConfig(new ItemModule("enchantment_books", "enchantment_books.json", loader));
-        registerConfig(new ItemModule("potions", "potions.json", loader));
-        registerConfig(new ItemModule("enchants", "enchants.json", loader));
-
-        getItemModulesFromFile();
+//        ClassLoader loader = ItemModules.class.getClassLoader();
+//        registerConfig(new ItemModule("heads", "heads.json", loader));
+//        registerConfig(new ItemModule("god_items", "god_items.json", loader));
+//        registerConfig(new ItemModule("enchantment_books", "enchantment_books.json", loader));
+//        registerConfig(new ItemModule("potions", "potions.json", loader));
+//        registerConfig(new ItemModule("enchants", "enchants.json", loader));
+//
+//        getItemModulesFromFile();
     }
 
     private static void registerConfig(ItemModule module) {

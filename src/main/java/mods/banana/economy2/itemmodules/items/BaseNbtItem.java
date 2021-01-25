@@ -25,8 +25,10 @@ public class BaseNbtItem {
         else return new BaseNbtItem(Registry.ITEM.get(identifier));
     }
 
-    public boolean matches(ItemStack itemStack) {
-        return itemStack.getItem().equals(item) && !itemStack.hasTag();
+    public boolean matches(ItemStack stack) { return matches(stack, NbtItem.Type.ITEM); }
+
+    public boolean matches(ItemStack itemStack, NbtItem.Type type) {
+        return type == NbtItem.Type.ITEM && itemStack.getItem().equals(item) && !itemStack.hasTag();
     }
 
     public ItemStack toItemStack() {
