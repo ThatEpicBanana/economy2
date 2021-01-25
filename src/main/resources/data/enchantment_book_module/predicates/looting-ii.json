@@ -1,0 +1,7 @@
+{
+  "condition": "minecraft:match_tool",
+  "predicate": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{lvl:2s,id:\"minecraft:looting\"}]}"
+  }
+}

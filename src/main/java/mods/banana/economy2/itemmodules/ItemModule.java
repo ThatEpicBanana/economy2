@@ -45,14 +45,10 @@ public class ItemModule {
         // get the items from the file
         List<JsonNbtItem> items = new Gson().fromJson(reader, new TypeToken<List<JsonNbtItem>>() {}.getType());
 
-        try {
-            // for each item
-            for(JsonNbtItem jsonItem : items) {
-                NbtItem item = jsonItem.toNbtItem();
-                values.put(item.getIdentifier(), item);
-            }
-        } catch (CommandSyntaxException e) {
-            e.printStackTrace();
+        // for each item
+        for(JsonNbtItem jsonItem : items) {
+            NbtItem item = jsonItem.toNbtItem();
+            values.put(item.getIdentifier(), item);
         }
 
         this.name = name;

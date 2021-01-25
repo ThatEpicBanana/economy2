@@ -22,7 +22,7 @@ public class JsonNbtItem {
         this.parent = null;
     }
 
-    public NbtItem toNbtItem() throws CommandSyntaxException {
+    public NbtItem toNbtItem() {
         return new NbtItem(new Identifier(identifier), new Identifier(predicate), parent != null ? new Identifier(parent) : null);
     }
 }

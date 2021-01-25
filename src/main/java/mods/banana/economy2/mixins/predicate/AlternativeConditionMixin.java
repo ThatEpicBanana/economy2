@@ -1,7 +1,6 @@
 package mods.banana.economy2.mixins.predicate;
 
 import mods.banana.bananaapi.helpers.TagHelper;
-import mods.banana.economy2.itemmodules.exceptions.ParseNbtItemPredicateException;
 import mods.banana.economy2.itemmodules.interfaces.AlternativeConditionInterface;
 import mods.banana.economy2.itemmodules.interfaces.ConditionInterface;
 import net.minecraft.item.Item;

@@ -18,6 +18,7 @@ import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.ItemModules;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
+import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -84,7 +85,7 @@ public class Economy2 implements ModInitializer {
                             ItemModuleHandler.activate(id.toString());
                         }
                     } catch(Exception e) {
-                        LOGGER.error("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! Error occurred while loading funni resource json " + id.toString(), e);
+                        LOGGER.error("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! Error occurred while loading funni resource json " + id.toString() + " (this was in the wiki and I just couldn't remove it)", e);
                     }
                 }
             }

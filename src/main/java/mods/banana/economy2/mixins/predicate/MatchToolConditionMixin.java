@@ -1,10 +1,8 @@
 package mods.banana.economy2.mixins.predicate;
 
-import mods.banana.economy2.itemmodules.exceptions.ParseNbtItemPredicateException;
 import mods.banana.economy2.itemmodules.interfaces.ItemPredicateInterface;
 import mods.banana.economy2.itemmodules.interfaces.MatchToolConditionInterface;
 import net.minecraft.item.Item;
-import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.predicate.item.ItemPredicate;
