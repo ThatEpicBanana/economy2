@@ -1,8 +1,8 @@
 package mods.banana.economy2.mixins.predicate;
 
-import mods.banana.economy2.itemmodules.interfaces.EnchantmentPredicateInterface;
-import mods.banana.economy2.itemmodules.interfaces.ItemPredicateInterface;
-import mods.banana.economy2.itemmodules.interfaces.NbtPredicateInterface;
+import mods.banana.economy2.itemmodules.interfaces.mixin.EnchantmentPredicateInterface;
+import mods.banana.economy2.itemmodules.interfaces.mixin.ItemPredicateInterface;
+import mods.banana.economy2.itemmodules.interfaces.mixin.NbtPredicateInterface;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.predicate.NbtPredicate;

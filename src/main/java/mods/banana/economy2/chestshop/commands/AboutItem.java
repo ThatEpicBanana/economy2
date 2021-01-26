@@ -2,7 +2,7 @@ package mods.banana.economy2.chestshop.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
-import mods.banana.economy2.itemmodules.items.NbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -21,7 +21,7 @@ public class AboutItem {
         ItemStack selectedItem = source.inventory.getStack(source.inventory.selectedSlot);
         if(!selectedItem.equals(ItemStack.EMPTY)) {
             // get matches
-            List<Identifier> matches = ItemModuleHandler.getSoftMatches(selectedItem, NbtItem.Type.BOTH);
+            List<Identifier> matches = ItemModuleHandler.getSoftMatches(selectedItem, NbtMatcher.Type.BOTH);
             // add regular minecraft item and set it to front
             matches.add(0, Registry.ITEM.getId(selectedItem.getItem()));
 

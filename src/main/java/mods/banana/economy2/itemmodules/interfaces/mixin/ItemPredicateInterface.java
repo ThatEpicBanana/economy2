@@ -1,9 +1,7 @@
-package mods.banana.economy2.itemmodules.interfaces;
+package mods.banana.economy2.itemmodules.interfaces.mixin;
 
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
-import net.minecraft.predicate.NbtPredicate;
-import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.tag.Tag;
 import org.jetbrains.annotations.Nullable;
 

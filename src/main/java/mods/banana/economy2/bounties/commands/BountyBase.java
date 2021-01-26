@@ -9,6 +9,7 @@ import mods.banana.economy2.bounties.Bounty;
 import mods.banana.economy2.bounties.BountyHandler;
 import mods.banana.economy2.bounties.gui.BountyList;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -90,7 +91,7 @@ public class BountyBase {
     private static RequiredArgumentBuilder<ServerCommandSource, Identifier> getIdentifierArgument(List<String> arguments, boolean first) {
         return CommandManager
                 .argument(arguments.get(arguments.size() - 1), IdentifierArgumentType.identifier())
-                .suggests(first ? new ItemModuleHandler.ItemModuleSuggestionProvider() : new ItemModuleHandler.ItemModuleSuggestionProvider(true, ItemModuleHandler.ItemModuleSuggestionProvider.TypeShown.MODIFIER))
+                .suggests(first ? new ItemModuleHandler.ItemModuleSuggestionProvider() : new ItemModuleHandler.ItemModuleSuggestionProvider(true, NbtMatcher.Type.BOTH))
                             .executes(context -> request(
                                     context.getSource().getPlayer(),
                                     getIdentifiers(context, arguments),

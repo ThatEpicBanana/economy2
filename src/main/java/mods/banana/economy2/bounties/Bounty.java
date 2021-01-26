@@ -1,9 +1,9 @@
 package mods.banana.economy2.bounties;
 
 import mods.banana.bananaapi.helpers.TagHelper;
-import mods.banana.economy2.itemmodules.items.BaseNbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
+import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
-import mods.banana.economy2.itemmodules.items.NbtItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
@@ -39,18 +39,19 @@ public class Bounty {
     }
 
     public ItemStack toItemStack() {
-        // initialize stack
-        ItemStack stack = ItemModuleHandler.getItem(baseItem).toItemStack();
-        // set tag
-        if(!stack.hasTag()) stack.setTag(new CompoundTag());
-        // for each matching nbt item
-        for (Identifier itemId : mustMatch) {
-            // get the item
-            BaseNbtItem item = ItemModuleHandler.getItem(itemId);
-            // combine the tags
-            if (item instanceof NbtItem) stack.setTag(TagHelper.combine(((NbtItem) item).getTag(), stack.getTag()));
-        }
-        // return the new stack
-        return stack;
+//        // initialize stack
+////        ItemStack stack = ItemModuleHandler.getItem(baseItem).toItemStack();
+//        // set tag
+//        if(!stack.hasTag()) stack.setTag(new CompoundTag());
+//        // for each matching nbt item
+//        for (Identifier itemId : mustMatch) {
+//            // get the item
+//            BaseItem item = ItemModuleHandler.getItem(itemId);
+//            // combine the tags
+//            if (item instanceof NbtMatcher) stack.setTag(TagHelper.combine(((NbtMatcher) item).getTag(), stack.getTag()));
+//        }
+//        // return the new stack
+//        return stack;
+        return null;
     }
 }

@@ -4,10 +4,11 @@ import mods.banana.bananaapi.helpers.BlockPosHelper;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.OfflinePlayer;
-import mods.banana.economy2.itemmodules.items.BaseNbtItem;
-import mods.banana.economy2.chestshop.interfaces.ChestInterface;
-import mods.banana.economy2.chestshop.interfaces.HopperInterface;
-import mods.banana.economy2.chestshop.interfaces.SignInterface;
+import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.chestshop.interfaces.ChestShopItem;
+import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
+import mods.banana.economy2.chestshop.interfaces.mixin.HopperInterface;
+import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.*;
 import net.minecraft.inventory.Inventory;
@@ -47,7 +48,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
     public UUID getParent() { return parent; }
     public void setParent(UUID parent) { this.parent = parent; }
 
-    public int countItem(BaseNbtItem input) {
+    public int countItem(ChestShopItem input) {
         int amount = 0;
         for(int i = 0; i < size(); i++) {
             ItemStack currentStack = getStack(i);
@@ -56,7 +57,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
         return amount;
     }
 
-    public List<ItemStack> removeItem(BaseNbtItem item, int count) {
+    public List<ItemStack> removeItem(ChestShopItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < size() && count > 0; i++) {
             ItemStack currentStack = getStack(i);

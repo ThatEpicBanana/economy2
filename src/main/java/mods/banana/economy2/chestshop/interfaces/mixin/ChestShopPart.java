@@ -1,4 +1,4 @@
-package mods.banana.economy2.chestshop.interfaces;
+package mods.banana.economy2.chestshop.interfaces.mixin;
 
 import java.util.UUID;
 

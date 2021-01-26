@@ -5,15 +5,15 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.oroarmor.config.ConfigItem;
-import mods.banana.economy2.itemmodules.items.BaseNbtItem;
 import mods.banana.economy2.itemmodules.items.NbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
+import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.itemmodules.items.NbtModifier;
 import net.minecraft.command.CommandSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class ItemModuleHandler {
         registeredModules.add(module);
 
         // register all of the children
-        for(NbtItem item : module.getValues().values()) {
+        for(NbtMatcher item : module.getValues().values()) {
             if(item.hasParent()) getRegisteredItem(item.getParent()).addChild(item);
         }
     }
@@ -47,7 +47,7 @@ public class ItemModuleHandler {
     }
 
 
-    public static NbtItem getActiveItem(Identifier identifier) {
+    public static NbtMatcher getActiveMatcher(Identifier identifier) {
         for(ItemModule module : activeModules) {
             if(module.getValues().containsKey(identifier)) {
                 return module.getValues().get(identifier);
@@ -56,7 +56,17 @@ public class ItemModuleHandler {
         return null;
     }
 
-    public static NbtItem getRegisteredItem(Identifier identifier) {
+    public static NbtItem getActiveItem(Identifier identifier) {
+        NbtMatcher matcher = getActiveMatcher(identifier);
+        return matcher instanceof NbtItem ? (NbtItem) matcher : null;
+    }
+
+    public static NbtModifier getActiveModifier(Identifier identifier) {
+        NbtMatcher matcher = getActiveMatcher(identifier);
+        return matcher instanceof NbtModifier ? (NbtModifier) matcher : null;
+    }
+
+    public static NbtMatcher getRegisteredItem(Identifier identifier) {
         for(ItemModule module : registeredModules) {
             if(module.getValues().containsKey(identifier)) {
                 return module.getValues().get(identifier);
@@ -65,31 +75,24 @@ public class ItemModuleHandler {
         return null;
     }
 
-    public static BaseNbtItem getItem(Identifier identifier) {
-        NbtItem item = getActiveItem(identifier);
-        if(item == null) return new BaseNbtItem(Registry.ITEM.get(identifier));
-        else return item;
-    }
-
-
-    public static Identifier getMatchOfUnsureStack(ItemStack itemStack, NbtItem.Type type) {
+    public static Identifier getMatchOfUnsureStack(ItemStack itemStack, NbtMatcher.Type type) {
         Identifier nbtItem = getMatch(itemStack, type);
         if(nbtItem != null) return nbtItem;
         else return Registry.ITEM.getId(itemStack.getItem());
     }
 
 
-    public static Identifier getMatch(ItemStack itemStack, NbtItem.Type type) {
+    public static Identifier getMatch(ItemStack itemStack, NbtMatcher.Type type) {
         List<Identifier> matches = getMatches(itemStack, type);
         return matches.size() == 0 ? null : matches.get(0);
     }
 
-    public static List<Identifier> getMatches(ItemStack stack, NbtItem.Type type) {
+    public static List<Identifier> getMatches(ItemStack stack, NbtMatcher.Type type) {
         ArrayList<Identifier> matches = new ArrayList<>();
 
         // for each nbt item
         for(ItemModule module : activeModules) {
-            for(NbtItem current : module.getValues().values()) {
+            for(NbtMatcher current : module.getValues().values()) {
                 // if it matches, add it to list
                 if(current.matches(stack, type)) {
                     matches.add(current.getIdentifier());
@@ -100,12 +103,12 @@ public class ItemModuleHandler {
         return matches;
     }
 
-    public static List<Identifier> getSoftMatches(ItemStack stack, NbtItem.Type type) {
+    public static List<Identifier> getSoftMatches(ItemStack stack, NbtMatcher.Type type) {
         ArrayList<Identifier> matches = new ArrayList<>();
 
         // for each nbt item
         for(ItemModule module : activeModules) {
-            for(NbtItem current : module.getValues().values()) {
+            for(NbtMatcher current : module.getValues().values()) {
                 // if it soft matches, add it to list
                 if(current.softMatches(stack, type)) {
                     matches.add(current.getIdentifier());
@@ -117,14 +120,14 @@ public class ItemModuleHandler {
     }
 
 
-    // gets eldest ancestor of nbt item
-    private static NbtItem getParent(NbtItem item) {
-        NbtItem current = item.copy();
-        while(current.hasParent()) {
-            current = getActiveItem(current.getParent()).copy();
-        }
-        return current;
-    }
+//    // gets eldest ancestor of nbt item
+//    private static NbtItem getParent(NbtItem item) {
+//        NbtItem current = item.copy();
+//        while(current.hasParent()) {
+//            current = getActiveItem(current.getParent()).copy();
+//        }
+//        return current;
+//    }
 
 //    // finds the child with the best fit to the item stack
 //    private static Pair<Identifier, Integer> getBestFit(NbtItem item, ItemStack stack, int specificity) {
@@ -173,28 +176,13 @@ public class ItemModuleHandler {
      */
     public static class ItemModuleSuggestionProvider implements SuggestionProvider<ServerCommandSource> {
         private final boolean negators;
-        private final TypeShown typeShown;
+        private final NbtMatcher.Type typeShown;
 
-        public enum TypeShown {
-            ITEM,
-            MODIFIER,
-            BOTH
-        }
+        public ItemModuleSuggestionProvider() { this(false, NbtMatcher.Type.ITEM); }
 
-        public ItemModuleSuggestionProvider() { this(false, TypeShown.ITEM); }
-
-        public ItemModuleSuggestionProvider(boolean negators, TypeShown typeShown) {
+        public ItemModuleSuggestionProvider(boolean negators, NbtMatcher.Type typeShown) {
             this.negators = negators;
             this.typeShown = typeShown;
-        }
-
-        private boolean typeMatches(NbtItem item) {
-            if(typeShown == TypeShown.BOTH) return true;
-
-            // true if item, false if modifier
-            boolean type = item.getItem() != null;
-
-            return (type && typeShown == TypeShown.ITEM) || (!type && typeShown == TypeShown.MODIFIER);
         }
 
         @Override
@@ -204,16 +192,16 @@ public class ItemModuleHandler {
 
             // add all nbt items
             for(ItemModule module : activeModules) {
-                for(NbtItem item : module.getValues().values()) {
-                    if(typeMatches(item)) identifiers.add(item.getIdentifier());
+                for(NbtMatcher item : module.getValues().values()) {
+                    if(item.typeMatches(typeShown)) identifiers.add(item.getIdentifier());
                 }
             }
 
             // add all negations
             if(negators) {
                 for(ItemModule module : activeModules) {
-                    for(NbtItem item : module.getValues().values()) {
-                        if(typeMatches(item)) {
+                    for(NbtMatcher item : module.getValues().values()) {
+                        if(item.typeMatches(typeShown)) {
                             Identifier identifier = item.getIdentifier();
                             identifiers.add(new Identifier("-" + identifier.getNamespace(), identifier.getPath()));
                         }

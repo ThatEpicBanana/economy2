@@ -1,0 +1,18 @@
+[
+  {
+    "identifier": "test:item_a",
+    "predicate": "test:item_a",
+    "item": "minecraft:dirt"
+  },
+  {
+    "identifier": "test:item_b",
+    "predicate": "test:item_b",
+    "item": "minecraft:dirt",
+    "parent": "test:item_a"
+  },
+  {
+    "identifier": "test:modifier",
+    "predicate": "test:modifier",
+    "item": "#test:modifiertag"
+  }
+]

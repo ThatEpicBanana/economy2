@@ -1,6 +1,6 @@
 package mods.banana.economy2.mixins.predicate;
 
-import mods.banana.economy2.itemmodules.interfaces.NbtPredicateInterface;
+import mods.banana.economy2.itemmodules.interfaces.mixin.NbtPredicateInterface;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.predicate.NbtPredicate;
 import org.jetbrains.annotations.Nullable;

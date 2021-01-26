@@ -1,442 +1,552 @@
 [
   {
     "identifier": "book:protection-i",
-    "predicate": "enchantment_book_module:protection-i"
+    "predicate": "enchantment_book_module:protection-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:protection-ii",
-    "predicate": "enchantment_book_module:protection-ii"
+    "predicate": "enchantment_book_module:protection-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:protection-iii",
-    "predicate": "enchantment_book_module:protection-iii"
+    "predicate": "enchantment_book_module:protection-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:protection-iv",
-    "predicate": "enchantment_book_module:protection-iv"
+    "predicate": "enchantment_book_module:protection-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fire_protection-i",
-    "predicate": "enchantment_book_module:fire_protection-i"
+    "predicate": "enchantment_book_module:fire_protection-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fire_protection-ii",
-    "predicate": "enchantment_book_module:fire_protection-ii"
+    "predicate": "enchantment_book_module:fire_protection-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fire_protection-iii",
-    "predicate": "enchantment_book_module:fire_protection-iii"
+    "predicate": "enchantment_book_module:fire_protection-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fire_protection-iv",
-    "predicate": "enchantment_book_module:fire_protection-iv"
+    "predicate": "enchantment_book_module:fire_protection-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:feather_falling-i",
-    "predicate": "enchantment_book_module:feather_falling-i"
+    "predicate": "enchantment_book_module:feather_falling-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:feather_falling-ii",
-    "predicate": "enchantment_book_module:feather_falling-ii"
+    "predicate": "enchantment_book_module:feather_falling-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:feather_falling-iii",
-    "predicate": "enchantment_book_module:feather_falling-iii"
+    "predicate": "enchantment_book_module:feather_falling-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:feather_falling-iv",
-    "predicate": "enchantment_book_module:feather_falling-iv"
+    "predicate": "enchantment_book_module:feather_falling-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:blast_protection-i",
-    "predicate": "enchantment_book_module:blast_protection-i"
+    "predicate": "enchantment_book_module:blast_protection-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:blast_protection-ii",
-    "predicate": "enchantment_book_module:blast_protection-ii"
+    "predicate": "enchantment_book_module:blast_protection-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:blast_protection-iii",
-    "predicate": "enchantment_book_module:blast_protection-iii"
+    "predicate": "enchantment_book_module:blast_protection-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:blast_protection-iv",
-    "predicate": "enchantment_book_module:blast_protection-iv"
+    "predicate": "enchantment_book_module:blast_protection-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:projectile_protection-i",
-    "predicate": "enchantment_book_module:projectile_protection-i"
+    "predicate": "enchantment_book_module:projectile_protection-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:projectile_protection-ii",
-    "predicate": "enchantment_book_module:projectile_protection-ii"
+    "predicate": "enchantment_book_module:projectile_protection-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:projectile_protection-iii",
-    "predicate": "enchantment_book_module:projectile_protection-iii"
+    "predicate": "enchantment_book_module:projectile_protection-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:projectile_protection-iv",
-    "predicate": "enchantment_book_module:projectile_protection-iv"
+    "predicate": "enchantment_book_module:projectile_protection-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:respiration-i",
-    "predicate": "enchantment_book_module:respiration-i"
+    "predicate": "enchantment_book_module:respiration-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:respiration-ii",
-    "predicate": "enchantment_book_module:respiration-ii"
+    "predicate": "enchantment_book_module:respiration-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:respiration-iii",
-    "predicate": "enchantment_book_module:respiration-iii"
+    "predicate": "enchantment_book_module:respiration-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:aqua_affinity",
-    "predicate": "enchantment_book_module:aqua_affinity"
+    "predicate": "enchantment_book_module:aqua_affinity",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:thorns-i",
-    "predicate": "enchantment_book_module:thorns-i"
+    "predicate": "enchantment_book_module:thorns-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:thorns-ii",
-    "predicate": "enchantment_book_module:thorns-ii"
+    "predicate": "enchantment_book_module:thorns-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:thorns-iii",
-    "predicate": "enchantment_book_module:thorns-iii"
+    "predicate": "enchantment_book_module:thorns-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:depth_strider-i",
-    "predicate": "enchantment_book_module:depth_strider-i"
+    "predicate": "enchantment_book_module:depth_strider-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:depth_strider-ii",
-    "predicate": "enchantment_book_module:depth_strider-ii"
+    "predicate": "enchantment_book_module:depth_strider-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:depth_strider-iii",
-    "predicate": "enchantment_book_module:depth_strider-iii"
+    "predicate": "enchantment_book_module:depth_strider-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:frost_walker-i",
-    "predicate": "enchantment_book_module:frost_walker-i"
+    "predicate": "enchantment_book_module:frost_walker-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:frost_walker-ii",
-    "predicate": "enchantment_book_module:frost_walker-ii"
+    "predicate": "enchantment_book_module:frost_walker-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:binding_curse",
-    "predicate": "enchantment_book_module:binding_curse"
+    "predicate": "enchantment_book_module:binding_curse",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:soul_speed-i",
-    "predicate": "enchantment_book_module:soul_speed-i"
+    "predicate": "enchantment_book_module:soul_speed-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:soul_speed-ii",
-    "predicate": "enchantment_book_module:soul_speed-ii"
+    "predicate": "enchantment_book_module:soul_speed-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:soul_speed-iii",
-    "predicate": "enchantment_book_module:soul_speed-iii"
+    "predicate": "enchantment_book_module:soul_speed-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sharpness-i",
-    "predicate": "enchantment_book_module:sharpness-i"
+    "predicate": "enchantment_book_module:sharpness-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sharpness-ii",
-    "predicate": "enchantment_book_module:sharpness-ii"
+    "predicate": "enchantment_book_module:sharpness-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sharpness-iii",
-    "predicate": "enchantment_book_module:sharpness-iii"
+    "predicate": "enchantment_book_module:sharpness-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sharpness-iv",
-    "predicate": "enchantment_book_module:sharpness-iv"
+    "predicate": "enchantment_book_module:sharpness-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sharpness-v",
-    "predicate": "enchantment_book_module:sharpness-v"
+    "predicate": "enchantment_book_module:sharpness-v",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:smite-i",
-    "predicate": "enchantment_book_module:smite-i"
+    "predicate": "enchantment_book_module:smite-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:smite-ii",
-    "predicate": "enchantment_book_module:smite-ii"
+    "predicate": "enchantment_book_module:smite-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:smite-iii",
-    "predicate": "enchantment_book_module:smite-iii"
+    "predicate": "enchantment_book_module:smite-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:smite-iv",
-    "predicate": "enchantment_book_module:smite-iv"
+    "predicate": "enchantment_book_module:smite-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:smite-v",
-    "predicate": "enchantment_book_module:smite-v"
+    "predicate": "enchantment_book_module:smite-v",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:bane_of_arthropods-i",
-    "predicate": "enchantment_book_module:bane_of_arthropods-i"
+    "predicate": "enchantment_book_module:bane_of_arthropods-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:bane_of_arthropods-ii",
-    "predicate": "enchantment_book_module:bane_of_arthropods-ii"
+    "predicate": "enchantment_book_module:bane_of_arthropods-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:bane_of_arthropods-iii",
-    "predicate": "enchantment_book_module:bane_of_arthropods-iii"
+    "predicate": "enchantment_book_module:bane_of_arthropods-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:bane_of_arthropods-iv",
-    "predicate": "enchantment_book_module:bane_of_arthropods-iv"
+    "predicate": "enchantment_book_module:bane_of_arthropods-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:bane_of_arthropods-v",
-    "predicate": "enchantment_book_module:bane_of_arthropods-v"
+    "predicate": "enchantment_book_module:bane_of_arthropods-v",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:knockback-i",
-    "predicate": "enchantment_book_module:knockback-i"
+    "predicate": "enchantment_book_module:knockback-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:knockback-ii",
-    "predicate": "enchantment_book_module:knockback-ii"
+    "predicate": "enchantment_book_module:knockback-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fire_aspect-i",
-    "predicate": "enchantment_book_module:fire_aspect-i"
+    "predicate": "enchantment_book_module:fire_aspect-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fire_aspect-ii",
-    "predicate": "enchantment_book_module:fire_aspect-ii"
+    "predicate": "enchantment_book_module:fire_aspect-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:looting-i",
-    "predicate": "enchantment_book_module:looting-i"
+    "predicate": "enchantment_book_module:looting-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:looting-ii",
-    "predicate": "enchantment_book_module:looting-ii"
+    "predicate": "enchantment_book_module:looting-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:looting-iii",
-    "predicate": "enchantment_book_module:looting-iii"
+    "predicate": "enchantment_book_module:looting-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sweeping-i",
-    "predicate": "enchantment_book_module:sweeping-i"
+    "predicate": "enchantment_book_module:sweeping-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sweeping-ii",
-    "predicate": "enchantment_book_module:sweeping-ii"
+    "predicate": "enchantment_book_module:sweeping-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:sweeping-iii",
-    "predicate": "enchantment_book_module:sweeping-iii"
+    "predicate": "enchantment_book_module:sweeping-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:efficiency-i",
-    "predicate": "enchantment_book_module:efficiency-i"
+    "predicate": "enchantment_book_module:efficiency-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:efficiency-ii",
-    "predicate": "enchantment_book_module:efficiency-ii"
+    "predicate": "enchantment_book_module:efficiency-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:efficiency-iii",
-    "predicate": "enchantment_book_module:efficiency-iii"
+    "predicate": "enchantment_book_module:efficiency-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:efficiency-iv",
-    "predicate": "enchantment_book_module:efficiency-iv"
+    "predicate": "enchantment_book_module:efficiency-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:efficiency-v",
-    "predicate": "enchantment_book_module:efficiency-v"
+    "predicate": "enchantment_book_module:efficiency-v",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:silk_touch",
-    "predicate": "enchantment_book_module:silk_touch"
+    "predicate": "enchantment_book_module:silk_touch",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:unbreaking-i",
-    "predicate": "enchantment_book_module:unbreaking-i"
+    "predicate": "enchantment_book_module:unbreaking-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:unbreaking-ii",
-    "predicate": "enchantment_book_module:unbreaking-ii"
+    "predicate": "enchantment_book_module:unbreaking-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:unbreaking-iii",
-    "predicate": "enchantment_book_module:unbreaking-iii"
+    "predicate": "enchantment_book_module:unbreaking-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fortune-i",
-    "predicate": "enchantment_book_module:fortune-i"
+    "predicate": "enchantment_book_module:fortune-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fortune-ii",
-    "predicate": "enchantment_book_module:fortune-ii"
+    "predicate": "enchantment_book_module:fortune-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:fortune-iii",
-    "predicate": "enchantment_book_module:fortune-iii"
+    "predicate": "enchantment_book_module:fortune-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:power-i",
-    "predicate": "enchantment_book_module:power-i"
+    "predicate": "enchantment_book_module:power-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:power-ii",
-    "predicate": "enchantment_book_module:power-ii"
+    "predicate": "enchantment_book_module:power-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:power-iii",
-    "predicate": "enchantment_book_module:power-iii"
+    "predicate": "enchantment_book_module:power-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:power-iv",
-    "predicate": "enchantment_book_module:power-iv"
+    "predicate": "enchantment_book_module:power-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:power-v",
-    "predicate": "enchantment_book_module:power-v"
+    "predicate": "enchantment_book_module:power-v",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:punch-i",
-    "predicate": "enchantment_book_module:punch-i"
+    "predicate": "enchantment_book_module:punch-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:punch-ii",
-    "predicate": "enchantment_book_module:punch-ii"
+    "predicate": "enchantment_book_module:punch-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:flame",
-    "predicate": "enchantment_book_module:flame"
+    "predicate": "enchantment_book_module:flame",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:infinity",
-    "predicate": "enchantment_book_module:infinity"
+    "predicate": "enchantment_book_module:infinity",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:luck_of_the_sea-i",
-    "predicate": "enchantment_book_module:luck_of_the_sea-i"
+    "predicate": "enchantment_book_module:luck_of_the_sea-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:luck_of_the_sea-ii",
-    "predicate": "enchantment_book_module:luck_of_the_sea-ii"
+    "predicate": "enchantment_book_module:luck_of_the_sea-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:luck_of_the_sea-iii",
-    "predicate": "enchantment_book_module:luck_of_the_sea-iii"
+    "predicate": "enchantment_book_module:luck_of_the_sea-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:lure-i",
-    "predicate": "enchantment_book_module:lure-i"
+    "predicate": "enchantment_book_module:lure-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:lure-ii",
-    "predicate": "enchantment_book_module:lure-ii"
+    "predicate": "enchantment_book_module:lure-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:lure-iii",
-    "predicate": "enchantment_book_module:lure-iii"
+    "predicate": "enchantment_book_module:lure-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:loyalty-i",
-    "predicate": "enchantment_book_module:loyalty-i"
+    "predicate": "enchantment_book_module:loyalty-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:loyalty-ii",
-    "predicate": "enchantment_book_module:loyalty-ii"
+    "predicate": "enchantment_book_module:loyalty-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:loyalty-iii",
-    "predicate": "enchantment_book_module:loyalty-iii"
+    "predicate": "enchantment_book_module:loyalty-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:impaling-i",
-    "predicate": "enchantment_book_module:impaling-i"
+    "predicate": "enchantment_book_module:impaling-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:impaling-ii",
-    "predicate": "enchantment_book_module:impaling-ii"
+    "predicate": "enchantment_book_module:impaling-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:impaling-iii",
-    "predicate": "enchantment_book_module:impaling-iii"
+    "predicate": "enchantment_book_module:impaling-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:impaling-iv",
-    "predicate": "enchantment_book_module:impaling-iv"
+    "predicate": "enchantment_book_module:impaling-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:impaling-v",
-    "predicate": "enchantment_book_module:impaling-v"
+    "predicate": "enchantment_book_module:impaling-v",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:riptide-i",
-    "predicate": "enchantment_book_module:riptide-i"
+    "predicate": "enchantment_book_module:riptide-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:riptide-ii",
-    "predicate": "enchantment_book_module:riptide-ii"
+    "predicate": "enchantment_book_module:riptide-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:riptide-iii",
-    "predicate": "enchantment_book_module:riptide-iii"
+    "predicate": "enchantment_book_module:riptide-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:channeling",
-    "predicate": "enchantment_book_module:channeling"
+    "predicate": "enchantment_book_module:channeling",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:multishot",
-    "predicate": "enchantment_book_module:multishot"
+    "predicate": "enchantment_book_module:multishot",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:quick_charge-i",
-    "predicate": "enchantment_book_module:quick_charge-i"
+    "predicate": "enchantment_book_module:quick_charge-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:quick_charge-ii",
-    "predicate": "enchantment_book_module:quick_charge-ii"
+    "predicate": "enchantment_book_module:quick_charge-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:quick_charge-iii",
-    "predicate": "enchantment_book_module:quick_charge-iii"
+    "predicate": "enchantment_book_module:quick_charge-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:piercing-i",
-    "predicate": "enchantment_book_module:piercing-i"
+    "predicate": "enchantment_book_module:piercing-i",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:piercing-ii",
-    "predicate": "enchantment_book_module:piercing-ii"
+    "predicate": "enchantment_book_module:piercing-ii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:piercing-iii",
-    "predicate": "enchantment_book_module:piercing-iii"
+    "predicate": "enchantment_book_module:piercing-iii",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:piercing-iv",
-    "predicate": "enchantment_book_module:piercing-iv"
+    "predicate": "enchantment_book_module:piercing-iv",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:mending",
-    "predicate": "enchantment_book_module:mending"
+    "predicate": "enchantment_book_module:mending",
+    "item": "minecraft:enchanted_book"
   },
   {
     "identifier": "book:vanishing_curse",
-    "predicate": "enchantment_book_module:vanishing_curse"
+    "predicate": "enchantment_book_module:vanishing_curse",
+    "item": "minecraft:enchanted_book"
   }
 ]

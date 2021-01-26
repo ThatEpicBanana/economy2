@@ -1,0 +1,6 @@
+{
+  "condition": "minecraft:match_tool",
+  "predicate": {
+    "nbt": "{a:1b}"
+  }
+}

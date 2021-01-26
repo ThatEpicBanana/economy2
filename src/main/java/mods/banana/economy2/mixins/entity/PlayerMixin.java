@@ -4,9 +4,10 @@ import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.itemmodules.items.BaseNbtItem;
+import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.chestshop.interfaces.ChestShopItem;
 import mods.banana.economy2.trade.TradeInstance;
-import mods.banana.economy2.chestshop.interfaces.ChestShopPlayerInterface;
+import mods.banana.economy2.chestshop.interfaces.mixin.ChestShopPlayerInterface;
 import mods.banana.economy2.trade.TradePlayerInterface;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -86,7 +87,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         return amount;
     }
 
-    public int countItem(BaseNbtItem item) {
+    public int countItem(ChestShopItem item) {
         int amount = 0;
         for(int i = 0; i < inventory.main.size(); i++) {
             ItemStack currentStack = inventory.main.get(i);
@@ -112,7 +113,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         }
     }
 
-    public List<ItemStack> removeItem(BaseNbtItem item, int count) {
+    public List<ItemStack> removeItem(ChestShopItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < inventory.main.size() && count > 0; i++) {
             ItemStack currentStack = inventory.main.get(i);

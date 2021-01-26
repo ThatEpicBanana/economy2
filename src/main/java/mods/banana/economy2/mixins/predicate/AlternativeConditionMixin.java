@@ -1,8 +1,8 @@
 package mods.banana.economy2.mixins.predicate;
 
 import mods.banana.bananaapi.helpers.TagHelper;
-import mods.banana.economy2.itemmodules.interfaces.AlternativeConditionInterface;
-import mods.banana.economy2.itemmodules.interfaces.ConditionInterface;
+import mods.banana.economy2.itemmodules.interfaces.mixin.AlternativeConditionInterface;
+import mods.banana.economy2.itemmodules.interfaces.mixin.ConditionInterface;
 import net.minecraft.item.Item;
 import net.minecraft.loot.condition.AlternativeLootCondition;
 import net.minecraft.loot.condition.LootCondition;

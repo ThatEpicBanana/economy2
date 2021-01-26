@@ -1,4 +1,4 @@
-package mods.banana.economy2.itemmodules.interfaces;
+package mods.banana.economy2.itemmodules.interfaces.mixin;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.predicate.NumberRange;

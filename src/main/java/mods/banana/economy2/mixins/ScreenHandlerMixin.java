@@ -1,6 +1,6 @@
 package mods.banana.economy2.mixins;
 
-import mods.banana.economy2.chestshop.interfaces.ChestInterface;
+import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.EconomyItems;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,10 +1,10 @@
 package mods.banana.economy2.itemmodules;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import mods.banana.economy2.itemmodules.items.JsonNbtItem;
-import mods.banana.economy2.itemmodules.items.NbtItem;
 import net.minecraft.util.Identifier;
 
 import java.io.*;
@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class ItemModule {
     private final String name;
-    private final Map<Identifier, NbtItem> values;
+    private final Map<Identifier, NbtMatcher> values;
 
-    public ItemModule(String name, Map<Identifier, NbtItem> values) {
+    public ItemModule(String name, Map<Identifier, NbtMatcher> values) {
         this.name = name;
         this.values = values;
     }
@@ -39,15 +39,17 @@ public class ItemModule {
      * @param reader reader to be read from
      */
     public ItemModule(String name, Reader reader) {
+        Gson gson = new GsonBuilder().registerTypeAdapter(Identifier.class, new Identifier.Serializer()).create();
+
         // output values
-        Map<Identifier, NbtItem> values = new HashMap<>();
+        Map<Identifier, NbtMatcher> values = new HashMap<>();
 
         // get the items from the file
-        List<JsonNbtItem> items = new Gson().fromJson(reader, new TypeToken<List<JsonNbtItem>>() {}.getType());
+        List<JsonNbtItem> items = gson.fromJson(reader, new TypeToken<List<JsonNbtItem>>() {}.getType());
 
         // for each item
         for(JsonNbtItem jsonItem : items) {
-            NbtItem item = jsonItem.toNbtItem();
+            NbtMatcher item = jsonItem.toNbtItem();
             values.put(item.getIdentifier(), item);
         }
 
@@ -64,12 +66,12 @@ public class ItemModule {
     public String toString() {
         StringBuilder string = new StringBuilder();
         string.append(name).append(":\n");
-        for(NbtItem item : values.values()) {
+        for(NbtMatcher item : values.values()) {
             string.append(item.toString()).append("\n");
         }
         return string.toString();
     }
 
     public String getName() { return name; }
-    public Map<Identifier, NbtItem> getValues() { return values; }
+    public Map<Identifier, NbtMatcher> getValues() { return values; }
 }

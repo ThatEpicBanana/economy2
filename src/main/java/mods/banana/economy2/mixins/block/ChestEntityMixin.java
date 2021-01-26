@@ -2,9 +2,10 @@ package mods.banana.economy2.mixins.block;
 
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.itemmodules.items.BaseNbtItem;
-import mods.banana.economy2.chestshop.interfaces.ChestInterface;
-import mods.banana.economy2.chestshop.interfaces.SignInterface;
+import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.chestshop.interfaces.ChestShopItem;
+import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
+import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
 import mods.banana.economy2.EconomyItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
@@ -147,7 +148,8 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         }
     }
 
-    public List<ItemStack> removeItem(BaseNbtItem item, int count) {
+    @Override
+    public List<ItemStack> removeItem(ChestShopItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < size() && count > 0; i++) {
             ItemStack currentStack = getStack(i);
@@ -178,6 +180,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         return amount;
     }
 
+    @Override
     public int countItemStack(ItemStack input) {
         int amount = 0;
         for(int i = 0; i < getLimit(); i++) {
@@ -187,7 +190,8 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         return amount;
     }
 
-    public int countItem(BaseNbtItem input) {
+    @Override
+    public int countItem(ChestShopItem input) {
         int amount = 0;
         for(int i = 0; i < getLimit(); i++) {
             ItemStack currentStack = getStack(i);
@@ -207,6 +211,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         return amount;
     }
 
+    @Override
     public int countSpaceForStack(ItemStack input) {
         int amount = 0;
         for(int i = 0; i < getLimit(); i++) {
@@ -216,16 +221,6 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         }
         return amount;
     }
-
-//    public int countSpaceForItem(ChestShopItem input) {
-//        int amount = 0;
-//        for(int i = 0; i < getLimit(); i++) {
-//            ItemStack stack = getStack(i);
-//            if(stack.isEmpty()) amount += input.getItem().getMaxCount(); // if slot is empty, add max count
-//            else if(input.matches(stack)) amount += input.getItem().getMaxCount() - stack.getCount(); // if items are the same, add items left in stack
-//        }
-//        return amount;
-//    }
 
     @Inject(method = "onClose", at = {@At("HEAD")})
     private void close(PlayerEntity player, CallbackInfo ci) {

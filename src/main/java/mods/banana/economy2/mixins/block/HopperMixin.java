@@ -2,10 +2,9 @@ package mods.banana.economy2.mixins.block;
 
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.EconomyItems;
-import mods.banana.economy2.chestshop.interfaces.HopperInterface;
+import mods.banana.economy2.chestshop.interfaces.mixin.HopperInterface;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HopperBlock;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
