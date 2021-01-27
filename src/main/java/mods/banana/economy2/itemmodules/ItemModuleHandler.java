@@ -22,15 +22,23 @@ public class ItemModuleHandler {
     public static ArrayList<ItemModule> registeredModules = new ArrayList<>();
     public static ArrayList<ItemModule> activeModules = new ArrayList<>();
 
+    /**
+     * Registers a module, this handles adding each matcher's children, so you must call this function
+     * @param module module to be added
+     */
     public static void register(ItemModule module) {
         registeredModules.add(module);
 
         // register all of the children
         for(NbtMatcher item : module.getValues().values()) {
-            if(item.hasParent()) getRegisteredItem(item.getParent()).addChild(item);
+            if(item.hasParent()) getRegisteredMatcher(item.getParent()).addChild(item);
         }
     }
 
+    /**
+     * Activates a module of the name, usage not necessary
+     * @param name name of module to be added
+     */
     public static void activate(String name) {
         activeModules.add(getModule(name));
     }
@@ -46,55 +54,47 @@ public class ItemModuleHandler {
     }
 
 
-    public static NbtMatcher getActiveMatcher(Identifier identifier) {
+
+    public static NbtMatcher getActiveMatcher(Identifier identifier) { return getActiveMatcher(identifier, NbtMatcher.Type.BOTH); }
+
+    public static NbtMatcher getActiveMatcher(Identifier identifier, NbtMatcher.Type type) {
         for(ItemModule module : activeModules) {
             if(module.getValues().containsKey(identifier)) {
-                return module.getValues().get(identifier);
+                NbtMatcher matcher = module.getValues().get(identifier);
+                if(matcher.typeMatches(type)) return matcher;
             }
         }
         return null;
     }
 
-    public static NbtItem getActiveItem(Identifier identifier) {
-        NbtMatcher matcher = getActiveMatcher(identifier);
-        return matcher instanceof NbtItem ? (NbtItem) matcher : null;
-    }
+    public static NbtMatcher getRegisteredMatcher(Identifier identifier) { return getRegisteredMatcher(identifier, NbtMatcher.Type.BOTH); }
 
-    public static NbtModifier getActiveModifier(Identifier identifier) {
-        NbtMatcher matcher = getActiveMatcher(identifier);
-        return matcher instanceof NbtModifier ? (NbtModifier) matcher : null;
-    }
-
-    public static NbtMatcher getRegisteredItem(Identifier identifier) {
+    public static NbtMatcher getRegisteredMatcher(Identifier identifier, NbtMatcher.Type type) {
         for(ItemModule module : registeredModules) {
             if(module.getValues().containsKey(identifier)) {
-                return module.getValues().get(identifier);
+                NbtMatcher matcher = module.getValues().get(identifier);
+                if(matcher.typeMatches(type)) return matcher;
             }
         }
         return null;
     }
 
-    public static Identifier getMatchOfUnsureStack(ItemStack itemStack, NbtMatcher.Type type) {
-        Identifier nbtItem = getMatch(itemStack, type);
-        if(nbtItem != null) return nbtItem;
-        else return Registry.ITEM.getId(itemStack.getItem());
-    }
 
 
-    public static Identifier getMatch(ItemStack itemStack, NbtMatcher.Type type) {
-        List<Identifier> matches = getMatches(itemStack, type);
+    public static NbtMatcher getMatch(ItemStack itemStack, NbtMatcher.Type type) {
+        List<NbtMatcher> matches = getMatches(itemStack, type);
         return matches.size() == 0 ? null : matches.get(0);
     }
 
-    public static List<Identifier> getMatches(ItemStack stack, NbtMatcher.Type type) {
-        ArrayList<Identifier> matches = new ArrayList<>();
+    public static List<NbtMatcher> getMatches(ItemStack stack, NbtMatcher.Type type) {
+        ArrayList<NbtMatcher> matches = new ArrayList<>();
 
         // for each nbt item
         for(ItemModule module : activeModules) {
             for(NbtMatcher current : module.getValues().values()) {
                 // if it matches, add it to list
                 if(current.matches(stack, type)) {
-                    matches.add(current.getIdentifier());
+                    matches.add(current);
                 }
             }
         }
@@ -119,42 +119,8 @@ public class ItemModuleHandler {
     }
 
 
-//    // gets eldest ancestor of nbt item
-//    private static NbtItem getParent(NbtItem item) {
-//        NbtItem current = item.copy();
-//        while(current.hasParent()) {
-//            current = getActiveItem(current.getParent()).copy();
-//        }
-//        return current;
-//    }
-
-//    // finds the child with the best fit to the item stack
-//    private static Pair<Identifier, Integer> getBestFit(NbtItem item, ItemStack stack, int specificity) {
-//        // visualizer
-//        System.out.println(StringUtils.repeat("    ", specificity) + item.getIdentifier());
-//
-//        // increment specificity
-//        specificity += 1;
-//
-//        // initialize best fit of children
-//        Pair<Identifier, Integer> bestpair = new Pair<>(item.getIdentifier(), specificity);
-//
-//        // get best fit of children (if it has any)
-//        for(NbtItem child : item.getChildren()) {
-//            if(child.softMatches(stack)) {
-//                // get it's fit
-//                Pair<Identifier, Integer> childFit = getBestFit(child, stack, specificity);
-//                // if it's more than the current best fit, update it
-//                if(childFit.getRight() > bestpair.getRight()) bestpair = childFit;
-//            }
-//        }
-//
-//        // return the best fit
-//        return bestpair;
-//    }
 
     public static void onChange(ConfigItem<Boolean> item) {
-//        System.out.println(item);
         // for each module
         for(ItemModule module : ItemModuleHandler.registeredModules) {
             // check if module changed is this one
@@ -169,6 +135,8 @@ public class ItemModuleHandler {
             }
         }
     }
+
+
 
     /**
      * creates suggestions of all item registry identifiers + all nbt item identifiers

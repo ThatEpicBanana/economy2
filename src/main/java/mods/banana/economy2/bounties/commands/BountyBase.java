@@ -4,33 +4,69 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
+import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
+import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.bounties.Bounty;
 import mods.banana.economy2.bounties.BountyHandler;
 import mods.banana.economy2.bounties.gui.BountyList;
+import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.interfaces.mixin.ConditionInterface;
+import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.command.argument.IdentifierArgumentType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BountyBase {
-    public static int request(ServerPlayerEntity player, List<Identifier> identifiers, int amount, long price) {
-        ArrayList<Identifier> mustMatch = new ArrayList<>();
-        ArrayList<Identifier> cannotMatch = new ArrayList<>();
+    private static final DynamicCommandExceptionType NBT_MATCHER_NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType(matcher -> new LiteralText(matcher + " was not found in database."));
+    private static final Dynamic2CommandExceptionType ITEMS_DO_NOT_MATCH_EXCEPTION = new Dynamic2CommandExceptionType((matcher1, matcher2) -> new LiteralText(matcher1 + " does not match with " + matcher2 + "'s item."));
+    private static final Dynamic2CommandExceptionType MATCHER_DOES_NOT_ACCEPT_EXCEPTION = new Dynamic2CommandExceptionType((matcher1, matcher2) -> new LiteralText(matcher1 +  " can not combine with " + matcher2 +  "."));
 
-        for(int i = 1; i < identifiers.size(); i++) {
-            Identifier identifier = identifiers.get(i);
-            if(identifier.getNamespace().startsWith("-")) cannotMatch.add(identifier);
-            else mustMatch.add(identifier);
+    public static int request(ServerPlayerEntity player, Identifier baseItemId, List<Identifier> identifiers, int amount, long price) throws CommandSyntaxException {
+        // initialize arrays
+        ArrayList<NbtMatcher> mustMatch = new ArrayList<>();
+        ArrayList<NbtMatcher> cannotMatch = new ArrayList<>();
+
+        // get base item
+        BaseItem baseItem = BaseItem.fromIdentifier(baseItemId);
+        if(baseItem == null) throw NBT_MATCHER_NOT_FOUND_EXCEPTION.create(baseItemId);
+
+        // for each identifier
+        for(Identifier identifier : identifiers) {
+            // get matcher
+            NbtMatcher matcher =  ItemModuleHandler.getActiveMatcher(removeNegation(identifier), NbtMatcher.Type.MODIFIER);
+
+            // make sure matcher exists
+            if(matcher == null) throw NBT_MATCHER_NOT_FOUND_EXCEPTION.create(identifier);
+
+            // add matcher to either list
+            if(identifier.getNamespace().startsWith("-")) cannotMatch.add(matcher);
+            else mustMatch.add(matcher);
         }
 
-        BountyHandler.add(new Bounty(player.getUuid(), identifiers.get(0), mustMatch, cannotMatch, amount, price));
+        // TODO: check if cannot matchers conflict with must matchers
+        for(NbtMatcher i : mustMatch) {
+            if(!i.itemMatches(baseItem.getItem())) throw ITEMS_DO_NOT_MATCH_EXCEPTION.create(i, baseItemId);
+            for(NbtMatcher j : mustMatch) {
+                if(!i.accepts(j, baseItem.getItem())) throw MATCHER_DOES_NOT_ACCEPT_EXCEPTION.create(i, j);
+            }
+        }
+
+        // add bounty to bounty handler
+        BountyHandler.add(new Bounty(player.getUuid(), baseItem, mustMatch, cannotMatch, amount, price));
 
         return 1;
     }
@@ -71,6 +107,10 @@ public class BountyBase {
         return baseNode;
     }
 
+    private static Identifier removeNegation(Identifier identifier) {
+        return new Identifier(identifier.getNamespace().replace("-", ""), identifier.getPath());
+    }
+
     private static RequiredArgumentBuilder<ServerCommandSource, Identifier> getIdentifierArguments(List<String> arguments) {
         RequiredArgumentBuilder<ServerCommandSource, Identifier> currentArg = null;
 
@@ -92,12 +132,16 @@ public class BountyBase {
         return CommandManager
                 .argument(arguments.get(arguments.size() - 1), IdentifierArgumentType.identifier())
                 .suggests(first ? new ItemModuleHandler.ItemModuleSuggestionProvider() : new ItemModuleHandler.ItemModuleSuggestionProvider(true, NbtMatcher.Type.BOTH))
-                            .executes(context -> request(
+                            .executes(context -> {
+                                List<Identifier> identifiers = getIdentifiers(context, arguments);
+                                return request(
                                     context.getSource().getPlayer(),
-                                    getIdentifiers(context, arguments),
+                                    identifiers.get(0),
+                                    identifiers.subList(1, identifiers.size()),
                                     IntegerArgumentType.getInteger(context, "amount"),
                                     LongArgumentType.getLong(context, "price")
-                            )
+                                );
+                            }
             );
     }
 

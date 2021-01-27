@@ -1,6 +1,5 @@
 package mods.banana.economy2.itemmodules.items;
 
-import mods.banana.bananaapi.helpers.PredicateHelper;
 import mods.banana.economy2.Economy2;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,22 +11,23 @@ import java.util.List;
 public class NbtModifier extends NbtMatcher {
     private final Identifier tag;
 
-    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent) {
-        super(identifier, predicate, parent);
+    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts) {
+        super(identifier, predicate, parent, accepts);
         this.tag = tag;
     }
 
-    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent, List<NbtMatcher> children) {
-        super(identifier, predicate, parent, children);
+    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts, List<NbtMatcher> children) {
+        super(identifier, predicate, parent, accepts, children);
         this.tag = tag;
     }
 
-    public boolean softMatches(ItemStack stack, Type type) {
-        return (getTag() == null || getTag().contains(stack.getItem())) && super.softMatches(stack, type); // check if tag and predicate works
+    @Override
+    public boolean itemMatches(Item item) {
+        return getTag() == null || getTag().contains(item); // check tag if it's specified
     }
 
     public NbtModifier copy() {
-        return new NbtModifier(getTagId(), getIdentifier(), getPredicateId(), getParent(), getChildren());
+        return new NbtModifier(getTagId(), getIdentifier(), getPredicateId(), getParent(), getAcceptsId(), getChildren());
     }
 
     @Override

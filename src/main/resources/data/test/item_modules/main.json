@@ -14,5 +14,15 @@
     "identifier": "test:modifier",
     "predicate": "test:modifier",
     "item": "#test:modifiertag"
+  },
+  {
+    "identifier": "test:mending",
+    "predicate": "test:test/mending",
+    "accepts": "test:accept/mending"
+  },
+  {
+    "identifier": "test:infinity",
+    "predicate": "test:test/infinity",
+    "accepts": "test:accept/infinity"
   }
 ]

@@ -1,0 +1,6 @@
+{
+  "condition": "minecraft:match_tool",
+  "predicate": {
+    "nbt": "{Enchantments:[{lvl:1s,id:\"minecraft:infinity\"}]}"
+  }
+}

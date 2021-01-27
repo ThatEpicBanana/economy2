@@ -50,6 +50,7 @@ public class CreateEnchantBooks {
                             "book:" + id,
                             "enchantment_book_module:" + id,
                             "minecraft:enchanted_book",
+                            null,
                             null
                     )));
 

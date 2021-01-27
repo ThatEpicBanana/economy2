@@ -23,10 +23,10 @@ public class ItemModules {
 //        getItemModulesFromFile();
     }
 
-    private static void registerConfig(ItemModule module) {
-        ItemModuleHandler.register(module);
-        if(Economy2.CONFIG.getValue("ItemModule." + module.getName(), Boolean.class)) ItemModuleHandler.activeModules.add(module);
-    }
+//    private static void registerConfig(ItemModule module) {
+//        ItemModuleHandler.register(module);
+//        if(Economy2.CONFIG.getValue("ItemModule." + module.getName(), Boolean.class)) ItemModuleHandler.activeModules.add(module);
+//    }
 
     public static void getItemModulesFromFile() {
         try {

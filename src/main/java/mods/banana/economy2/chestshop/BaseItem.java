@@ -4,40 +4,44 @@ import mods.banana.bananaapi.helpers.PredicateHelper;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.interfaces.mixin.ConditionInterface;
 import mods.banana.economy2.itemmodules.items.NbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class ChestShopItem {
+public class BaseItem {
     protected final Item item;
     private final LootCondition tag;
 
-    public ChestShopItem(Item item) {
+    public BaseItem(Item item) {
         this.item = item;
         this.tag = null;
     }
 
-    public ChestShopItem(Item item, LootCondition tag) {
+    public BaseItem(Item item, LootCondition tag) {
         this.item = item;
         this.tag = tag;
     }
 
-    public ChestShopItem(NbtItem item) {
+    public BaseItem(NbtItem item) {
         this(item.getItem(), item.getPredicate());
     }
 
-    public static ChestShopItem fromStack(ItemStack itemStack) {
+    public static BaseItem fromStack(ItemStack itemStack) {
         NbtItem nbtItem = NbtItem.fromStack(itemStack);
-        if(nbtItem != null) return new ChestShopItem(nbtItem);
-        else return new ChestShopItem(itemStack.getItem());
+        if(nbtItem != null) return new BaseItem(nbtItem);
+        else return new BaseItem(itemStack.getItem());
     }
 
-    public static ChestShopItem fromIdentifier(Identifier identifier) {
-        NbtItem nbtItem = ItemModuleHandler.getActiveItem(identifier);
-        if(nbtItem != null) return new ChestShopItem(nbtItem);
-        else return new ChestShopItem(Registry.ITEM.get(identifier));
+    public static BaseItem fromIdentifier(Identifier identifier) {
+        NbtItem nbtItem = (NbtItem) ItemModuleHandler.getActiveMatcher(identifier, NbtMatcher.Type.ITEM);
+        if(nbtItem != null) return new BaseItem(nbtItem);
+        else {
+            Item item = Registry.ITEM.getOrEmpty(identifier).orElse(null);
+            return item != null ? new BaseItem(item) : null;
+        }
     }
 
     public boolean matches(ItemStack itemStack) {

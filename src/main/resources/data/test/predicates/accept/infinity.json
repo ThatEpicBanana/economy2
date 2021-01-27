@@ -1,0 +1,14 @@
+{
+  "condition": "inverted",
+  "term": {
+    "condition": "alternative",
+    "terms": [
+      {
+        "condition": "match_tool",
+        "predicate": {
+          "nbt": "{Enchantments:[{lvl:1s,id:\"minecraft:mending\"}]}"
+        }
+      }
+    ]
+  }
+}

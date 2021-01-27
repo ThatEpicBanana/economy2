@@ -2,7 +2,7 @@ package mods.banana.economy2.mixins.block;
 
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.chestshop.ChestShopItem;
+import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
 import mods.banana.economy2.EconomyItems;
@@ -148,7 +148,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
     }
 
     @Override
-    public List<ItemStack> removeItem(ChestShopItem item, int count) {
+    public List<ItemStack> removeItem(BaseItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < size() && count > 0; i++) {
             ItemStack currentStack = getStack(i);
@@ -190,7 +190,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
     }
 
     @Override
-    public int countItem(ChestShopItem input) {
+    public int countItem(BaseItem input) {
         int amount = 0;
         for(int i = 0; i < getLimit(); i++) {
             ItemStack currentStack = getStack(i);

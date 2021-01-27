@@ -1,7 +1,9 @@
 package mods.banana.economy2.bounties;
 
+import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.nbt.CompoundTag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +11,13 @@ import java.util.UUID;
 
 public class Bounty {
     private final UUID owner;
-    private final Identifier baseItem;
-    private final List<Identifier> mustMatch;
-    private final List<Identifier> cannotMatch;
+    private final BaseItem baseItem;
+    private final List<NbtMatcher> mustMatch;
+    private final List<NbtMatcher> cannotMatch;
     private final int amount;
     private final long price;
 
-    public Bounty(UUID owner, Identifier baseItem, List<Identifier> mustMatch, int amount, long price) {
+    public Bounty(UUID owner, BaseItem baseItem, List<NbtMatcher> mustMatch, int amount, long price) {
         this.owner = owner;
         this.baseItem = baseItem;
         this.mustMatch = mustMatch;
@@ -24,7 +26,7 @@ public class Bounty {
         this.price = price;
     }
 
-    public Bounty(UUID owner, Identifier baseItem, List<Identifier> mustMatch, List<Identifier> cannotMatch, int amount, long price) {
+    public Bounty(UUID owner, BaseItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
         this.owner = owner;
         this.baseItem = baseItem;
         this.mustMatch = mustMatch;
@@ -34,19 +36,13 @@ public class Bounty {
     }
 
     public ItemStack toItemStack() {
-//        // initialize stack
-////        ItemStack stack = ItemModuleHandler.getItem(baseItem).toItemStack();
-//        // set tag
-//        if(!stack.hasTag()) stack.setTag(new CompoundTag());
-//        // for each matching nbt item
-//        for (Identifier itemId : mustMatch) {
-//            // get the item
-//            BaseItem item = ItemModuleHandler.getItem(itemId);
-//            // combine the tags
-//            if (item instanceof NbtMatcher) stack.setTag(TagHelper.combine(((NbtMatcher) item).getTag(), stack.getTag()));
-//        }
-//        // return the new stack
-//        return stack;
-        return null;
+        // initialize stack
+        ItemStack stack = baseItem.toItemStack();
+        // set tag if null
+        if(!stack.hasTag()) stack.setTag(new CompoundTag());
+        // apply each nbt matcher to stack
+        for (NbtMatcher item : mustMatch) item.apply(stack);
+        // return the new stack
+        return stack;
     }
 }
