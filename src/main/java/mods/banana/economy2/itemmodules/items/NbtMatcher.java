@@ -41,7 +41,7 @@ public abstract class NbtMatcher {
     }
 
     public CompoundTag getCompoundTag() {
-        return getPredicateInfo().getStack().getRight();
+        return getPredicateInfo().getTag();
     }
 
     public boolean matches(ItemStack stack, Type type) {

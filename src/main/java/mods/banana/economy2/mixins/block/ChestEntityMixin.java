@@ -2,8 +2,7 @@ package mods.banana.economy2.mixins.block;
 
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.chestshop.BaseItem;
-import mods.banana.economy2.chestshop.interfaces.ChestShopItem;
+import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
 import mods.banana.economy2.EconomyItems;

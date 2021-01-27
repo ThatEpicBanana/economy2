@@ -7,7 +7,6 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.oroarmor.config.ConfigItem;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
-import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.itemmodules.items.NbtModifier;
 import net.minecraft.command.CommandSource;
 import net.minecraft.item.ItemStack;

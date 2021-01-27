@@ -17,7 +17,8 @@ public abstract class MatchToolConditionMixin implements MatchToolConditionInter
 
     public ItemPredicateInterface getPredicate() { return (ItemPredicateInterface) predicate; }
 
-    public Pair<Item, CompoundTag> getStack() {
-        return new Pair<>(getPredicate().getItem(), getPredicate().getNbt().getTag());
+    @Override
+    public CompoundTag getTag() {
+        return getPredicate().getNbt().getTag();
     }
 }

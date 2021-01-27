@@ -1,8 +1,7 @@
 package mods.banana.economy2.chestshop.interfaces.mixin;
 
 import mods.banana.economy2.balance.PlayerInterface;
-import mods.banana.economy2.chestshop.BaseItem;
-import mods.banana.economy2.chestshop.interfaces.ChestShopItem;
+import mods.banana.economy2.chestshop.ChestShopItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;

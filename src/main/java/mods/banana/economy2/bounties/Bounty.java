@@ -1,11 +1,6 @@
 package mods.banana.economy2.bounties;
 
-import mods.banana.bananaapi.helpers.TagHelper;
-import mods.banana.economy2.itemmodules.items.NbtMatcher;
-import mods.banana.economy2.chestshop.BaseItem;
-import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;

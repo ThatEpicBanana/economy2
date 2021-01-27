@@ -5,5 +5,5 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Pair;
 
 public interface ConditionInterface {
-    Pair<Item, CompoundTag> getStack();
+    CompoundTag getTag();
 }

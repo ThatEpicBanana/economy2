@@ -2,10 +2,8 @@ package mods.banana.economy2.mixins.block;
 
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.OfflinePlayer;
-import mods.banana.economy2.chestshop.interfaces.ChestShopItem;
+import mods.banana.economy2.chestshop.ChestShopItem;
 import mods.banana.economy2.itemmodules.items.NbtItem;
-import mods.banana.economy2.itemmodules.items.NbtMatcher;
-import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.chestshop.interfaces.mixin.HopperInterface;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
@@ -91,9 +89,9 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         } else return -1; // not a chest shop sign
     }
 
-    public ChestShopItem getItem() {
+    public mods.banana.economy2.chestshop.ChestShopItem getItem() {
         if(isChestShop()) {
-            return BaseItem.fromIdentifier(new Identifier(text[3].getString()));
+            return mods.banana.economy2.chestshop.ChestShopItem.fromIdentifier(new Identifier(text[3].getString()));
         } else return null;
     }
 
@@ -128,7 +126,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         if(isChestShop()) {
             long buy = getBuy();
             int amount = getAmount();
-            ChestShopItem item = getItem();
+            mods.banana.economy2.chestshop.ChestShopItem item = getItem();
             ChestShopPlayerInterface buyer = (ChestShopPlayerInterface) player;
             if(!isAdmin()) {
                 PlayerInterface owner = OfflinePlayer.getPlayer(parent);
@@ -166,7 +164,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         if(isChestShop()) {
             long sell = getSell();
             int amount = getAmount();
-            ChestShopItem item = getItem();
+            mods.banana.economy2.chestshop.ChestShopItem item = getItem();
             ChestShopPlayerInterface seller = (ChestShopPlayerInterface) player;
             if(!isAdmin()) {
                 ChestInterface chest = getChest();

@@ -1,7 +1,6 @@
 package mods.banana.economy2.chestshop.interfaces.mixin;
 
-import mods.banana.economy2.chestshop.BaseItem;
-import mods.banana.economy2.chestshop.interfaces.ChestShopItem;
+import mods.banana.economy2.chestshop.ChestShopItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
