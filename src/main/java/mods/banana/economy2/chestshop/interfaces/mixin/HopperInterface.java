@@ -1,6 +1,6 @@
 package mods.banana.economy2.chestshop.interfaces.mixin;
 
-import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.itemmodules.items.NbtItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
@@ -18,6 +18,6 @@ public interface HopperInterface {
     UUID getParent();
     void setParent(UUID parent);
 
-    int countItem(BaseItem input);
-    List<ItemStack> removeItem(BaseItem item, int count);
+    int countItem(NbtItem input);
+    List<ItemStack> removeItem(NbtItem item, int count);
 }

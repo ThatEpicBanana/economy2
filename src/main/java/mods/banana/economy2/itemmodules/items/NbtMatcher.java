@@ -4,10 +4,13 @@ import mods.banana.bananaapi.helpers.PredicateHelper;
 import mods.banana.bananaapi.helpers.TagHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.itemmodules.interfaces.mixin.ConditionInterface;
+import mods.banana.economy2.itemmodules.interfaces.mixin.MatchToolConditionInterface;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
@@ -57,10 +60,12 @@ public abstract class NbtMatcher {
     public boolean softMatches(ItemStack stack, Type type) {
         return typeMatches(type) && // check if type matches
                 itemMatches(stack.getItem()) && // check if item matches
-                PredicateHelper.test(getPredicate(), stack); // check if predicate matches
+                (getPredicateId() == null || PredicateHelper.test(getPredicate(), stack)); // check if predicate matches
+//        new MatchToolLootCondition(ItemPredicate.ANY);
     }
 
     public abstract boolean itemMatches(Item item);
+    public abstract Item getItem();
 
     public boolean typeMatches(Type type) {
         return type == Type.BOTH || type == getType();
@@ -77,13 +82,19 @@ public abstract class NbtMatcher {
     }
 
     public boolean accepts(ItemStack stack) {
-        return PredicateHelper.test(getAccepts(), stack);
+        return accepts == null || PredicateHelper.test(getAccepts(), stack);
     }
 
     public boolean accepts(NbtMatcher matcher, Item baseItem) {
         ItemStack stack = new ItemStack(baseItem);
         stack.setTag(matcher.getCompoundTag());
         return accepts(stack);
+    }
+
+    public ItemStack toItemStack() {
+        ItemStack stack = new ItemStack(getItem());
+        if(getPredicateId() != null) stack.setTag(getPredicateInfo().getTag());
+        return stack;
     }
 
     public String toString() {

@@ -11,6 +11,11 @@ import java.util.List;
 public class NbtItem extends NbtMatcher {
     private final Item item;
 
+    public NbtItem(Item item) {
+        super(null, null, null, null);
+        this.item = item;
+    }
+
     public NbtItem(Item item, Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts) {
         super(identifier, predicate, parent, accepts);
         this.item = item;

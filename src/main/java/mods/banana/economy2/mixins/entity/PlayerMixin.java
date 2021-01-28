@@ -4,7 +4,8 @@ import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.itemmodules.items.NbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import mods.banana.economy2.trade.TradeInstance;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestShopPlayerInterface;
 import mods.banana.economy2.trade.TradePlayerInterface;
@@ -86,11 +87,11 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         return amount;
     }
 
-    public int countItem(BaseItem item) {
+    public int countItem(NbtItem item) {
         int amount = 0;
         for(int i = 0; i < inventory.main.size(); i++) {
             ItemStack currentStack = inventory.main.get(i);
-            if(item.matches(currentStack)) amount += currentStack.getCount();
+            if(item.matches(currentStack, NbtMatcher.Type.ITEM)) amount += currentStack.getCount();
         }
         return amount;
     }
@@ -112,12 +113,12 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         }
     }
 
-    public List<ItemStack> removeItem(BaseItem item, int count) {
+    public List<ItemStack> removeItem(NbtItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < inventory.main.size() && count > 0; i++) {
             ItemStack currentStack = inventory.main.get(i);
             // if the items are the same
-            if(item.matches(currentStack)) {
+            if(item.matches(currentStack, NbtMatcher.Type.ITEM)) {
                 // the amount to remove is either the entirety of the slot or the rest of the input amount
                 int amount = Math.min(currentStack.getCount(), count);
 

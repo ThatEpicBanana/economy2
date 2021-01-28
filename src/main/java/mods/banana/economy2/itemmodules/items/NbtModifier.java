@@ -3,6 +3,7 @@ package mods.banana.economy2.itemmodules.items;
 import mods.banana.economy2.Economy2;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 
@@ -24,6 +25,12 @@ public class NbtModifier extends NbtMatcher {
     @Override
     public boolean itemMatches(Item item) {
         return getTag() == null || getTag().contains(item); // check tag if it's specified
+    }
+
+    @Override
+    public Item getItem() {
+        // TODO: add a custom item and also options in json
+        return Items.STICK;
     }
 
     public NbtModifier copy() {

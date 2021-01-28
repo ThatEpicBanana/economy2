@@ -4,10 +4,11 @@ import mods.banana.bananaapi.helpers.BlockPosHelper;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.OfflinePlayer;
-import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.HopperInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
+import mods.banana.economy2.itemmodules.items.NbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.*;
 import net.minecraft.inventory.Inventory;
@@ -47,21 +48,21 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
     public UUID getParent() { return parent; }
     public void setParent(UUID parent) { this.parent = parent; }
 
-    public int countItem(BaseItem input) {
+    public int countItem(NbtItem input) {
         int amount = 0;
         for(int i = 0; i < size(); i++) {
             ItemStack currentStack = getStack(i);
-            if(!currentStack.isEmpty() && input.matches(currentStack)) amount += currentStack.getCount();
+            if(!currentStack.isEmpty() && input.matches(currentStack, NbtMatcher.Type.ITEM)) amount += currentStack.getCount();
         }
         return amount;
     }
 
-    public List<ItemStack> removeItem(BaseItem item, int count) {
+    public List<ItemStack> removeItem(NbtItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < size() && count > 0; i++) {
             ItemStack currentStack = getStack(i);
             // if the items are the same
-            if(item.matches(currentStack)) {
+            if(item.matches(currentStack, NbtMatcher.Type.ITEM)) {
                 // the amount to remove is either the entirety of the slot or the rest of the input amount
                 int amount = Math.min(currentStack.getCount(), count);
 
@@ -90,7 +91,7 @@ public abstract class HopperEntityMixin extends LootableContainerBlockEntity imp
                 // get chest shop
                 SignInterface chestShop = hopperInterface.getChestShop();
                 // make sure item transferred is not the item the hopper is selling
-                if(chestShop.getItem().matches(stack)) cir.setReturnValue(stack);
+                if(chestShop.getItem().matches(stack, NbtMatcher.Type.ITEM)) cir.setReturnValue(stack);
             }
         }
     }

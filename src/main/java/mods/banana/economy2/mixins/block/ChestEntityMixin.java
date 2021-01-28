@@ -2,10 +2,11 @@ package mods.banana.economy2.mixins.block;
 
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
 import mods.banana.economy2.EconomyItems;
+import mods.banana.economy2.itemmodules.items.NbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -148,12 +149,12 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
     }
 
     @Override
-    public List<ItemStack> removeItem(BaseItem item, int count) {
+    public List<ItemStack> removeItem(NbtItem item, int count) {
         ArrayList<ItemStack> itemsRemoved = new ArrayList<>();
         for(int i = 0; i < size() && count > 0; i++) {
             ItemStack currentStack = getStack(i);
             // if the items are the same
-            if(item.matches(currentStack)) {
+            if(item.matches(currentStack, NbtMatcher.Type.ITEM)) {
                 // the amount to remove is either the entirety of the slot or the rest of the input amount
                 int amount = Math.min(currentStack.getCount(), count);
 
@@ -190,11 +191,11 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
     }
 
     @Override
-    public int countItem(BaseItem input) {
+    public int countItem(NbtItem input) {
         int amount = 0;
         for(int i = 0; i < getLimit(); i++) {
             ItemStack currentStack = getStack(i);
-            if(!currentStack.isEmpty() && input.matches(currentStack)) amount += currentStack.getCount();
+            if(!currentStack.isEmpty() && input.matches(currentStack, NbtMatcher.Type.ITEM)) amount += currentStack.getCount();
         }
         return amount;
     }

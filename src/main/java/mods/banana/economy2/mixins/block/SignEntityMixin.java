@@ -3,12 +3,14 @@ package mods.banana.economy2.mixins.block;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.OfflinePlayer;
-import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.chestshop.interfaces.mixin.HopperInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestShopPlayerInterface;
 import mods.banana.economy2.balance.PlayerInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
+import mods.banana.economy2.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.items.NbtItem;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -24,6 +26,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -87,9 +90,12 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         } else return -1; // not a chest shop sign
     }
 
-    public BaseItem getItem() {
+    public NbtItem getItem() {
         if(isChestShop()) {
-            return BaseItem.fromIdentifier(new Identifier(text[3].getString()));
+//            return BaseItem.fromIdentifier(new Identifier(text[3].getString()));
+            NbtItem item = (NbtItem) ItemModuleHandler.getActiveMatcher(new Identifier(text[3].getString()), NbtMatcher.Type.ITEM);
+            if(item == null) return new NbtItem(Registry.ITEM.get(new Identifier(text[3].getString())));
+            else return item;
         } else return null;
     }
 
@@ -118,7 +124,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         if(isChestShop()) {
             long buy = getBuy();
             int amount = getAmount();
-            BaseItem item = getItem();
+            NbtItem item = getItem();
             ChestShopPlayerInterface buyer = (ChestShopPlayerInterface) player;
             if(!isAdmin()) {
                 PlayerInterface owner = OfflinePlayer.getPlayer(parent);
@@ -156,7 +162,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
         if(isChestShop()) {
             long sell = getSell();
             int amount = getAmount();
-            BaseItem item = getItem();
+            NbtItem item = getItem();
             ChestShopPlayerInterface seller = (ChestShopPlayerInterface) player;
             if(!isAdmin()) {
                 ChestInterface chest = getChest();
@@ -197,7 +203,7 @@ public class SignEntityMixin extends BlockEntity implements SignInterface {
     public void onSell(HopperInterface hopper, PlayerInterface player) {
         long sell = getSell();
         int amount = getAmount();
-        BaseItem item = getItem();
+        NbtItem item = getItem();
         if(isChestShop() && sell >= -1 && hopper.countItem(item) >= amount) {
             if(!isAdmin()) {
                 ChestInterface chest = getChest();

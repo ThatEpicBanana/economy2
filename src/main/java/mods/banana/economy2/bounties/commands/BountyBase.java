@@ -7,28 +7,23 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.bounties.Bounty;
 import mods.banana.economy2.bounties.BountyHandler;
 import mods.banana.economy2.bounties.gui.BountyList;
-import mods.banana.economy2.chestshop.BaseItem;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
-import mods.banana.economy2.itemmodules.interfaces.mixin.ConditionInterface;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.command.argument.IdentifierArgumentType;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BountyBase {
     private static final DynamicCommandExceptionType NBT_MATCHER_NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType(matcher -> new LiteralText(matcher + " was not found in database."));
@@ -40,9 +35,12 @@ public class BountyBase {
         ArrayList<NbtMatcher> mustMatch = new ArrayList<>();
         ArrayList<NbtMatcher> cannotMatch = new ArrayList<>();
 
-        // get base item
-        BaseItem baseItem = BaseItem.fromIdentifier(baseItemId);
-        if(baseItem == null) throw NBT_MATCHER_NOT_FOUND_EXCEPTION.create(baseItemId);
+        // get base item from item modules
+        NbtItem baseItem = (NbtItem) ItemModuleHandler.getActiveMatcher(baseItemId, NbtMatcher.Type.ITEM);
+        // if item modules do not contain the item check normal minecraft items
+        if(baseItem == null) baseItem = new NbtItem(Registry.ITEM.getOrEmpty(baseItemId).orElse(null));
+        // if it's still not found, throw
+        if(baseItem.getItem() == null) throw NBT_MATCHER_NOT_FOUND_EXCEPTION.create(baseItemId);
 
         // for each identifier
         for(Identifier identifier : identifiers) {

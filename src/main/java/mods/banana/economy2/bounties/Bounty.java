@@ -1,6 +1,6 @@
 package mods.banana.economy2.bounties;
 
-import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -11,13 +11,13 @@ import java.util.UUID;
 
 public class Bounty {
     private final UUID owner;
-    private final BaseItem baseItem;
+    private final NbtItem baseItem;
     private final List<NbtMatcher> mustMatch;
     private final List<NbtMatcher> cannotMatch;
     private final int amount;
     private final long price;
 
-    public Bounty(UUID owner, BaseItem baseItem, List<NbtMatcher> mustMatch, int amount, long price) {
+    public Bounty(UUID owner, NbtItem baseItem, List<NbtMatcher> mustMatch, int amount, long price) {
         this.owner = owner;
         this.baseItem = baseItem;
         this.mustMatch = mustMatch;
@@ -26,7 +26,7 @@ public class Bounty {
         this.price = price;
     }
 
-    public Bounty(UUID owner, BaseItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
+    public Bounty(UUID owner, NbtItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
         this.owner = owner;
         this.baseItem = baseItem;
         this.mustMatch = mustMatch;

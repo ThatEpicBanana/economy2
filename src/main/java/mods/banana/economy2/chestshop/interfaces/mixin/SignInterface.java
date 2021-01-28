@@ -1,7 +1,7 @@
 package mods.banana.economy2.chestshop.interfaces.mixin;
 
 import mods.banana.economy2.balance.PlayerInterface;
-import mods.banana.economy2.chestshop.BaseItem;
+import mods.banana.economy2.itemmodules.items.NbtItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -12,7 +12,7 @@ public interface SignInterface extends ChestShopPart {
     long getSell();
     int getAmount();
 
-    BaseItem getItem();
+    NbtItem getItem();
     ItemStack getItemStack();
     ItemStack getItemStack(int count);
 
