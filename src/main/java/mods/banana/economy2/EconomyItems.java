@@ -1,33 +1,64 @@
 package mods.banana.economy2;
 
 import mods.banana.bananaapi.serverItems.ServerItem;
-import mods.banana.bananaapi.serverItems.SimpleItem;
+import mods.banana.bananaapi.serverItems.ServerItemHandler;
 import mods.banana.economy2.banknote.items.BanknoteItem;
 import mods.banana.economy2.chestshop.items.AutoSellItem;
+import mods.banana.economy2.items.GuiItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class EconomyItems {
     public static BanknoteItem BANKNOTE = new BanknoteItem(new Identifier("economy", "banknote"));
 
-    public static ServerItem LIMIT = new SimpleItem(Items.NETHER_STAR, new Identifier("economy", "limit")).withCustomModelData(1).withName(new LiteralText("Limit")).setDropPrevention(true).setStealPrevention(true);
-    public static ServerItem LIMITED = new SimpleItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("economy", "limited")).withCustomModelData(1).withName(new LiteralText("")).setDropPrevention(true).setStealPrevention(true);
+    public static ServerItem LIMIT = new GuiItem(Items.NETHER_STAR, new Identifier("economy", "limit"), new LiteralText("Limit"));
+    public static ServerItem LIMITED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("economy", "limited"), new LiteralText(""));
 
     public static AutoSellItem AUTOSELL = new AutoSellItem(new Identifier("economy", "autosell"));
 
-    public static ServerItem EMPTY = new SimpleItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("economy", "empty")).withCustomModelData(1).withName(new LiteralText("")).setDropPrevention(true).setStealPrevention(true);
-    public static ServerItem NEXT = new SimpleItem(Items.ARROW, new Identifier("economy", "next")).withCustomModelData(1).withName(new LiteralText("Next")).setDropPrevention(true).setStealPrevention(true);
-    public static ServerItem PREVIOUS = new SimpleItem(Items.ARROW, new Identifier("economy", "previous")).withCustomModelData(1).withName(new LiteralText("Previous")).setDropPrevention(true).setStealPrevention(true);
-    public static ServerItem EXIT = new SimpleItem(Items.ARROW, new Identifier("economy", "exit")).withCustomModelData(1).withName(new LiteralText("Exit")).setDropPrevention(true).setStealPrevention(true);
+    public static ServerItem EMPTY = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("gui", "empty"), new LiteralText(""));
+    public static ServerItem NEXT = new GuiItem(Items.ARROW, new Identifier("gui", "next"), new LiteralText("Next"));
+    public static ServerItem PREVIOUS = new GuiItem(Items.ARROW, new Identifier("gui", "previous"), new LiteralText("Previous"));
+    public static ServerItem RETURN = new GuiItem(Items.ARROW, new Identifier("gui", "exit"), new LiteralText("Return"));
+    
+    public static ServerItem VIEW_ALL = new GuiItem(Items.GOLD_BLOCK, new Identifier("bounty", "view_all"), new LiteralText("View all"));
+    public static ServerItem VIEW_SELF = new GuiItem(Items.GOLDEN_CARROT, new Identifier("bounty", "view_self"), new LiteralText("View your bounties"));
+
+    public static ServerItem MOD_SELECTED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "selected"), 2, true, new LiteralText(""));
+    public static ServerItem MOD_UNSELECTED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "unselected"), 3, true, new LiteralText(""));
+    public static ServerItem MOD_EMPTY_TOP = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptyt"), 4, true, new LiteralText(""));
+    public static ServerItem MOD_EMPTY_MID = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptym"), 5, true, new LiteralText(""));
+    public static ServerItem MOD_EMPTY_BOT = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptyb"), 6, true, new LiteralText(""));
+
+    public static ServerItem PROTECTED_ITEM = new GuiItem(null, new Identifier("gui", "protected"), 0, true, null);
+
 
     static {
-        ServerItem.items.add(BANKNOTE);
-        ServerItem.items.add(LIMIT);
-        ServerItem.items.add(LIMITED);
-        ServerItem.items.add(EMPTY);
-        ServerItem.items.add(NEXT);
-        ServerItem.items.add(PREVIOUS);
-        ServerItem.items.add(EXIT);
+        ServerItemHandler.register(BANKNOTE);
+
+        ServerItemHandler.register(LIMIT);
+        ServerItemHandler.register(LIMITED);
+
+        ServerItemHandler.register(AUTOSELL);
+
+        ServerItemHandler.register(EMPTY);
+        ServerItemHandler.register(NEXT);
+        ServerItemHandler.register(PREVIOUS);
+        ServerItemHandler.register(RETURN);
+
+        ServerItemHandler.register(VIEW_ALL);
+        ServerItemHandler.register(VIEW_SELF);
+
+        ServerItemHandler.register(MOD_SELECTED);
+        ServerItemHandler.register(MOD_UNSELECTED);
+
+        ServerItemHandler.register(MOD_EMPTY_TOP);
+        ServerItemHandler.register(MOD_EMPTY_MID);
+        ServerItemHandler.register(MOD_EMPTY_BOT);
+
+        ServerItemHandler.register(PROTECTED_ITEM);
     }
 }

@@ -1,17 +1,16 @@
 package mods.banana.economy2.itemmodules.items;
 
+import com.google.gson.*;
 import mods.banana.bananaapi.helpers.PredicateHelper;
 import mods.banana.bananaapi.helpers.TagHelper;
 import mods.banana.economy2.Economy2;
-import mods.banana.economy2.itemmodules.interfaces.mixin.ConditionInterface;
-import mods.banana.economy2.itemmodules.interfaces.mixin.MatchToolConditionInterface;
+import mods.banana.economy2.itemmodules.interfaces.ConditionInterface;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +65,7 @@ public abstract class NbtMatcher {
 
     public abstract boolean itemMatches(Item item);
     public abstract Item getItem();
+    public abstract Identifier getItemId();
 
     public boolean typeMatches(Type type) {
         return type == Type.BOTH || type == getType();
@@ -99,6 +99,55 @@ public abstract class NbtMatcher {
 
     public String toString() {
         return identifier.toString() + (parent != null ? " - parent: " + parent.toString() : "");
+    }
+
+    public static class Serializer implements JsonSerializer<NbtMatcher>, JsonDeserializer<NbtMatcher> {
+        public static Gson GSON = new GsonBuilder().registerTypeAdapter(NbtMatcher.class, new NbtMatcher.Serializer()).create();
+
+        @Override
+        public NbtMatcher deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            JsonObject object = json.getAsJsonObject();
+
+            if(!(object.has("identifier") && object.has("predicate"))) throw new JsonParseException("Nbt matcher is not complete");
+
+            if(object.has("item") && !object.get("item").getAsString().startsWith("#")) {
+                // item
+                return new NbtItem(
+                        Registry.ITEM.get(identifier(object, "item")),
+                        identifier(object, "identifier"),
+                        identifier(object, "predicate"),
+                        object.has("parent") ? identifier(object, "parent") : null,
+                        object.has("accepts") ? identifier(object, "accepts") : null
+                );
+            } else {
+                // modifier
+                return new NbtModifier(
+                        object.has("item") ? identifier(object, "item") : null, // just in case it has a tag
+                        identifier(object, "identifier"),
+                        identifier(object, "predicate"),
+                        object.has("parent") ? identifier(object, "parent") : null,
+                        object.has("accepts") ? identifier(object, "accepts") : null
+                );
+            }
+        }
+
+        private Identifier identifier(JsonObject object, String string) { return new Identifier(object.get(string).getAsString().replace("#", "")); }
+
+        @Override
+        public JsonElement serialize(NbtMatcher src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
+            JsonObject object = new JsonObject();
+
+            object.addProperty("identifier", src.getIdentifier().toString());
+            object.addProperty("predicate", src.getPredicateId().toString());
+
+            if(src.getItemId() != null) object.addProperty("item", src.getItemId().toString());
+
+            if(src.hasParent()) object.addProperty("parent", src.getParent().toString());
+            if(src.getAcceptsId() != null) object.addProperty("accepts", src.getAcceptsId().toString());
+            //TODO: add custom items uwu
+
+            return object;
+        }
     }
 
     // so many gets

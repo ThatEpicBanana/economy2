@@ -44,7 +44,7 @@ public class BountyListScreen extends GenericContainerScreenHandler {
         // setup bottom row
         for(int i = 0; i < 9; i++) {
             if(i == 0 && page != 0) setStackInSlot(5 * 9 + i, EconomyItems.PREVIOUS.getItemStack());
-            else if(i == 4) setStackInSlot(5 * 9 + i, EconomyItems.EXIT.getItemStack());
+            else if(i == 4) setStackInSlot(5 * 9 + i, EconomyItems.RETURN.getItemStack());
             else if(i == 8 && bounties.size() > (page + 1) * (7 * 3)) setStackInSlot(5 * 9 + i, EconomyItems.NEXT.getItemStack());
             else setStackInSlot(5 * 9 + i, EconomyItems.EMPTY.getItemStack());
         }

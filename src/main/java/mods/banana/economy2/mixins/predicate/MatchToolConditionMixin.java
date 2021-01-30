@@ -1,12 +1,10 @@
 package mods.banana.economy2.mixins.predicate;
 
-import mods.banana.economy2.itemmodules.interfaces.mixin.ItemPredicateInterface;
-import mods.banana.economy2.itemmodules.interfaces.mixin.MatchToolConditionInterface;
-import net.minecraft.item.Item;
+import mods.banana.economy2.itemmodules.interfaces.ItemPredicateInterface;
+import mods.banana.economy2.itemmodules.interfaces.MatchToolConditionInterface;
 import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.util.Pair;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

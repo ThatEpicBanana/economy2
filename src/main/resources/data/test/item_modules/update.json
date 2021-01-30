@@ -1,0 +1,41 @@
+{
+  "name": "Test",
+  "display": {
+    "name": "Test predicates",
+    "item": {
+      "item": "minecraft:stick",
+      "tag": "{display:{Name:'{\"text\":\"Test\"}'}}"
+    }
+  },
+  "values": [
+    {
+      "identifier": "test:item_a",
+      "predicate": "test:item_a",
+      "item": "minecraft:dirt"
+    },
+    {
+      "identifier": "test:item_b",
+      "predicate": "test:item_b",
+      "item": "minecraft:dirt",
+      "parent": "test:item_a"
+    },
+    {
+      "identifier": "test:modifier",
+      "predicate": "test:modifier",
+      "item": "#test:modifiertag"
+    },
+    {
+      "identifier": "test:mending",
+      "predicate": "test:test/mending",
+      "accepts": "test:accept/mending"
+    },
+    {
+      "identifier": "test:infinity",
+      "predicate": "test:test/infinity",
+      "accepts": "test:accept/infinity",
+      "display": {
+        "item": "minecraft:bow"
+      }
+    }
+  ]
+}

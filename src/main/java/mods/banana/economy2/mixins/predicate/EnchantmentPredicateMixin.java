@@ -1,6 +1,6 @@
 package mods.banana.economy2.mixins.predicate;
 
-import mods.banana.economy2.itemmodules.interfaces.mixin.EnchantmentPredicateInterface;
+import mods.banana.economy2.itemmodules.interfaces.EnchantmentPredicateInterface;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.item.EnchantmentPredicate;

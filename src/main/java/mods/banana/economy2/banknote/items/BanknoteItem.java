@@ -1,6 +1,6 @@
 package mods.banana.economy2.banknote.items;
 
-import mods.banana.bananaapi.serverItems.SimpleItem;
+import mods.banana.bananaapi.serverItems.ServerItem;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.balance.PlayerInterface;
 import mods.banana.economy2.trade.TradePlayerInterface;
@@ -15,11 +15,9 @@ import net.minecraft.util.Identifier;
 
 import java.util.UUID;
 
-public class BanknoteItem extends SimpleItem {
+public class BanknoteItem extends ServerItem {
     public BanknoteItem(Identifier identifier) {
-        super(Items.PAPER, identifier);
-        withCustomModelData(1);
-        withName(new LiteralText("Banknote").formatted(Formatting.GREEN));
+        super(Items.PAPER, identifier, new LiteralText("Banknote").formatted(Formatting.GREEN));
     }
 
     @Override

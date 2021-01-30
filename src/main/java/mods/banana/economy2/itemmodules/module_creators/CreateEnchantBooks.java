@@ -71,7 +71,7 @@ public class CreateEnchantBooks {
                 }
             }
 
-            Files.write(Paths.get("enchantment_book_module/item_modules/enchantment_books.json"), gson.toJson(array).getBytes());
+            Files.write(Paths.get("enchantment_book_module/item_modules/enchantment_books.json.disabled"), gson.toJson(array).getBytes());
 
 //            Economy2.server.getTagManager().getItems().getTag()
 

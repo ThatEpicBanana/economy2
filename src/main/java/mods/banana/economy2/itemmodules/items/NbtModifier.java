@@ -43,4 +43,7 @@ public class NbtModifier extends NbtMatcher {
     }
     public Tag<Item> getTag() { return Economy2.server.getTagManager().getItems().getTag(getTagId()); }
     public Identifier getTagId() { return tag; }
+
+    @Override
+    public Identifier getItemId() { return tag; }
 }

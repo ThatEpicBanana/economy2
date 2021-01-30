@@ -22,6 +22,11 @@ public class ItemModuleHandler {
     public static ArrayList<ItemModule> registeredModules = new ArrayList<>();
     public static ArrayList<ItemModule> activeModules = new ArrayList<>();
 
+    public static void reset() {
+        registeredModules = new ArrayList<>();
+        activeModules = new ArrayList<>();
+    }
+
     /**
      * Registers a module, this handles adding each matcher's children, so you must call this function
      * @param module module to be added

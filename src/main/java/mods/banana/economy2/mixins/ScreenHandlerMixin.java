@@ -31,8 +31,8 @@ public abstract class ScreenHandlerMixin {
     @Inject(method = "onSlotClick", at = {@At("HEAD")})
     private void checkLimitedItem(int i, int j, SlotActionType actionType, PlayerEntity playerEntity, CallbackInfoReturnable<ItemStack> cir) {
         if(i < 0) return;
-        if(EconomyItems.LIMIT.sameIdentifierAs(playerEntity.inventory.getCursorStack())) {
-            if(EconomyItems.LIMITED.sameIdentifierAs(getSlot(i).getStack())) setStackInSlot(i, ItemStack.EMPTY);
+        if(EconomyItems.LIMIT.matches(playerEntity.inventory.getCursorStack())) {
+            if(EconomyItems.LIMITED.matches(getSlot(i).getStack())) setStackInSlot(i, ItemStack.EMPTY);
         }
     }
 
@@ -42,7 +42,7 @@ public abstract class ScreenHandlerMixin {
         if(i < 0) return;
 
         // check if slot dropped is a limit item
-        if(EconomyItems.LIMIT.sameIdentifierAs(getSlot(i).getStack())) {
+        if(EconomyItems.LIMIT.matches(getSlot(i).getStack())) {
             // check if screen handler is a container
             if (playerEntity.currentScreenHandler instanceof GenericContainerScreenHandler) {
                 // get inventory from screen handler
@@ -57,7 +57,7 @@ public abstract class ScreenHandlerMixin {
                         chestshop.setLimit(i);
 
                         // remove limited item if player picked it up
-                        if(EconomyItems.LIMITED.sameIdentifierAs(playerEntity.inventory.getCursorStack())) playerEntity.inventory.setCursorStack(ItemStack.EMPTY);
+                        if(EconomyItems.LIMITED.matches(playerEntity.inventory.getCursorStack())) playerEntity.inventory.setCursorStack(ItemStack.EMPTY);
                         if(playerEntity instanceof ServerPlayerEntity) ((ServerPlayerEntity) playerEntity).updateCursorStack();
 
                         // update player's screen

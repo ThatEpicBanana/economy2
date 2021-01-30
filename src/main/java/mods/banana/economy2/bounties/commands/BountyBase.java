@@ -29,6 +29,7 @@ public class BountyBase {
     private static final DynamicCommandExceptionType NBT_MATCHER_NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType(matcher -> new LiteralText(matcher + " was not found in database."));
     private static final Dynamic2CommandExceptionType ITEMS_DO_NOT_MATCH_EXCEPTION = new Dynamic2CommandExceptionType((matcher1, matcher2) -> new LiteralText(matcher1 + " does not match with " + matcher2 + "'s item."));
     private static final Dynamic2CommandExceptionType MATCHER_DOES_NOT_ACCEPT_EXCEPTION = new Dynamic2CommandExceptionType((matcher1, matcher2) -> new LiteralText(matcher1 +  " can not combine with " + matcher2 +  "."));
+    private static final Dynamic2CommandExceptionType MATCHERS_CONFLICT_EXCEPTION = new Dynamic2CommandExceptionType((matcher1, matcher2) -> new LiteralText(matcher1 +  " conflicts with " + matcher2 +  "."));
 
     public static int request(ServerPlayerEntity player, Identifier baseItemId, List<Identifier> identifiers, int amount, long price) throws CommandSyntaxException {
         // initialize arrays
@@ -55,11 +56,16 @@ public class BountyBase {
             else mustMatch.add(matcher);
         }
 
-        // TODO: check if cannot matchers conflict with must matchers
         for(NbtMatcher i : mustMatch) {
+            // check item
             if(!i.itemMatches(baseItem.getItem())) throw ITEMS_DO_NOT_MATCH_EXCEPTION.create(i, baseItemId);
+            // check against each other must match
             for(NbtMatcher j : mustMatch) {
                 if(!i.accepts(j, baseItem.getItem())) throw MATCHER_DOES_NOT_ACCEPT_EXCEPTION.create(i, j);
+            }
+            // check cannot matchers
+            for(NbtMatcher j : cannotMatch) {
+                if(j.accepts(i, baseItem.getItem())) throw MATCHERS_CONFLICT_EXCEPTION.create(j, i);
             }
         }
 

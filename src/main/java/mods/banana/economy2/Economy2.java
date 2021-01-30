@@ -1,5 +1,7 @@
 package mods.banana.economy2;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.oroarmor.config.Config;
@@ -15,10 +17,9 @@ import mods.banana.economy2.chestshop.commands.AboutItem;
 import mods.banana.economy2.chestshop.commands.HelpCommand;
 import mods.banana.economy2.itemmodules.ItemModule;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
-import mods.banana.economy2.itemmodules.ItemModules;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
-import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
+import mods.banana.economy2.itemmodules.commands.ListModules;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -61,13 +62,14 @@ public class Economy2 implements ModInitializer {
         previousSaveDirectory = CONFIG.getValue("file.saveDirectory", String.class);
 
         ServerLifecycleEvents.SERVER_STARTING.register(server1 -> server = server1);
+//        ServerLifecycleEvents.SERVER_STARTING.register(server1 -> ItemModuleHandler.reset());
 
         loadBalJson();
         registerCommands();
         TradeHandler.onInit();
 //        CreateEnchants.onInit();
 //        CreateEnchantBooks.onInit();
-        ItemModules.onInit();
+//        ItemModules.onInit();
 
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
@@ -78,12 +80,21 @@ public class Economy2 implements ModInitializer {
             @Override
             public void apply(ResourceManager manager) {
                 System.out.println("loading resources");
+                // get the item modules
                 for(Identifier id : manager.findResources("item_modules", path -> path.endsWith(".json"))) {
+                    // for each item module in datapack
                     try(InputStream stream = manager.getResource(id).getInputStream()) {
-                        if(!ItemModuleHandler.contains(id.toString())) {
-                            ItemModuleHandler.register(new ItemModule(id.toString(), new InputStreamReader(stream)));
-                            ItemModuleHandler.activate(id.toString());
+                        // get reader from stream
+                        InputStreamReader reader = new InputStreamReader(stream);
+                        // get module
+                        ItemModule module = ItemModule.Serializer.GSON.fromJson(reader, ItemModule.class);
+                        // if module isn't already registered, register and activate it
+                        if(!ItemModuleHandler.contains(module.getName())) {
+                            ItemModuleHandler.register(module);
+                            ItemModuleHandler.activate(module.getName());
                         }
+                        // close reader
+                        reader.close();
                     } catch(Exception e) {
                         LOGGER.error("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! Error occurred while loading funni resource json " + id.toString() + " (this was in the wiki and I just couldn't remove it)", e);
                     }
@@ -135,6 +146,7 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(AboutItem.build()); //aboutitem
             dispatcher.getRoot().addChild(BountyBase.build()); //bounty [request|list]
             dispatcher.getRoot().addChild(HelpCommand.build()); //chestshop help
+            dispatcher.getRoot().addChild(ListModules.build());
         });
 
         // setup config command

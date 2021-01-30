@@ -5,6 +5,7 @@ import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.List;
 
@@ -51,5 +52,10 @@ public class NbtItem extends NbtMatcher {
 
     public Item getItem() {
         return item;
+    }
+
+    @Override
+    public Identifier getItemId() {
+        return Registry.ITEM.getId(item);
     }
 }

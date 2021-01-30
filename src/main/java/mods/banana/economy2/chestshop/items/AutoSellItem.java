@@ -1,6 +1,6 @@
 package mods.banana.economy2.chestshop.items;
 
-import mods.banana.bananaapi.serverItems.SimpleItem;
+import mods.banana.bananaapi.serverItems.ServerItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import java.util.UUID;
 
-public class AutoSellItem extends SimpleItem {
+public class AutoSellItem extends ServerItem {
     public AutoSellItem(Identifier identifier) {
         super(Items.HOPPER, identifier);
     }
