@@ -1,11 +1,14 @@
 package mods.banana.economy2.mixins.network;
 
+import mods.banana.economy2.gui.GuiPlayer;
+import mods.banana.economy2.gui.SignGui;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -32,7 +35,16 @@ public class PlayHandlerMixin {
 
     @Inject(method = { "method_31282" }, at = { @At("HEAD") })
     private void createSign(UpdateSignC2SPacket updateSignC2SPacket, List<String> list, CallbackInfo callbackInfo) {
-        if(validateSignBase(list, player)) {
+        SignGui sign = ((GuiPlayer)player).getCustomSign();
+
+        if(sign != null) {
+            // if it's a sign gui, get first non-empty string and set the return value to it
+            for(String string : list) {
+                if(!string.equals("")) sign.setReturnValue(string);
+            }
+            // close sign
+            ((GuiPlayer)player).closeSignGui();
+        } else if(validateSignBase(list, player)) {
             if(list.get(0).equals("Admin") && player.hasPermissionLevel(3)) {
                 ((SignInterface) player.world.getBlockEntity(updateSignC2SPacket.getPos())).create(player, null);
             } else {

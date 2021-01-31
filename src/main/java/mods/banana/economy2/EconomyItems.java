@@ -5,10 +5,8 @@ import mods.banana.bananaapi.serverItems.ServerItemHandler;
 import mods.banana.economy2.banknote.items.BanknoteItem;
 import mods.banana.economy2.chestshop.items.AutoSellItem;
 import mods.banana.economy2.items.GuiItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class EconomyItems {
@@ -23,6 +21,7 @@ public class EconomyItems {
     public static ServerItem NEXT = new GuiItem(Items.ARROW, new Identifier("gui", "next"), new LiteralText("Next"));
     public static ServerItem PREVIOUS = new GuiItem(Items.ARROW, new Identifier("gui", "previous"), new LiteralText("Previous"));
     public static ServerItem RETURN = new GuiItem(Items.ARROW, new Identifier("gui", "exit"), new LiteralText("Return"));
+    public static ServerItem SEARCH = new GuiItem(Items.OAK_SIGN, new Identifier("gui", "search"), new LiteralText("Search"));
     
     public static ServerItem VIEW_ALL = new GuiItem(Items.GOLD_BLOCK, new Identifier("bounty", "view_all"), new LiteralText("View all"));
     public static ServerItem VIEW_SELF = new GuiItem(Items.GOLDEN_CARROT, new Identifier("bounty", "view_self"), new LiteralText("View your bounties"));
@@ -35,6 +34,7 @@ public class EconomyItems {
 
     public static ServerItem PROTECTED_ITEM = new GuiItem(null, new Identifier("gui", "protected"), 0, true, null);
 
+    public static ServerItem MATCHER_ITEM = new GuiItem(null, new Identifier("module", "matcher"), null);
 
     static {
         ServerItemHandler.register(BANKNOTE);
@@ -48,6 +48,7 @@ public class EconomyItems {
         ServerItemHandler.register(NEXT);
         ServerItemHandler.register(PREVIOUS);
         ServerItemHandler.register(RETURN);
+        ServerItemHandler.register(SEARCH);
 
         ServerItemHandler.register(VIEW_ALL);
         ServerItemHandler.register(VIEW_SELF);
@@ -60,5 +61,7 @@ public class EconomyItems {
         ServerItemHandler.register(MOD_EMPTY_BOT);
 
         ServerItemHandler.register(PROTECTED_ITEM);
+
+        ServerItemHandler.register(MATCHER_ITEM);
     }
 }

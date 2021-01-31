@@ -1,14 +1,15 @@
 package mods.banana.economy2.itemmodules.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import mods.banana.economy2.itemmodules.gui.ModulesScreenFactory;
+import mods.banana.economy2.gui.GuiPlayer;
+import mods.banana.economy2.itemmodules.gui.ModulesScreen;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class ListModules {
     public static int run(ServerPlayerEntity player) {
-        player.openHandledScreen(new ModulesScreenFactory());
+        ((GuiPlayer)player).openScreen(new ModulesScreen());
         return 1;
     }
 
