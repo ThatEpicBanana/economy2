@@ -10,7 +10,9 @@ import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import mods.banana.economy2.trade.TradeInstance;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestShopPlayerInterface;
 import mods.banana.economy2.trade.TradePlayerInterface;
+import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SignBlock;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -59,7 +61,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     private final List<CustomGui> screenStack = new ArrayList<>();
     private SignGui customSign = null;
     private int openSignState = 0;
-
+    // used to prevent infinite loops of closing screens
     private boolean closingGuiScreen = false;
 
     // trade variables
@@ -90,7 +92,11 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     public boolean getAccepted() { return accepted; }
     public void setAccepted(boolean accepted) { this.accepted = accepted; }
 
-    // gui stuff
+
+    /**
+     * Opens a gui screen and adds it to stack.
+     * @param screen screen to be added
+     */
     public void openScreen(GuiScreen screen) {
         openHandledScreen(screen.toFactory());
         // successfully opened screen
@@ -100,49 +106,42 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         }
     }
 
+    /**
+     * <p>Opens a custom sign gui.</p>
+     * To close the gui, you must use the {@link #closeSignGui() closeSignGui} method.
+     */
     public void openSignGui() {
         // so what happens when a player opens a sign is that the sign's position goes over to the client
         // what has to happen is for the client to be sent fake block data before it gets that sign
-        BlockPos pos = getBlockPos();
-        customSign = new SignGui(pos);
-        networkHandler.sendPacket(new BlockUpdateS2CPacket(pos, Blocks.OAK_SIGN.getDefaultState()), (future) -> {
-            // equivalent to openEditSignScreen
-            customSign.setEditor(this);
-            this.networkHandler.sendPacket(new SignEditorOpenS2CPacket(customSign.getPos()), (future1 -> {
-                // last part updates the block back to what it should be
-                networkHandler.sendPacket(new BlockUpdateS2CPacket(customSign.getPos(), world.getBlockState(getBlockPos())));
-                // and adds the sign to the stack
-                screenStack.add(0, customSign);
-            }));
-        });
+
+        // create sign at the bottom of the world at the player's position
+        customSign = new SignGui(new BlockPos(getBlockPos().getX(), 0, getBlockPos().getZ()));
+        // send fake sign to client
+        networkHandler.sendPacket(new BlockUpdateS2CPacket(customSign.getPos(), Blocks.OAK_SIGN.getDefaultState()));
+        // increment sign state
         this.openSignState = 1;
     }
 
-//    private void openSignGui2() {
-//        // opening a sign has to be split into 3 parts for if the client processes the packets in the wrong order
-//        openEditSignScreen(customSign);
-//        this.openSignState = 2;
-//    }
-//
-//    private void openSignGui3() {
-//        // last part updates the block back to what it should be
-//        networkHandler.sendPacket(new BlockUpdateS2CPacket(customSign.getPos(), world.getBlockState(getBlockPos())));
-//        // and adds the sign to the stack
-//        screenStack.add(0, customSign);
-//        this.openSignState = 0;
-//    }
+    private void openSignGui2() {
+        // opening a sign has to be split into 2 parts to make sure the client's block has updated
+        openEditSignScreen(customSign);
+        // add sign to stack
+        screenStack.add(0, customSign);
+    }
 
     public void closeSignGui() {
-        customSign = null;
+        networkHandler.sendPacket(new BlockUpdateS2CPacket(customSign.getPos(), world.getBlockState(getBlockPos())));
         this.closeScreen();
     }
 
     public SignGui getCustomSign() { return customSign; }
+    public CustomGui getGui(int i) { return screenStack.get(i); }
 
-    public CustomGui getGui(int i) {
-        return screenStack.get(i);
-    }
-
+    /**s
+     * utility function to only get gui screens
+     * @param i index of screen
+     * @return screen in stack
+     */
     public GuiScreen getScreen(int i) {
         CustomGui gui = screenStack.get(i);
         return gui instanceof GuiScreen ? (GuiScreen) gui : null;
@@ -150,24 +149,34 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
 
     public void closeScreen() { closeScreen(true); }
 
+    /**
+     * closes a screen handler and sends it's return value to the next screen in the stack if it exits
+     * @param closeScreenHandler whether to close the screen handler itself
+     */
     public void closeScreen(boolean closeScreenHandler) {
+        // declare that we are closing the gui screen
         closingGuiScreen = true;
 
+        // get the return value of the gui
         GuiReturnValue<?> returnValue = getGui(0).getReturnValue();
 
         screenStack.remove(0);
 
+        // if there are more in stack
         if(screenStack.size() > 0) {
+            // open the next screen in the stack
             openScreen((GuiScreen) screenStack.get(0));
 
             // remove duplicate screen
             screenStack.remove(1);
 
+            // send return value to screen
             if(currentScreenHandler instanceof GuiScreen) {
                 ((GuiScreen) currentScreenHandler).withReturnValue(returnValue);
                 ((GuiScreen) currentScreenHandler).updateState();
             }
         } else {
+            // else close the screen and send a system message of the return value
             if(returnValue != null) sendSystemMessage(new LiteralText(String.valueOf(returnValue.getValue())), UUID.randomUUID());
             closeHandledScreen();
             clearScreenStack();
@@ -181,6 +190,9 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     public boolean isClosingGuiScreen() { return closingGuiScreen; }
     public void clearScreenStack() { screenStack.clear(); }
     public int getScreenStackSize() { return screenStack.size(); }
+
+
+
 
     public void resetTrade() {
         currentTrade = null;
@@ -270,7 +282,6 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     // reset player
     public void reset(String player) {
         bal = (long) Economy2.CONFIG.getValue("player.startingBalance", Integer.class);
-//        playerName = player;
         save();
     }
 
@@ -289,8 +300,8 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         if(world.isClient) return;
 
         if(customSign == null) openSignState = 0;
-//        else if(openSignState == 1) openSignGui2();
-//        else if(openSignState == 2) openSignGui3();
+        if(openSignState == 2) openSignGui2();
+        if(openSignState != 0) openSignState++;
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
@@ -298,14 +309,11 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         if(!Economy2.BalanceJson.has(getUuidAsString())) {
             reset(profile.getName());
             LOGGER.info("Added player " + profile.getName() + " to balance file");
-//            System.out.println("Added player " + profile.getName() + " to balance file");
         } else {
             JsonObject player = Economy2.BalanceJson.get(getUuidAsString()).getAsJsonObject();
 
             bal = player.get("bal").getAsLong();
         }
-
-//        openScreen(new ModulesScreen());
     }
 
     @Inject(method = "onDisconnect", at = @At("HEAD"))

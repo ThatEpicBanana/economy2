@@ -30,7 +30,6 @@ import java.util.List;
 public class ModulesScreen extends ListGui {
     private int tab = 0;
     private List<NbtMatcher> values;
-    private ItemModule currentModule;
     private final List<ItemModule> itemModules;
 
     private Identifier returnValue = null;
@@ -163,8 +162,7 @@ public class ModulesScreen extends ListGui {
     }
 
     public void updateModule() {
-        currentModule = itemModules.get(tab);
-        values = new ArrayList<>(currentModule.getValues().values());
+        values = new ArrayList<>(itemModules.get(tab).getValues().values());
 
         // if there is a search, go through each matcher and see if it's identifier matches the search
         if(getSearch() != null) {

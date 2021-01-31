@@ -15,6 +15,7 @@ import mods.banana.economy2.admin.commands.AdminBase;
 import mods.banana.economy2.bounties.commands.BountyBase;
 import mods.banana.economy2.chestshop.commands.AboutItem;
 import mods.banana.economy2.chestshop.commands.HelpCommand;
+import mods.banana.economy2.dev.commands.DevBase;
 import mods.banana.economy2.itemmodules.ItemModule;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
@@ -147,6 +148,7 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(BountyBase.build()); //bounty [request|list]
             dispatcher.getRoot().addChild(HelpCommand.build()); //chestshop help
             dispatcher.getRoot().addChild(ListModules.build());
+            dispatcher.getRoot().addChild(DevBase.build());
         });
 
         // setup config command
