@@ -43,7 +43,7 @@ public class BlockItemMixin {
             // check if item used is a sign that's part of a chest shop, and if it allows for selling
             if(block instanceof SignBlockEntity && ((SignInterface)block).isChestShop() && ((SignInterface)block).getSell() != -1) {
                 // convert item
-                EconomyItems.AUTOSELL.load(stack, context.getBlockPos(), player.getUuid());
+                EconomyItems.ChestShop.AUTOSELL.load(stack, context.getBlockPos(), player.getUuid());
 
                 // add lore ex: Autosell: 0, 0, 0
                 stack.getTag().put("display", TextHelper.getLore(new LiteralText("Autosell: " + BlockPosHelper.toString(pos)).formatted(Formatting.GOLD)));

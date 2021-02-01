@@ -41,12 +41,19 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
     @Override
     public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
         // make sure the player actually has the correct info
-        if(i > 0) {
-            if(actionType == SlotActionType.QUICK_MOVE && playerEntity instanceof ServerPlayerEntity) {
-                ServerPlayerEntity player = (ServerPlayerEntity) playerEntity;
-                for(int slot = 0; slot < slots.size(); slot++) {
-                    player.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(syncId, slot, getSlot(slot).getStack()));
+        if(i >= 0) {
+            if(playerEntity instanceof ServerPlayerEntity) {
+                if(actionType == SlotActionType.QUICK_MOVE) {
+                    ServerPlayerEntity player = (ServerPlayerEntity) playerEntity;
+                    for(int slot = 0; slot < slots.size(); slot++) {
+                        player.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(syncId, slot, getSlot(slot).getStack()));
+                    }
                 }
+
+                ItemStack stack = getSlot(i).getStack();
+
+                if(EconomyItems.Gui.EXIT.matches(stack)) ((GuiPlayer)playerEntity).exitScreen();
+                if(EconomyItems.Gui.RETURN.matches(stack)) ((GuiPlayer)playerEntity).closeScreen();
             }
 
             updateState();

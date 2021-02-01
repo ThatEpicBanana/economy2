@@ -54,8 +54,8 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
         this.sign = null;
 
         for(int i = 0; i < size(); i++) {
-            if(EconomyItems.LIMITED.matches(getStack(i))) setStack(i, ItemStack.EMPTY);
-            if(EconomyItems.LIMIT.matches(getStack(i))) setStack(i, ItemStack.EMPTY);
+            if(EconomyItems.ChestShop.LIMITED.matches(getStack(i))) setStack(i, ItemStack.EMPTY);
+            if(EconomyItems.ChestShop.LIMIT.matches(getStack(i))) setStack(i, ItemStack.EMPTY);
         }
     }
 
@@ -71,16 +71,16 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
 
         //remove all limited items
         for(int i = 0; i < size(); i++) {
-            if(EconomyItems.LIMITED.matches(getStack(i))) setStack(i, ItemStack.EMPTY);
+            if(EconomyItems.ChestShop.LIMITED.matches(getStack(i))) setStack(i, ItemStack.EMPTY);
         }
 
         //if index slot isn't already the limit item, set it to it.
-        setStack(index, EconomyItems.LIMIT.getItemStack());
+        setStack(index, EconomyItems.ChestShop.LIMIT.getItemStack());
 
         //add all of the limited item
         for(int i = inventory.size() - 1; i > index; i--) {
-            if(getStack(i) != ItemStack.EMPTY && !EconomyItems.LIMITED.matches(getStack(i))) insertStack(getStack(i));
-            setStack(i, EconomyItems.LIMITED.getItemStack());
+            if(getStack(i) != ItemStack.EMPTY && !EconomyItems.ChestShop.LIMITED.matches(getStack(i))) insertStack(getStack(i));
+            setStack(i, EconomyItems.ChestShop.LIMITED.getItemStack());
         }
 
         markDirty();
@@ -89,7 +89,7 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
     public Integer getLimit() {
 //        Inventory inventory = (Inventory) this;
         for(int i = 0; i < size(); i++) {
-            if(EconomyItems.LIMIT.matches(getStack(i))) return i;
+            if(EconomyItems.ChestShop.LIMIT.matches(getStack(i))) return i;
         }
         setLimit(size() - 1);
         return getLimit();
@@ -226,8 +226,8 @@ public abstract class ChestEntityMixin extends LootableContainerBlockEntity impl
     private void close(PlayerEntity player, CallbackInfo ci) {
         // remove all limit and limited items from player
         for(int i = 0; i < 41; i++) {
-            if(EconomyItems.LIMIT.matches(player.inventory.getStack(i))) player.inventory.removeStack(i);
-            if(EconomyItems.LIMITED.matches(player.inventory.getStack(i))) player.inventory.removeStack(i);
+            if(EconomyItems.ChestShop.LIMIT.matches(player.inventory.getStack(i))) player.inventory.removeStack(i);
+            if(EconomyItems.ChestShop.LIMITED.matches(player.inventory.getStack(i))) player.inventory.removeStack(i);
         }
 
         // if the inventory doesn't have a limiter, reset it

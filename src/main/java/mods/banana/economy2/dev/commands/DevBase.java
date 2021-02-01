@@ -9,9 +9,11 @@ public class DevBase {
     public static LiteralCommandNode<ServerCommandSource> build() {
         LiteralCommandNode<ServerCommandSource> base = CommandManager
                 .literal("dev")
+                .requires(source -> source.hasPermissionLevel(4))
                 .build();
 
         base.addChild(OpenSign.build());
+        base.addChild(GiveItem.build());
 
         return base;
     }

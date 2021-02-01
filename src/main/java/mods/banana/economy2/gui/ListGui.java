@@ -1,7 +1,6 @@
 package mods.banana.economy2.gui;
 
 import mods.banana.economy2.EconomyItems;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -35,11 +34,11 @@ public abstract class ListGui extends GuiScreen {
 
     @Override
     public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
-        if(i > 0) {
+        if(i >= 0) {
             ItemStack stack = getSlot(i).getStack();
-            if(hasMoreItems() && EconomyItems.NEXT.matches(stack)) page++;
-            if(page != 0 && EconomyItems.PREVIOUS.matches(stack)) page--;
-            if(EconomyItems.SEARCH.matches(stack) && playerEntity instanceof ServerPlayerEntity)
+            if(hasMoreItems() && EconomyItems.Gui.NEXT.matches(stack)) page++;
+            if(page != 0 && EconomyItems.Gui.PREVIOUS.matches(stack)) page--;
+            if(EconomyItems.Gui.SEARCH.matches(stack) && playerEntity instanceof ServerPlayerEntity)
                 ((GuiPlayer)playerEntity).openSignGui(); // open sign for search
         }
 

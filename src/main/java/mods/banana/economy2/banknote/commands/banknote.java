@@ -19,11 +19,11 @@ import net.minecraft.util.Formatting;
 public class banknote {
     public static int run(ServerPlayerEntity target, long amount) {
         if(((PlayerInterface)target).getBal() >= amount) {
-            ItemStack itemStack = EconomyItems.BANKNOTE.getItemStack();
+            ItemStack itemStack = EconomyItems.Banknote.BANKNOTE.getItemStack();
             CompoundTag tag = itemStack.getTag();
 
             // add amount to tag
-            tag.getCompound(EconomyItems.BANKNOTE.getIdentifier().getNamespace()).putLong("amount", amount);
+            tag.getCompound(EconomyItems.Banknote.BANKNOTE.getIdentifier().getNamespace()).putLong("amount", amount);
 
             // add lore
             ListTag loreTag = tag.getCompound("display").getList("Lore", 9);

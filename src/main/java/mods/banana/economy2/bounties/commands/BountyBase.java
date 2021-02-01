@@ -8,6 +8,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import mods.banana.economy2.Economy2;
 import mods.banana.economy2.bounties.Bounty;
 import mods.banana.economy2.bounties.BountyHandler;
 import mods.banana.economy2.bounties.gui.BountyList;
@@ -70,7 +71,7 @@ public class BountyBase {
         }
 
         // add bounty to bounty handler
-        BountyHandler.add(new Bounty(player.getUuid(), baseItem, mustMatch, cannotMatch, amount, price));
+        Economy2.bountyHandler.add(new Bounty(player.getUuid(), baseItem, mustMatch, cannotMatch, amount, price));
 
         return 1;
     }

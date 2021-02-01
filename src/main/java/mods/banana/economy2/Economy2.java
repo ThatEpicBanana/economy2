@@ -1,9 +1,6 @@
 package mods.banana.economy2;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.oroarmor.config.Config;
 import com.oroarmor.config.ConfigItem;
 import com.oroarmor.config.command.ConfigCommand;
@@ -12,7 +9,9 @@ import mods.banana.economy2.balance.commands.baltop;
 import mods.banana.economy2.balance.commands.exchange;
 import mods.banana.economy2.banknote.commands.banknote;
 import mods.banana.economy2.admin.commands.AdminBase;
+import mods.banana.economy2.bounties.BountyHandler;
 import mods.banana.economy2.bounties.commands.BountyBase;
+import mods.banana.economy2.bounties.commands.BountyBaseV2;
 import mods.banana.economy2.chestshop.commands.AboutItem;
 import mods.banana.economy2.chestshop.commands.HelpCommand;
 import mods.banana.economy2.dev.commands.DevBase;
@@ -26,6 +25,8 @@ import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.ResourceManager;
@@ -47,6 +48,8 @@ public class Economy2 implements ModInitializer {
     public static final Config CONFIG = new EconomyConfig();
     public static final Logger LOGGER = LogManager.getLogger();
 
+    public static BountyHandler bountyHandler;
+
     public static String previousSaveDirectory;
 
     public static MinecraftServer server = null;
@@ -63,10 +66,13 @@ public class Economy2 implements ModInitializer {
         previousSaveDirectory = CONFIG.getValue("file.saveDirectory", String.class);
 
         ServerLifecycleEvents.SERVER_STARTING.register(server1 -> server = server1);
+        // load bounties after server start for data packs to be loaded
+        ServerLifecycleEvents.SERVER_STARTED.register(server1 -> loadBounties());
 //        ServerLifecycleEvents.SERVER_STARTING.register(server1 -> ItemModuleHandler.reset());
 
         loadBalJson();
         registerCommands();
+//        loadBounties();
         TradeHandler.onInit();
 //        CreateEnchants.onInit();
 //        CreateEnchantBooks.onInit();
@@ -146,6 +152,7 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(AdminBase.build()); //admin [clean|removeALl|balance|player]
             dispatcher.getRoot().addChild(AboutItem.build()); //aboutitem
             dispatcher.getRoot().addChild(BountyBase.build()); //bounty [request|list]
+            dispatcher.getRoot().addChild(BountyBaseV2.build());
             dispatcher.getRoot().addChild(HelpCommand.build()); //chestshop help
             dispatcher.getRoot().addChild(ListModules.build());
             dispatcher.getRoot().addChild(DevBase.build());
@@ -153,6 +160,20 @@ public class Economy2 implements ModInitializer {
 
         // setup config command
         CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> new ConfigCommand(CONFIG).register(dispatcher, dedicated)));
+    }
+
+    public static void loadBounties() {
+        Path path = Paths.get(CONFIG.getValue("file.saveDirectory", String.class) + "/bounties.json");
+
+        try{
+            if(!Files.exists(path)) Files.createFile(path);
+
+            BufferedReader reader = Files.newBufferedReader(path);
+            if(path.toFile().length() < 1 || reader.read() != '[') Files.write(path, "[]".getBytes());
+            reader.close();
+
+            bountyHandler = BountyHandler.Serializer.GSON.fromJson(Files.newBufferedReader(path), BountyHandler.class);
+        } catch(IOException | JsonSyntaxException e) { e.printStackTrace(); }
     }
 
     public static String addCurrencySign(long amount) {

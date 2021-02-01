@@ -13,7 +13,7 @@ public class NbtItem extends NbtMatcher {
     private final Item item;
 
     public NbtItem(Item item) {
-        super(null, null, null, null);
+        super(Registry.ITEM.getId(item), null, null, null);
         this.item = item;
     }
 

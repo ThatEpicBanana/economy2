@@ -20,12 +20,12 @@ public class HopperMixin {
     @Inject(method = "onPlaced", at = @At("TAIL"))
     private void onPlace(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack, CallbackInfo ci) {
         if(world.isClient) return;
-        if(Economy2.CONFIG.getValue("chestShop.autosellHoppers", Boolean.class) && EconomyItems.AUTOSELL.matches(itemStack) && placer instanceof ServerPlayerEntity) {
+        if(Economy2.CONFIG.getValue("chestShop.autosellHoppers", Boolean.class) && EconomyItems.ChestShop.AUTOSELL.matches(itemStack) && placer instanceof ServerPlayerEntity) {
             // auto sell hopper
             HopperInterface hopper = (HopperInterface) world.getBlockEntity(pos);
 
             hopper.setAutoSell(true);
-            hopper.setChestShop(EconomyItems.AUTOSELL.getShop(itemStack));
+            hopper.setChestShop(EconomyItems.ChestShop.AUTOSELL.getShop(itemStack));
             hopper.setParent(placer.getUuid());
 
         }

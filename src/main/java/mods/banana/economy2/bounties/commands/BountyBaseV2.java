@@ -11,7 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class BountyBaseV2 {
     public static int run(ServerPlayerEntity player) {
 //        player.openHandledScreen(new BPage1());
-        ((GuiPlayer)player).openScreen(new ModulesScreen());
+        ((GuiPlayer)player).openScreen(new BPage1());
         return 1;
     }
 

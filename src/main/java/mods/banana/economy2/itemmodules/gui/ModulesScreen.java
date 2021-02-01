@@ -11,20 +11,15 @@ import mods.banana.economy2.items.GuiItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.StringTag;
-import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
-import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.SlotActionType;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class ModulesScreen extends ListGui {
@@ -63,13 +58,13 @@ public class ModulesScreen extends ListGui {
         // set column background
         for(int tab = 0; tab < getRows() * 9; tab += 9) {
             setStackInSlot(tab, ItemStack.EMPTY);
-            if(tab == 0) setStackInSlot(tab + 1, EconomyItems.MOD_EMPTY_TOP.getItemStack());
-            else if(tab == 9 * (getRows() - 1)) setStackInSlot(tab + 1, EconomyItems.MOD_EMPTY_BOT.getItemStack());
-            else setStackInSlot(tab + 1, EconomyItems.MOD_EMPTY_MID.getItemStack());
+            if(tab == 0) setStackInSlot(tab + 1, EconomyItems.ModulesScreen.EMPTY_TOP.getItemStack());
+            else if(tab == 9 * (getRows() - 1)) setStackInSlot(tab + 1, EconomyItems.ModulesScreen.EMPTY_BOT.getItemStack());
+            else setStackInSlot(tab + 1, EconomyItems.ModulesScreen.EMPTY_MID.getItemStack());
         }
 
         // set the selected tab to the selected tab item
-        setStackInSlot(9 * startingRow + 1, EconomyItems.MOD_SELECTED.getItemStack());
+        setStackInSlot(9 * startingRow + 1, EconomyItems.ModulesScreen.SELECTED.getItemStack());
 
         // for each tab, set it's tab item and stack
         for(int tab = -Math.min(this.tab, startingRow); tab < Math.min(itemModules.size() - this.tab, 6 - startingRow); tab++) {
@@ -78,7 +73,7 @@ public class ModulesScreen extends ListGui {
             // get module
             ItemModule module = itemModules.get(tab + this.tab);
             // if tab isn't the currently selected tab, set the tab to unselected
-            if(tab != 0) setStackInSlot(row + 1, EconomyItems.MOD_UNSELECTED.getItemStack());
+            if(tab != 0) setStackInSlot(row + 1, EconomyItems.ModulesScreen.UNSELECTED.getItemStack());
             // set the stack
             setStackInSlot(row, EconomyItems.PROTECTED_ITEM.convert(module.getItemStack()));
         }
@@ -97,8 +92,10 @@ public class ModulesScreen extends ListGui {
                         List.of(new LiteralText(item.getIdentifier().toString())) // set lore to identifier
                 );
 
-                EconomyItems.MATCHER_ITEM.convert(stack);
-                EconomyItems.MATCHER_ITEM.setCustomValue(stack, "id", StringTag.of(item.getIdentifier().toString()));
+                if(item.typeMatches(NbtMatcher.Type.MODIFIER)) EconomyItems.ModulesScreen.MODIFIER.convert(stack);
+                else EconomyItems.ModulesScreen.MATCHER.convert(stack);
+
+                EconomyItems.ModulesScreen.MATCHER.setCustomValue(stack, "id", StringTag.of(item.getIdentifier().toString()));
 
                 setStackInSlot(adjusted, stack);
             } else {
@@ -108,16 +105,16 @@ public class ModulesScreen extends ListGui {
     }
 
     private void updateNavi() {
-        if(getPage() != 0) setStackInSlot(5 * 9 + 2, EconomyItems.PREVIOUS.getItemStack());
-        else setStackInSlot(5 * 9 + 2, EconomyItems.EMPTY.getItemStack());
+        if(getPage() != 0) setStackInSlot(5 * 9 + 2, EconomyItems.Gui.PREVIOUS.getItemStack());
+        else setStackInSlot(5 * 9 + 2, EconomyItems.Gui.EMPTY.getItemStack());
 
         for(int i = 3; i < 8; i++) {
-            if(i == 5) setStackInSlot(5 * 9 + i, EconomyItems.SEARCH.getItemStack());
-            else setStackInSlot(5 * 9 + i, EconomyItems.EMPTY.getItemStack());
+            if(i == 5) setStackInSlot(5 * 9 + i, EconomyItems.Gui.SEARCH.getItemStack());
+            else setStackInSlot(5 * 9 + i, EconomyItems.Gui.EMPTY.getItemStack());
         }
 
-        if(hasMoreItems()) setStackInSlot(5 * 9 + 8, EconomyItems.NEXT.getItemStack());
-        else setStackInSlot(5 * 9 + 8, EconomyItems.EMPTY.getItemStack());
+        if(hasMoreItems()) setStackInSlot(5 * 9 + 8, EconomyItems.Gui.NEXT.getItemStack());
+        else setStackInSlot(5 * 9 + 8, EconomyItems.Gui.EMPTY.getItemStack());
     }
 
     public void updateState() {
@@ -147,8 +144,8 @@ public class ModulesScreen extends ListGui {
             }
 
             // select item
-            if(EconomyItems.MATCHER_ITEM.matches(stack)) {
-                returnValue = new Identifier(EconomyItems.MATCHER_ITEM.getCustomTag(stack).getString("id"));
+            if(EconomyItems.ModulesScreen.MATCHER.matches(stack)) {
+                returnValue = new Identifier(EconomyItems.ModulesScreen.MATCHER.getCustomTag(stack).getString("id"));
                 ((GuiPlayer)playerEntity).closeScreen();
             }
         }

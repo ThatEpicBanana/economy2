@@ -1,6 +1,7 @@
 package mods.banana.economy2.mixins;
 
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.bounties.BountyHandler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.registry.RegistryKey;
@@ -16,6 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Mixin(MinecraftServer.class)
@@ -46,6 +50,13 @@ public class MinecraftServerMixin {
                 //close file
                 file.flush();
                 file.close();
+
+                if(Economy2.bountyHandler != null) {
+                    // write bounties
+                    Path path = Paths.get(Economy2.CONFIG.getValue("file.saveDirectory", String.class) + "/bounties.json");
+
+                    Files.write(path, BountyHandler.Serializer.GSON.toJson(Economy2.bountyHandler).getBytes());
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
