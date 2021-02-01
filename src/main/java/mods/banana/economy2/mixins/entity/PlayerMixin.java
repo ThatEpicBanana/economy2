@@ -10,16 +10,13 @@ import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import mods.banana.economy2.trade.TradeInstance;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestShopPlayerInterface;
 import mods.banana.economy2.trade.TradePlayerInterface;
-import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SignBlock;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
-import net.minecraft.network.packet.s2c.play.SignEditorOpenS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.MinecraftServer;
@@ -32,11 +29,14 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     private SignGui customSign = null;
     private int openSignState = 0;
     // used to prevent infinite loops of closing screens
-    private boolean closingGuiScreen = false;
+    private boolean closingOrOpeningGuiScreen = false;
 
     // trade variables
     private TradeInstance currentTrade;
@@ -104,53 +104,49 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
      * @param screen screen to be added
      */
     public void openScreen(GuiScreen screen) {
+        openScreen(screen, false);
+    }
+
+    private void openScreen(GuiScreen screen, boolean replaceFirst) {
+        this.closingOrOpeningGuiScreen = true;
+
         openHandledScreen(screen.toFactory());
         // successfully opened screen
         if(currentScreenHandler instanceof GuiScreen) {
-            screenStack.add(0, (GuiScreen) currentScreenHandler);
+            if(replaceFirst) screenStack.set(0, (GuiScreen) currentScreenHandler);
+            else screenStack.add(0, (GuiScreen) currentScreenHandler);
             ((GuiScreen) currentScreenHandler).updateState();
         }
-    }
 
-    public void closeScreen() { closeScreen(true); }
+        this.closingOrOpeningGuiScreen = false;
+    }
 
     /**
      * closes a screen handler and sends it's return value to the next screen in the stack if it exits
-     * @param closeScreenHandler whether to close the screen handler itself
      */
-    public void closeScreen(boolean closeScreenHandler) {
+    public void closeScreen() {
         // declare that we are closing the gui screen
-        closingGuiScreen = true;
+        closingOrOpeningGuiScreen = true;
 
-        // get the return value of the gui
-        GuiReturnValue<?> returnValue = getGui(0).getReturnValue();
+        if(screenStack.size() > 1) {
+            // get the return value of the gui
+            GuiReturnValue<?> returnValue = getGui(0).getReturnValue();
 
-        screenStack.remove(0);
+            // remove screen from stack
+            screenStack.remove(0);
 
-        // if there are more in stack
-        if(screenStack.size() > 0) {
             // open the next screen in the stack
-            openScreen((GuiScreen) screenStack.get(0));
-
-            // remove duplicate screen
-            screenStack.remove(1);
+            openScreen((GuiScreen) screenStack.get(0), true);
 
             // send return value to screen
             if(currentScreenHandler instanceof GuiScreen) {
                 ((GuiScreen) currentScreenHandler).withReturnValue(returnValue);
-                ((GuiScreen) currentScreenHandler).updateState();
             }
-        } else {
-            // else close the screen and send a system message of the return value
-            if(returnValue != null && returnValue != GuiReturnValue.EMPTY)
-                sendSystemMessage(new LiteralText(String.valueOf(returnValue.getValue())), UUID.randomUUID());
-            closeHandledScreen();
-            clearScreenStack();
-        }
+        } else exitScreen();
 
         this.customSign = null;
 
-        closingGuiScreen = false;
+        closingOrOpeningGuiScreen = false;
     }
 
     /**
@@ -158,19 +154,34 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
      */
     public void exitScreen() {
         // declare that we are closing the gui screen
-        closingGuiScreen = true;
+        closingOrOpeningGuiScreen = true;
 
         // get the return value of the gui
         GuiReturnValue<?> returnValue = getGui(0).getReturnValue();
 
         if(returnValue != null && returnValue != GuiReturnValue.EMPTY)
             sendSystemMessage(new LiteralText(String.valueOf(returnValue.getValue())), UUID.randomUUID());
+
         closeHandledScreen();
         clearScreenStack();
 
         this.customSign = null;
 
-        closingGuiScreen = false;
+        closingOrOpeningGuiScreen = false;
+    }
+
+    //@Redirect(method = "closeScreenHandler", at = @At(value = "HEAD", target = "Lnet/minecraft/server/network/ServerPlayerEntity;currentScreenHandler:Lnet/minecraft/screen/ScreenHandler;", opcode = Opcodes.PUTFIELD))
+    @Inject(method = "closeScreenHandler", at = @At("HEAD"), cancellable = true)
+    private void afterClose(CallbackInfo ci) {
+        // check if screen to close is a gui screen and it's not a duplicate call
+        if(currentScreenHandler instanceof GuiScreen && !closingOrOpeningGuiScreen) {
+            // if so, fully close the screen
+            currentScreenHandler.close(this);
+            closeScreen();
+
+            // and return
+            ci.cancel();
+        }
     }
 
 
@@ -215,7 +226,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     }
 
 
-    public boolean isClosingGuiScreen() { return closingGuiScreen; }
+    public boolean isClosingOrOpeningGuiScreen() { return closingOrOpeningGuiScreen; }
     public void clearScreenStack() { screenStack.clear(); }
 
     public int getScreenStackSize() { return screenStack.size(); }

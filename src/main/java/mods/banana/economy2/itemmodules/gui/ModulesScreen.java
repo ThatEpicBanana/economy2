@@ -130,9 +130,7 @@ public class ModulesScreen extends ListGui {
 
     @Override
     public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
-        if(playerEntity.world.isClient) return ItemStack.EMPTY;
-
-        if(i > 0) {
+        if(i > 0 && !playerEntity.world.isClient) {
             ItemStack stack = getSlot(i).getStack();
 
             // update tab

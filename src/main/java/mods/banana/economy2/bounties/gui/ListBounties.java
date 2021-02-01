@@ -72,15 +72,6 @@ public class ListBounties extends ListGui {
         return bounties.size() > (getPage() + 1) * (7 * 3);
     }
 
-    // not running. why? idk
-    @Override
-    public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
-        if(playerEntity.world.isClient) return ItemStack.EMPTY;
-        System.out.println("onslotclick");
-//        return ItemStack.EMPTY;
-        return super.onSlotClick(i, j, actionType, playerEntity);
-    }
-
     private ListBounties(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(syncId, playerInventory, inventory, ScreenHandlerType.GENERIC_9X6, 6);
     }

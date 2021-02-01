@@ -93,7 +93,7 @@ public abstract class NbtMatcher {
 
     public ItemStack toItemStack() {
         ItemStack stack = new ItemStack(getItem());
-        if(getPredicateId() != null) stack.setTag(getPredicateInfo().getTag());
+        if(getPredicateId() != null) stack.setTag(getPredicateInfo().getTag().copy());
         return stack;
     }
 

@@ -13,7 +13,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,12 +74,15 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
     public abstract GuiScreen copy(int syncId, PlayerInventory inventory);
 
     @Override
-    public void close(PlayerEntity player) {
-        if(player instanceof ServerPlayerEntity) {
-            // close screen and prevent infinite loop
-            if(!((GuiPlayer)player).isClosingGuiScreen()) ((GuiPlayer)player).closeScreen(false);
-        }
-        super.close(player);
+    public boolean canUse(PlayerEntity player) {
+        return true;
+    }
+
+    // if the play handler sees that the items mismatch, it adds the player to the restricted list
+    // so this is here to bypass that list
+    @Override
+    public boolean isNotRestricted(PlayerEntity player) {
+        return true;
     }
 
     // used for cloning

@@ -11,7 +11,7 @@ public interface GuiPlayer {
     void clearScreenStack();
 
     int getScreenStackSize();
-    boolean isClosingGuiScreen();
+    boolean isClosingOrOpeningGuiScreen();
 
     void openSignGui();
     SignGui getCustomSign();

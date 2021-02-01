@@ -4,6 +4,7 @@ import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.gui.GuiPlayer;
 import mods.banana.economy2.gui.GuiReturnValue;
 import mods.banana.economy2.gui.GuiScreen;
+import mods.banana.economy2.itemmodules.gui.ModulesScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

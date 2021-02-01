@@ -60,8 +60,8 @@ public class BountyListScreen extends GenericContainerScreenHandler {
     @Override
     public boolean canUse(PlayerEntity player) { return true; }
 
-    @Override
-    public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
-        return super.onSlotClick(i, j, actionType, playerEntity);
-    }
+//    @Override
+//    public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
+//        return super.onSlotClick(i, j, actionType, playerEntity);
+//    }
 }
