@@ -13,12 +13,12 @@ public class EconomyItems {
     public static class Gui {
         public static ServerItem EMPTY = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("gui", "empty"), new LiteralText(""));
 
-        public static ServerItem NEXT = new GuiItem(Items.ARROW, new Identifier("gui", "next"), new LiteralText("Next"));
-        public static ServerItem PREVIOUS = new GuiItem(Items.ARROW, new Identifier("gui", "previous"), new LiteralText("Previous"));
-        public static ServerItem SEARCH = new GuiItem(Items.OAK_SIGN, new Identifier("gui", "search"), new LiteralText("Search"));
+        public static ServerItem NEXT = new GuiItem(Items.ARROW, new Identifier("gui", "next"), 1, true, new LiteralText("Next"));
+        public static ServerItem PREVIOUS = new GuiItem(Items.ARROW, new Identifier("gui", "previous"), 2, true, new LiteralText("Previous"));
+        public static ServerItem SEARCH = new GuiItem(Items.OAK_SIGN, new Identifier("gui", "search"), 1, true, new LiteralText("Search"));
 
-        public static ServerItem RETURN = new GuiItem(Items.ARROW, new Identifier("gui", "return"), new LiteralText("Return"));
-        public static ServerItem EXIT = new GuiItem(Items.BARRIER, new Identifier("gui", "exit"), new LiteralText("Exit"));
+        public static ServerItem RETURN = new GuiItem(Items.ARROW, new Identifier("gui", "return"), 3, true, new LiteralText("Return"));
+        public static ServerItem EXIT = new GuiItem(Items.BARRIER, new Identifier("gui", "exit"), 1, true, new LiteralText("Exit"));
     }
 
     public static class ChestShop {
@@ -30,6 +30,7 @@ public class EconomyItems {
     public static class ModulesScreen {
         public static ServerItem SELECTED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "selected"), 2, true, new LiteralText(""));
         public static ServerItem UNSELECTED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "unselected"), 3, true, new LiteralText(""));
+
         public static ServerItem EMPTY_TOP = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptyt"), 4, true, new LiteralText(""));
         public static ServerItem EMPTY_MID = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptym"), 5, true, new LiteralText(""));
         public static ServerItem EMPTY_BOT = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptyb"), 6, true, new LiteralText(""));
@@ -41,6 +42,8 @@ public class EconomyItems {
     public static class Bounties {
         public static ServerItem VIEW_ALL = new GuiItem(Items.GOLD_BLOCK, new Identifier("bounty", "view_all"), new LiteralText("View bounties"));
         public static ServerItem VIEW_SELF = new GuiItem(Items.GOLDEN_CARROT, new Identifier("bounty", "view_self"), new LiteralText("Manage bounties"));
+
+        public static ServerItem ADD_BOUNTY = new GuiItem(Items.GOLDEN_HORSE_ARMOR, new Identifier("bounty", "add"), new LiteralText("Request bounty"));
     }
 
     public static class Banknote {

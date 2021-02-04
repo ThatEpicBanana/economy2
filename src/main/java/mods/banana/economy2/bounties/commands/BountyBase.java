@@ -10,8 +10,8 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.bounties.Bounty;
-import mods.banana.economy2.bounties.BountyHandler;
 import mods.banana.economy2.bounties.gui.BountyList;
+import mods.banana.economy2.gui.GuiPlayer;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
@@ -77,7 +77,8 @@ public class BountyBase {
     }
 
     public static int list(ServerPlayerEntity player) {
-        player.openHandledScreen(new BountyList());
+//        player.openHandledScreen(new BountyList());
+        ((GuiPlayer)player).openScreen(new BountyList());
 
         return 1;
     }

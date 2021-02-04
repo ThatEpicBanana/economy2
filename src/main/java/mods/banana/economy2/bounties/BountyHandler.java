@@ -4,10 +4,7 @@ import com.google.gson.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class BountyHandler {
     private final List<Bounty> bounties;
@@ -18,6 +15,14 @@ public class BountyHandler {
 
     public void add(Bounty bounty) { bounties.add(bounty); }
     public List<Bounty> getBounties() { return bounties; }
+
+    public List<Bounty> getBounties(UUID player) {
+        ArrayList<Bounty> output = new ArrayList<>();
+
+        for(Bounty bounty : bounties) if(bounty.getOwner().equals(player)) output.add(bounty);
+
+        return output;
+    }
 
     public static class Serializer implements JsonSerializer<BountyHandler>, JsonDeserializer<BountyHandler> {
         public static final Gson GSON;

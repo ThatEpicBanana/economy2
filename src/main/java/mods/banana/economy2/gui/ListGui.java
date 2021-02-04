@@ -5,21 +5,21 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.network.ServerPlayerEntity;
+
+import java.util.List;
 
 public abstract class ListGui extends GuiScreen {
     private int page = 0;
     private String search;
 
-    public ListGui(int syncId, PlayerInventory playerInventory, Inventory inventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows) {
-        super(syncId, playerInventory, inventory, size, rows);
+    public ListGui(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows) {
+        super(syncId, playerInventory, inventory, rows);
     }
 
-    public ListGui(int syncId, PlayerInventory playerInventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows) {
-        super(syncId, playerInventory, size, rows);
+    public ListGui(int syncId, PlayerInventory playerInventory, int rows) {
+        super(syncId, playerInventory, rows);
     }
 
     public int getPage() { return page; }

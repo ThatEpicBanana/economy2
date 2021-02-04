@@ -141,6 +141,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
             // send return value to screen
             if(currentScreenHandler instanceof GuiScreen) {
                 ((GuiScreen) currentScreenHandler).withReturnValue(returnValue);
+                ((GuiScreen) currentScreenHandler).updateState();
             }
         } else exitScreen();
 
@@ -170,14 +171,14 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         closingOrOpeningGuiScreen = false;
     }
 
-    //@Redirect(method = "closeScreenHandler", at = @At(value = "HEAD", target = "Lnet/minecraft/server/network/ServerPlayerEntity;currentScreenHandler:Lnet/minecraft/screen/ScreenHandler;", opcode = Opcodes.PUTFIELD))
+    // check for player escaping from screen
     @Inject(method = "closeScreenHandler", at = @At("HEAD"), cancellable = true)
     private void afterClose(CallbackInfo ci) {
         // check if screen to close is a gui screen and it's not a duplicate call
         if(currentScreenHandler instanceof GuiScreen && !closingOrOpeningGuiScreen) {
             // if so, fully close the screen
             currentScreenHandler.close(this);
-            closeScreen();
+            exitScreen();
 
             // and return
             ci.cancel();

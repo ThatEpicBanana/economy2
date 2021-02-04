@@ -26,11 +26,18 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
         this.size = size;
     }
 
+    public GuiScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows) {
+        this(syncId, playerInventory, inventory, getScreenHandlerType(rows), rows);
+    }
+
     public GuiScreen(int syncId, PlayerInventory playerInventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows) {
         super(size, syncId, playerInventory, new SimpleInventory(9 * rows), rows);
         this.playerInventory = playerInventory;
         this.size = size;
-//        updateState();
+    }
+
+    public GuiScreen(int syncId, PlayerInventory playerInventory, int rows) {
+        this(syncId, playerInventory, getScreenHandlerType(rows), rows);
     }
 
     public abstract Text getName();
@@ -71,7 +78,7 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
 
     public void withReturnValue(GuiReturnValue<?> value) {}
 
-    public abstract GuiScreen copy(int syncId, PlayerInventory inventory);
+    public abstract GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player);
 
     @Override
     public boolean canUse(PlayerEntity player) {
@@ -83,6 +90,27 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
     @Override
     public boolean isNotRestricted(PlayerEntity player) {
         return true;
+    }
+
+    /**
+     * gets a screen handler type from a number of rows, default 3.
+     * @return ScreenHandlerType<GenericContainerScreenHandler> screen handler type
+     */
+    public static ScreenHandlerType<GenericContainerScreenHandler> getScreenHandlerType(int rows) {
+        switch(rows) {
+            case 1:
+                return ScreenHandlerType.GENERIC_9X1;
+            case 2:
+                return ScreenHandlerType.GENERIC_9X2;
+            case 4:
+                return ScreenHandlerType.GENERIC_9X4;
+            case 5:
+                return ScreenHandlerType.GENERIC_9X5;
+            case 6:
+                return ScreenHandlerType.GENERIC_9X6;
+            default: // default is 9x3 so don't have to put in the case for a row size of 3
+                return ScreenHandlerType.GENERIC_9X3;
+        }
     }
 
     // used for cloning
@@ -106,7 +134,7 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
         @Nullable
         @Override
         public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-            return screen.copy(syncId, inv);
+            return screen.copy(syncId, inv, player);
         }
     }
 }

@@ -13,7 +13,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.StringTag;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -24,10 +23,11 @@ import java.util.List;
 
 public class ModulesScreen extends ListGui {
     private int tab = 0;
-    private List<NbtMatcher> values;
     private final List<ItemModule> itemModules;
 
     private Identifier returnValue = null;
+
+    private List<NbtMatcher> values;
 
     private static final int startingRow = 2;
     private static final int sizeInPage = 7 * 5;
@@ -41,11 +41,11 @@ public class ModulesScreen extends ListGui {
     }
 
     private ModulesScreen(int syncId, PlayerInventory playerInventory, boolean updateState) {
-        super(syncId, playerInventory, ScreenHandlerType.GENERIC_9X6, 6);
+        super(syncId, playerInventory, 6);
 
         itemModules = new ArrayList<>(ItemModuleHandler.activeModules);
 
-        updateModule();
+        updateValues();
         if(updateState) updateState();
     }
 
@@ -118,7 +118,7 @@ public class ModulesScreen extends ListGui {
     }
 
     public void updateState() {
-        updateModule();
+        updateValues();
 
         updateTabs();
         updateItems();
@@ -138,7 +138,7 @@ public class ModulesScreen extends ListGui {
             int newRow = this.tab + row;
             if(i % 9 == 0 && newRow >= 0 && newRow < itemModules.size()) {
                 this.tab = newRow;
-                updateModule();
+                updateValues();
             }
 
             // select item
@@ -156,7 +156,7 @@ public class ModulesScreen extends ListGui {
         return new LiteralText("Bounties");
     }
 
-    public void updateModule() {
+    public void updateValues() {
         values = new ArrayList<>(itemModules.get(tab).getValues().values());
 
         // if there is a search, go through each matcher and see if it's identifier matches the search
@@ -198,16 +198,16 @@ public class ModulesScreen extends ListGui {
     }
 
     private ModulesScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int tab, String search) {
-        super(syncId, playerInventory, inventory, ScreenHandlerType.GENERIC_9X6, 6);
+        super(syncId, playerInventory, inventory, 6);
 
         itemModules = new ArrayList<>(ItemModuleHandler.activeModules);
         this.tab = tab;
         setSearch(search);
 
-        updateModule();
+        updateValues();
     }
 
-    public GuiScreen copy(int syncId, PlayerInventory playerInventory) {
+    public GuiScreen copy(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new ModulesScreen(syncId, playerInventory, getInventory(), tab, getSearch());
     }
 
