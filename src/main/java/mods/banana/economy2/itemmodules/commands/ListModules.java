@@ -3,13 +3,14 @@ package mods.banana.economy2.itemmodules.commands;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.gui.GuiPlayer;
 import mods.banana.economy2.itemmodules.gui.ModulesScreen;
+import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class ListModules {
     public static int run(ServerPlayerEntity player) {
-        ((GuiPlayer)player).openScreen(new ModulesScreen());
+        ((GuiPlayer)player).openScreen(new ModulesScreen(NbtMatcher.Type.BOTH, true));
         return 1;
     }
 

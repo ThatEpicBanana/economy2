@@ -44,6 +44,8 @@ public class EconomyItems {
         public static ServerItem VIEW_SELF = new GuiItem(Items.GOLDEN_CARROT, new Identifier("bounty", "view_self"), new LiteralText("Manage bounties"));
 
         public static ServerItem ADD_BOUNTY = new GuiItem(Items.GOLDEN_HORSE_ARMOR, new Identifier("bounty", "add"), new LiteralText("Request bounty"));
+
+        public static ServerItem SET_ITEM = new GuiItem(Items.IRON_INGOT, new Identifier("bounty", "set-item"), new LiteralText("Set item"));
     }
 
     public static class Banknote {

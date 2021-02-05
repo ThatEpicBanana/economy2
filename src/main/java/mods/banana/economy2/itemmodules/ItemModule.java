@@ -96,6 +96,17 @@ public class ItemModule {
     public String getName() { return name; }
     public Map<Identifier, NbtMatcher> getValues() { return values; }
 
+    public Map<Identifier, NbtMatcher> getValuesOfType(NbtMatcher.Type type) {
+        Map<Identifier, NbtMatcher> values = new HashMap<>();
+
+        for(Map.Entry<Identifier, NbtMatcher> matcher : getValues().entrySet()) {
+            if(matcher.getValue().typeMatches(type))
+                values.put(matcher.getKey(), matcher.getValue());
+        }
+
+        return values;
+    }
+
     public boolean hasDisplay() { return display != null; }
     public ModuleDisplay getDisplay() { return display; }
 

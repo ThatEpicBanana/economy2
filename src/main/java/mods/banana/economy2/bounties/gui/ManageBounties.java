@@ -12,6 +12,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ManageBounties extends ListGui {
     public ManageBounties() { this(0, new PlayerInventory(null), null); }
 
     public ManageBounties(int syncId, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        super(syncId, playerInventory, getRows(null));
+        super(syncId, playerInventory, getRows(null), new Identifier("bounty", "manage"));
         updateBounties();
     }
 
@@ -78,7 +79,7 @@ public class ManageBounties extends ListGui {
     }
 
     public ManageBounties(int syncId, PlayerInventory playerInventory, Inventory inventory, PlayerEntity playerEntity) {
-        super(syncId, playerInventory, update(inventory, getRows(playerEntity)), getRows(playerEntity));
+        super(syncId, playerInventory, update(inventory, getRows(playerEntity)), getRows(playerEntity), new Identifier("bounty", "manage"));
         updateBounties();
     }
 

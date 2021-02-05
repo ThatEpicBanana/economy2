@@ -74,6 +74,7 @@ public class Economy2 implements ModInitializer {
         registerCommands();
 //        loadBounties();
         TradeHandler.onInit();
+        ItemModuleHandler.init();
 //        CreateEnchants.onInit();
 //        CreateEnchantBooks.onInit();
 //        ItemModules.onInit();

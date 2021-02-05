@@ -29,21 +29,28 @@ public class ModulesScreen extends ListGui {
 
     private List<NbtMatcher> values;
 
+    private final NbtMatcher.Type typeToShow;
+    private final boolean showsMinecraftItems;
+
     private static final int startingRow = 2;
     private static final int sizeInPage = 7 * 5;
 
-    public ModulesScreen() {
-        this(0, new PlayerInventory(null), false);
+    public ModulesScreen(NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
+        this(0, new PlayerInventory(null), false, typeToShow, showsMinecraftItems);
     }
 
-    public ModulesScreen(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, true);
+    public ModulesScreen(int syncId, PlayerInventory playerInventory, NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
+        this(syncId, playerInventory, true, typeToShow, showsMinecraftItems);
     }
 
-    private ModulesScreen(int syncId, PlayerInventory playerInventory, boolean updateState) {
-        super(syncId, playerInventory, 6);
+    private ModulesScreen(int syncId, PlayerInventory playerInventory, boolean updateState, NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
+        super(syncId, playerInventory, 6, new Identifier("module", "list"));
 
         itemModules = new ArrayList<>(ItemModuleHandler.activeModules);
+        if(showsMinecraftItems) itemModules.add(0, ItemModuleHandler.MINECRAFT_ITEMS);
+
+        this.typeToShow = typeToShow;
+        this.showsMinecraftItems = showsMinecraftItems;
 
         updateValues();
         if(updateState) updateState();
@@ -130,7 +137,7 @@ public class ModulesScreen extends ListGui {
 
     @Override
     public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
-        if(i > 0 && !playerEntity.world.isClient) {
+        if(i >= 0 && !playerEntity.world.isClient) {
             ItemStack stack = getSlot(i).getStack();
 
             // update tab
@@ -138,6 +145,7 @@ public class ModulesScreen extends ListGui {
             int newRow = this.tab + row;
             if(i % 9 == 0 && newRow >= 0 && newRow < itemModules.size()) {
                 this.tab = newRow;
+                setPage(0);
                 updateValues();
             }
 
@@ -157,7 +165,7 @@ public class ModulesScreen extends ListGui {
     }
 
     public void updateValues() {
-        values = new ArrayList<>(itemModules.get(tab).getValues().values());
+        values = new ArrayList<>(itemModules.get(tab).getValuesOfType(typeToShow).values());
 
         // if there is a search, go through each matcher and see if it's identifier matches the search
         if(getSearch() != null) {
@@ -197,18 +205,23 @@ public class ModulesScreen extends ListGui {
         return ItemStack.EMPTY;
     }
 
-    private ModulesScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int tab, String search) {
-        super(syncId, playerInventory, inventory, 6);
+    private ModulesScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int tab, String search, NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
+        super(syncId, playerInventory, inventory, 6, new Identifier("module", "list"));
 
         itemModules = new ArrayList<>(ItemModuleHandler.activeModules);
+        if(showsMinecraftItems) itemModules.add(0, ItemModuleHandler.MINECRAFT_ITEMS);
+
         this.tab = tab;
         setSearch(search);
+
+        this.typeToShow = typeToShow;
+        this.showsMinecraftItems = showsMinecraftItems;
 
         updateValues();
     }
 
     public GuiScreen copy(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new ModulesScreen(syncId, playerInventory, getInventory(), tab, getSearch());
+        return new ModulesScreen(syncId, playerInventory, getInventory(), tab, getSearch(), typeToShow, showsMinecraftItems);
     }
 
 

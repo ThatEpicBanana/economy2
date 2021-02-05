@@ -12,12 +12,13 @@ import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 public class BountyBasePage extends GuiScreen {
     public BountyBasePage() { this(0, new PlayerInventory(null)); }
 
     public BountyBasePage(int syncId, PlayerInventory playerInventory) {
-        super(syncId, playerInventory, ScreenHandlerType.GENERIC_9X4, 4);
+        super(syncId, playerInventory, ScreenHandlerType.GENERIC_9X4, 4, new Identifier("bounty", "base"));
     }
 
     @Override
@@ -51,7 +52,7 @@ public class BountyBasePage extends GuiScreen {
     }
 
     private BountyBasePage(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(syncId, playerInventory, inventory, ScreenHandlerType.GENERIC_9X4, 4);
+        super(syncId, playerInventory, inventory, ScreenHandlerType.GENERIC_9X4, 4, new Identifier("bounty", "base"));
     }
 
     @Override

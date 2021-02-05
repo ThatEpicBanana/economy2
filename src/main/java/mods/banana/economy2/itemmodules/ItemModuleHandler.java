@@ -5,22 +5,27 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.oroarmor.config.ConfigItem;
+import mods.banana.economy2.itemmodules.display.ModuleDisplay;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import mods.banana.economy2.itemmodules.items.NbtModifier;
 import net.minecraft.command.CommandSource;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ItemModuleHandler {
     public static ArrayList<ItemModule> registeredModules = new ArrayList<>();
     public static ArrayList<ItemModule> activeModules = new ArrayList<>();
+    public static ItemModule MINECRAFT_ITEMS;
 
     public static void reset() {
         registeredModules = new ArrayList<>();
@@ -58,6 +63,15 @@ public class ItemModuleHandler {
         return false;
     }
 
+
+    public static List<NbtMatcher> getActiveItemsOfType(NbtMatcher.Type type) {
+        ArrayList<NbtMatcher> items = new ArrayList<>();
+        for(ItemModule module : activeModules) {
+            for(NbtMatcher matcher : module.getValues().values())
+                if(matcher.typeMatches(type)) items.add(matcher);
+        }
+        return items;
+    }
 
 
     public static NbtMatcher getActiveMatcher(Identifier identifier) { return getActiveMatcher(identifier, NbtMatcher.Type.BOTH); }
@@ -139,6 +153,22 @@ public class ItemModuleHandler {
                 return;
             }
         }
+    }
+
+    public static void init() {
+        Map<Identifier, NbtMatcher> items = new HashMap<>();
+
+        for(Identifier itemId : Registry.ITEM.getIds()) {
+            Item item = Registry.ITEM.get(itemId);
+            if(
+                    item.getGroup() != null && // only allow obtainable items
+                    !item.equals(Items.BEDROCK) &&
+                    !item.equals(Items.END_PORTAL_FRAME) &&
+                    !(item instanceof SpawnEggItem)
+            ) items.put(itemId, new NbtItem(item));
+        }
+
+        MINECRAFT_ITEMS = new ItemModule("Minecraft", items, new ModuleDisplay("Minecraft", new ItemStack(Items.GRASS_BLOCK)));
     }
 
 

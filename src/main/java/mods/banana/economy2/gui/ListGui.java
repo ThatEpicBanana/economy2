@@ -7,6 +7,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 
 import java.util.List;
 
@@ -14,15 +15,16 @@ public abstract class ListGui extends GuiScreen {
     private int page = 0;
     private String search;
 
-    public ListGui(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows) {
-        super(syncId, playerInventory, inventory, rows);
+    public ListGui(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, Identifier id) {
+        super(syncId, playerInventory, inventory, rows, id);
     }
 
-    public ListGui(int syncId, PlayerInventory playerInventory, int rows) {
-        super(syncId, playerInventory, rows);
+    public ListGui(int syncId, PlayerInventory playerInventory, int rows, Identifier id) {
+        super(syncId, playerInventory, rows, id);
     }
 
     public int getPage() { return page; }
+    public void setPage(int page) { this.page = page; }
 
     public void withReturnValue(GuiReturnValue<?> value) {
         // should be search sign

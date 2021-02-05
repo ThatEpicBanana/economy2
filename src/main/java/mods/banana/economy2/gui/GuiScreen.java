@@ -14,33 +14,39 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class GuiScreen extends GenericContainerScreenHandler implements CustomGui {
     private final ScreenHandlerType<GenericContainerScreenHandler> size;
     private final PlayerInventory playerInventory;
+    private final Identifier id;
 
-    public GuiScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows) {
+    public GuiScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows, Identifier id) {
         super(size, syncId, playerInventory, inventory, rows);
         this.playerInventory = playerInventory;
         this.size = size;
+        this.id = id;
     }
 
-    public GuiScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows) {
-        this(syncId, playerInventory, inventory, getScreenHandlerType(rows), rows);
+    public GuiScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, Identifier id) {
+        this(syncId, playerInventory, inventory, getScreenHandlerType(rows), rows, id);
     }
 
-    public GuiScreen(int syncId, PlayerInventory playerInventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows) {
+    public GuiScreen(int syncId, PlayerInventory playerInventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows, Identifier id) {
         super(size, syncId, playerInventory, new SimpleInventory(9 * rows), rows);
         this.playerInventory = playerInventory;
         this.size = size;
+        this.id = id;
     }
 
-    public GuiScreen(int syncId, PlayerInventory playerInventory, int rows) {
-        this(syncId, playerInventory, getScreenHandlerType(rows), rows);
+    public GuiScreen(int syncId, PlayerInventory playerInventory, int rows, Identifier id) {
+        this(syncId, playerInventory, getScreenHandlerType(rows), rows, id);
     }
 
     public abstract Text getName();
+
+    public Identifier getId() { return id; }
 
     public abstract void updateState();
 
@@ -68,16 +74,14 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
         return ItemStack.EMPTY;
     }
 
-    public NamedScreenHandlerFactory toFactory() {
-        return new Factory(getName(), this);
-    }
-
     public GuiReturnValue<?> getReturnValue() {
         return GuiReturnValue.EMPTY;
     }
-
     public void withReturnValue(GuiReturnValue<?> value) {}
 
+    public NamedScreenHandlerFactory toFactory() {
+        return new Factory(getName(), this);
+    }
     public abstract GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player);
 
     @Override

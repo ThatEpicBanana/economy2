@@ -11,6 +11,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class BountyList extends ListGui {
     public BountyList() { this(0, new PlayerInventory(null)); }
 
     public BountyList(int syncId, PlayerInventory playerInventory) {
-        super(syncId, playerInventory, 6);
+        super(syncId, playerInventory, 6, new Identifier("bounty", "list"));
     }
 
 //    @Override
@@ -70,7 +71,7 @@ public class BountyList extends ListGui {
     }
 
     private BountyList(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(syncId, playerInventory, inventory, 6);
+        super(syncId, playerInventory, inventory, 6, new Identifier("bounty", "list"));
     }
 
     @Override
