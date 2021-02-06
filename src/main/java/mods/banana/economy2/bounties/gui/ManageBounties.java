@@ -3,18 +3,19 @@ package mods.banana.economy2.bounties.gui;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.bounties.Bounty;
-import mods.banana.economy2.gui.GuiScreen;
-import mods.banana.economy2.gui.ListGui;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
+import mods.banana.economy2.gui.screens.GuiScreen;
+import mods.banana.economy2.gui.screens.ListGui;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ManageBounties extends ListGui {
@@ -28,12 +29,14 @@ public class ManageBounties extends ListGui {
     }
 
     @Override
-    public Text getName() {
+    public Text getDisplayName() {
         return new LiteralText("Manage Bounties");
     }
 
     @Override
     public void updateState() {
+        updateBounties();
+
         // top / bottom
         for(int i = 0; i < 9; i++) {
             setStackInSlot(i, EconomyItems.Gui.EMPTY.getItemStack());
@@ -53,6 +56,16 @@ public class ManageBounties extends ListGui {
 
         setStackInSlot((getRows() - 1) * 9 + 4, EconomyItems.Gui.RETURN.getItemStack());
         setStackInSlot((getRows() - 1) * 9 + 5, EconomyItems.Bounties.ADD_BOUNTY.getItemStack());
+    }
+
+    @Override
+    public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
+        if(i >= 0 && !playerEntity.world.isClient) {
+            ItemStack stack = getSlot(i).getStack();
+            if(EconomyItems.Bounties.ADD_BOUNTY.matches(stack)) ((GuiPlayer)playerEntity).openScreen(new CreateBounty());
+        }
+
+        return super.onSlotClick(i, j, actionType, playerEntity);
     }
 
     public static int getRows(PlayerEntity player) {

@@ -1,10 +1,13 @@
-package mods.banana.economy2.gui;
+package mods.banana.economy2.gui.screens;
 
 import mods.banana.economy2.EconomyItems;
+import mods.banana.economy2.gui.CustomGui;
+import mods.banana.economy2.gui.FluidScreen;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
+import mods.banana.economy2.gui.GuiReturnValue;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.screen.GenericContainerScreenHandler;
@@ -17,38 +20,45 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class GuiScreen extends GenericContainerScreenHandler implements CustomGui {
+public abstract class GuiScreen extends FluidScreen implements CustomGui {
     private final ScreenHandlerType<GenericContainerScreenHandler> size;
-    private final PlayerInventory playerInventory;
+    private PlayerInventory playerInventory;
     private final Identifier id;
+//    public int syncId;
 
     public GuiScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows, Identifier id) {
-        super(size, syncId, playerInventory, inventory, rows);
+        super(playerInventory, inventory, syncId, rows);
         this.playerInventory = playerInventory;
         this.size = size;
         this.id = id;
     }
 
     public GuiScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, Identifier id) {
-        this(syncId, playerInventory, inventory, getScreenHandlerType(rows), rows, id);
+        this(syncId, playerInventory, inventory, FluidScreen.getType(rows), rows, id);
     }
 
     public GuiScreen(int syncId, PlayerInventory playerInventory, ScreenHandlerType<GenericContainerScreenHandler> size, int rows, Identifier id) {
-        super(size, syncId, playerInventory, new SimpleInventory(9 * rows), rows);
+        super(playerInventory, syncId, rows);
         this.playerInventory = playerInventory;
         this.size = size;
         this.id = id;
     }
 
     public GuiScreen(int syncId, PlayerInventory playerInventory, int rows, Identifier id) {
-        this(syncId, playerInventory, getScreenHandlerType(rows), rows, id);
+        this(syncId, playerInventory, FluidScreen.getType(rows), rows, id);
     }
 
-    public abstract Text getName();
+//    public abstract Text getName();
 
     public Identifier getId() { return id; }
 
     public abstract void updateState();
+
+    public void clear() {
+        for(int i = 0; i < getInventory().size(); i++) {
+            setStackInSlot(i, EconomyItems.Gui.EMPTY.getItemStack());
+        }
+    }
 
     @Override
     public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
@@ -79,66 +89,15 @@ public abstract class GuiScreen extends GenericContainerScreenHandler implements
     }
     public void withReturnValue(GuiReturnValue<?> value) {}
 
-    public NamedScreenHandlerFactory toFactory() {
-        return new Factory(getName(), this);
-    }
     public abstract GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player);
-
-    @Override
-    public boolean canUse(PlayerEntity player) {
-        return true;
-    }
-
-    // if the play handler sees that the items mismatch, it adds the player to the restricted list
-    // so this is here to bypass that list
-    @Override
-    public boolean isNotRestricted(PlayerEntity player) {
-        return true;
-    }
-
-    /**
-     * gets a screen handler type from a number of rows, default 3.
-     * @return ScreenHandlerType<GenericContainerScreenHandler> screen handler type
-     */
-    public static ScreenHandlerType<GenericContainerScreenHandler> getScreenHandlerType(int rows) {
-        switch(rows) {
-            case 1:
-                return ScreenHandlerType.GENERIC_9X1;
-            case 2:
-                return ScreenHandlerType.GENERIC_9X2;
-            case 4:
-                return ScreenHandlerType.GENERIC_9X4;
-            case 5:
-                return ScreenHandlerType.GENERIC_9X5;
-            case 6:
-                return ScreenHandlerType.GENERIC_9X6;
-            default: // default is 9x3 so don't have to put in the case for a row size of 3
-                return ScreenHandlerType.GENERIC_9X3;
-        }
-    }
 
     // used for cloning
     public ScreenHandlerType<GenericContainerScreenHandler> getSize() { return size; }
     public PlayerInventory getPlayerInventory() { return playerInventory; }
 
-    public static class Factory implements NamedScreenHandlerFactory {
-        private final Text name;
-        private final GuiScreen screen;
-
-        public Factory(Text name, GuiScreen screen) {
-            this.name = name;
-            this.screen = screen;
-        }
-
-        @Override
-        public Text getDisplayName() {
-            return name;
-        }
-
-        @Nullable
-        @Override
-        public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-            return screen.copy(syncId, inv, player);
-        }
+    @Override
+    public void updatePlayerInventory(PlayerInventory inv) {
+        playerInventory = inv;
+        super.updatePlayerInventory(inv);
     }
 }

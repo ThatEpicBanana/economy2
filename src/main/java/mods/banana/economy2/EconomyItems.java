@@ -8,6 +8,7 @@ import mods.banana.economy2.items.GuiItem;
 import net.minecraft.item.Items;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
+import org.lwjgl.system.CallbackI;
 
 public class EconomyItems {
     public static class Gui {
@@ -45,7 +46,12 @@ public class EconomyItems {
 
         public static ServerItem ADD_BOUNTY = new GuiItem(Items.GOLDEN_HORSE_ARMOR, new Identifier("bounty", "add"), new LiteralText("Request bounty"));
 
-        public static ServerItem SET_ITEM = new GuiItem(Items.IRON_INGOT, new Identifier("bounty", "set-item"), new LiteralText("Set item"));
+        public static ServerItem SET_ITEM = new GuiItem(Items.STONE_BUTTON, new Identifier("bounty", "set-item"), new LiteralText("Set item"));
+        public static ServerItem ALLOW_CUSTOM_TAGS = new GuiItem(Items.STICK, new Identifier("bounty", "allowtags"), 0, true, new LiteralText("Set custom data"));
+
+        public static ServerItem UNSET_MATCHER = new GuiItem(Items.LIGHT_GRAY_STAINED_GLASS_PANE, new Identifier("bounty", "unset"));
+        public static ServerItem REQUIRED_MATCHER = new GuiItem(Items.LIME_STAINED_GLASS_PANE, new Identifier("bounty", "unset"));
+        public static ServerItem DENIED_MATCHER = new GuiItem(Items.RED_STAINED_GLASS_PANE, new Identifier("bounty", "unset"));
     }
 
     public static class Banknote {
@@ -71,6 +77,11 @@ public class EconomyItems {
 
         ServerItemHandler.register(Bounties.VIEW_ALL);
         ServerItemHandler.register(Bounties.VIEW_SELF);
+        ServerItemHandler.register(Bounties.SET_ITEM);
+        ServerItemHandler.register(Bounties.ALLOW_CUSTOM_TAGS);
+        ServerItemHandler.register(Bounties.UNSET_MATCHER);
+        ServerItemHandler.register(Bounties.REQUIRED_MATCHER);
+        ServerItemHandler.register(Bounties.DENIED_MATCHER);
 
         ServerItemHandler.register(ModulesScreen.SELECTED);
         ServerItemHandler.register(ModulesScreen.UNSELECTED);

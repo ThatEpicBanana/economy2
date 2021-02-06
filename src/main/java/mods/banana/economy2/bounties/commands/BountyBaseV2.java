@@ -2,7 +2,7 @@ package mods.banana.economy2.bounties.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.bounties.gui.BountyBasePage;
-import mods.banana.economy2.gui.GuiPlayer;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;

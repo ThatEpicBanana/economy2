@@ -1,7 +1,7 @@
 package mods.banana.economy2.itemmodules.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import mods.banana.economy2.gui.GuiPlayer;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
 import mods.banana.economy2.itemmodules.gui.ModulesScreen;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.server.command.CommandManager;

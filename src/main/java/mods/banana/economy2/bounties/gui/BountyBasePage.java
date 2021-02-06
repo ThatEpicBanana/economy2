@@ -1,8 +1,8 @@
 package mods.banana.economy2.bounties.gui;
 
 import mods.banana.economy2.EconomyItems;
-import mods.banana.economy2.gui.GuiPlayer;
-import mods.banana.economy2.gui.GuiScreen;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
+import mods.banana.economy2.gui.screens.GuiScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -22,7 +22,7 @@ public class BountyBasePage extends GuiScreen {
     }
 
     @Override
-    public Text getName() {
+    public Text getDisplayName() {
         return new LiteralText("Bounties");
     }
 

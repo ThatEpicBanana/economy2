@@ -1,4 +1,7 @@
-package mods.banana.economy2.gui;
+package mods.banana.economy2.gui.mixin;
+
+import mods.banana.economy2.gui.screens.GuiScreen;
+import mods.banana.economy2.gui.screens.SignGui;
 
 public interface GuiPlayer {
     // base functions

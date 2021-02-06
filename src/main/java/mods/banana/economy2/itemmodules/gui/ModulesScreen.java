@@ -4,6 +4,9 @@ import com.ibm.icu.text.UTF16;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.gui.*;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
+import mods.banana.economy2.gui.screens.GuiScreen;
+import mods.banana.economy2.gui.screens.ListGui;
 import mods.banana.economy2.itemmodules.ItemModule;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
@@ -160,7 +163,7 @@ public class ModulesScreen extends ListGui {
     }
 
     @Override
-    public Text getName() {
+    public Text getDisplayName() {
         return new LiteralText("Bounties");
     }
 

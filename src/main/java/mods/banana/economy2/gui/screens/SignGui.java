@@ -1,5 +1,7 @@
-package mods.banana.economy2.gui;
+package mods.banana.economy2.gui.screens;
 
+import mods.banana.economy2.gui.CustomGui;
+import mods.banana.economy2.gui.GuiReturnValue;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SignBlock;

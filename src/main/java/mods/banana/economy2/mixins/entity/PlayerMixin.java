@@ -5,6 +5,9 @@ import com.mojang.authlib.GameProfile;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.gui.*;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
+import mods.banana.economy2.gui.screens.GuiScreen;
+import mods.banana.economy2.gui.screens.SignGui;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import mods.banana.economy2.trade.TradeInstance;
@@ -29,15 +32,14 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +98,6 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         tradingItems = new ArrayList<>();
     }
 
-
     // custom gui stuff
 
     /**
@@ -110,7 +111,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     private void openScreen(GuiScreen screen, boolean replaceFirst) {
         this.closingOrOpeningGuiScreen = true;
 
-        openHandledScreen(screen.toFactory());
+        openHandledScreen(screen);
         // successfully opened screen
         if(currentScreenHandler instanceof GuiScreen) {
             if(replaceFirst) screenStack.set(0, (GuiScreen) currentScreenHandler);
@@ -119,6 +120,11 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         }
 
         this.closingOrOpeningGuiScreen = false;
+    }
+
+    @Redirect(method = "openHandledScreen", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;closeHandledScreen()V"))
+    private void preventClose(ServerPlayerEntity playerEntity) {
+        if(!(playerEntity.currentScreenHandler instanceof FluidScreen)) playerEntity.closeHandledScreen();
     }
 
     /**

@@ -1,6 +1,8 @@
-package mods.banana.economy2.gui;
+package mods.banana.economy2.gui.screens;
 
 import mods.banana.economy2.EconomyItems;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
+import mods.banana.economy2.gui.GuiReturnValue;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -8,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-
-import java.util.List;
 
 public abstract class ListGui extends GuiScreen {
     private int page = 0;

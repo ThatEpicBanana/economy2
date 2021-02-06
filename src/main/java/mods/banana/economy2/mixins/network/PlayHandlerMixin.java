@@ -1,14 +1,13 @@
 package mods.banana.economy2.mixins.network;
 
-import mods.banana.economy2.gui.GuiPlayer;
-import mods.banana.economy2.gui.SignGui;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
+import mods.banana.economy2.gui.screens.SignGui;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.chestshop.interfaces.mixin.ChestInterface;
 import mods.banana.economy2.chestshop.interfaces.mixin.SignInterface;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;

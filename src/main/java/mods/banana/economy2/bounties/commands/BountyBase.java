@@ -11,7 +11,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.bounties.Bounty;
 import mods.banana.economy2.bounties.gui.BountyList;
-import mods.banana.economy2.gui.GuiPlayer;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
