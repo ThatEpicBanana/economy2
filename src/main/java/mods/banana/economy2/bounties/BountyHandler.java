@@ -14,6 +14,8 @@ public class BountyHandler {
     }
 
     public void add(Bounty bounty) { bounties.add(bounty); }
+    public void remove(Bounty bounty) { bounties.remove(bounty); }
+
     public List<Bounty> getBounties() { return bounties; }
 
     public List<Bounty> getBounties(UUID player) {

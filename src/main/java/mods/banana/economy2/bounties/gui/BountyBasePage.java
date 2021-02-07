@@ -32,8 +32,8 @@ public class BountyBasePage extends GuiScreen {
         ItemStack emptyStack = EconomyItems.Gui.EMPTY.getItemStack();
         for(int i = 0; i < 4 * 9; i++) setStackInSlot(i, emptyStack);
 
-        setStackInSlot(9 + 3, EconomyItems.Bounties.VIEW_ALL.getItemStack());
-        setStackInSlot(9 + 5, EconomyItems.Bounties.VIEW_SELF.getItemStack());
+        setStackInSlot(9 + 3, EconomyItems.Bounties.BaseScreen.VIEW_ALL.getItemStack());
+        setStackInSlot(9 + 5, EconomyItems.Bounties.BaseScreen.VIEW_SELF.getItemStack());
         setStackInSlot(9 * 3 + 4, EconomyItems.Gui.EXIT.getItemStack());
     }
 
@@ -42,9 +42,9 @@ public class BountyBasePage extends GuiScreen {
         if(i > 0 && playerEntity instanceof ServerPlayerEntity) {
             ItemStack stack = getSlot(i).getStack();
 
-            if(EconomyItems.Bounties.VIEW_ALL.matches(stack))
+            if(EconomyItems.Bounties.BaseScreen.VIEW_ALL.matches(stack))
                 ((GuiPlayer)playerEntity).openScreen(new BountyList());
-            if(EconomyItems.Bounties.VIEW_SELF.matches(stack))
+            if(EconomyItems.Bounties.BaseScreen.VIEW_SELF.matches(stack))
                 ((GuiPlayer)playerEntity).openScreen(new ManageBounties());
         }
 

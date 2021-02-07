@@ -2,6 +2,7 @@ package mods.banana.economy2.bounties.gui;
 
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 
+import static mods.banana.economy2.EconomyItems.Bounties.Create.*;
 import static mods.banana.economy2.EconomyItems.Bounties.*;
 import static mods.banana.economy2.EconomyItems.Gui.*;
 
@@ -38,11 +39,11 @@ public class CreateBounty extends GuiScreen {
     ItemStack baseItem = SET_ITEM.getItemStack();
     NbtItem baseItemNbt = null;
 
-    private static final Pattern checkInt = Pattern.compile("^-?\\d+$");
+    private static final Pattern checkInt = Pattern.compile("^\\d+$");
     private String error;
 
     private int amount = 0;
-    private int price = 0;
+    private long price = 0;
 
     @Override
     public void withReturnValue(GuiReturnValue<?> returnValue) {
@@ -103,7 +104,7 @@ public class CreateBounty extends GuiScreen {
 
             if(returnValue.getValue() != null && id.equals(new Identifier("bounty", "price"))) {
                 if(checkInt.matcher(value).find()) {
-                    this.price = Integer.parseInt(value);
+                    this.price = Long.parseLong(value);
                 }
             }
         }

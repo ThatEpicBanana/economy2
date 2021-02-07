@@ -28,17 +28,12 @@ public class Bounty {
     private final NbtItem baseItem;
     private final List<NbtMatcher> mustMatch;
     private final List<NbtMatcher> cannotMatch;
-    private final int amount;
-    private final long price;
+    private int amount;
+    private long price;
+    private final UUID id;
 
     public Bounty(UUID owner, String ownerName, NbtItem baseItem, List<NbtMatcher> mustMatch, int amount, long price) {
-        this.owner = owner;
-        this.ownerName = ownerName;
-        this.baseItem = baseItem;
-        this.mustMatch = mustMatch;
-        this.cannotMatch = new ArrayList<>();
-        this.amount = amount;
-        this.price = price;
+        this(owner, ownerName, baseItem, mustMatch, new ArrayList<>(), amount, price);
     }
 
     public Bounty(UUID owner, String ownerName, NbtItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
@@ -49,6 +44,7 @@ public class Bounty {
         this.cannotMatch = cannotMatch;
         this.amount = amount;
         this.price = price;
+        this.id = UUID.randomUUID();
     }
 
     public boolean isValid() { return getValidity().isEmpty(); }
@@ -97,7 +93,7 @@ public class Bounty {
                         new LiteralText(""),
                         new LiteralText("----------").formatted(Formatting.DARK_GRAY),
                         new LiteralText(""),
-                        new LiteralText("Seller: ").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)
+                        new LiteralText("Buyer: ").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)
                                 .append(new LiteralText(ownerName + "").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)),
                         new LiteralText("Price: ").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)
                                 .append(new LiteralText(Economy2.addCurrencySign(price)).setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GOLD)),
@@ -111,8 +107,21 @@ public class Bounty {
         return stack;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(super.equals(obj)) return true;
+        else if(obj == null) return false;
+        else if(!(obj instanceof Bounty)) return false;
+        else {
+            Bounty other = (Bounty) obj;
+            return getId().equals(other.id);
+        }
+    }
+
     public int getAmount() { return amount; }
+    public void setAmount(int amount) { this.amount = amount; }
     public long getPrice() { return price; }
+    public void setPrice(long price) { this.price = price; }
 
     public UUID getOwner() { return owner; }
     public String getOwnerName() { return ownerName; }
@@ -121,6 +130,8 @@ public class Bounty {
 
     public List<NbtMatcher> getMustMatch() { return mustMatch; }
     public List<NbtMatcher> getCannotMatch() { return cannotMatch; }
+
+    public UUID getId() { return id; }
 
     public static class Serializer implements JsonSerializer<Bounty>, JsonDeserializer<Bounty> {
         public static Gson GSON = new GsonBuilder().registerTypeAdapter(Bounty.class, new Bounty.Serializer()).create();

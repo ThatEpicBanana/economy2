@@ -16,6 +16,9 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import static mods.banana.economy2.EconomyItems.Bounties.*;
+import static mods.banana.economy2.EconomyItems.Gui.*;
+
 import java.util.List;
 
 public class ManageBounties extends ListGui {
@@ -39,30 +42,39 @@ public class ManageBounties extends ListGui {
 
         // top / bottom
         for(int i = 0; i < 9; i++) {
-            setStackInSlot(i, EconomyItems.Gui.EMPTY.getItemStack());
-            setStackInSlot(i + ((getRows() - 1) * 9), EconomyItems.Gui.EMPTY.getItemStack());
+            setStackInSlot(i, EMPTY.getItemStack());
+            setStackInSlot(i + ((getRows() - 1) * 9), EMPTY.getItemStack());
         }
         // sides
         for(int i = 1; i < getRows() - 1; i++) {
-            setStackInSlot(9 * i, EconomyItems.Gui.EMPTY.getItemStack());
-            setStackInSlot(9 * i + 8, EconomyItems.Gui.EMPTY.getItemStack());
+            setStackInSlot(9 * i, EMPTY.getItemStack());
+            setStackInSlot(9 * i + 8, EMPTY.getItemStack());
         }
 
+        int i;
         // add all bounties
-        for(int i = 0; i < Math.min(bounties.size(), (getRows() - 2) * 7); i++) {
+        for(i = 0; i < Math.min(bounties.size(), (getRows() - 2) * 7); i++) {
             int slot = i + 10 + (Math.floorDiv(i, 7) * 2);
-            setStackInSlot(slot, bounties.get(i).toItemStack().copy());
+            setStackInSlot(slot, BOUNTY.convertTag(bounties.get(i).toItemStack().copy()));
+        }
+        // clear all empty stacks
+        for(; i < (getRows() - 2) * 7; i++) {
+            int slot = i + 10 + (Math.floorDiv(i, 7) * 2);
+            setStackInSlot(slot, ItemStack.EMPTY);
         }
 
-        setStackInSlot((getRows() - 1) * 9 + 4, EconomyItems.Gui.RETURN.getItemStack());
-        setStackInSlot((getRows() - 1) * 9 + 5, EconomyItems.Bounties.ADD_BOUNTY.getItemStack());
+        setStackInSlot((getRows() - 1) * 9 + 4, RETURN.getItemStack());
+        setStackInSlot((getRows() - 1) * 9 + 5, ADD_BOUNTY.getItemStack());
     }
 
     @Override
     public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
         if(i >= 0 && !playerEntity.world.isClient) {
             ItemStack stack = getSlot(i).getStack();
-            if(EconomyItems.Bounties.ADD_BOUNTY.matches(stack)) ((GuiPlayer)playerEntity).openScreen(new CreateBounty());
+            if(ADD_BOUNTY.matches(stack)) ((GuiPlayer)playerEntity).openScreen(new CreateBounty());
+            if(BOUNTY.matches(stack)) ((GuiPlayer)playerEntity).openScreen(
+                    new EditBounty(bounties.get(i - (9 + 1)))
+            );
         }
 
         return super.onSlotClick(i, j, actionType, playerEntity);
