@@ -75,7 +75,7 @@ public abstract class NbtMatcher {
         // either combine tags
         if(stack.hasTag()) stack.setTag(TagHelper.combine(stack.getTag(), getPredicateInfo().getTag()));
         // or just set it
-        else stack.setTag(getPredicateInfo().getTag());
+        else stack.setTag(getPredicateInfo().getTag().copy());
 
         // and return
         return stack;

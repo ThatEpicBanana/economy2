@@ -3,12 +3,12 @@ package mods.banana.economy2;
 import mods.banana.bananaapi.serverItems.ServerItem;
 import mods.banana.bananaapi.serverItems.ServerItemHandler;
 import mods.banana.economy2.banknote.items.BanknoteItem;
+import mods.banana.economy2.bounties.items.MatcherItem;
 import mods.banana.economy2.chestshop.items.AutoSellItem;
 import mods.banana.economy2.items.GuiItem;
 import net.minecraft.item.Items;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
-import org.lwjgl.system.CallbackI;
 
 public class EconomyItems {
     public static class Gui {
@@ -20,6 +20,8 @@ public class EconomyItems {
 
         public static ServerItem RETURN = new GuiItem(Items.ARROW, new Identifier("gui", "return"), 3, true, new LiteralText("Return"));
         public static ServerItem EXIT = new GuiItem(Items.BARRIER, new Identifier("gui", "exit"), 1, true, new LiteralText("Exit"));
+
+        public static ServerItem CONFIRM = new GuiItem(Items.BAMBOO, new Identifier("gui", "confirm"), new LiteralText("Confirm"));
     }
 
     public static class ChestShop {
@@ -49,9 +51,16 @@ public class EconomyItems {
         public static ServerItem SET_ITEM = new GuiItem(Items.STONE_BUTTON, new Identifier("bounty", "set-item"), new LiteralText("Set item"));
         public static ServerItem ALLOW_CUSTOM_TAGS = new GuiItem(Items.STICK, new Identifier("bounty", "allowtags"), 0, true, new LiteralText("Set custom data"));
 
-        public static ServerItem UNSET_MATCHER = new GuiItem(Items.LIGHT_GRAY_STAINED_GLASS_PANE, new Identifier("bounty", "unset"));
-        public static ServerItem REQUIRED_MATCHER = new GuiItem(Items.LIME_STAINED_GLASS_PANE, new Identifier("bounty", "unset"));
-        public static ServerItem DENIED_MATCHER = new GuiItem(Items.RED_STAINED_GLASS_PANE, new Identifier("bounty", "unset"));
+        public static MatcherItem UNSET_MATCHER = new MatcherItem(Items.BLACK_STAINED_GLASS_PANE, true, true);
+        public static MatcherItem REQUIRED_MATCHER = new MatcherItem(Items.LIME_STAINED_GLASS_PANE, true, true);
+        public static MatcherItem DENIED_MATCHER = new MatcherItem(Items.RED_STAINED_GLASS_PANE, false, true);
+
+        public static MatcherItem UNSET_MATCHER_DISPLAY = new MatcherItem(Items.BLACK_STAINED_GLASS_PANE, true, false);
+        public static MatcherItem REQUIRED_MATCHER_DISPLAY = new MatcherItem(Items.LIME_STAINED_GLASS_PANE, true, false);
+        public static MatcherItem DENIED_MATCHER_DISPLAY = new MatcherItem(Items.RED_STAINED_GLASS_PANE, false, false);
+
+        public static ServerItem AMOUNT = new GuiItem(Items.PAPER, new Identifier("bounty", "amount"), 2, true, new LiteralText("Amount"));
+        public static ServerItem PRICE = new GuiItem(Items.PAPER, new Identifier("bounty", "price"), 3, true, new LiteralText("Price"));
     }
 
     public static class Banknote {
@@ -74,6 +83,7 @@ public class EconomyItems {
         ServerItemHandler.register(Gui.RETURN);
         ServerItemHandler.register(Gui.SEARCH);
         ServerItemHandler.register(Gui.EXIT);
+        ServerItemHandler.register(Gui.CONFIRM);
 
         ServerItemHandler.register(Bounties.VIEW_ALL);
         ServerItemHandler.register(Bounties.VIEW_SELF);
@@ -82,6 +92,9 @@ public class EconomyItems {
         ServerItemHandler.register(Bounties.UNSET_MATCHER);
         ServerItemHandler.register(Bounties.REQUIRED_MATCHER);
         ServerItemHandler.register(Bounties.DENIED_MATCHER);
+        ServerItemHandler.register(Bounties.UNSET_MATCHER_DISPLAY);
+        ServerItemHandler.register(Bounties.REQUIRED_MATCHER_DISPLAY);
+        ServerItemHandler.register(Bounties.DENIED_MATCHER_DISPLAY);
 
         ServerItemHandler.register(ModulesScreen.SELECTED);
         ServerItemHandler.register(ModulesScreen.UNSELECTED);

@@ -15,6 +15,7 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -67,9 +68,7 @@ public abstract class GuiScreen extends FluidScreen implements CustomGui {
             if(playerEntity instanceof ServerPlayerEntity) {
                 if(actionType == SlotActionType.QUICK_MOVE) {
                     ServerPlayerEntity player = (ServerPlayerEntity) playerEntity;
-                    for(int slot = 0; slot < slots.size(); slot++) {
-                        player.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(syncId, slot, getSlot(slot).getStack()));
-                    }
+                    forceStackUpdates(player.networkHandler);
                 }
 
                 ItemStack stack = getSlot(i).getStack();
@@ -89,7 +88,7 @@ public abstract class GuiScreen extends FluidScreen implements CustomGui {
     }
     public void withReturnValue(GuiReturnValue<?> value) {}
 
-    public abstract GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player);
+//    public abstract GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player);
 
     // used for cloning
     public ScreenHandlerType<GenericContainerScreenHandler> getSize() { return size; }

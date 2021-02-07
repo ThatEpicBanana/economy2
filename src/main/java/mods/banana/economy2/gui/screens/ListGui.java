@@ -32,6 +32,8 @@ public abstract class ListGui extends GuiScreen {
             this.search = (String) value.getValue();
             System.out.println(search);
         }
+
+//        updateState();
     }
 
     @Override
@@ -40,8 +42,10 @@ public abstract class ListGui extends GuiScreen {
             ItemStack stack = getSlot(i).getStack();
             if(hasMoreItems() && EconomyItems.Gui.NEXT.matches(stack)) page++;
             if(page != 0 && EconomyItems.Gui.PREVIOUS.matches(stack)) page--;
-            if(EconomyItems.Gui.SEARCH.matches(stack) && playerEntity instanceof ServerPlayerEntity)
-                ((GuiPlayer)playerEntity).openSignGui(); // open sign for search
+            if(EconomyItems.Gui.SEARCH.matches(stack) && playerEntity instanceof ServerPlayerEntity) {
+                ((GuiPlayer)playerEntity).openSignGui(new Identifier("list", "search")); // open sign for search
+                return ItemStack.EMPTY;
+            }
         }
 
         return super.onSlotClick(i, j, actionType, playerEntity);

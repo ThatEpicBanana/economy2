@@ -5,10 +5,11 @@ import mods.banana.economy2.gui.mixin.GuiPlayer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 
 public class OpenSign {
     public static int run(ServerPlayerEntity  player) {
-        ((GuiPlayer)player).openSignGui();
+        ((GuiPlayer)player).openSignGui(new Identifier("command", "openSign"));
         return 1;
     }
 

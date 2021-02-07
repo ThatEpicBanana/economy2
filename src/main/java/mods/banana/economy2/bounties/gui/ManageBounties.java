@@ -51,7 +51,7 @@ public class ManageBounties extends ListGui {
         // add all bounties
         for(int i = 0; i < Math.min(bounties.size(), (getRows() - 2) * 7); i++) {
             int slot = i + 10 + (Math.floorDiv(i, 7) * 2);
-            setStackInSlot(slot, bounties.get(i).toItemStack());
+            setStackInSlot(slot, bounties.get(i).toItemStack().copy());
         }
 
         setStackInSlot((getRows() - 1) * 9 + 4, EconomyItems.Gui.RETURN.getItemStack());
@@ -91,15 +91,15 @@ public class ManageBounties extends ListGui {
         if(getPlayerInventory().player != null) this.bounties = Economy2.bountyHandler.getBounties(getPlayerInventory().player.getUuid());
     }
 
-    public ManageBounties(int syncId, PlayerInventory playerInventory, Inventory inventory, PlayerEntity playerEntity) {
-        super(syncId, playerInventory, update(inventory, getRows(playerEntity)), getRows(playerEntity), new Identifier("bounty", "manage"));
-        updateBounties();
-    }
-
-    @Override
-    public GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new ManageBounties(syncId, inventory, getInventory(), player);
-    }
+//    public ManageBounties(int syncId, PlayerInventory playerInventory, Inventory inventory, PlayerEntity playerEntity) {
+//        super(syncId, playerInventory, update(inventory, getRows(playerEntity)), getRows(playerEntity), new Identifier("bounty", "manage"));
+//        updateBounties();
+//    }
+//
+//    @Override
+//    public GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player) {
+//        return new ManageBounties(syncId, inventory, getInventory(), player);
+//    }
 
     @Override
     public boolean hasMoreItems() {

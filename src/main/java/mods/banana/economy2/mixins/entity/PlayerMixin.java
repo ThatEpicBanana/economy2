@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.gui.*;
 import mods.banana.economy2.gui.mixin.GuiPlayer;
 import mods.banana.economy2.gui.screens.GuiScreen;
@@ -29,6 +30,8 @@ import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -56,6 +59,8 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     @Shadow public abstract void closeHandledScreen();
 
     @Shadow public abstract void sendSystemMessage(Text message, UUID senderUuid);
+
+    @Shadow public abstract void closeScreenHandler();
 
     private long bal;
 
@@ -116,7 +121,9 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         if(currentScreenHandler instanceof GuiScreen) {
             if(replaceFirst) screenStack.set(0, (GuiScreen) currentScreenHandler);
             else screenStack.add(0, (GuiScreen) currentScreenHandler);
+
             ((GuiScreen) currentScreenHandler).updateState();
+            ((GuiScreen) currentScreenHandler).forceStackUpdates(networkHandler);
         }
 
         this.closingOrOpeningGuiScreen = false;
@@ -125,6 +132,11 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     @Redirect(method = "openHandledScreen", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;closeHandledScreen()V"))
     private void preventClose(ServerPlayerEntity playerEntity) {
         if(!(playerEntity.currentScreenHandler instanceof FluidScreen)) playerEntity.closeHandledScreen();
+    }
+
+    @Inject(method = "swingHand", at = @At("HEAD"), cancellable = true)
+    private void preventPunch(Hand hand, CallbackInfo ci) {
+        if(currentScreenHandler instanceof FluidScreen) ci.cancel();
     }
 
     /**
@@ -198,12 +210,12 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
      * <p>Opens a custom sign gui.</p>
      * To close the gui, you must use the {@link #closeSignGui() closeSignGui} method.
      */
-    public void openSignGui() {
+    public void openSignGui(Identifier id) {
         // so what happens when a player opens a sign is that the sign's position goes over to the client
         // what has to happen is for the client to be sent fake block data before it gets that sign
 
         // create sign at the bottom of the world at the player's position
-        customSign = new SignGui(new BlockPos(getBlockPos().getX(), 0, getBlockPos().getZ()));
+        customSign = new SignGui(new BlockPos(getBlockPos().getX(), 0, getBlockPos().getZ()), id);
         // send fake sign to client
         networkHandler.sendPacket(new BlockUpdateS2CPacket(customSign.getPos(), Blocks.OAK_SIGN.getDefaultState()));
         // increment sign state

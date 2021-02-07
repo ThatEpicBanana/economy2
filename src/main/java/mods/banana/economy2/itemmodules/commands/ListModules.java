@@ -7,10 +7,11 @@ import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 
 public class ListModules {
     public static int run(ServerPlayerEntity player) {
-        ((GuiPlayer)player).openScreen(new ModulesScreen(NbtMatcher.Type.BOTH, true));
+        ((GuiPlayer)player).openScreen(new ModulesScreen(NbtMatcher.Type.BOTH, true, null));
         return 1;
     }
 

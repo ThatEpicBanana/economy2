@@ -74,8 +74,8 @@ public class BountyList extends ListGui {
         super(syncId, playerInventory, inventory, 6, new Identifier("bounty", "list"));
     }
 
-    @Override
-    public GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new BountyList(syncId, inventory, getInventory());
-    }
+//    @Override
+//    public GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player) {
+//        return new BountyList(syncId, inventory, getInventory());
+//    }
 }

@@ -55,8 +55,8 @@ public class BountyBasePage extends GuiScreen {
         super(syncId, playerInventory, inventory, ScreenHandlerType.GENERIC_9X4, 4, new Identifier("bounty", "base"));
     }
 
-    @Override
-    public GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new BountyBasePage(syncId, inventory, getInventory());
-    }
+//    @Override
+//    public GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player) {
+//        return new BountyBasePage(syncId, inventory, getInventory());
+//    }
 }

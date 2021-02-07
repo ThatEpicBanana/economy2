@@ -14,12 +14,14 @@ import mods.banana.economy2.items.GuiItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,27 +35,31 @@ public class ModulesScreen extends ListGui {
     private List<NbtMatcher> values;
 
     private final NbtMatcher.Type typeToShow;
-    private final boolean showsMinecraftItems;
+    private final Item itemToMatch;
 
     private static final int startingRow = 2;
     private static final int sizeInPage = 7 * 5;
 
-    public ModulesScreen(NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
-        this(0, new PlayerInventory(null), false, typeToShow, showsMinecraftItems);
+    public ModulesScreen(NbtMatcher.Type typeToShow, boolean showsMinecraftItems, @Nullable Item itemToMatch) {
+        this(typeToShow, showsMinecraftItems, itemToMatch, new Identifier("module", "screen"));
     }
 
-    public ModulesScreen(int syncId, PlayerInventory playerInventory, NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
-        this(syncId, playerInventory, true, typeToShow, showsMinecraftItems);
+    public ModulesScreen(NbtMatcher.Type typeToShow, boolean showsMinecraftItems, @Nullable Item itemToMatch, Identifier id) {
+        this(0, new PlayerInventory(null), false, typeToShow, showsMinecraftItems, itemToMatch, id);
     }
 
-    private ModulesScreen(int syncId, PlayerInventory playerInventory, boolean updateState, NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
-        super(syncId, playerInventory, 6, new Identifier("module", "list"));
+    public ModulesScreen(int syncId, PlayerInventory playerInventory, NbtMatcher.Type typeToShow, boolean showsMinecraftItems, @Nullable Item itemToMatch, Identifier id) {
+        this(syncId, playerInventory, true, typeToShow, showsMinecraftItems, itemToMatch, id);
+    }
+
+    private ModulesScreen(int syncId, PlayerInventory playerInventory, boolean updateState, NbtMatcher.Type typeToShow, boolean showsMinecraftItems, @Nullable Item itemToMatch, Identifier id) {
+        super(syncId, playerInventory, 6, id);
 
         itemModules = new ArrayList<>(ItemModuleHandler.activeModules);
         if(showsMinecraftItems) itemModules.add(0, ItemModuleHandler.MINECRAFT_ITEMS);
 
         this.typeToShow = typeToShow;
-        this.showsMinecraftItems = showsMinecraftItems;
+        this.itemToMatch = itemToMatch;
 
         updateValues();
         if(updateState) updateState();
@@ -61,7 +67,7 @@ public class ModulesScreen extends ListGui {
 
     @Override
     public GuiReturnValue<?> getReturnValue() {
-        return returnValue != null ? new GuiReturnValue<>(returnValue, this) : null;
+        return new GuiReturnValue<>(returnValue, this);
     }
 
     private void updateTabs() {
@@ -85,7 +91,7 @@ public class ModulesScreen extends ListGui {
             // if tab isn't the currently selected tab, set the tab to unselected
             if(tab != 0) setStackInSlot(row + 1, EconomyItems.ModulesScreen.UNSELECTED.getItemStack());
             // set the stack
-            setStackInSlot(row, EconomyItems.PROTECTED_ITEM.convert(module.getItemStack()));
+            setStackInSlot(row, EconomyItems.PROTECTED_ITEM.convertTag(module.getItemStack()));
         }
     }
 
@@ -102,8 +108,8 @@ public class ModulesScreen extends ListGui {
                         List.of(new LiteralText(item.getIdentifier().toString())) // set lore to identifier
                 );
 
-                if(item.typeMatches(NbtMatcher.Type.MODIFIER)) EconomyItems.ModulesScreen.MODIFIER.convert(stack);
-                else EconomyItems.ModulesScreen.MATCHER.convert(stack);
+                if(item.typeMatches(NbtMatcher.Type.MODIFIER)) EconomyItems.ModulesScreen.MODIFIER.convertTag(stack);
+                else EconomyItems.ModulesScreen.MATCHER.convertTag(stack);
 
                 EconomyItems.ModulesScreen.MATCHER.setCustomValue(stack, "id", StringTag.of(item.getIdentifier().toString()));
 
@@ -119,7 +125,8 @@ public class ModulesScreen extends ListGui {
         else setStackInSlot(5 * 9 + 2, EconomyItems.Gui.EMPTY.getItemStack());
 
         for(int i = 3; i < 8; i++) {
-            if(i == 5) setStackInSlot(5 * 9 + i, EconomyItems.Gui.SEARCH.getItemStack());
+            if(i == 4) setStackInSlot(5 * 9 + i, EconomyItems.Gui.RETURN.getItemStack());
+            else if(i == 5) setStackInSlot(5 * 9 + i, EconomyItems.Gui.SEARCH.getItemStack());
             else setStackInSlot(5 * 9 + i, EconomyItems.Gui.EMPTY.getItemStack());
         }
 
@@ -170,6 +177,15 @@ public class ModulesScreen extends ListGui {
     public void updateValues() {
         values = new ArrayList<>(itemModules.get(tab).getValuesOfType(typeToShow).values());
 
+        // search items
+        if(itemToMatch != null) {
+            List<NbtMatcher> itemsMatched = new ArrayList<>();
+            for(NbtMatcher matcher : values) {
+                if(matcher.itemMatches(itemToMatch)) itemsMatched.add(matcher);
+            }
+            values = itemsMatched;
+        }
+
         // if there is a search, go through each matcher and see if it's identifier matches the search
         if(getSearch() != null) {
             List<NbtMatcher> searchedValues = new ArrayList<>();
@@ -208,24 +224,25 @@ public class ModulesScreen extends ListGui {
         return ItemStack.EMPTY;
     }
 
-    private ModulesScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int tab, String search, NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
-        super(syncId, playerInventory, inventory, 6, new Identifier("module", "list"));
-
-        itemModules = new ArrayList<>(ItemModuleHandler.activeModules);
-        if(showsMinecraftItems) itemModules.add(0, ItemModuleHandler.MINECRAFT_ITEMS);
-
-        this.tab = tab;
-        setSearch(search);
-
-        this.typeToShow = typeToShow;
-        this.showsMinecraftItems = showsMinecraftItems;
-
-        updateValues();
-    }
-
-    public GuiScreen copy(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new ModulesScreen(syncId, playerInventory, getInventory(), tab, getSearch(), typeToShow, showsMinecraftItems);
-    }
+//    private ModulesScreen(int syncId, PlayerInventory playerInventory, Inventory inventory, int tab, String search, NbtMatcher.Type typeToShow, boolean showsMinecraftItems) {
+//        super(syncId, playerInventory, inventory, 6, new Identifier("module", "list"));
+//
+//        itemModules = new ArrayList<>(ItemModuleHandler.activeModules);
+//        if(showsMinecraftItems) itemModules.add(0, ItemModuleHandler.MINECRAFT_ITEMS);
+//
+//        this.tab = tab;
+//        setSearch(search);
+//
+//        this.typeToShow = typeToShow;
+//        this.showsMinecraftItems = showsMinecraftItems;
+//
+//        updateValues();
+//    }
+//
+//
+//    public GuiScreen copy(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+//        return new ModulesScreen(syncId, playerInventory, getInventory(), tab, getSearch(), typeToShow, showsMinecraftItems);
+//    }
 
 
 }

@@ -71,7 +71,7 @@ public class BountyBase {
         }
 
         // add bounty to bounty handler
-        Economy2.bountyHandler.add(new Bounty(player.getUuid(), baseItem, mustMatch, cannotMatch, amount, price));
+        Economy2.bountyHandler.add(new Bounty(player.getUuid(), player.getEntityName(), baseItem, mustMatch, cannotMatch, amount, price));
 
         return 1;
     }

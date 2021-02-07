@@ -6,11 +6,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,8 +61,9 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
     }
 
     public void updatePlayerInventory(PlayerInventory playerInventory) {
+        // basically just directly copied from GenericScreenHandler
         int i = (getRows() - 4) * 18;
-        int prev = inv.size();
+        int invOffset = inv.size();
 
         int n;
         int m;
@@ -68,19 +71,26 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
         for(n = 0; n < 3; ++n) {
             for(m = 0; m < 9; ++m) {
                 setSlot(
-                        prev + m + n * 9 + 9,
-                        new Slot(playerInventory, m + n * 9 + 9, 8 + m * 18, 103 + n * 18 + i),
-                        playerInventory.getStack(prev + m + n * 9 + 9)
+                        invOffset + m + n * 9,
+                        new Slot(playerInventory, m + n * 9 + 9, 8 + m * 18, 103 + n * 18 + i)
                 );
             }
         }
 
+        int mainOffset = playerInventory.main.size() - 9;
+
         for(n = 0; n < 9; ++n) {
             setSlot(
-                    prev + n,
-                    new Slot(playerInventory, n, 8 + n * 18, 161 + i),
-                    playerInventory.getStack(prev + n)
+                    invOffset + mainOffset + n,
+                    new Slot(playerInventory, n, 8 + n * 18, 161 + i)
             );
+        }
+    }
+
+    public void forceStackUpdates(ServerPlayNetworkHandler networkHandler) {
+        for(int slot = 0; slot < slots.size(); slot++) {
+            networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(((ScreenHandler)this).syncId, slot, getSlot(slot).getStack()));
+            networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(syncId, slot, getSlot(slot).getStack()));
         }
     }
 
@@ -88,12 +98,6 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
 
     public void setSlot(int i, Slot slot) {
         ((ScreenHandlerInterface)this).overrideSlot(i, slot);
-        setStackInSlot(i, slot.getStack());
-    }
-
-    public void setSlot(int i, Slot slot, ItemStack stack) {
-        slot.setStack(stack);
-        setSlot(i, slot);
     }
 
     @Override
