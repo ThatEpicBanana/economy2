@@ -76,7 +76,7 @@ public class EditBounty extends GuiScreen {
         if(i >= 0 && !playerEntity.world.isClient) {
             ItemStack stack = getSlot(i).getStack();
             if(DELETE.matches(stack)) {
-                Economy2.bountyHandler.remove(bounty);
+                Economy2.bountyHandler.remove(bounty, true);
                 ((GuiPlayer)playerEntity).closeScreen();
             }
 

@@ -4,6 +4,8 @@ import com.google.gson.*;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.bananaapi.helpers.TextHelper;
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.EconomyItems;
+import mods.banana.economy2.balance.OfflinePlayer;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
@@ -17,10 +19,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class Bounty {
     private final UUID owner;
@@ -50,18 +49,21 @@ public class Bounty {
     public boolean isValid() { return getValidity().isEmpty(); }
 
     public Optional<String> getValidity() {
-        return getValidity(baseItem, mustMatch, cannotMatch, amount, price);
+        return getValidity(owner, baseItem, mustMatch, cannotMatch, amount, price);
     }
 
-    public static boolean isValid(NbtItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
-        return getValidity(baseItem, mustMatch, cannotMatch, amount, price).isEmpty();
+    public static boolean isValid(UUID owner, NbtItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
+        return getValidity(owner, baseItem, mustMatch, cannotMatch, amount, price).isEmpty();
     }
 
-    public static Optional<String> getValidity(NbtItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
+    public static Optional<String> getValidity(UUID owner, NbtItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
         // check parameters
         if(amount <= 0) return Optional.of("Amount must be set");
         if(price <= 0) return Optional.of("Price must be set");
         if(baseItem == null || baseItem.getItem().equals(Items.AIR)) return Optional.of("Base item must be set");
+        if(OfflinePlayer.getPlayer(owner).getBal() < price) return Optional.of("Not enough " + Economy2.CONFIG.getValue("currency.name", String.class) + " to request this bounty.");
+
+        ItemStack stack = new ItemStack(baseItem.getItem());
 
         for(NbtMatcher i : mustMatch) {
             // check item
@@ -70,12 +72,30 @@ public class Bounty {
             for(NbtMatcher j : mustMatch) {
                 if(!i.accepts(j, baseItem.getItem())) return Optional.of(i.getIdentifier().toString() + " cannot combine with " + j.getIdentifier().toString());
             }
-            // check cannot matchers
-            for(NbtMatcher j : cannotMatch) {
-                if(j.accepts(i, baseItem.getItem())) return Optional.of("Must match " + i.getIdentifier().toString() + " conflicts with cannot match " + j.getIdentifier().toString());
-            }
+            // apply to stack for cannot matchers
+            i.apply(stack);
         }
+
+        // check cannot matchers
+        for(NbtMatcher i : cannotMatch) {
+            if(!i.accepts(stack)) return Optional.of("Cannot match" + i.getIdentifier().toString() + " conflicts with stack.");
+        }
+
         return Optional.empty();
+    }
+
+    public boolean matches(ItemStack stack) {
+        if(!baseItem.matches(stack, NbtMatcher.Type.BOTH)) return false;
+
+        for(NbtMatcher matcher : mustMatch) {
+            if(!matcher.matches(stack, NbtMatcher.Type.BOTH)) return false;
+        }
+
+        for(NbtMatcher matcher : cannotMatch) {
+            if(matcher.matches(stack, NbtMatcher.Type.BOTH)) return false;
+        }
+
+        return true;
     }
 
     public ItemStack toItemStack() {
@@ -86,7 +106,7 @@ public class Bounty {
         // apply each nbt matcher to stack
         for (NbtMatcher item : mustMatch) item.apply(stack);
         // set count
-        ItemStackHelper.setCount(stack, Math.min(amount, 64));
+        ItemStackHelper.setCount(stack, Math.min(getAmount(), 64));
         ItemStackHelper.addLore(
                 stack,
                 List.of(
@@ -94,12 +114,12 @@ public class Bounty {
                         new LiteralText("----------").formatted(Formatting.DARK_GRAY),
                         new LiteralText(""),
                         new LiteralText("Buyer: ").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)
-                                .append(new LiteralText(ownerName + "").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)),
+                                .append(new LiteralText(getOwnerName() + "").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)),
                         new LiteralText("Price: ").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)
-                                .append(new LiteralText(Economy2.addCurrencySign(price)).setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GOLD)),
+                                .append(new LiteralText(Economy2.addCurrencySign(getPrice())).setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GOLD)),
                         new LiteralText(""),
                         new LiteralText("Amount: ").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.GRAY)
-                                .append(new LiteralText(amount + "").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.WHITE))
+                                .append(new LiteralText(getAmount() + "").setStyle(TextHelper.TRUE_RESET).formatted(Formatting.WHITE))
                 ),
                 0
         );
@@ -121,7 +141,11 @@ public class Bounty {
     public int getAmount() { return amount; }
     public void setAmount(int amount) { this.amount = amount; }
     public long getPrice() { return price; }
-    public void setPrice(long price) { this.price = price; }
+
+    public void setPrice(long price) {
+        OfflinePlayer.getPlayer(owner).addBal(this.price - price);
+        this.price = price;
+    }
 
     public UUID getOwner() { return owner; }
     public String getOwnerName() { return ownerName; }

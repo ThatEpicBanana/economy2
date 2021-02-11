@@ -28,6 +28,8 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -319,9 +321,21 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         return itemsRemoved;
     }
 
-    public void giveStack(ItemStack inputStack) {
-        if(!inventory.insertStack(inputStack)) {
-            ItemEntity itemEntity = dropItem(inputStack, false);
+    public void giveStack(ItemStack itemStack) {
+        // literally just copied from the /give command
+        boolean bl = inventory.insertStack(itemStack);
+        ItemEntity itemEntity;
+        if (bl && itemStack.isEmpty()) {
+            itemStack.setCount(1);
+            itemEntity = dropItem(itemStack, false);
+            if (itemEntity != null) {
+                itemEntity.setDespawnImmediately();
+            }
+
+            world.playSound(null, getX(), getY(), getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((getRandom().nextFloat() - getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+            playerScreenHandler.sendContentUpdates();
+        } else {
+            itemEntity = dropItem(itemStack, false);
             if (itemEntity != null) {
                 itemEntity.resetPickupDelay();
                 itemEntity.setOwner(getUuid());

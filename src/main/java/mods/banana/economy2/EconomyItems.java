@@ -3,6 +3,7 @@ package mods.banana.economy2;
 import mods.banana.bananaapi.serverItems.ServerItem;
 import mods.banana.bananaapi.serverItems.ServerItemHandler;
 import mods.banana.economy2.banknote.items.BanknoteItem;
+import mods.banana.economy2.bounties.items.BountyItem;
 import mods.banana.economy2.bounties.items.MatcherItem;
 import mods.banana.economy2.chestshop.items.AutoSellItem;
 import mods.banana.economy2.items.GuiItem;
@@ -66,12 +67,17 @@ public class EconomyItems {
             public static ServerItem DELETE = new GuiItem(Items.BARRIER, new Identifier("bounty", "delete"), 2, true, new LiteralText("Delete").formatted(Formatting.RED));
         }
 
+        public static class View {
+            public static ServerItem REDEEM = new GuiItem(Items.GOLD_NUGGET, new Identifier("bounty", "redeem"), new LiteralText("Redeem"));
+            public static ServerItem CANNOT_MATCH = new GuiItem(Items.BARRIER, new Identifier("bounty", "cannot_match"), new LiteralText("Uncombinable"));
+        }
+
         public static ServerItem ADD_BOUNTY = new GuiItem(Items.GOLDEN_HORSE_ARMOR, new Identifier("bounty", "add"), new LiteralText("Request bounty"));
 
         public static ServerItem AMOUNT = new GuiItem(Items.PAPER, new Identifier("bounty", "amount"), 2, true, new LiteralText("Amount"));
         public static ServerItem PRICE = new GuiItem(Items.PAPER, new Identifier("bounty", "price"), 3, true, new LiteralText("Price"));
 
-        public static ServerItem BOUNTY = new GuiItem(null, new Identifier("bounty", "bounty"), 0, true, null);
+        public static BountyItem BOUNTY = new BountyItem(new Identifier("bounty", "bounty"));
     }
 
     public static class Banknote {

@@ -1,5 +1,7 @@
 package mods.banana.economy2.trade;
 
+import mods.banana.economy2.balance.PlayerInterface;
+import mods.banana.economy2.chestshop.interfaces.mixin.ChestShopPlayerInterface;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -63,19 +65,20 @@ public class TradeInstance {
 
         if(exchangeItems) {
             for(ItemStack itemStack : sourceInterface.getTradeItems()) {
-                target.giveItemStack(itemStack);
+                targetInterface.giveStack(itemStack);
             }
             for(ItemStack itemStack : targetInterface.getTradeItems()) {
-                source.giveItemStack(itemStack);
+                sourceInterface.giveStack(itemStack);
             }
+
             source.playSound(SoundEvents.ENTITY_ARROW_HIT_PLAYER, SoundCategory.PLAYERS, 0.5F, 1);
             target.playSound(SoundEvents.ENTITY_ARROW_HIT_PLAYER, SoundCategory.PLAYERS, 0.5F, 1);
         } else {
             for(ItemStack itemStack : sourceInterface.getTradeItems()) {
-                source.giveItemStack(itemStack);
+                sourceInterface.giveStack(itemStack);
             }
             for(ItemStack itemStack : targetInterface.getTradeItems()) {
-                target.giveItemStack(itemStack);
+                targetInterface.giveStack(itemStack);
             }
         }
 

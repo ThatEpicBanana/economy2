@@ -15,4 +15,6 @@ public interface TradePlayerInterface extends PlayerInterface {
 
     boolean getAccepted();
     void setAccepted(boolean accepted);
+
+    void giveStack(ItemStack inputStack);
 }

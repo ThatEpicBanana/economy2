@@ -3,18 +3,25 @@ package mods.banana.economy2.bounties.gui;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.bounties.Bounty;
+import mods.banana.economy2.bounties.items.BountyItem;
+import mods.banana.economy2.gui.GuiReturnValue;
+import mods.banana.economy2.gui.mixin.GuiPlayer;
 import mods.banana.economy2.gui.screens.GuiScreen;
 import mods.banana.economy2.gui.screens.ListGui;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static mods.banana.economy2.EconomyItems.Bounties.*;
 
 public class BountyList extends ListGui {
     private final List<Bounty> bounties = new ArrayList<>(Economy2.bountyHandler.getBounties());
@@ -31,6 +38,16 @@ public class BountyList extends ListGui {
 //    public GuiReturnValue<?> getReturnValue() {
 //        return new GuiReturnValue<>("aaaa", this);
 //    }
+
+
+    @Override
+    public void withReturnValue(GuiReturnValue<?> value) {
+        if(value != null && value.getValue() instanceof Boolean && (Boolean) value.getValue()) {
+            // reset bounties
+            bounties.clear();
+            bounties.addAll(Economy2.bountyHandler.getBounties());
+        }
+    }
 
     @Override
     public Text getDisplayName() {
@@ -60,9 +77,24 @@ public class BountyList extends ListGui {
             int adjusted = i + 10 + (Math.floorDiv(i, 7) * 2); // adjust for the two slots taken up by the left
             int index = i + sizeInScreen * getPage(); // get the index
 
-            if(index < bounties.size()) setStackInSlot(adjusted, bounties.get(index).toItemStack());
+            if(index < bounties.size()) {
+                Bounty bounty = bounties.get(index);
+                setStackInSlot(adjusted, BOUNTY.setId(bounty.toItemStack(), bounty.getId()));
+            }
             else setStackInSlot(adjusted, ItemStack.EMPTY);
         }
+    }
+
+    @Override
+    public ItemStack onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity) {
+        if(i >= 0 && !playerEntity.world.isClient) {
+            ItemStack stack = getSlot(i).getStack();
+
+            if(BOUNTY.matches(stack)) {
+                ((GuiPlayer)playerEntity).openScreen(new ViewBounty(BOUNTY.getBounty(stack)));
+            }
+        }
+        return super.onSlotClick(i, j, actionType, playerEntity);
     }
 
     @Override
@@ -70,9 +102,9 @@ public class BountyList extends ListGui {
         return bounties.size() > (getPage() + 1) * sizeInScreen;
     }
 
-    private BountyList(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(syncId, playerInventory, inventory, 6, new Identifier("bounty", "list"));
-    }
+//    private BountyList(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+//        super(syncId, playerInventory, inventory, 6, new Identifier("bounty", "list"));
+//    }
 
 //    @Override
 //    public GuiScreen copy(int syncId, PlayerInventory inventory, PlayerEntity player) {
