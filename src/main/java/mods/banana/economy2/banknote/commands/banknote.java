@@ -23,7 +23,7 @@ public class banknote {
             CompoundTag tag = itemStack.getTag();
 
             // add amount to tag
-            tag.getCompound(EconomyItems.Banknote.BANKNOTE.getIdentifier().getNamespace()).putLong("amount", amount);
+            tag.getCompound(EconomyItems.Banknote.BANKNOTE.getId().getNamespace()).putLong("amount", amount);
 
             // add lore
             ListTag loreTag = tag.getCompound("display").getList("Lore", 9);

@@ -2,6 +2,8 @@ package mods.banana.economy2.itemmodules.gui;
 
 import com.ibm.icu.text.UTF16;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
+import mods.banana.bananaapi.itemsv2.CustomItem;
+import mods.banana.bananaapi.itemsv2.ItemHandler;
 import mods.banana.economy2.EconomyItems;
 import mods.banana.economy2.gui.*;
 import mods.banana.economy2.gui.mixin.GuiPlayer;
@@ -11,6 +13,7 @@ import mods.banana.economy2.itemmodules.ItemModule;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
 import mods.banana.economy2.items.GuiItem;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -67,7 +70,7 @@ public class ModulesScreen extends ListGui {
 
     @Override
     public GuiReturnValue<?> getReturnValue() {
-        return new GuiReturnValue<>(returnValue, this);
+        return returnValue != null ? new GuiReturnValue<>(returnValue, this) : null;
     }
 
     private void updateTabs() {
@@ -91,6 +94,10 @@ public class ModulesScreen extends ListGui {
             // if tab isn't the currently selected tab, set the tab to unselected
             if(tab != 0) setStackInSlot(row + 1, EconomyItems.ModulesScreen.UNSELECTED.getItemStack());
             // set the stack
+            EconomyItems.PROTECTED_ITEM = new CustomItem.Builder().id("gui", "protected").customModelData(0).build();
+
+            ItemHandler.register(EconomyItems.Banknote.BANKNOTE);
+
             setStackInSlot(row, EconomyItems.PROTECTED_ITEM.convertTag(module.getItemStack()));
         }
     }
@@ -111,7 +118,10 @@ public class ModulesScreen extends ListGui {
                 if(item.typeMatches(NbtMatcher.Type.MODIFIER)) EconomyItems.ModulesScreen.MODIFIER.convertTag(stack);
                 else EconomyItems.ModulesScreen.MATCHER.convertTag(stack);
 
-                EconomyItems.ModulesScreen.MATCHER.setCustomValue(stack, "id", StringTag.of(item.getIdentifier().toString()));
+                stack = EconomyItems.ModulesScreen.MATCHER
+                        .toBuilder(stack, false)
+                        .customValue("id", StringTag.of(item.getIdentifier().toString()))
+                        .build();
 
                 setStackInSlot(adjusted, stack);
             } else {
@@ -161,7 +171,12 @@ public class ModulesScreen extends ListGui {
 
             // select item
             if(EconomyItems.ModulesScreen.MATCHER.matches(stack)) {
-                returnValue = new Identifier(EconomyItems.ModulesScreen.MATCHER.getCustomTag(stack).getString("id"));
+                returnValue = new Identifier(
+                        EconomyItems.ModulesScreen.MATCHER
+                                .toReader(stack)
+                                .getCustomValue("id", NbtType.STRING)
+                                .asString()
+                );
                 ((GuiPlayer)playerEntity).closeScreen();
             }
         }

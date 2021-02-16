@@ -47,64 +47,66 @@ public class CreateBounty extends GuiScreen {
 
     @Override
     public void withReturnValue(GuiReturnValue<?> returnValue) {
-        Identifier id = returnValue.getParent().getId();
+        if(returnValue != null) {
+            Identifier id = returnValue.getParent().getId();
 
-        if(id.getNamespace().equals("modifier")) {
-            Identifier value = (Identifier) returnValue.getValue();
+            if(id.getNamespace().equals("modifier")) {
+                Identifier value = (Identifier) returnValue.getValue();
 
-            // get index from path
-            int i = Integer.parseInt(id.getPath());
-            ItemStack matcherStack = matchers[i];
+                // get index from path
+                int i = Integer.parseInt(id.getPath());
+                ItemStack matcherStack = matchers[i];
 
-            if(returnValue.getValue() instanceof Identifier) {
-                NbtMatcher matcher = ItemModuleHandler.getActiveMatcher(value);
+                if(returnValue.getValue() instanceof Identifier) {
+                    NbtMatcher matcher = ItemModuleHandler.getActiveMatcher(value);
 
-                // get item stack
-                if(matcher != null) {
-                    MatcherItem matcherType = UNSET_MATCHER.isActivated(matcherStack) ?
-                            REQUIRED_MATCHER :
-                            DENIED_MATCHER;
+                    // get item stack
+                    if(matcher != null) {
+                        MatcherItem matcherType = UNSET_MATCHER.isActivated(matcherStack) ?
+                                REQUIRED_MATCHER :
+                                DENIED_MATCHER;
 
-                    matcherStack = matcher.toItemStack();
+                        matcherStack = matcher.toItemStack();
 
-                    matcherType.convert(matcherStack);
+                        matcherType.convertTag(matcherStack);
+                    }
+
+                    // set item modifier to value
+                    matcherStack = UNSET_MATCHER.setValue(matcherStack, value);
+                } else {
+                    // return value is null, reset stack
+                    matcherStack = UNSET_MATCHER.getItemStack();
                 }
 
-                // set item modifier to value
-                UNSET_MATCHER.setValue(matcherStack, value);
-            } else {
-                // return value is null, reset stack
-                matcherStack = UNSET_MATCHER.getItemStack();
+                // update item stack
+                matchers[i] = matcherStack;
             }
 
-            // update item stack
-            matchers[i] = matcherStack;
-        }
+            if(returnValue.getValue() != null && id.getNamespace().equals("item")) {
+                Identifier value = (Identifier) returnValue.getValue();
 
-        if(returnValue.getValue() != null && id.getNamespace().equals("item")) {
-            Identifier value = (Identifier) returnValue.getValue();
+                baseItemNbt = (NbtItem) ItemModuleHandler.getActiveMatcher(value, NbtMatcher.Type.ITEM);
+                if(baseItemNbt == null) baseItemNbt = (NbtItem) ItemModuleHandler.MINECRAFT_ITEMS.getValues().get(value);
 
-            baseItemNbt = (NbtItem) ItemModuleHandler.getActiveMatcher(value, NbtMatcher.Type.ITEM);
-            if(baseItemNbt == null) baseItemNbt = (NbtItem) ItemModuleHandler.MINECRAFT_ITEMS.getValues().get(value);
+                baseItem = baseItemNbt.toItemStack();
+                SET_ITEM.convertTag(baseItem);
 
-            baseItem = baseItemNbt.toItemStack();
-            SET_ITEM.convertTag(baseItem);
+                // clear matchers
+                resetMatchers();
+            }
 
-            // clear matchers
-            resetMatchers();
-        }
-
-        if(returnValue.getParent() instanceof SignGui) {
-            String value = (String) returnValue.getValue();
-            if(returnValue.getValue() != null && id.equals(new Identifier("bounty", "amount"))) {
-                if(checkInt.matcher(value).find()) {
-                    this.amount = Integer.parseInt(value);
+            if(returnValue.getParent() instanceof SignGui) {
+                String value = (String) returnValue.getValue();
+                if(returnValue.getValue() != null && id.equals(new Identifier("bounty", "amount"))) {
+                    if(checkInt.matcher(value).find()) {
+                        this.amount = Integer.parseInt(value);
+                    }
                 }
-            }
 
-            if(returnValue.getValue() != null && id.equals(new Identifier("bounty", "price"))) {
-                if(checkInt.matcher(value).find()) {
-                    this.price = Long.parseLong(value);
+                if(returnValue.getValue() != null && id.equals(new Identifier("bounty", "price"))) {
+                    if(checkInt.matcher(value).find()) {
+                        this.price = Long.parseLong(value);
+                    }
                 }
             }
         }
@@ -180,11 +182,11 @@ public class CreateBounty extends GuiScreen {
             if(ALLOW_CUSTOM_TAGS.matches(stack)) customTags = !customTags;
 
             if(j > 0) {
-                if(UNSET_MATCHER_DISPLAY.matches(stack) || UNSET_MATCHER.matches(stack)) {
-                    UNSET_MATCHER.setActivated(matchers[i % 9 - 3], !UNSET_MATCHER.isActivated(stack));
+                if(UNSET_MATCHER_DISPLAY.idMatches(stack) || UNSET_MATCHER.idMatches(stack)) {
+                    matchers[i % 9 - 3] = UNSET_MATCHER.setActivated(matchers[i % 9 - 3], !UNSET_MATCHER.isActivated(stack));
                 }
             } else {
-                if(UNSET_MATCHER.matches(stack)) {
+                if(UNSET_MATCHER.idMatches(stack)) {
                     ((GuiPlayer)playerEntity).openScreen(new ModulesScreen(
                             NbtMatcher.Type.BOTH,
                             false,
@@ -194,7 +196,7 @@ public class CreateBounty extends GuiScreen {
                 }
             }
 
-            if(SET_ITEM.matches(stack)) {
+            if(SET_ITEM.idMatches(stack)) {
                 ((GuiPlayer)playerEntity).openScreen(new ModulesScreen(
                         NbtMatcher.Type.ITEM,
                         true,
@@ -224,6 +226,8 @@ public class CreateBounty extends GuiScreen {
                     ((GuiPlayer)playerEntity).closeScreen();
                 }
             }
+
+//            setStackInSlot(i, stack);
         }
 
         return super.onSlotClick(i, j, actionType, playerEntity);

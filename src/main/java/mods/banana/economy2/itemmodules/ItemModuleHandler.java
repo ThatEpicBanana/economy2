@@ -5,6 +5,7 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.oroarmor.config.ConfigItem;
+import mods.banana.bananaapi.itemsv2.StackBuilder;
 import mods.banana.economy2.itemmodules.display.ModuleDisplay;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
@@ -168,7 +169,7 @@ public class ItemModuleHandler {
             ) items.put(itemId, new NbtItem(item));
         }
 
-        MINECRAFT_ITEMS = new ItemModule("Minecraft", items, new ModuleDisplay("Minecraft", new ItemStack(Items.GRASS_BLOCK)));
+        MINECRAFT_ITEMS = new ItemModule("Minecraft", items, new ModuleDisplay("Minecraft", new StackBuilder().item(Items.GRASS_BLOCK).name("Minecraft").build()));
     }
 
 

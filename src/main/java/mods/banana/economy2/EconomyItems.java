@@ -1,5 +1,7 @@
 package mods.banana.economy2;
 
+import mods.banana.bananaapi.itemsv2.CustomItem;
+import mods.banana.bananaapi.itemsv2.ItemHandler;
 import mods.banana.bananaapi.serverItems.ServerItem;
 import mods.banana.bananaapi.serverItems.ServerItemHandler;
 import mods.banana.economy2.banknote.items.BanknoteItem;
@@ -14,116 +16,117 @@ import net.minecraft.util.Identifier;
 
 public class EconomyItems {
     public static class Gui {
-        public static ServerItem EMPTY = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("gui", "empty"), new LiteralText(""));
+        public static CustomItem EMPTY = new CustomItem.Builder().item(Items.GRAY_STAINED_GLASS_PANE).id("gui", "empty").name("").build();
 
-        public static ServerItem NEXT = new GuiItem(Items.ARROW, new Identifier("gui", "next"), 1, true, new LiteralText("Next"));
-        public static ServerItem PREVIOUS = new GuiItem(Items.ARROW, new Identifier("gui", "previous"), 2, true, new LiteralText("Previous"));
-        public static ServerItem SEARCH = new GuiItem(Items.OAK_SIGN, new Identifier("gui", "search"), 1, true, new LiteralText("Search"));
+        public static CustomItem NEXT = new CustomItem.Builder().item(Items.ARROW).id("gui", "next").name("Next").build();
+        public static CustomItem PREVIOUS = new CustomItem.Builder().item(Items.ARROW).id("gui", "previous").name("Previous").customModelData(2).build();
+        public static CustomItem SEARCH = new CustomItem.Builder().item(Items.OAK_SIGN).id("gui", "search").name("Search").build();
 
-        public static ServerItem RETURN = new GuiItem(Items.ARROW, new Identifier("gui", "return"), 3, true, new LiteralText("Return"));
-        public static ServerItem EXIT = new GuiItem(Items.BARRIER, new Identifier("gui", "exit"), 1, true, new LiteralText("Exit"));
+        public static CustomItem RETURN = new CustomItem.Builder().item(Items.ARROW).id("gui", "return").name("Return").customModelData(3).build();
+        public static CustomItem EXIT = new CustomItem.Builder().item(Items.BARRIER).id("gui", "exit").name("Exit").build();
 
-        public static ServerItem CONFIRM = new GuiItem(Items.BAMBOO, new Identifier("gui", "confirm"), new LiteralText("Confirm"));
+        public static CustomItem CONFIRM = new CustomItem.Builder().item(Items.BAMBOO).id("gui", "confirm").name("Confirm").build();
     }
 
     public static class ChestShop {
-        public static ServerItem LIMIT = new GuiItem(Items.NETHER_STAR, new Identifier("economy", "limit"), new LiteralText("Limit"));
-        public static ServerItem LIMITED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("economy", "limited"), new LiteralText(""));
+        public static CustomItem LIMIT = new CustomItem.Builder().item(Items.NETHER_STAR).id("economy", "limit").name("Limit").build();
+        public static CustomItem LIMITED = new CustomItem.Builder().item(Items.GRAY_STAINED_GLASS_PANE).id("economy", "limited").name("").build();
+
         public static AutoSellItem AUTOSELL = new AutoSellItem(new Identifier("economy", "autosell"));
     }
 
     public static class ModulesScreen {
-        public static ServerItem SELECTED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "selected"), 2, true, new LiteralText(""));
-        public static ServerItem UNSELECTED = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "unselected"), 3, true, new LiteralText(""));
+        public static CustomItem SELECTED = new CustomItem.Builder().item(Items.GRAY_STAINED_GLASS_PANE).id("module", "selected").name("").customModelData(2).build();
+        public static CustomItem UNSELECTED = new CustomItem.Builder().item(Items.GRAY_STAINED_GLASS_PANE).id("module", "unselected").name("").customModelData(3).build();
 
-        public static ServerItem EMPTY_TOP = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptyt"), 4, true, new LiteralText(""));
-        public static ServerItem EMPTY_MID = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptym"), 5, true, new LiteralText(""));
-        public static ServerItem EMPTY_BOT = new GuiItem(Items.GRAY_STAINED_GLASS_PANE, new Identifier("module", "emptyb"), 6, true, new LiteralText(""));
+        public static CustomItem EMPTY_TOP = new CustomItem.Builder().item(Items.GRAY_STAINED_GLASS_PANE).id("module", "emptyt").customModelData(4).name("").build();
+        public static CustomItem EMPTY_MID = new CustomItem.Builder().item(Items.GRAY_STAINED_GLASS_PANE).id("module", "emptym").customModelData(5).name("").build();
+        public static CustomItem EMPTY_BOT = new CustomItem.Builder().item(Items.GRAY_STAINED_GLASS_PANE).id("module", "emptyb").customModelData(6).name("").build();
 
-        public static ServerItem MATCHER = new GuiItem(null, new Identifier("module", "matcher"), 0, true, null);
-        public static ServerItem MODIFIER = new GuiItem(null, new Identifier("module", "matcher"), null);
+        public static CustomItem MATCHER = new CustomItem.Builder().id("module", "matcher").customModelData(0).build();
+        public static CustomItem MODIFIER = new CustomItem.Builder().id("module", "matcher").build();
     }
 
     public static class Bounties {
         public static class Create {
-            public static ServerItem SET_ITEM = new GuiItem(Items.STONE_BUTTON, new Identifier("bounty", "set-item"), new LiteralText("Set item"));
-            public static ServerItem ALLOW_CUSTOM_TAGS = new GuiItem(Items.STICK, new Identifier("bounty", "allow-tags"), 0, true, new LiteralText("Set custom data"));
+            public static CustomItem SET_ITEM = new CustomItem.Builder().item(Items.STONE_BUTTON).id("bounty", "set-item").name("Set item").build();
+            public static CustomItem ALLOW_CUSTOM_TAGS = new CustomItem.Builder().item(Items.STICK).id("bounty", "allow-tags").name("Set custom data").build();
 
-            public static MatcherItem UNSET_MATCHER = new MatcherItem(Items.BLACK_STAINED_GLASS_PANE, true, true);
-            public static MatcherItem REQUIRED_MATCHER = new MatcherItem(Items.LIME_STAINED_GLASS_PANE, true, true);
-            public static MatcherItem DENIED_MATCHER = new MatcherItem(Items.RED_STAINED_GLASS_PANE, false, true);
+            public static MatcherItem UNSET_MATCHER = new MatcherItem(Items.BLACK_STAINED_GLASS_PANE, true, false);
+            public static MatcherItem REQUIRED_MATCHER = new MatcherItem(Items.LIME_STAINED_GLASS_PANE, true, false);
+            public static MatcherItem DENIED_MATCHER = new MatcherItem(Items.RED_STAINED_GLASS_PANE, false, false);
 
-            public static MatcherItem UNSET_MATCHER_DISPLAY = new MatcherItem(Items.BLACK_STAINED_GLASS_PANE, true, false);
-            public static MatcherItem REQUIRED_MATCHER_DISPLAY = new MatcherItem(Items.LIME_STAINED_GLASS_PANE, true, false);
-            public static MatcherItem DENIED_MATCHER_DISPLAY = new MatcherItem(Items.RED_STAINED_GLASS_PANE, false, false);
+            public static MatcherItem UNSET_MATCHER_DISPLAY = new MatcherItem(Items.BLACK_STAINED_GLASS_PANE, true, true);
+            public static MatcherItem REQUIRED_MATCHER_DISPLAY = new MatcherItem(Items.LIME_STAINED_GLASS_PANE, true, true);
+            public static MatcherItem DENIED_MATCHER_DISPLAY = new MatcherItem(Items.RED_STAINED_GLASS_PANE, false, true);
         }
 
         public static class BaseScreen {
-            public static ServerItem VIEW_ALL = new GuiItem(Items.GOLD_BLOCK, new Identifier("bounty", "view_all"), new LiteralText("View bounties"));
-            public static ServerItem VIEW_SELF = new GuiItem(Items.GOLDEN_CARROT, new Identifier("bounty", "view_self"), new LiteralText("Manage bounties"));
+            public static CustomItem VIEW_ALL = new CustomItem.Builder().item(Items.GOLD_BLOCK).id("bounty", "view_all").name("View bounties").build();
+            public static CustomItem VIEW_SELF = new CustomItem.Builder().item(Items.GOLDEN_CARROT).id("bounty", "view_self").name("Manage bounties").build();
         }
 
         public static class Edit {
-            public static ServerItem DELETE = new GuiItem(Items.BARRIER, new Identifier("bounty", "delete"), 2, true, new LiteralText("Delete").formatted(Formatting.RED));
+            public static CustomItem DELETE = new CustomItem.Builder().item(Items.BARRIER).id("bounty", "delete").customModelData(2).name(new LiteralText("Delete").formatted(Formatting.RED)).build();
         }
 
         public static class View {
-            public static ServerItem REDEEM = new GuiItem(Items.GOLD_NUGGET, new Identifier("bounty", "redeem"), new LiteralText("Redeem"));
-            public static ServerItem CANNOT_MATCH = new GuiItem(Items.BARRIER, new Identifier("bounty", "cannot_match"), new LiteralText("Uncombinable"));
+            public static CustomItem REDEEM = new CustomItem.Builder().item(Items.GOLD_NUGGET).id("bounty", "redeem").name("Redeem").build();
+            public static CustomItem CANNOT_MATCH = new CustomItem.Builder().item(Items.BARRIER).id("bounty", "cannot_match").name("Uncombinable").build();
         }
 
-        public static ServerItem ADD_BOUNTY = new GuiItem(Items.GOLDEN_HORSE_ARMOR, new Identifier("bounty", "add"), new LiteralText("Request bounty"));
+        public static CustomItem ADD_BOUNTY = new CustomItem.Builder().item(Items.GOLDEN_HORSE_ARMOR).id("bounty", "add").name("Request bounty").build();
 
-        public static ServerItem AMOUNT = new GuiItem(Items.PAPER, new Identifier("bounty", "amount"), 2, true, new LiteralText("Amount"));
-        public static ServerItem PRICE = new GuiItem(Items.PAPER, new Identifier("bounty", "price"), 3, true, new LiteralText("Price"));
+        public static CustomItem AMOUNT = new CustomItem.Builder().item(Items.PAPER).id("bounty", "amount").name("Amount").build();
+        public static CustomItem PRICE = new CustomItem.Builder().item(Items.PAPER).id("bounty", "price").name("Price").build();
 
-        public static BountyItem BOUNTY = new BountyItem(new Identifier("bounty", "bounty"));
+        public static CustomItem BOUNTY = new CustomItem.Builder().id("bounty", "bounty").build();
     }
 
     public static class Banknote {
         public static BanknoteItem BANKNOTE = new BanknoteItem(new Identifier("economy", "banknote"));
     }
 
-    public static ServerItem PROTECTED_ITEM = new GuiItem(null, new Identifier("gui", "protected"), 0, true, null);
+    public static CustomItem PROTECTED_ITEM = new CustomItem.Builder().id("gui", "protected").customModelData(0).build();
 
     static {
-        ServerItemHandler.register(Banknote.BANKNOTE);
+        ItemHandler.register(Banknote.BANKNOTE);
 
-        ServerItemHandler.register(ChestShop.LIMIT);
-        ServerItemHandler.register(ChestShop.LIMITED);
+        ItemHandler.register(ChestShop.LIMIT);
+        ItemHandler.register(ChestShop.LIMITED);
 
-        ServerItemHandler.register(ChestShop.AUTOSELL);
+        ItemHandler.register(ChestShop.AUTOSELL);
 
-        ServerItemHandler.register(Gui.EMPTY);
-        ServerItemHandler.register(Gui.NEXT);
-        ServerItemHandler.register(Gui.PREVIOUS);
-        ServerItemHandler.register(Gui.RETURN);
-        ServerItemHandler.register(Gui.SEARCH);
-        ServerItemHandler.register(Gui.EXIT);
-        ServerItemHandler.register(Gui.CONFIRM);
+        ItemHandler.register(Gui.EMPTY);
+        ItemHandler.register(Gui.NEXT);
+        ItemHandler.register(Gui.PREVIOUS);
+        ItemHandler.register(Gui.RETURN);
+        ItemHandler.register(Gui.SEARCH);
+        ItemHandler.register(Gui.EXIT);
+        ItemHandler.register(Gui.CONFIRM);
 
-        ServerItemHandler.register(Bounties.BaseScreen.VIEW_ALL);
-        ServerItemHandler.register(Bounties.BaseScreen.VIEW_SELF);
-        ServerItemHandler.register(Bounties.Create.SET_ITEM);
-        ServerItemHandler.register(Bounties.Create.ALLOW_CUSTOM_TAGS);
-        ServerItemHandler.register(Bounties.Create.UNSET_MATCHER);
-        ServerItemHandler.register(Bounties.Create.REQUIRED_MATCHER);
-        ServerItemHandler.register(Bounties.Create.DENIED_MATCHER);
-        ServerItemHandler.register(Bounties.Create.UNSET_MATCHER_DISPLAY);
-        ServerItemHandler.register(Bounties.Create.REQUIRED_MATCHER_DISPLAY);
-        ServerItemHandler.register(Bounties.Create.DENIED_MATCHER_DISPLAY);
-        ServerItemHandler.register(Bounties.Edit.DELETE);
-        ServerItemHandler.register(Bounties.BOUNTY);
+        ItemHandler.register(Bounties.BaseScreen.VIEW_ALL);
+        ItemHandler.register(Bounties.BaseScreen.VIEW_SELF);
+        ItemHandler.register(Bounties.Create.SET_ITEM);
+        ItemHandler.register(Bounties.Create.ALLOW_CUSTOM_TAGS);
+        ItemHandler.register(Bounties.Create.UNSET_MATCHER);
+        ItemHandler.register(Bounties.Create.REQUIRED_MATCHER);
+        ItemHandler.register(Bounties.Create.DENIED_MATCHER);
+        ItemHandler.register(Bounties.Create.UNSET_MATCHER_DISPLAY);
+        ItemHandler.register(Bounties.Create.REQUIRED_MATCHER_DISPLAY);
+        ItemHandler.register(Bounties.Create.DENIED_MATCHER_DISPLAY);
+        ItemHandler.register(Bounties.Edit.DELETE);
+        ItemHandler.register(Bounties.BOUNTY);
 
-        ServerItemHandler.register(ModulesScreen.SELECTED);
-        ServerItemHandler.register(ModulesScreen.UNSELECTED);
+        ItemHandler.register(ModulesScreen.SELECTED);
+        ItemHandler.register(ModulesScreen.UNSELECTED);
 
-        ServerItemHandler.register(ModulesScreen.EMPTY_TOP);
-        ServerItemHandler.register(ModulesScreen.EMPTY_MID);
-        ServerItemHandler.register(ModulesScreen.EMPTY_BOT);
+        ItemHandler.register(ModulesScreen.EMPTY_TOP);
+        ItemHandler.register(ModulesScreen.EMPTY_MID);
+        ItemHandler.register(ModulesScreen.EMPTY_BOT);
 
-        ServerItemHandler.register(PROTECTED_ITEM);
+        ItemHandler.register(PROTECTED_ITEM);
 
-        ServerItemHandler.register(ModulesScreen.MATCHER);
+        ItemHandler.register(ModulesScreen.MATCHER);
     }
 }

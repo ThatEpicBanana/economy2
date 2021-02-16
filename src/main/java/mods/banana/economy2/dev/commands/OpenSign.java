@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public class OpenSign {
     public static int run(ServerPlayerEntity  player) {
-        ((GuiPlayer)player).openSignGui(new Identifier("command", "openSign"));
+        ((GuiPlayer)player).openSignGui(new Identifier("command", "opensign"));
         return 1;
     }
 

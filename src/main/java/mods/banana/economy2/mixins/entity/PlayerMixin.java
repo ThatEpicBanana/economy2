@@ -85,7 +85,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
     public void addBal(long amount) { bal += amount; save(); }
 
     public String getBalAsString() {
-        return Economy2.addCurrencySign(bal);
+        return Economy2.addCurrencySign(getBal());
     }
 
     public String getPlayerName() {return getEntityName();}

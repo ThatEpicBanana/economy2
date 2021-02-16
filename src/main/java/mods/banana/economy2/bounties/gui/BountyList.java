@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtHelper;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -79,7 +80,15 @@ public class BountyList extends ListGui {
 
             if(index < bounties.size()) {
                 Bounty bounty = bounties.get(index);
-                setStackInSlot(adjusted, BOUNTY.setId(bounty.toItemStack(), bounty.getId()));
+//                setStackInSlot(adjusted, BOUNTY.setId(bounty.toItemStack(), bounty.getId()));
+                setStackInSlot(
+                        adjusted,
+                        BOUNTY.toBuilder(bounty.toItemStack(), false)
+                                .customValue(
+                                        "id",
+                                        NbtHelper.fromUuid(bounty.getId())
+                                ).build()
+                );
             }
             else setStackInSlot(adjusted, ItemStack.EMPTY);
         }
@@ -91,7 +100,15 @@ public class BountyList extends ListGui {
             ItemStack stack = getSlot(i).getStack();
 
             if(BOUNTY.matches(stack)) {
-                ((GuiPlayer)playerEntity).openScreen(new ViewBounty(BOUNTY.getBounty(stack)));
+                ((GuiPlayer)playerEntity).openScreen(
+                        new ViewBounty(
+                                Economy2.bountyHandler.get(
+                                        NbtHelper.toUuid(
+                                                BOUNTY.toReader(stack).getCustomValue("id")
+                                        )
+                                )
+                        )
+                );
             }
         }
         return super.onSlotClick(i, j, actionType, playerEntity);

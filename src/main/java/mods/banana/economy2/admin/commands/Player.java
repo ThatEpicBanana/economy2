@@ -5,6 +5,8 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.balance.OfflinePlayer;
+import mods.banana.economy2.balance.PlayerInterface;
 import net.minecraft.command.EntitySelector;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
@@ -14,6 +16,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class Player {
     public static int remove(ServerPlayerEntity playerEntity) {
         Economy2.BalanceJson.remove(playerEntity.getGameProfile().getId().toString());
+        ((PlayerInterface)playerEntity).reset(null);
         return 1;
     }
 
