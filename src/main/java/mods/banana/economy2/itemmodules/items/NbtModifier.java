@@ -1,6 +1,7 @@
 package mods.banana.economy2.itemmodules.items;
 
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.itemmodules.items.accepts.MatcherAccepts;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -12,12 +13,12 @@ import java.util.List;
 public class NbtModifier extends NbtMatcher {
     private final Identifier tag;
 
-    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts) {
+    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts) {
         super(identifier, predicate, parent, accepts);
         this.tag = tag;
     }
 
-    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts, List<NbtMatcher> children) {
+    public NbtModifier(Identifier tag, Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts, List<NbtMatcher> children) {
         super(identifier, predicate, parent, accepts, children);
         this.tag = tag;
     }
@@ -34,7 +35,7 @@ public class NbtModifier extends NbtMatcher {
     }
 
     public NbtModifier copy() {
-        return new NbtModifier(getTagId(), getIdentifier(), getPredicateId(), getParent(), getAcceptsId(), getChildren());
+        return new NbtModifier(getTagId(), getIdentifier(), getPredicateId(), getParent(), getAccepts(), getChildren());
     }
 
     @Override

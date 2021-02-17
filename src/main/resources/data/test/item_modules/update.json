@@ -27,12 +27,20 @@
     {
       "identifier": "test:mending",
       "predicate": "test:test/mending",
-      "accepts": "test:accept/mending"
+      "accepts": {
+        "blacklist": [
+          "test:test/infinity"
+        ]
+      }
     },
     {
       "identifier": "test:infinity",
       "predicate": "test:test/infinity",
-      "accepts": "test:accept/infinity",
+      "accepts": {
+        "blacklist": [
+          "test:test/mending"
+        ]
+      },
       "display": {
         "item": "minecraft:bow"
       }

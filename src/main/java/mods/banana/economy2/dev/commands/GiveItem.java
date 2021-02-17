@@ -20,7 +20,7 @@ public class GiveItem {
                 .literal("giveItem")
                 .then(
                         CommandManager.argument("identifier", IdentifierArgumentType.identifier())
-                                .suggests(new ItemModuleHandler.ItemModuleSuggestionProvider(false, NbtMatcher.Type.BOTH))
+                                .suggests(new ItemModuleHandler.NbtMatcherSuggestionProvider(false, NbtMatcher.Type.BOTH))
                                 .executes(context -> run(context.getSource().getPlayer(), IdentifierArgumentType.getIdentifier(context, "identifier")))
                 )
                 .build();

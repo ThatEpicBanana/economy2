@@ -2,6 +2,7 @@ package mods.banana.economy2.itemmodules.items;
 
 import mods.banana.bananaapi.helpers.PredicateHelper;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
+import mods.banana.economy2.itemmodules.items.accepts.MatcherAccepts;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -17,12 +18,12 @@ public class NbtItem extends NbtMatcher {
         this.item = item;
     }
 
-    public NbtItem(Item item, Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts) {
+    public NbtItem(Item item, Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts) {
         super(identifier, predicate, parent, accepts);
         this.item = item;
     }
 
-    public NbtItem(Item item, Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts, List<NbtMatcher> children) {
+    public NbtItem(Item item, Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts, List<NbtMatcher> children) {
         super(identifier, predicate, parent, accepts, children);
         this.item = item;
     }
@@ -42,7 +43,7 @@ public class NbtItem extends NbtMatcher {
     }
 
     public NbtItem copy() {
-        return new NbtItem(getItem(), getIdentifier(), getPredicateId(), getParent(), getAcceptsId(), getChildren());
+        return new NbtItem(getItem(), getIdentifier(), getPredicateId(), getParent(), getAccepts(), getChildren());
     }
 
     @Override

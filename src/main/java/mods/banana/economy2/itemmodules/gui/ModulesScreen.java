@@ -70,7 +70,7 @@ public class ModulesScreen extends ListGui {
 
     @Override
     public GuiReturnValue<?> getReturnValue() {
-        return returnValue != null ? new GuiReturnValue<>(returnValue, this) : null;
+        return new GuiReturnValue<>(returnValue, this);
     }
 
     private void updateTabs() {

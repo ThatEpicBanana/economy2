@@ -1,0 +1,6 @@
+{
+  "predicate": {
+    "nbt": "{Enchantments:[{lvl:1s,id:\"minecraft:impaling\"}]}"
+  },
+  "condition": "minecraft:match_tool"
+}

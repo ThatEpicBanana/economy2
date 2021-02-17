@@ -29,9 +29,9 @@ public class MatcherItem extends CustomItem {
     }
 
     @Override
-    public ItemStack convert(ItemStack stack) {
+    public ItemStack convertTag(ItemStack stack) {
         setActivated(stack, activated);
-        return super.convert(stack);
+        return super.convertTag(stack);
     }
 
     public ItemStack setValue(ItemStack stack, Identifier identifier) {

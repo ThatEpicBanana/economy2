@@ -1,20 +1,19 @@
 package mods.banana.economy2.itemmodules;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import mods.banana.bananaapi.helpers.ItemStackHelper;
 import mods.banana.economy2.itemmodules.display.ModuleDisplay;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
-import mods.banana.economy2.itemmodules.items.JsonNbtItem;
+import mods.banana.economy2.itemmodules.items.accepts.DefaultedAccepts;
+import mods.banana.economy2.itemmodules.items.accepts.ListAccepts;
+import mods.banana.economy2.itemmodules.items.accepts.MatcherAccepts;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 
-import java.io.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ItemModule {
@@ -30,50 +29,6 @@ public class ItemModule {
 
     public ItemModule(String name, Map<Identifier, NbtMatcher> values) {
         this(name, values, null);
-    }
-
-    /**
-     * Returns a new ItemModule created from a json file defined by an array of Items to be added.
-     * An item is defined by a base item, identifier, optional parent, and tag - all of them strings.
-     * @param name module name
-     * @param file file name originating from the resources folder
-     * @param classLoader classloader for your class, used to get to resource folder
-     */
-    public ItemModule(String name, String file, ClassLoader classLoader) {
-        this(name, new InputStreamReader(classLoader.getResourceAsStream(file)));
-    }
-
-    /**
-     * Returns a new ItemModule created from a json reader defined by an array of Items to be added.
-     * An item is defined by a base item, identifier, optional parent, and tag - all of them strings.
-     * @param name module name
-     * @param reader reader to be read from
-     */
-    @Deprecated
-    public ItemModule(String name, Reader reader) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(Identifier.class, new Identifier.Serializer()).create();
-
-        // output values
-        Map<Identifier, NbtMatcher> values = new HashMap<>();
-
-        // get the items from the file
-        List<JsonNbtItem> items = gson.fromJson(reader, new TypeToken<List<JsonNbtItem>>() {}.getType());
-
-        // for each item
-        for(JsonNbtItem jsonItem : items) {
-            NbtMatcher item = jsonItem.toNbtItem();
-            values.put(item.getIdentifier(), item);
-        }
-
-        this.name = name;
-        this.values = values;
-        this.display = null;
-
-        try {
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public String toString() {
@@ -115,6 +70,10 @@ public class ItemModule {
                 .registerTypeAdapter(ItemModule.class, new ItemModule.Serializer())
                 .registerTypeAdapter(NbtMatcher.class, new NbtMatcher.Serializer())
                 .registerTypeAdapter(ModuleDisplay.class, new ModuleDisplay.Serializer())
+                .registerTypeAdapter(MatcherAccepts.class, new MatcherAccepts.Serializer())
+                .registerTypeAdapter(ListAccepts.class, new MatcherAccepts.Serializer())
+                .registerTypeAdapter(DefaultedAccepts.class, new MatcherAccepts.Serializer())
+                .setPrettyPrinting()
                 .create();
 
         @Override
@@ -129,6 +88,8 @@ public class ItemModule {
             module.add("values", array);
 
             module.addProperty("name", src.getName());
+
+            if(src.hasDisplay()) module.add("display", context.serialize(src.getDisplay()));
 
             return module;
         }

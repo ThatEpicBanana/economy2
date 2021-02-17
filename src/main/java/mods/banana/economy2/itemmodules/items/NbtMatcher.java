@@ -5,6 +5,8 @@ import mods.banana.bananaapi.helpers.PredicateHelper;
 import mods.banana.bananaapi.helpers.TagHelper;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.itemmodules.interfaces.ConditionInterface;
+import mods.banana.economy2.itemmodules.items.accepts.DefaultedAccepts;
+import mods.banana.economy2.itemmodules.items.accepts.MatcherAccepts;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
@@ -19,7 +21,7 @@ public abstract class NbtMatcher {
     private final Identifier identifier;
     private final Identifier predicate;
     private final Identifier parent;
-    private final Identifier accepts;
+    private final MatcherAccepts accepts;
     private List<NbtMatcher> children = new ArrayList<>();
 
     public enum Type {
@@ -29,7 +31,7 @@ public abstract class NbtMatcher {
     }
 
     // full constructor with parent
-    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts) {
+    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts) {
         this.identifier = identifier;
         this.predicate = predicate;
         this.parent = parent;
@@ -37,7 +39,7 @@ public abstract class NbtMatcher {
     }
 
     // full constructor with children
-    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, Identifier accepts, List<NbtMatcher> children) {
+    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts, List<NbtMatcher> children) {
         this(identifier, predicate, parent, accepts);
         this.children = children;
     }
@@ -82,13 +84,11 @@ public abstract class NbtMatcher {
     }
 
     public boolean accepts(ItemStack stack) {
-        return accepts == null || PredicateHelper.test(getAccepts(), stack);
+        return accepts == null || getAccepts().accepts(stack);
     }
 
     public boolean accepts(NbtMatcher matcher, Item baseItem) {
-        ItemStack stack = new ItemStack(baseItem);
-        stack.setTag(matcher.getCompoundTag());
-        return accepts(stack);
+        return accepts == null || getAccepts().accepts(matcher, baseItem);
     }
 
     public ItemStack toItemStack() {
@@ -102,7 +102,10 @@ public abstract class NbtMatcher {
     }
 
     public static class Serializer implements JsonSerializer<NbtMatcher>, JsonDeserializer<NbtMatcher> {
-        public static Gson GSON = new GsonBuilder().registerTypeAdapter(NbtMatcher.class, new NbtMatcher.Serializer()).create();
+        public static Gson GSON = new GsonBuilder()
+                .registerTypeAdapter(NbtMatcher.class, new Serializer())
+                .registerTypeAdapter(MatcherAccepts.class, new MatcherAccepts.Serializer())
+                .create();
 
         @Override
         public NbtMatcher deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -117,7 +120,7 @@ public abstract class NbtMatcher {
                         identifier(object, "identifier"),
                         identifier(object, "predicate"),
                         object.has("parent") ? identifier(object, "parent") : null,
-                        object.has("accepts") ? identifier(object, "accepts") : null
+                        object.has("accepts") ? context.deserialize(object.get("accepts"), MatcherAccepts.class) : new DefaultedAccepts(true)
                 );
             } else {
                 // modifier
@@ -126,7 +129,7 @@ public abstract class NbtMatcher {
                         identifier(object, "identifier"),
                         identifier(object, "predicate"),
                         object.has("parent") ? identifier(object, "parent") : null,
-                        object.has("accepts") ? identifier(object, "accepts") : null
+                        object.has("accepts") ? context.deserialize(object.get("accepts"), MatcherAccepts.class) : new DefaultedAccepts(true)
                 );
             }
         }
@@ -140,13 +143,22 @@ public abstract class NbtMatcher {
             object.addProperty("identifier", src.getIdentifier().toString());
             object.addProperty("predicate", src.getPredicateId().toString());
 
-            if(src.getItemId() != null) object.addProperty("item", src.getItemId().toString());
+            if(src.getItemId() != null) object.addProperty("item", (src instanceof NbtModifier ? "#" : "") + src.getItemId().toString());
 
             if(src.hasParent()) object.addProperty("parent", src.getParent().toString());
-            if(src.getAcceptsId() != null) object.addProperty("accepts", src.getAcceptsId().toString());
+//            if(src.getAcceptsId() != null) object.addProperty("accepts", src.getAcceptsId().toString());
+            if(src.getAccepts() != null) object.add("accepts", context.serialize(src.getAccepts()));
             //TODO: add custom items uwu
 
             return object;
+        }
+
+        public JsonElement toJson(NbtMatcher matcher) {
+            return GSON.toJsonTree(matcher);
+        }
+
+        public NbtMatcher fromJson(JsonElement element) {
+            return GSON.fromJson(element, NbtMatcher.class);
         }
     }
 
@@ -157,9 +169,10 @@ public abstract class NbtMatcher {
     public LootCondition getPredicate() { return Economy2.server.getPredicateManager().get(getPredicateId()); }
     public ConditionInterface getPredicateInfo() { return (ConditionInterface) getPredicate(); }
 
-    public Identifier getAcceptsId() { return accepts; }
-    public LootCondition getAccepts() { return Economy2.server.getPredicateManager().get(getPredicateId()); }
-    public ConditionInterface getAcceptsInfo() { return (ConditionInterface) getPredicate(); }
+//    public Identifier getAcceptsId() { return accepts; }
+//    public LootCondition getAccepts() { return Economy2.server.getPredicateManager().get(getPredicateId()); }
+//    public ConditionInterface getAcceptsInfo() { return (ConditionInterface) getPredicate(); }
+    public MatcherAccepts getAccepts() { return accepts; }
 
     public boolean hasParent() { return parent != null; }
     public Identifier getParent() { return parent; }

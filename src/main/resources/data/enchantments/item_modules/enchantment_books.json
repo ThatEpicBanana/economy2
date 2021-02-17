@@ -1,0 +1,1224 @@
+{
+  "values": [
+    {
+      "identifier": "ench:protection-ii",
+      "predicate": "enchantments:protection-ii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:loyalty-ii",
+      "predicate": "enchantments:loyalty-ii",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:loyalty-any",
+          "enchantments:riptide-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:impaling-iv",
+      "predicate": "enchantments:impaling-iv",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:impaling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:power-v",
+      "predicate": "enchantments:power-v",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:power-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sharpness-ii",
+      "predicate": "enchantments:sharpness-ii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:protection-iii",
+      "predicate": "enchantments:protection-iii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fortune-i",
+      "predicate": "enchantments:fortune-i",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:silk_touch-any",
+          "enchantments:fortune-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:power-iv",
+      "predicate": "enchantments:power-iv",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:power-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:impaling-iii",
+      "predicate": "enchantments:impaling-iii",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:impaling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:soul_speed-i",
+      "predicate": "enchantments:soul_speed-i",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:soul_speed-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:infinity",
+      "predicate": "enchantments:infinity",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:infinity-any",
+          "enchantments:mending-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:feather_falling-iii",
+      "predicate": "enchantments:feather_falling-iii",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:feather_falling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:protection-iv",
+      "predicate": "enchantments:protection-iv",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fire_protection-ii",
+      "predicate": "enchantments:fire_protection-ii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:punch-i",
+      "predicate": "enchantments:punch-i",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:punch-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:thorns-i",
+      "predicate": "enchantments:thorns-i",
+      "item": "#enchantments:armor_chest",
+      "accepts": {
+        "blacklist": [
+          "enchantments:thorns-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:quick_charge-i",
+      "predicate": "enchantments:quick_charge-i",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:quick_charge-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:luck_of_the_sea-ii",
+      "predicate": "enchantments:luck_of_the_sea-ii",
+      "item": "#enchantments:fishing_rod",
+      "accepts": {
+        "blacklist": [
+          "enchantments:silk_touch-any",
+          "enchantments:luck_of_the_sea-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sweeping-iii",
+      "predicate": "enchantments:sweeping-iii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sweeping-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:unbreaking-iii",
+      "predicate": "enchantments:unbreaking-iii",
+      "item": "#enchantments:breakable",
+      "accepts": {
+        "blacklist": [
+          "enchantments:unbreaking-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:vanishing_curse",
+      "predicate": "enchantments:vanishing_curse",
+      "item": "#enchantments:vanishable",
+      "accepts": {
+        "blacklist": [
+          "enchantments:vanishing_curse-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:quick_charge-ii",
+      "predicate": "enchantments:quick_charge-ii",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:quick_charge-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:bane_of_arthropods-iii",
+      "predicate": "enchantments:bane_of_arthropods-iii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:feather_falling-ii",
+      "predicate": "enchantments:feather_falling-ii",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:feather_falling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:respiration-ii",
+      "predicate": "enchantments:respiration-ii",
+      "item": "#enchantments:armor_head",
+      "accepts": {
+        "blacklist": [
+          "enchantments:respiration-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:efficiency-iii",
+      "predicate": "enchantments:efficiency-iii",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:efficiency-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fortune-ii",
+      "predicate": "enchantments:fortune-ii",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:silk_touch-any",
+          "enchantments:fortune-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:power-i",
+      "predicate": "enchantments:power-i",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:power-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sharpness-iv",
+      "predicate": "enchantments:sharpness-iv",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:power-ii",
+      "predicate": "enchantments:power-ii",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:power-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:projectile_protection-ii",
+      "predicate": "enchantments:projectile_protection-ii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:impaling-ii",
+      "predicate": "enchantments:impaling-ii",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:impaling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:projectile_protection-iv",
+      "predicate": "enchantments:projectile_protection-iv",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:blast_protection-i",
+      "predicate": "enchantments:blast_protection-i",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:luck_of_the_sea-iii",
+      "predicate": "enchantments:luck_of_the_sea-iii",
+      "item": "#enchantments:fishing_rod",
+      "accepts": {
+        "blacklist": [
+          "enchantments:silk_touch-any",
+          "enchantments:luck_of_the_sea-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:frost_walker-ii",
+      "predicate": "enchantments:frost_walker-ii",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:depth_strider-any",
+          "enchantments:frost_walker-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:soul_speed-iii",
+      "predicate": "enchantments:soul_speed-iii",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:soul_speed-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:lure-iii",
+      "predicate": "enchantments:lure-iii",
+      "item": "#enchantments:fishing_rod",
+      "accepts": {
+        "blacklist": [
+          "enchantments:lure-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:multishot",
+      "predicate": "enchantments:multishot",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:multishot-any",
+          "enchantments:piercing-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:projectile_protection-i",
+      "predicate": "enchantments:projectile_protection-i",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:piercing-iv",
+      "predicate": "enchantments:piercing-iv",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:multishot-any",
+          "enchantments:piercing-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:looting-ii",
+      "predicate": "enchantments:looting-ii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:looting-any",
+          "enchantments:silk_touch-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:smite-ii",
+      "predicate": "enchantments:smite-ii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:loyalty-i",
+      "predicate": "enchantments:loyalty-i",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:loyalty-any",
+          "enchantments:riptide-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:unbreaking-ii",
+      "predicate": "enchantments:unbreaking-ii",
+      "item": "#enchantments:breakable",
+      "accepts": {
+        "blacklist": [
+          "enchantments:unbreaking-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sweeping-ii",
+      "predicate": "enchantments:sweeping-ii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sweeping-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:thorns-iii",
+      "predicate": "enchantments:thorns-iii",
+      "item": "#enchantments:armor_chest",
+      "accepts": {
+        "blacklist": [
+          "enchantments:thorns-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:feather_falling-iv",
+      "predicate": "enchantments:feather_falling-iv",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:feather_falling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:channeling",
+      "predicate": "enchantments:channeling",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:riptide-any",
+          "enchantments:channeling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:blast_protection-iii",
+      "predicate": "enchantments:blast_protection-iii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fortune-iii",
+      "predicate": "enchantments:fortune-iii",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:silk_touch-any",
+          "enchantments:fortune-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sharpness-v",
+      "predicate": "enchantments:sharpness-v",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:efficiency-v",
+      "predicate": "enchantments:efficiency-v",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:efficiency-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:power-iii",
+      "predicate": "enchantments:power-iii",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:power-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:knockback-ii",
+      "predicate": "enchantments:knockback-ii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:knockback-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:depth_strider-iii",
+      "predicate": "enchantments:depth_strider-iii",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:depth_strider-any",
+          "enchantments:frost_walker-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:riptide-i",
+      "predicate": "enchantments:riptide-i",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:loyalty-any",
+          "enchantments:riptide-any",
+          "enchantments:channeling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:knockback-i",
+      "predicate": "enchantments:knockback-i",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:knockback-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:blast_protection-iv",
+      "predicate": "enchantments:blast_protection-iv",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:riptide-ii",
+      "predicate": "enchantments:riptide-ii",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:loyalty-any",
+          "enchantments:riptide-any",
+          "enchantments:channeling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fire_protection-iv",
+      "predicate": "enchantments:fire_protection-iv",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sharpness-i",
+      "predicate": "enchantments:sharpness-i",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:piercing-ii",
+      "predicate": "enchantments:piercing-ii",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:multishot-any",
+          "enchantments:piercing-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:efficiency-ii",
+      "predicate": "enchantments:efficiency-ii",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:efficiency-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:silk_touch",
+      "predicate": "enchantments:silk_touch",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:looting-any",
+          "enchantments:silk_touch-any",
+          "enchantments:fortune-any",
+          "enchantments:luck_of_the_sea-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:depth_strider-ii",
+      "predicate": "enchantments:depth_strider-ii",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:depth_strider-any",
+          "enchantments:frost_walker-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:efficiency-iv",
+      "predicate": "enchantments:efficiency-iv",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:efficiency-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fire_protection-i",
+      "predicate": "enchantments:fire_protection-i",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:looting-iii",
+      "predicate": "enchantments:looting-iii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:looting-any",
+          "enchantments:silk_touch-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:smite-iii",
+      "predicate": "enchantments:smite-iii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:respiration-iii",
+      "predicate": "enchantments:respiration-iii",
+      "item": "#enchantments:armor_head",
+      "accepts": {
+        "blacklist": [
+          "enchantments:respiration-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:looting-i",
+      "predicate": "enchantments:looting-i",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:looting-any",
+          "enchantments:silk_touch-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:bane_of_arthropods-v",
+      "predicate": "enchantments:bane_of_arthropods-v",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sweeping-i",
+      "predicate": "enchantments:sweeping-i",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sweeping-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:efficiency-i",
+      "predicate": "enchantments:efficiency-i",
+      "item": "#enchantments:digger",
+      "accepts": {
+        "blacklist": [
+          "enchantments:efficiency-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:aqua_affinity",
+      "predicate": "enchantments:aqua_affinity",
+      "item": "#enchantments:armor_head",
+      "accepts": {
+        "blacklist": [
+          "enchantments:aqua_affinity-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:impaling-i",
+      "predicate": "enchantments:impaling-i",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:impaling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:quick_charge-iii",
+      "predicate": "enchantments:quick_charge-iii",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:quick_charge-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:blast_protection-ii",
+      "predicate": "enchantments:blast_protection-ii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fire_aspect-ii",
+      "predicate": "enchantments:fire_aspect-ii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:fire_aspect-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:unbreaking-i",
+      "predicate": "enchantments:unbreaking-i",
+      "item": "#enchantments:breakable",
+      "accepts": {
+        "blacklist": [
+          "enchantments:unbreaking-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:protection-i",
+      "predicate": "enchantments:protection-i",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:soul_speed-ii",
+      "predicate": "enchantments:soul_speed-ii",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:soul_speed-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:smite-iv",
+      "predicate": "enchantments:smite-iv",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:bane_of_arthropods-i",
+      "predicate": "enchantments:bane_of_arthropods-i",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:mending",
+      "predicate": "enchantments:mending",
+      "item": "#enchantments:breakable",
+      "accepts": {
+        "blacklist": [
+          "enchantments:infinity-any",
+          "enchantments:mending-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:loyalty-iii",
+      "predicate": "enchantments:loyalty-iii",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:loyalty-any",
+          "enchantments:riptide-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fire_aspect-i",
+      "predicate": "enchantments:fire_aspect-i",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:fire_aspect-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:impaling-v",
+      "predicate": "enchantments:impaling-v",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:impaling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:piercing-i",
+      "predicate": "enchantments:piercing-i",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:multishot-any",
+          "enchantments:piercing-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:frost_walker-i",
+      "predicate": "enchantments:frost_walker-i",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:depth_strider-any",
+          "enchantments:frost_walker-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:binding_curse",
+      "predicate": "enchantments:binding_curse",
+      "item": "#enchantments:wearable",
+      "accepts": {
+        "blacklist": [
+          "enchantments:binding_curse-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:flame",
+      "predicate": "enchantments:flame",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:flame-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:punch-ii",
+      "predicate": "enchantments:punch-ii",
+      "item": "#enchantments:bow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:punch-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:bane_of_arthropods-ii",
+      "predicate": "enchantments:bane_of_arthropods-ii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:piercing-iii",
+      "predicate": "enchantments:piercing-iii",
+      "item": "#enchantments:crossbow",
+      "accepts": {
+        "blacklist": [
+          "enchantments:multishot-any",
+          "enchantments:piercing-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:bane_of_arthropods-iv",
+      "predicate": "enchantments:bane_of_arthropods-iv",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:projectile_protection-iii",
+      "predicate": "enchantments:projectile_protection-iii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:depth_strider-i",
+      "predicate": "enchantments:depth_strider-i",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:depth_strider-any",
+          "enchantments:frost_walker-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:riptide-iii",
+      "predicate": "enchantments:riptide-iii",
+      "item": "#enchantments:trident",
+      "accepts": {
+        "blacklist": [
+          "enchantments:loyalty-any",
+          "enchantments:riptide-any",
+          "enchantments:channeling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:smite-i",
+      "predicate": "enchantments:smite-i",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:fire_protection-iii",
+      "predicate": "enchantments:fire_protection-iii",
+      "item": "#enchantments:armor",
+      "accepts": {
+        "blacklist": [
+          "enchantments:protection-any",
+          "enchantments:fire_protection-any",
+          "enchantments:blast_protection-any",
+          "enchantments:projectile_protection-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:luck_of_the_sea-i",
+      "predicate": "enchantments:luck_of_the_sea-i",
+      "item": "#enchantments:fishing_rod",
+      "accepts": {
+        "blacklist": [
+          "enchantments:silk_touch-any",
+          "enchantments:luck_of_the_sea-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:smite-v",
+      "predicate": "enchantments:smite-v",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:sharpness-iii",
+      "predicate": "enchantments:sharpness-iii",
+      "item": "#enchantments:weapon",
+      "accepts": {
+        "blacklist": [
+          "enchantments:sharpness-any",
+          "enchantments:smite-any",
+          "enchantments:bane_of_arthropods-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:respiration-i",
+      "predicate": "enchantments:respiration-i",
+      "item": "#enchantments:armor_head",
+      "accepts": {
+        "blacklist": [
+          "enchantments:respiration-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:lure-ii",
+      "predicate": "enchantments:lure-ii",
+      "item": "#enchantments:fishing_rod",
+      "accepts": {
+        "blacklist": [
+          "enchantments:lure-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:thorns-ii",
+      "predicate": "enchantments:thorns-ii",
+      "item": "#enchantments:armor_chest",
+      "accepts": {
+        "blacklist": [
+          "enchantments:thorns-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:feather_falling-i",
+      "predicate": "enchantments:feather_falling-i",
+      "item": "#enchantments:armor_feet",
+      "accepts": {
+        "blacklist": [
+          "enchantments:feather_falling-any"
+        ]
+      }
+    },
+    {
+      "identifier": "ench:lure-i",
+      "predicate": "enchantments:lure-i",
+      "item": "#enchantments:fishing_rod",
+      "accepts": {
+        "blacklist": [
+          "enchantments:lure-any"
+        ]
+      }
+    }
+  ],
+  "name": "Enchantments",
+  "display": {
+    "name": "Enchantments",
+    "item": {
+      "item": "minecraft:experience_bottle",
+      "tag": "{display:{Name:\u0027{\"text\":\"Enchantments\"}\u0027}}"
+    }
+  }
+}

@@ -19,7 +19,9 @@ import mods.banana.economy2.itemmodules.ItemModule;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
+import mods.banana.economy2.itemmodules.commands.ActivateModule;
 import mods.banana.economy2.itemmodules.commands.ListModules;
+import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
 import mods.banana.economy2.trade.commands.TradeBase;
 import mods.banana.economy2.trade.TradeHandler;
 import net.fabricmc.api.ModInitializer;
@@ -75,7 +77,12 @@ public class Economy2 implements ModInitializer {
 //        loadBounties();
         TradeHandler.onInit();
         ItemModuleHandler.init();
+
+//        long startTime = System.currentTimeMillis();
 //        CreateEnchants.onInit();
+//        long endTime = System.currentTimeMillis();
+//        LOGGER.info(endTime - startTime);
+
 //        CreateEnchantBooks.onInit();
 //        ItemModules.onInit();
 
@@ -152,11 +159,12 @@ public class Economy2 implements ModInitializer {
             dispatcher.getRoot().addChild(TradeBase.build()); //trade <player>
             dispatcher.getRoot().addChild(AdminBase.build()); //admin [clean|removeALl|balance|player]
             dispatcher.getRoot().addChild(AboutItem.build()); //aboutitem
-            dispatcher.getRoot().addChild(BountyBase.build()); //bounty [request|list]
+//            dispatcher.getRoot().addChild(BountyBase.build()); //bounty [request|list]
             dispatcher.getRoot().addChild(BountyBaseV2.build());
             dispatcher.getRoot().addChild(HelpCommand.build()); //chestshop help
             dispatcher.getRoot().addChild(ListModules.build());
             dispatcher.getRoot().addChild(DevBase.build());
+            dispatcher.getRoot().addChild(ActivateModule.build());
         });
 
         // setup config command

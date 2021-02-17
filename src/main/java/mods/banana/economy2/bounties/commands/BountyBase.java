@@ -137,7 +137,7 @@ public class BountyBase {
     private static RequiredArgumentBuilder<ServerCommandSource, Identifier> getIdentifierArgument(List<String> arguments, boolean first) {
         return CommandManager
                 .argument(arguments.get(arguments.size() - 1), IdentifierArgumentType.identifier())
-                .suggests(first ? new ItemModuleHandler.ItemModuleSuggestionProvider() : new ItemModuleHandler.ItemModuleSuggestionProvider(true, NbtMatcher.Type.BOTH))
+                .suggests(first ? new ItemModuleHandler.NbtMatcherSuggestionProvider() : new ItemModuleHandler.NbtMatcherSuggestionProvider(true, NbtMatcher.Type.BOTH))
                             .executes(context -> {
                                 List<Identifier> identifiers = getIdentifiers(context, arguments);
                                 return request(

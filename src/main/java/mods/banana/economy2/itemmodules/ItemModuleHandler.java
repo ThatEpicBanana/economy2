@@ -1,6 +1,7 @@
 package mods.banana.economy2.itemmodules;
 
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
@@ -9,12 +10,10 @@ import mods.banana.bananaapi.itemsv2.StackBuilder;
 import mods.banana.economy2.itemmodules.display.ModuleDisplay;
 import mods.banana.economy2.itemmodules.items.NbtItem;
 import mods.banana.economy2.itemmodules.items.NbtMatcher;
-import mods.banana.economy2.itemmodules.items.NbtModifier;
 import net.minecraft.command.CommandSource;
 import net.minecraft.item.*;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
@@ -51,7 +50,19 @@ public class ItemModuleHandler {
      * @param name name of module to be added
      */
     public static void activate(String name) {
-        activeModules.add(getModule(name));
+        activate(getModule(name));
+    }
+
+    public static void activate(ItemModule module) {
+        if(!activeModules.contains(module)) activeModules.add(module);
+    }
+
+    public static void deactivate(String name) {
+        deactivate(getModule(name));
+    }
+
+    public static void deactivate(ItemModule module) {
+        activeModules.remove(module);
     }
 
     public static ItemModule getModule(String name) {
@@ -177,13 +188,13 @@ public class ItemModuleHandler {
     /**
      * creates suggestions of all item registry identifiers + all nbt item identifiers
      */
-    public static class ItemModuleSuggestionProvider implements SuggestionProvider<ServerCommandSource> {
+    public static class NbtMatcherSuggestionProvider implements SuggestionProvider<ServerCommandSource> {
         private final boolean negators;
         private final NbtMatcher.Type typeShown;
 
-        public ItemModuleSuggestionProvider() { this(false, NbtMatcher.Type.ITEM); }
+        public NbtMatcherSuggestionProvider() { this(false, NbtMatcher.Type.ITEM); }
 
-        public ItemModuleSuggestionProvider(boolean negators, NbtMatcher.Type typeShown) {
+        public NbtMatcherSuggestionProvider(boolean negators, NbtMatcher.Type typeShown) {
             this.negators = negators;
             this.typeShown = typeShown;
         }
@@ -214,6 +225,22 @@ public class ItemModuleHandler {
 
             // suggest the identifiers
             return CommandSource.suggestIdentifiers(identifiers, builder);
+        }
+    }
+
+    public static class ModuleSuggestionProvider implements SuggestionProvider<ServerCommandSource> {
+
+        public ModuleSuggestionProvider() {}
+
+        @Override
+        public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
+            List<String> modules = new ArrayList<>();
+
+            for(ItemModule module : registeredModules) {
+                modules.add(module.getName());
+            }
+
+            return CommandSource.suggestMatching(modules, builder);
         }
     }
 }

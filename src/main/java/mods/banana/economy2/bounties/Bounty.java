@@ -65,20 +65,26 @@ public class Bounty {
 
         ItemStack stack = new ItemStack(baseItem.getItem());
 
-        for(NbtMatcher i : mustMatch) {
+        for(int ii = 0; ii < mustMatch.size(); ii++) {
+            NbtMatcher i = mustMatch.get(ii);
+
             // check item
             if(!i.itemMatches(baseItem.getItem())) return Optional.of(i.getIdentifier().toString() + " cannot combine with the base item " + baseItem.getItem());
+
             // check against each other must match
-            for(NbtMatcher j : mustMatch) {
-                if(!i.accepts(j, baseItem.getItem())) return Optional.of(i.getIdentifier().toString() + " cannot combine with " + j.getIdentifier().toString());
+            for(int ji = 0; ji < mustMatch.size(); ji++) {
+                NbtMatcher j = mustMatch.get(ji);
+
+                if(ii != ji && !i.accepts(j, baseItem.getItem())) return Optional.of(i.getIdentifier().toString() + " cannot combine with " + j.getIdentifier().toString());
             }
+
             // apply to stack for cannot matchers
             i.apply(stack);
         }
 
         // check cannot matchers
         for(NbtMatcher i : cannotMatch) {
-            if(!i.accepts(stack)) return Optional.of("Cannot match" + i.getIdentifier().toString() + " conflicts with stack.");
+            if(i.accepts(stack)) return Optional.of("Cannot match " + i.getIdentifier().toString() + " conflicts with stack.");
         }
 
         return Optional.empty();

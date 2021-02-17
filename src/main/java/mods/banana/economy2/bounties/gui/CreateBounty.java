@@ -245,7 +245,7 @@ public class CreateBounty extends GuiScreen {
         }
 
         // remove duplicates
-        list = new ArrayList<>(new HashSet<>(list));
+//        list = new ArrayList<>(new HashSet<>(list));
 
         return list;
     }

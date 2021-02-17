@@ -4,16 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import mods.banana.economy2.Economy2;
-import mods.banana.economy2.itemmodules.items.JsonNbtItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.item.ToolItem;
-import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.LootConditionTypes;
 import net.minecraft.loot.condition.MatchToolLootCondition;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.util.Identifier;
@@ -21,10 +16,8 @@ import net.minecraft.util.registry.Registry;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class CreateEnchantBooks {
     public static void onInit() {
@@ -46,13 +39,13 @@ public class CreateEnchantBooks {
                 for(int i = 1; i <= ench.getMaxLevel(); i++) {
                     String id = Registry.ENCHANTMENT.getId(ench).getPath() + (ench.getMaxLevel() != 1 ? "-" + roman[i-1] : "");
 
-                    array.add(gson.toJsonTree(new JsonNbtItem(
-                            "book:" + id,
-                            "enchantment_book_module:" + id,
-                            "minecraft:enchanted_book",
-                            null,
-                            null
-                    )));
+//                    array.add(gson.toJsonTree(new JsonNbtItem(
+//                            "book:" + id,
+//                            "enchantment_book_module:" + id,
+//                            "minecraft:enchanted_book",
+//                            null,
+//                            null
+//                    )));
 
                     Path predicate = Paths.get("enchantment_book_module/predicates/matches/" + id + ".json");
 
@@ -72,16 +65,6 @@ public class CreateEnchantBooks {
             }
 
             Files.write(Paths.get("enchantment_book_module/item_modules/enchantment_books.json.disabled"), gson.toJson(array).getBytes());
-
-//            Economy2.server.getTagManager().getItems().getTag()
-
-//            ArrayList<String> tools = new ArrayList<>();
-//
-//            for(Item item : Registry.ITEM) {
-//                if(item instanceof ToolItem) tools.add(Registry.ITEM.getId(item).toString());
-//            }
-//
-//            Files.write(Paths.get("enchantment_book_module/tags/items/tools.json"), gson.toJson(tools).getBytes());
         } catch (IOException | CommandSyntaxException e) {
             e.printStackTrace();
         }

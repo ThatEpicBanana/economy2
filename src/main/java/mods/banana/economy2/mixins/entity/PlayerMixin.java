@@ -180,7 +180,7 @@ public abstract class PlayerMixin extends PlayerEntity implements TradePlayerInt
         // get the return value of the gui
         GuiReturnValue<?> returnValue = getGui(0).getReturnValue();
 
-        if(returnValue != null && returnValue != GuiReturnValue.EMPTY)
+        if(returnValue != null && returnValue != GuiReturnValue.EMPTY && returnValue.getValue() != null)
             sendSystemMessage(new LiteralText(String.valueOf(returnValue.getValue())), UUID.randomUUID());
 
         closeHandledScreen();
