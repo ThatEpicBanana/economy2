@@ -45,7 +45,7 @@ public class BountyBasePage extends GuiScreen {
             if(EconomyItems.Bounties.BaseScreen.VIEW_ALL.matches(stack))
                 ((GuiPlayer)playerEntity).openScreen(new BountyList());
             if(EconomyItems.Bounties.BaseScreen.VIEW_SELF.matches(stack))
-                ((GuiPlayer)playerEntity).openScreen(new ManageBounties());
+                ((GuiPlayer)playerEntity).openScreen(new ManageBounties(playerEntity));
         }
 
         return super.onSlotClick(i, j, actionType, playerEntity);

@@ -6,6 +6,8 @@ import static mods.banana.economy2.EconomyItems.Bounties.Create.*;
 import static mods.banana.economy2.EconomyItems.Bounties.*;
 import static mods.banana.economy2.EconomyItems.Gui.*;
 
+import mods.banana.bananaapi.helpers.TextHelper;
+import mods.banana.bananaapi.itemsv2.StackBuilder;
 import mods.banana.economy2.Economy2;
 import mods.banana.economy2.bounties.Bounty;
 import mods.banana.economy2.bounties.items.MatcherItem;
@@ -25,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
@@ -62,13 +65,20 @@ public class CreateBounty extends GuiScreen {
 
                     // get item stack
                     if(matcher != null) {
-                        MatcherItem matcherType = UNSET_MATCHER.isActivated(matcherStack) ?
+                        boolean activated = UNSET_MATCHER.isActivated(matcherStack);
+
+                        MatcherItem matcherType = activated ?
                                 REQUIRED_MATCHER :
                                 DENIED_MATCHER;
 
-                        matcherStack = matcher.toItemStack();
+                        matcherStack = matcher.getDisplayStack();
 
                         matcherType.convertTag(matcherStack);
+
+                        matcherStack = new StackBuilder(matcherStack)
+                                .addLore("")
+                                .addLore(TextHelper.t(value.toString()).formatted(Formatting.GRAY))
+                                .build();
                     }
 
                     // set item modifier to value

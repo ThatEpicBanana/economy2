@@ -110,9 +110,9 @@ public class ModulesScreen extends ListGui {
             if(index < values.size()) {
                 NbtMatcher item = values.get(index);
 
-                ItemStack stack = ItemStackHelper.setLore( // set lore of item
-                        item.toItemStack(), // get item from matcher
-                        List.of(new LiteralText(item.getIdentifier().toString())) // set lore to identifier
+                ItemStack stack = ItemStackHelper.setName( // set lore of item
+                        item.getDisplayStack(), // get item from matcher
+                        new LiteralText(item.getIdentifier().getPath()) // set lore to identifier
                 );
 
                 if(item.typeMatches(NbtMatcher.Type.MODIFIER)) EconomyItems.ModulesScreen.MODIFIER.convertTag(stack);

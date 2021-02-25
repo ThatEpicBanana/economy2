@@ -2,11 +2,21 @@ package mods.banana.economy2.balance;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
+import com.mojang.brigadier.suggestion.Suggestions;
+import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import mods.banana.economy2.Economy2;
+import net.minecraft.command.CommandSource;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class OfflinePlayer implements PlayerInterface {
     private final UUID uuid;
@@ -15,8 +25,13 @@ public class OfflinePlayer implements PlayerInterface {
 
     OfflinePlayer(UUID uuid) {
         this.uuid = uuid;
-        this.playerName = Economy2.BalanceJson.get(uuid.toString()).getAsJsonObject().get("playerName").getAsString();
-        this.bal = Economy2.BalanceJson.get(uuid.toString()).getAsJsonObject().get("bal").getAsLong();
+        if(Economy2.BalanceJson.has(uuid.toString())) {
+            this.playerName = Economy2.BalanceJson.get(uuid.toString()).getAsJsonObject().get("playerName").getAsString();
+            this.bal = Economy2.BalanceJson.get(uuid.toString()).getAsJsonObject().get("bal").getAsLong();
+        } else {
+            this.playerName = "Unknown";
+            reset("Unknown");
+        }
     }
 
     public long getBal() {
@@ -60,5 +75,20 @@ public class OfflinePlayer implements PlayerInterface {
         if(player != null) return (PlayerInterface) player;
         // if player isn't in server, return a new offline player instance
         else return new OfflinePlayer(uuid);
+    }
+
+    public static class PlayerSuggestion implements SuggestionProvider<ServerCommandSource> {
+        public PlayerSuggestion() {}
+
+        @Override
+        public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
+            List<String> suggestions = new ArrayList<>();
+
+            for(Map.Entry<String, JsonElement> element : Economy2.BalanceJson.entrySet()) {
+                suggestions.add(element.getValue().getAsJsonObject().get("playerName").getAsString());
+            }
+
+            return CommandSource.suggestMatching(suggestions, builder);
+        }
     }
 }

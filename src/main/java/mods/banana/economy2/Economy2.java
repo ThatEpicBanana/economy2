@@ -19,6 +19,7 @@ import mods.banana.economy2.itemmodules.ItemModule;
 import mods.banana.economy2.itemmodules.ItemModuleHandler;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchantBooks;
 //import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
+import mods.banana.economy2.itemmodules.ModuleConfig;
 import mods.banana.economy2.itemmodules.commands.ActivateModule;
 import mods.banana.economy2.itemmodules.commands.ListModules;
 import mods.banana.economy2.itemmodules.module_creators.CreateEnchants;
@@ -31,6 +32,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.server.MinecraftServer;
@@ -49,6 +51,7 @@ public class Economy2 implements ModInitializer {
 
     public static final Config CONFIG = new EconomyConfig();
     public static final Logger LOGGER = LogManager.getLogger();
+    public static ModuleConfig MODULE_CONFIG;
 
     public static BountyHandler bountyHandler;
 
@@ -63,6 +66,9 @@ public class Economy2 implements ModInitializer {
         // load config
         CONFIG.readConfigFromFile();
         CONFIG.saveConfigToFile();
+
+        MODULE_CONFIG = new ModuleConfig(Path.of(FabricLoader.getInstance().getConfigDir().toString(), "economy/modules.json"));
+        MODULE_CONFIG.readConfigs();
 
         // save previous directory for reference when moving it
         previousSaveDirectory = CONFIG.getValue("file.saveDirectory", String.class);
@@ -106,7 +112,9 @@ public class Economy2 implements ModInitializer {
                         // if module isn't already registered, register and activate it
                         if(!ItemModuleHandler.contains(module.getName())) {
                             ItemModuleHandler.register(module);
-                            ItemModuleHandler.activate(module.getName());
+                            if(MODULE_CONFIG.isActivated(module)) {
+                                ItemModuleHandler.activate(module.getName());
+                            }
                         }
                         // close reader
                         reader.close();
@@ -114,6 +122,8 @@ public class Economy2 implements ModInitializer {
                         LOGGER.error("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! Error occurred while loading funni resource json " + id.toString() + " (this was in the wiki and I just couldn't remove it)", e);
                     }
                 }
+
+                MODULE_CONFIG.saveConfigs();
             }
         });
 

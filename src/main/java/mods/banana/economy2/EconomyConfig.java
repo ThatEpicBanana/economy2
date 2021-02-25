@@ -7,6 +7,7 @@ import mods.banana.economy2.itemmodules.ItemModuleHandler;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 public class EconomyConfig extends Config {
@@ -20,7 +21,7 @@ public class EconomyConfig extends Config {
     public static final List<ConfigItemGroup> configs = List.of(currencyGroup, playerGroup, chestShopGroup, fileSettings, itemModuleSettings, bountySettings);
 
     public EconomyConfig() {
-        super(configs, new File(FabricLoader.getInstance().getConfigDir().toFile(), "economy.json"), "economy");
+        super(configs, Path.of(FabricLoader.getInstance().getConfigDir().toString(), "economy/economy.json").toFile(), "economy");
     }
 
     public static class CurrencySettings extends ConfigItemGroup {
@@ -41,13 +42,7 @@ public class EconomyConfig extends Config {
     }
 
     public static class ItemModuleSettings extends ConfigItemGroup {
-        public static final ConfigItem<Boolean> heads = new ConfigItem<>("heads", false, "Adds support for custom heads from VanillaTweaks in bounties and chest shops", ItemModuleHandler::onChange);
-        public static final ConfigItem<Boolean> god_items = new ConfigItem<>("god_items", true, "Adds support for max enchanted items in bounties and chest shops", ItemModuleHandler::onChange);
-        public static final ConfigItem<Boolean> enchantment_books = new ConfigItem<>("enchantment_books", true, "Adds support for enchantment books in bounties and chest shops", ItemModuleHandler::onChange);
-        public static final ConfigItem<Boolean> potions = new ConfigItem<>("potions", true, "Adds support for potions in bounties and chest shops", ItemModuleHandler::onChange);
-        public static final ConfigItem<Boolean> enchants = new ConfigItem<>("enchants", true, "Adds support for enchants in bounties", ItemModuleHandler::onChange);
-
-        public ItemModuleSettings() { super(List.of(heads, god_items, enchantment_books, potions, enchants), "ItemModule"); }
+        public ItemModuleSettings() { super(List.of(), "ItemModule"); }
     }
 
     public static class ChestShopSettings extends ConfigItemGroup {
@@ -69,10 +64,11 @@ public class EconomyConfig extends Config {
     }
 
     public static class BountySettings extends ConfigItemGroup {
+        public static final ConfigItem<Boolean> enabled = new ConfigItem<>("enabled", true, "If bounties are enabled");
         public static final ConfigItem<Integer> maxRequests = new ConfigItem<>("maxRequests", 10, "Max amount of requests a player can have");
 
         public BountySettings() {
-            super(List.of(maxRequests), "bounty");
+            super(List.of(enabled, maxRequests), "bounty");
         }
     }
 }

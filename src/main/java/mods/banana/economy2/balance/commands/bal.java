@@ -34,7 +34,8 @@ public class bal {
                 .executes(context -> run(context.getSource().getPlayer(), context.getSource().getPlayer()))
                 .then(
                         CommandManager.argument("player", StringArgumentType.string())
-                        .executes(context -> run(context.getSource().getPlayer(), StringArgumentType.getString(context, "player")))
+                                .suggests(new OfflinePlayer.PlayerSuggestion())
+                                .executes(context -> run(context.getSource().getPlayer(), StringArgumentType.getString(context, "player")))
                 )
                 .build();
     }

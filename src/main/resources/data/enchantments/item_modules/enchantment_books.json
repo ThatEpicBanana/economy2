@@ -11,6 +11,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -22,6 +27,11 @@
           "enchantments:loyalty-any",
           "enchantments:riptide-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -32,6 +42,11 @@
         "blacklist": [
           "enchantments:impaling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -42,6 +57,11 @@
         "blacklist": [
           "enchantments:power-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -54,6 +74,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -67,6 +92,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -78,6 +108,11 @@
           "enchantments:silk_touch-any",
           "enchantments:fortune-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -88,6 +123,11 @@
         "blacklist": [
           "enchantments:power-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -98,6 +138,11 @@
         "blacklist": [
           "enchantments:impaling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -108,6 +153,11 @@
         "blacklist": [
           "enchantments:soul_speed-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -119,6 +169,11 @@
           "enchantments:infinity-any",
           "enchantments:mending-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -129,6 +184,11 @@
         "blacklist": [
           "enchantments:feather_falling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -142,6 +202,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -155,6 +220,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -165,6 +235,11 @@
         "blacklist": [
           "enchantments:punch-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -175,6 +250,11 @@
         "blacklist": [
           "enchantments:thorns-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -185,6 +265,11 @@
         "blacklist": [
           "enchantments:quick_charge-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -196,6 +281,11 @@
           "enchantments:silk_touch-any",
           "enchantments:luck_of_the_sea-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:fishing_rod",
+        "overwrite": false
       }
     },
     {
@@ -206,6 +296,11 @@
         "blacklist": [
           "enchantments:sweeping-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -216,6 +311,11 @@
         "blacklist": [
           "enchantments:unbreaking-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_hoe",
+        "overwrite": false
       }
     },
     {
@@ -226,6 +326,11 @@
         "blacklist": [
           "enchantments:vanishing_curse-any"
         ]
+      },
+      "display": {
+        "tag": "{}",
+        "item": "minecraft:carved_pumpkin",
+        "overwrite": false
       }
     },
     {
@@ -236,6 +341,11 @@
         "blacklist": [
           "enchantments:quick_charge-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -248,6 +358,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -258,6 +373,11 @@
         "blacklist": [
           "enchantments:feather_falling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -268,6 +388,11 @@
         "blacklist": [
           "enchantments:respiration-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_helmet",
+        "overwrite": false
       }
     },
     {
@@ -278,6 +403,11 @@
         "blacklist": [
           "enchantments:efficiency-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -289,6 +419,11 @@
           "enchantments:silk_touch-any",
           "enchantments:fortune-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -299,6 +434,11 @@
         "blacklist": [
           "enchantments:power-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -311,6 +451,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -321,6 +466,11 @@
         "blacklist": [
           "enchantments:power-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -334,6 +484,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -344,6 +499,11 @@
         "blacklist": [
           "enchantments:impaling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -357,6 +517,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -370,6 +535,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -381,6 +551,11 @@
           "enchantments:silk_touch-any",
           "enchantments:luck_of_the_sea-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:fishing_rod",
+        "overwrite": false
       }
     },
     {
@@ -392,6 +567,11 @@
           "enchantments:depth_strider-any",
           "enchantments:frost_walker-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -402,6 +582,11 @@
         "blacklist": [
           "enchantments:soul_speed-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -412,6 +597,11 @@
         "blacklist": [
           "enchantments:lure-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:fishing_rod",
+        "overwrite": false
       }
     },
     {
@@ -423,6 +613,11 @@
           "enchantments:multishot-any",
           "enchantments:piercing-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -436,6 +631,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -447,6 +647,11 @@
           "enchantments:multishot-any",
           "enchantments:piercing-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -458,6 +663,11 @@
           "enchantments:looting-any",
           "enchantments:silk_touch-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -470,6 +680,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -481,6 +696,11 @@
           "enchantments:loyalty-any",
           "enchantments:riptide-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -491,6 +711,11 @@
         "blacklist": [
           "enchantments:unbreaking-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_hoe",
+        "overwrite": false
       }
     },
     {
@@ -501,6 +726,11 @@
         "blacklist": [
           "enchantments:sweeping-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -511,6 +741,11 @@
         "blacklist": [
           "enchantments:thorns-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -521,6 +756,11 @@
         "blacklist": [
           "enchantments:feather_falling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -532,6 +772,11 @@
           "enchantments:riptide-any",
           "enchantments:channeling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -545,6 +790,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -556,6 +806,11 @@
           "enchantments:silk_touch-any",
           "enchantments:fortune-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -568,6 +823,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -578,6 +838,11 @@
         "blacklist": [
           "enchantments:efficiency-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -588,6 +853,11 @@
         "blacklist": [
           "enchantments:power-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -598,6 +868,11 @@
         "blacklist": [
           "enchantments:knockback-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -609,6 +884,11 @@
           "enchantments:depth_strider-any",
           "enchantments:frost_walker-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -621,6 +901,11 @@
           "enchantments:riptide-any",
           "enchantments:channeling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -631,6 +916,11 @@
         "blacklist": [
           "enchantments:knockback-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -644,6 +934,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -656,6 +951,11 @@
           "enchantments:riptide-any",
           "enchantments:channeling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -669,6 +969,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -681,6 +986,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -692,6 +1002,11 @@
           "enchantments:multishot-any",
           "enchantments:piercing-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -702,6 +1017,11 @@
         "blacklist": [
           "enchantments:efficiency-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -715,6 +1035,11 @@
           "enchantments:fortune-any",
           "enchantments:luck_of_the_sea-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -726,6 +1051,11 @@
           "enchantments:depth_strider-any",
           "enchantments:frost_walker-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -736,6 +1066,11 @@
         "blacklist": [
           "enchantments:efficiency-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -749,6 +1084,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -760,6 +1100,11 @@
           "enchantments:looting-any",
           "enchantments:silk_touch-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -772,6 +1117,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -782,6 +1132,11 @@
         "blacklist": [
           "enchantments:respiration-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_helmet",
+        "overwrite": false
       }
     },
     {
@@ -793,6 +1148,11 @@
           "enchantments:looting-any",
           "enchantments:silk_touch-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -805,6 +1165,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -815,6 +1180,11 @@
         "blacklist": [
           "enchantments:sweeping-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -825,6 +1195,11 @@
         "blacklist": [
           "enchantments:efficiency-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_pickaxe",
+        "overwrite": false
       }
     },
     {
@@ -835,6 +1210,11 @@
         "blacklist": [
           "enchantments:aqua_affinity-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_helmet",
+        "overwrite": false
       }
     },
     {
@@ -845,6 +1225,11 @@
         "blacklist": [
           "enchantments:impaling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -855,6 +1240,11 @@
         "blacklist": [
           "enchantments:quick_charge-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -868,6 +1258,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -878,6 +1273,11 @@
         "blacklist": [
           "enchantments:fire_aspect-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -888,6 +1288,11 @@
         "blacklist": [
           "enchantments:unbreaking-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_hoe",
+        "overwrite": false
       }
     },
     {
@@ -901,6 +1306,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -911,6 +1321,11 @@
         "blacklist": [
           "enchantments:soul_speed-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -923,6 +1338,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -935,6 +1355,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -946,6 +1371,11 @@
           "enchantments:infinity-any",
           "enchantments:mending-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_hoe",
+        "overwrite": false
       }
     },
     {
@@ -957,6 +1387,11 @@
           "enchantments:loyalty-any",
           "enchantments:riptide-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -967,6 +1402,11 @@
         "blacklist": [
           "enchantments:fire_aspect-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -977,6 +1417,11 @@
         "blacklist": [
           "enchantments:impaling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -988,6 +1433,11 @@
           "enchantments:multishot-any",
           "enchantments:piercing-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -999,6 +1449,11 @@
           "enchantments:depth_strider-any",
           "enchantments:frost_walker-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -1009,6 +1464,11 @@
         "blacklist": [
           "enchantments:binding_curse-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -1019,6 +1479,11 @@
         "blacklist": [
           "enchantments:flame-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -1029,6 +1494,11 @@
         "blacklist": [
           "enchantments:punch-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:bow",
+        "overwrite": false
       }
     },
     {
@@ -1041,6 +1511,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -1052,6 +1527,11 @@
           "enchantments:multishot-any",
           "enchantments:piercing-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:crossbow",
+        "overwrite": false
       }
     },
     {
@@ -1064,6 +1544,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -1077,6 +1562,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -1088,6 +1578,11 @@
           "enchantments:depth_strider-any",
           "enchantments:frost_walker-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -1100,6 +1595,11 @@
           "enchantments:riptide-any",
           "enchantments:channeling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:trident",
+        "overwrite": false
       }
     },
     {
@@ -1112,6 +1612,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -1125,6 +1630,11 @@
           "enchantments:blast_protection-any",
           "enchantments:projectile_protection-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -1136,6 +1646,11 @@
           "enchantments:silk_touch-any",
           "enchantments:luck_of_the_sea-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:fishing_rod",
+        "overwrite": false
       }
     },
     {
@@ -1148,6 +1663,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -1160,6 +1680,11 @@
           "enchantments:smite-any",
           "enchantments:bane_of_arthropods-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_sword",
+        "overwrite": false
       }
     },
     {
@@ -1170,6 +1695,11 @@
         "blacklist": [
           "enchantments:respiration-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_helmet",
+        "overwrite": false
       }
     },
     {
@@ -1180,6 +1710,11 @@
         "blacklist": [
           "enchantments:lure-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:fishing_rod",
+        "overwrite": false
       }
     },
     {
@@ -1190,6 +1725,11 @@
         "blacklist": [
           "enchantments:thorns-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_chestplate",
+        "overwrite": false
       }
     },
     {
@@ -1200,6 +1740,11 @@
         "blacklist": [
           "enchantments:feather_falling-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:netherite_boots",
+        "overwrite": false
       }
     },
     {
@@ -1210,6 +1755,11 @@
         "blacklist": [
           "enchantments:lure-any"
         ]
+      },
+      "display": {
+        "tag": "{Damage:0}",
+        "item": "minecraft:fishing_rod",
+        "overwrite": false
       }
     }
   ],

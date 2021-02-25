@@ -58,6 +58,7 @@ public class Bounty {
 
     public static Optional<String> getValidity(UUID owner, NbtItem baseItem, List<NbtMatcher> mustMatch, List<NbtMatcher> cannotMatch, int amount, long price) {
         // check parameters
+        if(Economy2.bountyHandler.getBounties(owner).size() + 1 > Economy2.CONFIG.getValue("bounty.maxRequests", Integer.class)) return Optional.of("You have too many bounties");
         if(amount <= 0) return Optional.of("Amount must be set");
         if(price <= 0) return Optional.of("Price must be set");
         if(baseItem == null || baseItem.getItem().equals(Items.AIR)) return Optional.of("Base item must be set");

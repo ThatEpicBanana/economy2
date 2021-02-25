@@ -4,4 +4,5 @@ import net.minecraft.screen.slot.Slot;
 
 public interface ScreenHandlerInterface {
     void overrideSlot(int i, Slot slot);
+    void clearSlots();
 }

@@ -99,4 +99,14 @@ public abstract class GuiScreen extends FluidScreen implements CustomGui {
         playerInventory = inv;
         super.updatePlayerInventory(inv);
     }
+
+    public int getNewRows() {
+        return serverGetRows();
+    }
+
+    @Override
+    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        if(serverGetRows() != getNewRows()) setRows(getNewRows());
+        return super.createMenu(syncId, inv, player);
+    }
 }

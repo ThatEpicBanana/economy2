@@ -25,6 +25,7 @@ public class ActivateModule {
         ItemModule module = ItemModuleHandler.getModule(moduleName);
         if(module != null) {
             ItemModuleHandler.activate(module);
+            Economy2.MODULE_CONFIG.setValue(module, true);
             return 1;
         } else return 0;
     }
@@ -33,6 +34,7 @@ public class ActivateModule {
         ItemModule module = ItemModuleHandler.getModule(moduleName);
         if(module != null) {
             ItemModuleHandler.deactivate(module);
+            Economy2.MODULE_CONFIG.setValue(module, false);
             return 1;
         } else return 0;
     }
@@ -52,6 +54,13 @@ public class ActivateModule {
 
         text.append(new LiteralText("\nItems: "));
         text.append(new LiteralText(module.getValues().size() + "").formatted(Formatting.GOLD));
+
+        text.append(new LiteralText("\nState: "));
+        if(Economy2.MODULE_CONFIG.isActivated(module)) {
+            text.append(new LiteralText("activated").formatted(Formatting.GREEN));
+        } else {
+            text.append(new LiteralText("deactivated").formatted(Formatting.RED));
+        }
 
         return text;
     }

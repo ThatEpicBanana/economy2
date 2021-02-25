@@ -21,6 +21,9 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
     // if this gets converted to a regular screen handler, it will still show the original syncId however
     public int syncId;
     public Inventory inv;
+    public PlayerInventory playerInventory;
+    public int rows;
+    public ScreenHandlerType<?> type;
 
     public FluidScreen(PlayerInventory playerInventory, int syncId, int rows) {
         this(playerInventory, new SimpleInventory(9 * rows), syncId, rows);
@@ -31,6 +34,9 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
         super(getType(rows), syncId == 0 ? 1 : syncId, playerInventory, inventory, rows);
         this.syncId = syncId == 0 ? 1 : syncId;
         this.inv = inventory;
+        this.playerInventory = playerInventory;
+        this.rows = rows;
+        this.type = getType(rows);
     }
 
     @Override
@@ -85,6 +91,49 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
                     new Slot(playerInventory, n, 8 + n * 18, 161 + i)
             );
         }
+
+        this.playerInventory = playerInventory;
+    }
+
+    public void updateSlots() {
+        asScreenHandlerInterface().clearSlots();
+
+        int i = (this.serverGetRows() - 4) * 18;
+
+        int n;
+        int m;
+        for(n = 0; n < this.serverGetRows(); ++n) {
+            for(m = 0; m < 9; ++m) {
+                this.addSlot(new Slot(getInventory(), m + n * 9, 8 + m * 18, 18 + n * 18));
+            }
+        }
+
+        for(n = 0; n < 3; ++n) {
+            for(m = 0; m < 9; ++m) {
+                this.addSlot(new Slot(playerInventory, m + n * 9 + 9, 8 + m * 18, 103 + n * 18 + i));
+            }
+        }
+
+        for(n = 0; n < 9; ++n) {
+            this.addSlot(new Slot(playerInventory, n, 8 + n * 18, 161 + i));
+        }
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+        this.type = getType(rows);
+
+        Inventory newInventory = new SimpleInventory(9 * rows);
+        Inventory oldInventory = getInventory();
+
+        for(int i = 0; i < Math.min(oldInventory.size(), newInventory.size()); i++) {
+            ItemStack stack = oldInventory.getStack(i);
+            newInventory.setStack(i, stack);
+        }
+
+        this.inv = newInventory;
+
+        updateSlots();
     }
 
     public void forceStackUpdates(ServerPlayNetworkHandler networkHandler) {
@@ -97,7 +146,7 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
     public abstract Text getDisplayName();
 
     public void setSlot(int i, Slot slot) {
-        ((ScreenHandlerInterface)this).overrideSlot(i, slot);
+        asScreenHandlerInterface().overrideSlot(i, slot);
     }
 
     @Override
@@ -117,5 +166,18 @@ public abstract class FluidScreen extends GenericContainerScreenHandler implemen
         this.syncId = syncId;
         updatePlayerInventory(inv);
         return this;
+    }
+
+    public ScreenHandlerInterface asScreenHandlerInterface() {
+        return (ScreenHandlerInterface) this;
+    }
+
+    public int serverGetRows() {
+        return rows;
+    }
+
+    @Override
+    public ScreenHandlerType<?> getType() {
+        return type;
     }
 }

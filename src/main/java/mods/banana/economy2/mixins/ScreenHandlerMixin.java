@@ -77,4 +77,8 @@ public abstract class ScreenHandlerMixin implements ScreenHandlerInterface {
         trackedStacks.set(i, slot.getStack());
         slot.id = i;
     }
+
+    public void clearSlots() {
+        this.slots.clear();
+    }
 }

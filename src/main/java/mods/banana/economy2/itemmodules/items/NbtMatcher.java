@@ -3,7 +3,9 @@ package mods.banana.economy2.itemmodules.items;
 import com.google.gson.*;
 import mods.banana.bananaapi.helpers.PredicateHelper;
 import mods.banana.bananaapi.helpers.TagHelper;
+import mods.banana.bananaapi.itemsv2.StackBuilder;
 import mods.banana.economy2.Economy2;
+import mods.banana.economy2.itemmodules.display.MatcherDisplay;
 import mods.banana.economy2.itemmodules.interfaces.ConditionInterface;
 import mods.banana.economy2.itemmodules.items.accepts.DefaultedAccepts;
 import mods.banana.economy2.itemmodules.items.accepts.MatcherAccepts;
@@ -22,6 +24,7 @@ public abstract class NbtMatcher {
     private final Identifier predicate;
     private final Identifier parent;
     private final MatcherAccepts accepts;
+    private final MatcherDisplay display;
     private List<NbtMatcher> children = new ArrayList<>();
 
     public enum Type {
@@ -31,16 +34,17 @@ public abstract class NbtMatcher {
     }
 
     // full constructor with parent
-    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts) {
+    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts, MatcherDisplay display) {
         this.identifier = identifier;
         this.predicate = predicate;
         this.parent = parent;
         this.accepts = accepts;
+        this.display = display;
     }
 
     // full constructor with children
-    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts, List<NbtMatcher> children) {
-        this(identifier, predicate, parent, accepts);
+    public NbtMatcher(Identifier identifier, Identifier predicate, Identifier parent, MatcherAccepts accepts, MatcherDisplay display, List<NbtMatcher> children) {
+        this(identifier, predicate, parent, accepts, display);
         this.children = children;
     }
 
@@ -97,6 +101,23 @@ public abstract class NbtMatcher {
         return stack;
     }
 
+    public ItemStack getDisplayStack() {
+        ItemStack stack = toItemStack();
+        if(getDisplay() != null) {
+            MatcherDisplay display = getDisplay();
+            StackBuilder builder = display.getBuilder();
+
+            if(!display.overwritesTag()) {
+                // merge tags
+                builder.tag(TagHelper.combine(builder.build().getOrCreateTag(), stack.getOrCreateTag()));
+            }
+
+            return builder.build();
+        } else {
+            return stack;
+        }
+    }
+
     public String toString() {
         return identifier.toString() + (parent != null ? " - parent: " + parent.toString() : "");
     }
@@ -120,7 +141,8 @@ public abstract class NbtMatcher {
                         identifier(object, "identifier"),
                         identifier(object, "predicate"),
                         object.has("parent") ? identifier(object, "parent") : null,
-                        object.has("accepts") ? context.deserialize(object.get("accepts"), MatcherAccepts.class) : new DefaultedAccepts(true)
+                        object.has("accepts") ? context.deserialize(object.get("accepts"), MatcherAccepts.class) : new DefaultedAccepts(true),
+                        object.has("display") ? MatcherDisplay.Serializer.fromJson(object.get("display")) : null
                 );
             } else {
                 // modifier
@@ -129,7 +151,8 @@ public abstract class NbtMatcher {
                         identifier(object, "identifier"),
                         identifier(object, "predicate"),
                         object.has("parent") ? identifier(object, "parent") : null,
-                        object.has("accepts") ? context.deserialize(object.get("accepts"), MatcherAccepts.class) : new DefaultedAccepts(true)
+                        object.has("accepts") ? context.deserialize(object.get("accepts"), MatcherAccepts.class) : new DefaultedAccepts(true),
+                        object.has("display") ? MatcherDisplay.Serializer.fromJson(object.get("display")) : null
                 );
             }
         }
@@ -148,7 +171,8 @@ public abstract class NbtMatcher {
             if(src.hasParent()) object.addProperty("parent", src.getParent().toString());
 //            if(src.getAcceptsId() != null) object.addProperty("accepts", src.getAcceptsId().toString());
             if(src.getAccepts() != null) object.add("accepts", context.serialize(src.getAccepts()));
-            //TODO: add custom items uwu
+
+            if(src.getDisplay() != null) object.add("display", MatcherDisplay.Serializer.toJson(src.getDisplay()));
 
             return object;
         }
@@ -182,4 +206,6 @@ public abstract class NbtMatcher {
     public boolean hasChildren() { return !children.isEmpty(); }
 
     public abstract Type getType();
+
+    public MatcherDisplay getDisplay() { return display; }
 }

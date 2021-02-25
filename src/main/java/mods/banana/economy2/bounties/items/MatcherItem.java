@@ -1,6 +1,7 @@
 package mods.banana.economy2.bounties.items;
 
 import mods.banana.bananaapi.helpers.ItemStackHelper;
+import mods.banana.bananaapi.helpers.TextHelper;
 import mods.banana.bananaapi.itemsv2.CustomItem;
 import mods.banana.economy2.items.GuiItem;
 import net.fabricmc.fabric.api.util.NbtType;
@@ -10,10 +11,14 @@ import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.text.LiteralText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static mods.banana.bananaapi.helpers.TextHelper.t;
+import static net.minecraft.util.Formatting.*;
 
 public class MatcherItem extends CustomItem {
     public final boolean activated;
@@ -36,7 +41,8 @@ public class MatcherItem extends CustomItem {
 
     public ItemStack setValue(ItemStack stack, Identifier identifier) {
         stack = toBuilder(stack, false).customValue("value", StringTag.of(identifier.toString())).build();
-        return ItemStackHelper.setLore(stack, List.of(new LiteralText(identifier.toString())));
+//        return ItemStackHelper.setLore(stack, List.of(new LiteralText(identifier.toString())));
+        return stack;
     }
 
     public Identifier getValue(ItemStack stack) {
@@ -49,7 +55,23 @@ public class MatcherItem extends CustomItem {
     }
 
     public ItemStack setActivated(ItemStack stack, boolean activated) {
-        return toBuilder(stack, false).customValue("activated", ByteTag.of(activated)).build();
+        return toBuilder(stack, false)
+                .customValue("activated", ByteTag.of(activated))
+                .replaceLore(0, List.of(
+                        t(""),
+                        t("------------------------").formatted(GRAY),
+                        t(""),
+                        t("Left click").formatted(GOLD)
+                                .append(t(" to set item").formatted(GRAY)),
+                        t("Right click").formatted(GOLD)
+                                .append(t(" to set as ").formatted(GRAY))
+                                .append(
+                                        activated
+                                                ? t("denied").formatted(RED)
+                                                : t("required").formatted(GREEN)
+                                )
+                ))
+                .build();
     }
 
     public boolean isActivated(ItemStack stack) {

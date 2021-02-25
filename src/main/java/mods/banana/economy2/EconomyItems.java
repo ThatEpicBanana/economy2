@@ -77,8 +77,8 @@ public class EconomyItems {
 
         public static CustomItem ADD_BOUNTY = new CustomItem.Builder().item(Items.GOLDEN_HORSE_ARMOR).id("bounty", "add").name("Request bounty").build();
 
-        public static CustomItem AMOUNT = new CustomItem.Builder().item(Items.PAPER).id("bounty", "amount").name("Amount").build();
-        public static CustomItem PRICE = new CustomItem.Builder().item(Items.PAPER).id("bounty", "price").name("Price").build();
+        public static CustomItem AMOUNT = new CustomItem.Builder().item(Items.PAPER).id("bounty", "amount").customModelData(2).name("Amount").build();
+        public static CustomItem PRICE = new CustomItem.Builder().item(Items.PAPER).id("bounty", "price").customModelData(3).name("Price").build();
 
         public static CustomItem BOUNTY = new CustomItem.Builder().id("bounty", "bounty").build();
     }
